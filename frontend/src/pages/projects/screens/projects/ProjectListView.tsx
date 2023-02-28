@@ -86,9 +86,7 @@ const ProjectListView: React.FC<ProjectListViewProps> = ({
             <NewProjectButton />
           </ToolbarItem>
           <ToolbarItem>
-            <Button variant="link">
-              <Link to="/notebookController">Launch Jupyter</Link>
-            </Button>
+            <Button variant="link" component={() => <Link to="/notebookController">Launch Jupyter</Link>}/>
           </ToolbarItem>
           <ToolbarItem variant="pagination" alignment={{ default: 'alignRight' }}>
             {pagination('down')}
