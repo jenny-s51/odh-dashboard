@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Button, Flex, Select, SelectOption } from '@patternfly/react-core';
+import {
+	Button,
+	Flex
+} from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption
+} from '@patternfly/react-core/deprecated';
 import { MinusCircleIcon } from '@patternfly/react-icons';
 import { CUSTOM_VARIABLE, EMPTY_KEY } from '~/pages/notebookController/const';
 import { EnvVarCategoryType, EnvVarType, VariableRow } from '~/types';

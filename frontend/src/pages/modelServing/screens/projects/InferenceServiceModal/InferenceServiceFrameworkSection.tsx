@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Alert, FormGroup, Select, SelectOption, Skeleton } from '@patternfly/react-core';
+import {
+	Alert,
+	FormGroup,
+	Skeleton
+} from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption
+} from '@patternfly/react-core/deprecated';
 import { UpdateObjectAtPropAndValue } from '~/pages/projects/types';
 import { CreatingInferenceServiceObject } from '~/pages/modelServing/screens/types';
 import { SupportedModelFormats } from '~/k8sTypes';
@@ -47,7 +55,7 @@ const InferenceServiceFrameworkSection: React.FC<InferenceServiceFrameworkSectio
           models.length === 0 ? 'No frameworks available to select' : 'Select a framework'
         }
         isDisabled={models.length === 0}
-        onToggle={(open) => setOpen(open)}
+        onToggle={(_event, open) => setOpen(open)}
         onSelect={(_, option) => {
           if (typeof option === 'string') {
             const [name, version] = option.split(' - ');

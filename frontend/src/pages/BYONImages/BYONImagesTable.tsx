@@ -1,23 +1,24 @@
 import React from 'react';
 import {
-  Button,
-  Bullseye,
-  EmptyState,
-  EmptyStateBody,
-  EmptyStateIcon,
-  EmptyStateVariant,
-  Flex,
-  FlexItem,
-  Select,
-  SelectOption,
-  SelectVariant,
-  SearchInput,
-  Switch,
-  Title,
-  Toolbar,
-  ToolbarContent,
-  ToolbarItem,
+	Button,
+	Bullseye,
+	EmptyState,
+	EmptyStateBody,
+	EmptyStateIcon,
+	EmptyStateVariant,
+	Flex,
+	FlexItem,
+	SearchInput,
+	Switch,
+	Toolbar,
+	ToolbarContent,
+	ToolbarItem
 } from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption,
+	SelectVariant
+} from '@patternfly/react-core/deprecated';
 import {
   ActionsColumn,
   TableComposable,
@@ -377,10 +378,7 @@ export const BYONImagesTable: React.FC<BYONImagesTableProps> = ({ images, forceU
                       </ExpandableRowContent>
                     ) : (
                       <EmptyState variant={EmptyStateVariant.small}>
-                        <EmptyStateIcon icon={CubesIcon} />
-                        <Title headingLevel="h2" size="lg">
-                          No packages detected
-                        </Title>
+                        <EmptyStateHeader titleText="No packages detected" icon={<EmptyStateIcon icon={CubesIcon} />} headingLevel="h2" />
                         <EmptyStateBody>Edit the image to add packages</EmptyStateBody>
                       </EmptyState>
                     )}
@@ -394,12 +392,12 @@ export const BYONImagesTable: React.FC<BYONImagesTableProps> = ({ images, forceU
             <Tr>
               <Td colSpan={8}>
                 <Bullseye>
-                  <EmptyState variant={EmptyStateVariant.small}>
+                  <EmptyState variant={EmptyStateVariant.sm}>
                     <EmptyStateIcon icon={SearchIcon} />
                     <Title headingLevel="h2" size="lg">
                       No results found
                     </Title>
-                    <EmptyStateBody>Clear all filters and try again.</EmptyStateBody>
+                    <EmptyStateBody>Clear all filters and try again.</EmptyStateBody><EmptyStateFooter>
                     <Button
                       variant="link"
                       onClick={() => {
@@ -412,13 +410,13 @@ export const BYONImagesTable: React.FC<BYONImagesTableProps> = ({ images, forceU
                     >
                       Clear all filters
                     </Button>
-                  </EmptyState>
+                  </EmptyStateFooter></EmptyState>
                 </Bullseye>
               </Td>
             </Tr>
           </Tbody>
         )}
-      </TableComposable>
+      </Table>
     </React.Fragment>
   );
 };

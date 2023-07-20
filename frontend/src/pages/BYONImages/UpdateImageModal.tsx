@@ -11,11 +11,10 @@ import {
   Tabs,
   TabTitleText,
   TextInput,
-  Title,
   Modal,
-  ModalVariant,
+  ModalVariant, EmptyStateHeader, EmptyStateFooter,
 } from '@patternfly/react-core';
-import { Caption, TableComposable, Tbody, Thead, Th, Tr } from '@patternfly/react-table';
+import { Caption, Table /* data-codemods */, Tbody, Thead, Th, Tr } from '@patternfly/react-table';
 import { CubesIcon, ExclamationCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
 import { updateBYONImage } from '~/services/imagesService';
 import { BYONImage, BYONImagePackage } from '~/types';
@@ -127,7 +126,7 @@ export const UpdateImageModal: React.FC<UpdateImageModalProps> = ({
             data-id="byon-image-name-input"
             name="byon-image-name-input"
             value={name}
-            onChange={(value) => {
+            onChange={(_event, value) => {
               setName(value);
             }}
           />
@@ -141,7 +140,7 @@ export const UpdateImageModal: React.FC<UpdateImageModalProps> = ({
             name="byon-image-description-input"
             aria-describedby="byon-image-description-input"
             value={description}
-            onChange={(value) => {
+            onChange={(_event, value) => {
               setDescription(value);
             }}
           />
@@ -156,7 +155,7 @@ export const UpdateImageModal: React.FC<UpdateImageModalProps> = ({
             <Tab data-id="software-tab" eventKey={0} title={<TabTitleText>Software</TabTitleText>}>
               {software.length > 0 ? (
                 <>
-                  <TableComposable aria-label="Simple table" variant="compact">
+                  <Table aria-label="Simple table" variant="compact">
                     <Caption>
                       Change the advertised software shown with this notebook image. Modifying the
                       software here does not effect the contents of the notebook image.
@@ -184,7 +183,7 @@ export const UpdateImageModal: React.FC<UpdateImageModalProps> = ({
                         />
                       ))}
                     </Tbody>
-                  </TableComposable>
+                  </Table>
                   <Button
                     data-id="add-software-secondary-button"
                     variant="link"
@@ -204,15 +203,12 @@ export const UpdateImageModal: React.FC<UpdateImageModalProps> = ({
                   </Button>
                 </>
               ) : (
-                <EmptyState variant={EmptyStateVariant.small}>
-                  <EmptyStateIcon icon={CubesIcon} />
-                  <Title headingLevel="h2" size="lg">
-                    No software added
-                  </Title>
+                <EmptyState variant={EmptyStateVariant.sm}>
+                  <EmptyStateHeader titleText="No software added" icon={<EmptyStateIcon icon={CubesIcon} />} headingLevel="h2" />
                   <EmptyStateBody>
                     Add software to be advertised with your notebook image. Making changes here
                     won’t affect the contents of the image.{' '}
-                  </EmptyStateBody>
+                  </EmptyStateBody><EmptyStateFooter>
                   <Button
                     data-id="add-software-button"
                     className="empty-button"
@@ -230,13 +226,13 @@ export const UpdateImageModal: React.FC<UpdateImageModalProps> = ({
                   >
                     Add software
                   </Button>
-                </EmptyState>
+                </EmptyStateFooter></EmptyState>
               )}
             </Tab>
             <Tab eventKey={1} title={<TabTitleText>Packages</TabTitleText>}>
               {packages.length > 0 ? (
                 <>
-                  <TableComposable aria-label="Simple table" variant="compact" isStickyHeader>
+                  <Table aria-label="Simple table" variant="compact" isStickyHeader>
                     <Caption>
                       Change the advertised packages shown with this notebook image. Modifying the
                       packages here does not effect the contents of the notebook image.
@@ -264,7 +260,7 @@ export const UpdateImageModal: React.FC<UpdateImageModalProps> = ({
                         />
                       ))}
                     </Tbody>
-                  </TableComposable>
+                  </Table>
                   <Button
                     data-id="add-package-secondary-button"
                     variant="link"
@@ -284,15 +280,12 @@ export const UpdateImageModal: React.FC<UpdateImageModalProps> = ({
                   </Button>
                 </>
               ) : (
-                <EmptyState variant={EmptyStateVariant.small}>
-                  <EmptyStateIcon icon={CubesIcon} />
-                  <Title headingLevel="h2" size="lg">
-                    No packages added
-                  </Title>
+                <EmptyState variant={EmptyStateVariant.sm}>
+                  <EmptyStateHeader titleText="No packages added" icon={<EmptyStateIcon icon={CubesIcon} />} headingLevel="h2" />
                   <EmptyStateBody>
                     Add packages to be advertised with your notebook image. Making changes here
                     won’t affect the contents of the image.{' '}
-                  </EmptyStateBody>
+                  </EmptyStateBody><EmptyStateFooter>
                   <Button
                     data-id="add-package-button"
                     className="empty-button"
@@ -310,7 +303,7 @@ export const UpdateImageModal: React.FC<UpdateImageModalProps> = ({
                   >
                     Add package
                   </Button>
-                </EmptyState>
+                </EmptyStateFooter></EmptyState>
               )}
             </Tab>
           </Tabs>

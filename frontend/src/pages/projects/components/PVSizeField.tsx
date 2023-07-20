@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { FormGroup, InputGroup, InputGroupText, NumberInput } from '@patternfly/react-core';
+import {
+  FormGroup,
+  InputGroup,
+  InputGroupText,
+  NumberInput,
+  InputGroupItem,
+} from '@patternfly/react-core';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 import { isHTMLInputElement } from '~/utilities/utils';
 
@@ -29,22 +35,24 @@ const PVSizeField: React.FC<PVSizeFieldProps> = ({ fieldID, size, setSize, curre
       fieldId={fieldID}
     >
       <InputGroup>
-        <NumberInput
-          inputAriaLabel="Persistent storage size number input"
-          id={fieldID}
-          name={fieldID}
-          value={size}
-          min={minSize}
-          onPlus={() => onStep(1)}
-          onMinus={() => onStep(-1)}
-          onChange={(event) => {
-            if (isHTMLInputElement(event.target)) {
-              const newSize = Number(event.target.value);
-              setSize(isNaN(newSize) ? size : Math.max(newSize, minSize));
-            }
-          }}
-        />
-        <InputGroupText variant="plain">GiB</InputGroupText>
+        <InputGroupItem>
+          <NumberInput
+            inputAriaLabel="Persistent storage size number input"
+            id={fieldID}
+            name={fieldID}
+            value={size}
+            min={minSize}
+            onPlus={() => onStep(1)}
+            onMinus={() => onStep(-1)}
+            onChange={(event) => {
+              if (isHTMLInputElement(event.target)) {
+                const newSize = Number(event.target.value);
+                setSize(isNaN(newSize) ? size : Math.max(newSize, minSize));
+              }
+            }}
+          />
+        </InputGroupItem>
+        <InputGroupText>GiB</InputGroupText>
       </InputGroup>
     </FormGroup>
   );

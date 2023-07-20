@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormGroup, InputGroup, InputGroupText, TextInput } from '@patternfly/react-core';
+import { FormGroup, InputGroup, InputGroupText, TextInput, InputGroupItem } from '@patternfly/react-core';
 import { MountPath } from '~/pages/projects/types';
 
 type MountPathFieldProps = {
@@ -21,14 +21,14 @@ const MountPathField: React.FC<MountPathFieldProps> = ({
     validated={mountPath.error ? 'error' : 'default'}
   >
     <InputGroup>
-      <InputGroupText variant="plain">/</InputGroupText>
-      <TextInput
+      <InputGroupText >/</InputGroupText>
+      <InputGroupItem isFill ><TextInput
         isRequired
         aria-label="mount-path-folder-value"
         type="text"
         value={mountPath.value}
         placeholder="eg. data"
-        onChange={(value) => {
+        onChange={(_event, value) => {
           let error = '';
           if (value.length === 0) {
             error = 'Required';
@@ -39,7 +39,7 @@ const MountPathField: React.FC<MountPathFieldProps> = ({
           }
           setMountPath({ value, error });
         }}
-      />
+      /></InputGroupItem>
     </InputGroup>
   </FormGroup>
 );

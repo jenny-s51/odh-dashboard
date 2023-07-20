@@ -2,21 +2,23 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import {
-  Button,
-  ButtonVariant,
-  Flex,
-  FlexItem,
-  SearchInput,
-  Select,
-  SelectOption,
-  SelectVariant,
-  ToggleGroup,
-  ToggleGroupItem,
-  Toolbar,
-  ToolbarContent,
-  ToolbarItem,
-  Tooltip,
+	Button,
+	ButtonVariant,
+	Flex,
+	FlexItem,
+	SearchInput,
+	ToggleGroup,
+	ToggleGroupItem,
+	Toolbar,
+	ToolbarContent,
+	ToolbarItem,
+	Tooltip
 } from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption,
+	SelectVariant
+} from '@patternfly/react-core/deprecated';
 import {
   ThIcon,
   CheckIcon,
@@ -170,7 +172,7 @@ const LearningCenterToolbar: React.FC<LearningCenterToolbarProps> = ({
           <FlexItem>{categoryQuery || 'All Items'}</FlexItem>
           {filtersCollapsible ? (
             <FlexItem>
-              <Tooltip removeFindDomNode content={isFiltered ? 'Filters set' : 'No filters set'}>
+              <Tooltip  content={isFiltered ? 'Filters set' : 'No filters set'}>
                 <Button
                   aria-label="Toggle filters shown"
                   variant={ButtonVariant.link}
@@ -201,7 +203,7 @@ const LearningCenterToolbar: React.FC<LearningCenterToolbarProps> = ({
       <ToolbarContent>
         <ToolbarItem className="odh-learning-paths__toolbar__input">
           <SearchInput
-            removeFindDomNode
+            
             placeholder="Search"
             value={searchInputText}
             onChange={(_, value) => handleTextChange(value)}
@@ -216,7 +218,7 @@ const LearningCenterToolbar: React.FC<LearningCenterToolbarProps> = ({
                 variant={SelectVariant.single}
                 aria-label="Select sort type"
                 isOpen={isSortTypeDropdownOpen}
-                onToggle={(isEnabled) => setIsSortTypeDropdownOpen(isEnabled)}
+                onToggle={(_event, isEnabled) => setIsSortTypeDropdownOpen(isEnabled)}
                 placeholderText={`Sort by ${sortTypes[sortType]}`}
                 onSelect={onSortTypeSelect}
               >
@@ -229,7 +231,7 @@ const LearningCenterToolbar: React.FC<LearningCenterToolbarProps> = ({
                 variant={SelectVariant.single}
                 aria-label="Select sort order"
                 isOpen={isSortOrderDropdownOpen}
-                onToggle={(isEnabled) => setIsSortOrderDropdownOpen(isEnabled)}
+                onToggle={(_event, isEnabled) => setIsSortOrderDropdownOpen(isEnabled)}
                 placeholderText={
                   sortOrder === SORT_ASC ? (
                     <PficonSortCommonAscIcon data-key={sortOrder} alt={sortOrders.ASC} />
@@ -246,7 +248,7 @@ const LearningCenterToolbar: React.FC<LearningCenterToolbarProps> = ({
         ) : null}
         <ToolbarItem
           className="odh-learning-paths__toolbar__count"
-          alignment={{ default: 'alignRight' }}
+          align={{ default: 'alignRight' }}
         >
           {`${count}${count !== totalCount ? ` of ${totalCount}` : ''} items`}
         </ToolbarItem>

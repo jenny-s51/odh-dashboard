@@ -1,19 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import {
-  Button,
-  Card,
-  CardActions,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  CardHeaderMain,
-  Dropdown,
-  DropdownItem,
-  KebabToggle,
-  Popover,
-} from '@patternfly/react-core';
+import { Button, Card, CardBody, CardFooter, CardHeader, Popover } from '@patternfly/react-core';
+import { Dropdown, DropdownItem, KebabToggle } from '@patternfly/react-core/deprecated';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { OdhApplication } from '~/types';
 import { getLaunchStatus, launchQuickStart } from '~/utilities/quickStartUtils';
@@ -160,7 +149,6 @@ const OdhAppCard: React.FC<OdhAppCardProps> = ({ odhApp }) => {
 
   const disabledPopover = (
     <Popover
-      removeFindDomNode
       headerContent={<div className="odh-card__disabled-popover-title">Application disabled</div>}
       bodyContent={popoverBodyContent}
       position="bottom"
@@ -175,27 +163,32 @@ const OdhAppCard: React.FC<OdhAppCardProps> = ({ odhApp }) => {
       data-id={odhApp.metadata.name}
       id={odhApp.metadata.name}
       role="listitem"
-      isHoverable={!disabled}
       className={cardClasses}
       isSelected={selected}
       isSelectable={!disabled}
     >
-      <CardHeader style={{ paddingRight: 0 }}>
-        <CardHeaderMain style={{ maxWidth: '33%', width: '100%' }}>
-          <BrandImage src={odhApp.spec.img} alt={odhApp.spec.displayName} />
-        </CardHeaderMain>
-        <CardActions hasNoOffset>
-          {disabled ? disabledPopover : null}
-          <Dropdown
-            removeFindDomNode
-            onSelect={onOpenKebab}
-            toggle={<KebabToggle onToggle={onToggle} />}
-            isOpen={isOpen}
-            isPlain
-            dropdownItems={dropdownItems}
-            position={'right'}
-          />
-        </CardActions>
+      <CardHeader
+        actions={{
+          actions: (
+            <>
+              {disabled ? disabledPopover : null}
+              <Dropdown
+                removeFindDomNode
+                onSelect={onOpenKebab}
+                toggle={<KebabToggle onToggle={(_event, value) => onToggle(value)} />}
+                isOpen={isOpen}
+                isPlain
+                dropdownItems={dropdownItems}
+                position={'right'}
+              />
+            </>
+          ),
+          hasNoOffset: true,
+          className: undefined,
+        }}
+        style={{ paddingRight: 0 }}
+      >
+        <BrandImage src={odhApp.spec.img} alt={odhApp.spec.displayName} />
       </CardHeader>
       <SupportedAppTitle odhApp={odhApp} />
       <CardBody>

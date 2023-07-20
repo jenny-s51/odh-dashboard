@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { ActionsColumn, Td, Tr } from '@patternfly/react-table';
-import { DropdownDirection } from '@patternfly/react-core';
+import {
+	DropdownDirection
+} from '@patternfly/react-core/deprecated';
 import ConnectedNotebookNames from '~/pages/projects/notebook/ConnectedNotebookNames';
 import { ConnectedNotebookContext } from '~/pages/projects/notebook/useRelatedNotebooks';
 import { DataConnection } from '~/pages/projects/types';

@@ -1,11 +1,13 @@
 import * as React from 'react';
 import {
-  FormGroup,
-  HelperText,
-  HelperTextItem,
-  Select,
-  SelectOption,
+	FormGroup,
+	HelperText,
+	HelperTextItem
 } from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption
+} from '@patternfly/react-core/deprecated';
 import { NotebookSize } from '~/types';
 import { getSizeDescription } from '~/pages/projects/screens/spawner/spawnerUtils';
 

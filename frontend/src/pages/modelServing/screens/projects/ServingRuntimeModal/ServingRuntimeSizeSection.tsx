@@ -1,13 +1,15 @@
 import * as React from 'react';
 import {
-  FormGroup,
-  FormSection,
-  NumberInput,
-  Select,
-  SelectOption,
-  Stack,
-  StackItem,
+	FormGroup,
+	FormSection,
+	NumberInput,
+	Stack,
+	StackItem
 } from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption
+} from '@patternfly/react-core/deprecated';
 import { UpdateObjectAtPropAndValue } from '~/pages/projects/types';
 import {
   CreatingServingRuntimeObject,
@@ -67,7 +69,7 @@ const ServingRuntimeSizeSection: React.FC<ServingRuntimeSizeSectionProps> = ({
               id="model-server-size-selection"
               isOpen={sizeDropdownOpen}
               placeholderText="Select a model server size"
-              onToggle={(open) => setSizeDropdownOpen(open)}
+              onToggle={(_event, open) => setSizeDropdownOpen(open)}
               onSelect={(_, option) => {
                 const valuesSelected = sizeCustom.find((element) => element.name === option);
                 if (valuesSelected) {

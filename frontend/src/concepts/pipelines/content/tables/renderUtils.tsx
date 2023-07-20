@@ -174,7 +174,7 @@ export const RunJobStatus: RunJobUtil<{ onToggle: (value: boolean) => Promise<vo
             id={`${job.id}-toggle`}
             aria-label={`Toggle switch; ${isEnabled ? 'Enabled' : 'Disabled'}`}
             isDisabled={isChangingFlag}
-            onChange={(checked) => {
+            onChange={(_event, checked) => {
               setIsChangingFlag(true);
               setError(null);
               onToggle(checked).catch((e) => {

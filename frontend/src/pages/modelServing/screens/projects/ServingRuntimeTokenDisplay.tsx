@@ -28,7 +28,7 @@ const ServingRuntimeTokenDisplay: React.FC<ServingRuntimeTokenDisplayProps> = ({
   }
 
   return (
-    <ClipboardCopy removeFindDomNode isReadOnly>
+    <ClipboardCopy  isReadOnly>
       {atob(token.data.token)}
     </ClipboardCopy>
   );

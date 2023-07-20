@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Alert, FormGroup, Select, SelectOption } from '@patternfly/react-core';
+import {
+	Alert,
+	FormGroup
+} from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption
+} from '@patternfly/react-core/deprecated';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import { getDataConnectionDisplayName } from '~/pages/projects/screens/detail/data-connections/utils';
 

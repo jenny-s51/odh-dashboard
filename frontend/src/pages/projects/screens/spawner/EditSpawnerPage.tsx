@@ -6,9 +6,8 @@ import {
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
-  Spinner,
-  Title,
-} from '@patternfly/react-core';
+  Spinner, EmptyStateHeader, EmptyStateFooter,
+  } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { useNavigate } from 'react-router-dom';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
@@ -34,15 +33,12 @@ const EditSpawnerPage: React.FC = () => {
     return (
       <Bullseye>
         <EmptyState>
-          <EmptyStateIcon icon={ExclamationCircleIcon} />
-          <Title headingLevel="h4" size="lg">
-            Problem loading project details
-          </Title>
-          <EmptyStateBody>{error.message}</EmptyStateBody>
+          <EmptyStateHeader titleText="Problem loading project details" icon={<EmptyStateIcon icon={ExclamationCircleIcon} />} headingLevel="h4" />
+          <EmptyStateBody>{error.message}</EmptyStateBody><EmptyStateFooter>
           <Button variant="primary" onClick={() => navigate('/projects')}>
             View my projects
           </Button>
-        </EmptyState>
+        </EmptyStateFooter></EmptyState>
       </Bullseye>
     );
   }
@@ -59,21 +55,18 @@ const EditSpawnerPage: React.FC = () => {
     return (
       <Bullseye>
         <EmptyState>
-          <EmptyStateIcon icon={ExclamationCircleIcon} />
-          <Title headingLevel="h4" size="lg">
-            Unable to edit workbench
-          </Title>
+          <EmptyStateHeader titleText="Unable to edit workbench" icon={<EmptyStateIcon icon={ExclamationCircleIcon} />} headingLevel="h4" />
           <EmptyStateBody>
             We were unable to find a notebook by this name in your project{' '}
             {getProjectDisplayName(currentProject)}.
-          </EmptyStateBody>
+          </EmptyStateBody><EmptyStateFooter>
           <Button
             variant="primary"
             onClick={() => navigate(`/projects/${currentProject.metadata.name}`)}
           >
             Return to {getProjectDisplayName(currentProject)}
           </Button>
-        </EmptyState>
+        </EmptyStateFooter></EmptyState>
       </Bullseye>
     );
   }

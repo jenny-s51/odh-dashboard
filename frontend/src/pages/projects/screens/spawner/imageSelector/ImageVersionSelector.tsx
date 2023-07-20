@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { FormGroup, Select, SelectOption } from '@patternfly/react-core';
+import {
+	FormGroup
+} from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption
+} from '@patternfly/react-core/deprecated';
 import { ImageVersionSelectDataType } from '~/pages/projects/screens/spawner/types';
 import {
   checkTagBuildValid,
@@ -64,7 +70,7 @@ const ImageVersionSelector: React.FC<ImageVersionSelectorProps> = ({
     >
       <Select
         id="workbench-image-version-selection"
-        onToggle={(open) => setVersionSelectionOpen(open)}
+        onToggle={(_event, open) => setVersionSelectionOpen(open)}
         onSelect={(e, selection) => {
           // We know selection here is ImageVersionSelectOptionObjectType
           if (isImageVersionSelectOptionObject(selection)) {

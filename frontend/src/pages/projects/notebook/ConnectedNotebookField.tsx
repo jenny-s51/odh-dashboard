@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { FormGroup, Select, SelectOption } from '@patternfly/react-core';
+import {
+	FormGroup
+} from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption
+} from '@patternfly/react-core/deprecated';
 import { getNotebookDisplayName } from '~/pages/projects/utils';
 import { NotebookKind } from '~/k8sTypes';
 
@@ -70,7 +76,7 @@ const ConnectedNotebookField: React.FC<SelectNotebookFieldProps> = ({
           }
           setNotebookSelectOpen(false);
         }}
-        onToggle={(isOpen) => setNotebookSelectOpen(isOpen)}
+        onToggle={(_event, isOpen) => setNotebookSelectOpen(isOpen)}
         placeholderText={placeholderText}
         menuAppendTo="parent"
       >

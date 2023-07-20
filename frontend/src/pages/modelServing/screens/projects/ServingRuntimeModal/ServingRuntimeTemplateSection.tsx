@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { FormGroup, Select, SelectOption, StackItem, TextInput } from '@patternfly/react-core';
+import {
+	FormGroup,
+	StackItem,
+	TextInput
+} from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption
+} from '@patternfly/react-core/deprecated';
 import { UpdateObjectAtPropAndValue } from '~/pages/projects/types';
 import { CreatingServingRuntimeObject } from '~/pages/modelServing/screens/types';
 import { TemplateKind } from '~/k8sTypes';
@@ -40,7 +48,7 @@ const ServingRuntimeTemplateSection: React.FC<ServingRuntimeTemplateSectionProps
             isRequired
             id="serving-runtime-name-input"
             value={data.name}
-            onChange={(name) => setData('name', name)}
+            onChange={(_event, name) => setData('name', name)}
           />
         </FormGroup>
       </StackItem>

@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  ApplicationLauncher,
-  ApplicationLauncherGroup,
-  ApplicationLauncherItem,
-  ApplicationLauncherSeparator,
-} from '@patternfly/react-core';
+	ApplicationLauncher,
+	ApplicationLauncherGroup,
+	ApplicationLauncherItem,
+	ApplicationLauncherSeparator
+} from '@patternfly/react-core/deprecated';
 import openshiftLogo from '~/images/openshift.svg';
 import { useWatchConsoleLinks } from '~/utilities/useWatchConsoleLinks';
 import { ODH_PRODUCT_NAME } from '~/utilities/const';

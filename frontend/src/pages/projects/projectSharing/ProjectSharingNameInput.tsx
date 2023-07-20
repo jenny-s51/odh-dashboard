@@ -1,4 +1,11 @@
-import { Select, SelectOption, SelectVariant, TextInput } from '@patternfly/react-core';
+import {
+	TextInput
+} from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption,
+	SelectVariant
+} from '@patternfly/react-core/deprecated';
 import React from 'react';
 import { ProjectSharingRBType } from '~/pages/projects/projectSharing/types';
 
@@ -40,7 +47,7 @@ const ProjectSharingNameInput: React.FC<ProjectSharingNameInputProps> = ({
       variant={SelectVariant.typeahead}
       typeAheadAriaLabel="Name selection"
       selections={value}
-      onToggle={(isOpened) => {
+      onToggle={(_event, isOpened) => {
         setIsOpen(isOpened);
       }}
       onSelect={(e, selection) => {

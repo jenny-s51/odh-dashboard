@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { Dropdown, DropdownItem, DropdownSeparator, DropdownToggle } from '@patternfly/react-core';
+import {
+	Dropdown,
+	DropdownItem,
+	DropdownSeparator,
+	DropdownToggle
+} from '@patternfly/react-core/deprecated';
 import { DeleteServerModal, ViewServerModal } from '~/concepts/pipelines/context';
 
 const PipelinesPageHeaderActions: React.FC = () => {

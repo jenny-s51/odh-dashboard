@@ -6,11 +6,10 @@ import {
   HelperTextItem,
   InputGroup,
   InputGroupText,
-  InputGroupTextVariant,
   Radio,
   Stack,
   StackItem,
-  TextInput,
+  TextInput, InputGroupItem,
 } from '@patternfly/react-core';
 import SettingSection from '~/components/SettingSection';
 import { getHourAndMinuteByTimeout, getTimeoutByHourAndMinute } from '~/utilities/utils';
@@ -88,7 +87,7 @@ const CullerSettings: React.FC<CullerSettingsProps> = ({
                 label="Do not stop idle notebooks"
                 isChecked={cullerTimeoutChecked === CULLER_TIMEOUT_UNLIMITED}
                 name={CULLER_TIMEOUT_UNLIMITED}
-                onChange={radioCheckedChange}
+                onChange={(event, _) => radioCheckedChange(_, event)}
                 value={CULLER_TIMEOUT_UNLIMITED}
               />
             </FlexItem>
@@ -99,11 +98,11 @@ const CullerSettings: React.FC<CullerSettingsProps> = ({
                 label="Stop idle notebooks after"
                 isChecked={cullerTimeoutChecked === CULLER_TIMEOUT_LIMITED}
                 name={CULLER_TIMEOUT_LIMITED}
-                onChange={radioCheckedChange}
+                onChange={(event, _) => radioCheckedChange(_, event)}
                 value={CULLER_TIMEOUT_LIMITED}
                 body={
                   <InputGroup>
-                    <TextInput
+                    <InputGroupItem isFill ><TextInput
                       id="hour-input"
                       style={{ maxWidth: '60px' }}
                       name="hour"
@@ -112,7 +111,7 @@ const CullerSettings: React.FC<CullerSettingsProps> = ({
                       aria-label="Culler Timeout Hour Input"
                       value={hour}
                       isDisabled={cullerTimeoutChecked === CULLER_TIMEOUT_UNLIMITED}
-                      onChange={(value: string) => {
+                      onChange={(_event, value: string) => {
                         let newValue =
                           isNaN(Number(value)) || !Number.isInteger(Number(value))
                             ? hour
@@ -129,9 +128,9 @@ const CullerSettings: React.FC<CullerSettingsProps> = ({
                         }
                         setHour(newValue);
                       }}
-                    />
-                    <InputGroupText variant={InputGroupTextVariant.plain}>hours</InputGroupText>
-                    <TextInput
+                    /></InputGroupItem>
+                    <InputGroupText >hours</InputGroupText>
+                    <InputGroupItem isFill ><TextInput
                       id="minute-input"
                       style={{ maxWidth: '40px' }}
                       name="minute"
@@ -140,7 +139,7 @@ const CullerSettings: React.FC<CullerSettingsProps> = ({
                       aria-label="Culler Timeout Minute Input"
                       value={minute}
                       isDisabled={cullerTimeoutChecked === CULLER_TIMEOUT_UNLIMITED}
-                      onChange={(value: string) => {
+                      onChange={(_event, value: string) => {
                         let newValue =
                           isNaN(Number(value)) || !Number.isInteger(Number(value))
                             ? minute
@@ -157,8 +156,8 @@ const CullerSettings: React.FC<CullerSettingsProps> = ({
                         }
                         setMinute(newValue);
                       }}
-                    />
-                    <InputGroupText variant={InputGroupTextVariant.plain}>minutes</InputGroupText>
+                    /></InputGroupItem>
+                    <InputGroupText >minutes</InputGroupText>
                   </InputGroup>
                 }
               />

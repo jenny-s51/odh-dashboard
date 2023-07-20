@@ -33,7 +33,7 @@ const EnableVariable = React.forwardRef<HTMLInputElement, EnableVariableProps>(
             inputType === TextInputTypes.password && showPassword ? TextInputTypes.text : inputType
           }
           value={value || ''}
-          onChange={(newValue) => updateValue(newValue)}
+          onChange={(_event, newValue) => updateValue(newValue)}
         />
         {inputType === TextInputTypes.password ? (
           <Button

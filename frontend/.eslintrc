@@ -11,8 +11,8 @@
     "js": true,
     "useJSXTextNode": true,
     "project": "./tsconfig.json",
-    "tsconfigRootDir": "."
-  },
+    "tsconfigRootDir": "./frontend"
+    },
   // includes the typescript specific rules found here: https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#supported-rules
   "plugins": [
     "@typescript-eslint",

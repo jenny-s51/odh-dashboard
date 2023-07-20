@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Alert, FormGroup, Select, SelectOption } from '@patternfly/react-core';
+import {
+	Alert,
+	FormGroup
+} from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption
+} from '@patternfly/react-core/deprecated';
 import { getPvcDisplayName } from '~/pages/projects/utils';
 import { PersistentVolumeClaimKind } from '~/k8sTypes';
 

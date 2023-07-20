@@ -1,11 +1,13 @@
 import * as React from 'react';
 import {
-  HelperText,
-  HelperTextItem,
-  Select,
-  SelectOption,
-  SelectVariant,
+	HelperText,
+	HelperTextItem
 } from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption,
+	SelectVariant
+} from '@patternfly/react-core/deprecated';
 import { MenuItemStatus } from '~/pages/groupSettings/groupTypes';
 
 type MultiSelectionProps = {
@@ -33,7 +35,7 @@ export const MultiSelection: React.FC<MultiSelectionProps> = ({ value, setValue,
       <Select
         removeFindDomNode
         variant={SelectVariant.typeaheadMulti}
-        onToggle={toggleMenu}
+        onToggle={(_event, isOpen: React.SetStateAction<boolean>) => toggleMenu(isOpen)}
         onSelect={(e, newValue) => {
           if (value?.filter((option) => option.name === newValue).length) {
             const newState = value.map((element) =>

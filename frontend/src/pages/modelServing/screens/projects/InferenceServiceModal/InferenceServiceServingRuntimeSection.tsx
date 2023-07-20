@@ -1,5 +1,14 @@
 import * as React from 'react';
-import { Alert, FormGroup, Select, SelectOption, Skeleton, Text } from '@patternfly/react-core';
+import {
+	Alert,
+	FormGroup,
+	Skeleton,
+	Text
+} from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption
+} from '@patternfly/react-core/deprecated';
 import { UpdateObjectAtPropAndValue } from '~/pages/projects/types';
 import { CreatingInferenceServiceObject } from '~/pages/modelServing/screens/types';
 import { ServingRuntimeKind } from '~/k8sTypes';
@@ -55,7 +64,7 @@ const InferenceServiceServingRuntimeSection: React.FC<
             : 'Select a model server'
         }
         isDisabled={servingRuntimes.length === 0}
-        onToggle={(open) => setOpen(open)}
+        onToggle={(_event, open) => setOpen(open)}
         onSelect={(_, option) => {
           if (typeof option === 'string') {
             setData('servingRuntimeName', option);

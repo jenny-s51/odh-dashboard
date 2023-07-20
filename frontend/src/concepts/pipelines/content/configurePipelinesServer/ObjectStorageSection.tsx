@@ -1,15 +1,17 @@
 import {
-  FormSection,
-  Title,
-  Radio,
-  FormGroup,
-  Select,
-  SelectOption,
-  Text,
-  TextInput,
-  Stack,
-  StackItem,
+	FormSection,
+	Title,
+	Radio,
+	FormGroup,
+	Text,
+	TextInput,
+	Stack,
+	StackItem
 } from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption
+} from '@patternfly/react-core/deprecated';
 import React from 'react';
 import AWSField from '~/pages/projects/dataConnections/AWSField';
 import { getDataConnectionDisplayName } from '~/pages/projects/screens/detail/data-connections/utils';
@@ -81,7 +83,7 @@ export const ObjectStorageSection = ({
                         : 'Select...'
                     }
                     isDisabled={dataConnections.length === 0}
-                    onToggle={(open) => setExistingDataConnectionOpen(open)}
+                    onToggle={(_event, open) => setExistingDataConnectionOpen(open)}
                     onSelect={(_, option) => {
                       if (typeof option === 'string') {
                         setConfig({

@@ -1,17 +1,19 @@
 import React from 'react';
 import {
-  Dropdown,
-  DropdownPosition,
-  DropdownToggle,
-  NotificationBadge,
-  DropdownItem,
-  Toolbar,
-  ToolbarContent,
-  ToolbarGroup,
-  ToolbarItem,
-  Button,
-  Tooltip,
+	NotificationBadge,
+	Toolbar,
+	ToolbarContent,
+	ToolbarGroup,
+	ToolbarItem,
+	Button,
+	Tooltip
 } from '@patternfly/react-core';
+import {
+	Dropdown,
+	DropdownPosition,
+	DropdownToggle,
+	DropdownItem
+} from '@patternfly/react-core/deprecated';
 import { ExternalLinkAltIcon, QuestionCircleIcon } from '@patternfly/react-icons';
 import { COMMUNITY_LINK, DOC_LINK, SUPPORT_LINK, DEV_MODE } from '~/utilities/const';
 import useNotification from '~/utilities/useNotification';
@@ -118,7 +120,7 @@ const HeaderTools: React.FC<HeaderToolsProps> = ({ onNotificationsClick }) => {
   return (
     <Toolbar isFullHeight>
       <ToolbarContent>
-        <ToolbarGroup variant="icon-button-group" alignment={{ default: 'alignRight' }}>
+        <ToolbarGroup variant="icon-button-group" align={{ default: 'alignRight' }}>
           {!dashboardConfig.spec.dashboardConfig.disableAppLauncher ? (
             <ToolbarItem>
               <AppLauncher />

@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { ActionsColumn, Tbody, Td, Tr } from '@patternfly/react-table';
 import {
-  Button,
-  DropdownDirection,
-  Split,
-  SplitItem,
-  Text,
-  Timestamp,
-  TimestampTooltipVariant,
+	Button,
+	Split,
+	SplitItem,
+	Text,
+	Timestamp,
+	TimestampTooltipVariant
 } from '@patternfly/react-core';
+import {
+	DropdownDirection
+} from '@patternfly/react-core/deprecated';
 import { CheckIcon, TimesIcon } from '@patternfly/react-icons';
 import { RoleBindingKind } from '~/k8sTypes';
 import { relativeTime } from '~/utilities/time';

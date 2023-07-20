@@ -5,9 +5,8 @@ import {
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
-  Spinner,
-  Title,
-} from '@patternfly/react-core';
+  Spinner, EmptyStateHeader,
+  } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { TemplateKind } from '~/k8sTypes';
 import { DEFAULT_CONTEXT_DATA } from '~/utilities/const';
@@ -74,10 +73,7 @@ const CustomServingRuntimeContextProvider: React.FC = () => {
     return (
       <Bullseye>
         <EmptyState>
-          <EmptyStateIcon icon={ExclamationCircleIcon} />
-          <Title headingLevel="h2" size="lg">
-            Problem loading serving runtimes page
-          </Title>
+          <EmptyStateHeader titleText="Problem loading serving runtimes page" icon={<EmptyStateIcon icon={ExclamationCircleIcon} />} headingLevel="h2" />
           <EmptyStateBody>
             {servingRuntimeTemplates?.error?.message || servingRuntimeTemplateOrder?.error?.message}
           </EmptyStateBody>

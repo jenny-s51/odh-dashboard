@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { FormGroup, Select, SelectOption, Skeleton } from '@patternfly/react-core';
+import {
+	FormGroup,
+	Skeleton
+} from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption
+} from '@patternfly/react-core/deprecated';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 import { useAppContext } from '~/app/AppContext';
 import useGPUSetting from './useGPUSetting';

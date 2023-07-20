@@ -4,9 +4,8 @@ import {
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
-  EmptyStateSecondaryActions,
-  Title,
-} from '@patternfly/react-core';
+  EmptyStateActions, EmptyStateHeader, EmptyStateFooter,
+  } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
 import { useNavigate } from 'react-router-dom';
 import { ODH_PRODUCT_NAME } from '~/utilities/const';
@@ -23,10 +22,7 @@ const EmptyProjects: React.FC<EmptyProjectsProps> = ({ allowCreate }) => {
   const { dashboardConfig } = useAppContext();
   return (
     <EmptyState>
-      <EmptyStateIcon icon={CubesIcon} />
-      <Title headingLevel="h2" size="lg">
-        No data science projects yet.
-      </Title>
+      <EmptyStateHeader titleText="No data science projects yet." icon={<EmptyStateIcon icon={CubesIcon} />} headingLevel="h2" />
       <EmptyStateBody>
         {allowCreate
           ? `To get started, create a data science project${
@@ -39,22 +35,22 @@ const EmptyProjects: React.FC<EmptyProjectsProps> = ({ allowCreate }) => {
                 ? ' or launch a notebook with Jupyter'
                 : ''
             }.`}
-      </EmptyStateBody>
+      </EmptyStateBody><EmptyStateFooter>
       {allowCreate ? (
         <>
           <NewProjectButton
             onProjectCreated={(projectName) => navigate(`/projects/${projectName}`)}
           />
           {dashboardConfig.spec.notebookController?.enabled && (
-            <EmptyStateSecondaryActions>
+            <EmptyStateActions>
               <LaunchJupyterButton variant={ButtonVariant.link} />
-            </EmptyStateSecondaryActions>
+            </EmptyStateActions>
           )}
         </>
       ) : (
         <LaunchJupyterButton variant={ButtonVariant.primary} />
       )}
-    </EmptyState>
+    </EmptyStateFooter></EmptyState>
   );
 };
 

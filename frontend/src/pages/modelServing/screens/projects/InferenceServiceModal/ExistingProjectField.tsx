@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Alert, FormGroup, Select, SelectOption, Skeleton } from '@patternfly/react-core';
+import {
+	Alert,
+	FormGroup,
+	Skeleton
+} from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption
+} from '@patternfly/react-core/deprecated';
 import { getProjectDisplayName } from '~/pages/projects/utils';
 import useModelServingProjects from './useModelServingProjects';
 

@@ -2,12 +2,11 @@ import * as React from 'react';
 import {
   EmptyState,
   EmptyStateIcon,
-  Title,
   EmptyStateBody,
   EmptyStateVariant,
   Bullseye,
   Button,
-  Spinner,
+  Spinner, EmptyStateHeader, EmptyStateFooter,
 } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { useOpenShiftURL } from '~/utilities/clusterUtils';
@@ -37,17 +36,14 @@ const PipelinesDependencyMissing: React.FC = () => {
   if (allowCreate) {
     return (
       <Bullseye>
-        <EmptyState variant={EmptyStateVariant.large}>
-          <EmptyStateIcon
+        <EmptyState variant={EmptyStateVariant.lg}>
+          <EmptyStateHeader titleText="Install the Pipelines Operator" icon={<EmptyStateIcon
             color="var(--pf-global--danger-color--100)"
             icon={ExclamationCircleIcon}
-          />
-          <Title headingLevel="h2" size="2xl">
-            Install the Pipelines Operator
-          </Title>
+          />} headingLevel="h2" />
           <EmptyStateBody>
             To use pipelines, first install the Red Hat OpenShift Pipelines Operator.
-          </EmptyStateBody>
+          </EmptyStateBody><EmptyStateFooter>
           {url && (
             <Button
               variant="primary"
@@ -60,18 +56,15 @@ const PipelinesDependencyMissing: React.FC = () => {
               Install operator
             </Button>
           )}
-        </EmptyState>
+        </EmptyStateFooter></EmptyState>
       </Bullseye>
     );
   }
 
   return (
     <Bullseye>
-      <EmptyState variant={EmptyStateVariant.large}>
-        <EmptyStateIcon color="var(--pf-global--danger-color--100)" icon={ExclamationCircleIcon} />
-        <Title headingLevel="h2" size="2xl">
-          Missing the pipelines operator
-        </Title>
+      <EmptyState variant={EmptyStateVariant.lg}>
+        <EmptyStateHeader titleText="Missing the pipelines operator" icon={<EmptyStateIcon color="var(--pf-global--danger-color--100)" icon={ExclamationCircleIcon} />} headingLevel="h2" />
         <EmptyStateBody>
           To use pipelines, first your {ODH_PRODUCT_NAME} admin needs to install the Red Hat
           OpenShift Pipelines operator.

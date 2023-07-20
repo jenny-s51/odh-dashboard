@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { InputGroup, SearchInput, Select, SelectOption } from '@patternfly/react-core';
+import {
+	InputGroup,
+	SearchInput, InputGroupItem
+} from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption
+} from '@patternfly/react-core/deprecated';
 
 export enum SearchType {
   NAME = 'Name',
@@ -26,7 +33,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
 
   return (
     <InputGroup>
-      <Select
+      <InputGroupItem><Select
         removeFindDomNode
         isOpen={typeOpen}
         onToggle={() => setTypeOpen(!typeOpen)}
@@ -43,8 +50,8 @@ const SearchField: React.FC<SearchFieldProps> = ({
             {SearchType[key]}
           </SelectOption>
         ))}
-      </Select>
-      <SearchInput
+      </Select></InputGroupItem>
+      <InputGroupItem><SearchInput
         placeholder={`Find by ${searchType.toLowerCase()}`}
         value={searchValue}
         onChange={(_, newSearch) => {
@@ -52,7 +59,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
         }}
         onClear={() => onSearchValueChange('')}
         style={{ minWidth: '200px' }}
-      />
+      /></InputGroupItem>
     </InputGroup>
   );
 };

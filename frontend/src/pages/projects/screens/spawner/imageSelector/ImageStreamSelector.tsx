@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { FormGroup, Select, SelectOption } from '@patternfly/react-core';
+import {
+	FormGroup
+} from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption
+} from '@patternfly/react-core/deprecated';
 import { BuildStatus } from '~/pages/projects/screens/spawner/types';
 import {
   checkImageStreamAvailability,
@@ -46,7 +52,7 @@ const ImageStreamSelector: React.FC<ImageStreamSelectorProps> = ({
     <FormGroup isRequired label="Image selection" fieldId="workbench-image-stream-selection">
       <Select
         id="workbench-image-stream-selection"
-        onToggle={(open) => setImageSelectionOpen(open)}
+        onToggle={(_event, open) => setImageSelectionOpen(open)}
         onSelect={(e, selection) => {
           // We know selection here is ImageStreamSelectOptionObjectType
           if (isImageStreamSelectOptionObject(selection)) {

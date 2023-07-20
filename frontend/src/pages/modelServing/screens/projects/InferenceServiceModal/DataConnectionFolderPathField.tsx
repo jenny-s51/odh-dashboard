@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormGroup, InputGroup, InputGroupText, TextInput } from '@patternfly/react-core';
+import { FormGroup, InputGroup, InputGroupText, TextInput, InputGroupItem } from '@patternfly/react-core';
 
 type DataConnectionFolderPathFieldProps = {
   folderPath: string;
@@ -12,14 +12,14 @@ const DataConnectionFolderPathField: React.FC<DataConnectionFolderPathFieldProps
 }) => (
   <FormGroup fieldId="folder-path" label="Folder path">
     <InputGroup>
-      <InputGroupText variant="plain">/</InputGroupText>
-      <TextInput
+      <InputGroupText >/</InputGroupText>
+      <InputGroupItem isFill ><TextInput
         aria-label="folder-path"
         type="text"
         value={folderPath}
         placeholder="eg. data"
-        onChange={(value) => setFolderPath(value)}
-      />
+        onChange={(_event, value) => setFolderPath(value)}
+      /></InputGroupItem>
     </InputGroup>
   </FormGroup>
 );

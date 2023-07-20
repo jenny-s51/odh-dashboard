@@ -6,9 +6,8 @@ import {
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
-  Spinner,
-  Title,
-} from '@patternfly/react-core';
+  Spinner, EmptyStateHeader, EmptyStateFooter,
+  } from '@patternfly/react-core';
 import { useNavigate } from 'react-router-dom';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { ServingRuntimeKind, InferenceServiceKind } from '~/k8sTypes';
@@ -49,17 +48,14 @@ const ModelServingContextProvider: React.FC = () => {
     return (
       <Bullseye>
         <EmptyState>
-          <EmptyStateIcon icon={ExclamationCircleIcon} />
-          <Title headingLevel="h2" size="lg">
-            Problem loading model serving page
-          </Title>
+          <EmptyStateHeader titleText="Problem loading model serving page" icon={<EmptyStateIcon icon={ExclamationCircleIcon} />} headingLevel="h2" />
           <EmptyStateBody>
             {servingRuntimes.error?.message || inferenceServices.error?.message}
-          </EmptyStateBody>
+          </EmptyStateBody><EmptyStateFooter>
           <Button variant="primary" onClick={() => navigate('/projects')}>
             View my projects
           </Button>
-        </EmptyState>
+        </EmptyStateFooter></EmptyState>
       </Bullseye>
     );
   }

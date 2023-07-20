@@ -49,7 +49,7 @@ const ParamsSection: React.FC<ParamsSectionProps> = ({ value, onChange }) => {
               id={`${label}-param-field`}
               name={`${label}-param-field`}
               value={value}
-              onChange={(newValue) => handleChange(i, { label, value: newValue })}
+              onChange={(_event, newValue) => handleChange(i, { label, value: newValue })}
             />
           </FormGroup>
         ))}

@@ -43,7 +43,7 @@ const GenericKeyValuePairField: React.FC<GenericKeyValuePairFieldProps> = ({
                           isRequired
                           aria-label={`key of item ${i}`}
                           value={key}
-                          onChange={(updatedKey) =>
+                          onChange={(_event, updatedKey) =>
                             onUpdate(updateArrayValue(values, i, { key: updatedKey }))
                           }
                         />

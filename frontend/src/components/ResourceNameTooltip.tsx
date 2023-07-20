@@ -24,7 +24,7 @@ const ResourceNameTooltip: React.FC<ResourceNameTooltipProps> = ({ children, res
     {resource.metadata?.name && (
       <div style={{ display: 'inline-block' }}>
         <Tooltip
-          removeFindDomNode
+          
           position="right"
           content={
             <Stack hasGutter>

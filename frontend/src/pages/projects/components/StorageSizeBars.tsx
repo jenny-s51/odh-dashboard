@@ -27,7 +27,7 @@ const StorageSizeBar: React.FC<StorageSizeBarProps> = ({ pvc }) => {
     return (
       <div>
         <Tooltip
-          removeFindDomNode
+          
           content="No active storage information at this time, check back later"
         >
           <Text component="small">Max {maxValue}</Text>
@@ -43,7 +43,7 @@ const StorageSizeBar: React.FC<StorageSizeBarProps> = ({ pvc }) => {
   let inUseRender: React.ReactNode;
   if (error) {
     inUseRender = (
-      <Tooltip removeFindDomNode content={`Unable to get storage data. ${error.message}`}>
+      <Tooltip  content={`Unable to get storage data. ${error.message}`}>
         <ExclamationCircleIcon
           color="var(--pf-global--danger-color--100)"
           aria-label="error icon"
@@ -75,7 +75,7 @@ const StorageSizeBar: React.FC<StorageSizeBarProps> = ({ pvc }) => {
       </SplitItem>
       <SplitItem isFilled style={{ maxWidth: 200 }}>
         {percentageLabel ? (
-          <Tooltip removeFindDomNode content={percentageLabel}>
+          <Tooltip  content={percentageLabel}>
             {progressBar}
           </Tooltip>
         ) : (

@@ -64,7 +64,7 @@ const ServingRuntimeTokenInput: React.FC<ServingRuntimeTokenInputProps> = ({
             aria-describedby="service-account-form-name-helper"
             validated={token.error ? ValidatedOptions.error : ValidatedOptions.default}
             isDisabled={disabled}
-            onChange={(value) => {
+            onChange={(_event, value) => {
               const tokens = data.tokens?.map((item) =>
                 item.uuid === token.uuid
                   ? {

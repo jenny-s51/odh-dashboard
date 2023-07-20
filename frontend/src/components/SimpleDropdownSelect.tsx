@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { Dropdown, DropdownItem, DropdownToggle } from '@patternfly/react-core';
+import {
+	Dropdown,
+	DropdownItem,
+	DropdownToggle
+} from '@patternfly/react-core/deprecated';
 
 type SimpleDropdownProps = {
   options: { key: string; label: React.ReactNode }[];

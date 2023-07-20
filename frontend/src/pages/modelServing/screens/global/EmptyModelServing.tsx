@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, EmptyState, EmptyStateBody, EmptyStateIcon, Title } from '@patternfly/react-core';
+import { Button, EmptyState, EmptyStateBody, EmptyStateIcon, EmptyStateHeader, EmptyStateFooter,  } from '@patternfly/react-core';
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import { useNavigate } from 'react-router-dom';
 import { ModelServingContext } from '~/pages/modelServing/ModelServingContext';
@@ -14,29 +14,23 @@ const EmptyModelServing: React.FC = () => {
   if (servingRuntimes.length === 0) {
     return (
       <EmptyState>
-        <EmptyStateIcon icon={PlusCircleIcon} />
-        <Title headingLevel="h2" size="lg">
-          No model servers
-        </Title>
+        <EmptyStateHeader titleText="No model servers" icon={<EmptyStateIcon icon={PlusCircleIcon} />} headingLevel="h2" />
         <EmptyStateBody>
           Before deploying a model, you must first configure a model server.
-        </EmptyStateBody>
+        </EmptyStateBody><EmptyStateFooter>
         <Button variant="primary" onClick={() => navigate('/projects')}>
           Create server
         </Button>
-      </EmptyState>
+      </EmptyStateFooter></EmptyState>
     );
   }
 
   return (
     <EmptyState>
-      <EmptyStateIcon icon={PlusCircleIcon} />
-      <Title headingLevel="h2" size="lg">
-        No deployed models.
-      </Title>
-      <EmptyStateBody>To get started, use existing model servers to serve a model.</EmptyStateBody>
+      <EmptyStateHeader titleText="No deployed models." icon={<EmptyStateIcon icon={PlusCircleIcon} />} headingLevel="h2" />
+      <EmptyStateBody>To get started, use existing model servers to serve a model.</EmptyStateBody><EmptyStateFooter>
       <ServeModelButton />
-    </EmptyState>
+    </EmptyStateFooter></EmptyState>
   );
 };
 

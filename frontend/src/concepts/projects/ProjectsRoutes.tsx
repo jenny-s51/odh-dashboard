@@ -4,9 +4,8 @@ import {
   Button,
   EmptyState,
   EmptyStateBody,
-  Spinner,
-  Title,
-} from '@patternfly/react-core';
+  Spinner, EmptyStateHeader, EmptyStateFooter,
+  } from '@patternfly/react-core';
 import { Route, Routes } from 'react-router-dom';
 import { ProjectsContext } from '~/concepts/projects/ProjectsContext';
 
@@ -33,10 +32,8 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = ({ children, disableMountR
     // This is unlikely to happen -- likely a development setup error and mounted outside of the provider
     render = (
       <EmptyState>
-        <Title headingLevel="h2" size="lg">
-          There was an issue fetching projects.
-        </Title>
-        <EmptyStateBody>{loadError.message}</EmptyStateBody>
+        <EmptyStateHeader titleText="There was an issue fetching projects." headingLevel="h2" />
+        <EmptyStateBody>{loadError.message}</EmptyStateBody><EmptyStateFooter>
         <Button
           variant="primary"
           isDisabled={!enabledRefresh}
@@ -47,7 +44,7 @@ const ProjectsRoutes: React.FC<ProjectsRoutesProps> = ({ children, disableMountR
         >
           Attempt to refresh
         </Button>
-      </EmptyState>
+      </EmptyStateFooter></EmptyState>
     );
   } else if (!loaded) {
     render = (

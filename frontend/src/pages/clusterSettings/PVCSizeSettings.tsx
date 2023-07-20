@@ -6,10 +6,9 @@ import {
   HelperTextItem,
   InputGroup,
   InputGroupText,
-  InputGroupTextVariant,
   Stack,
   StackItem,
-  TextInput,
+  TextInput, InputGroupItem,
 } from '@patternfly/react-core';
 import SettingSection from '~/components/SettingSection';
 import { DEFAULT_PVC_SIZE, MAX_PVC_SIZE, MIN_PVC_SIZE } from './const';
@@ -34,7 +33,7 @@ all users."
       <Stack hasGutter>
         <StackItem>
           <InputGroup>
-            <TextInput
+            <InputGroupItem isFill ><TextInput
               id="pvc-size-input"
               style={{ maxWidth: '200px' }}
               name="pvc"
@@ -43,7 +42,7 @@ all users."
               aria-label="PVC Size Input"
               value={pvcSize}
               pattern="/^(\s*|\d+)$/"
-              onChange={async (value: string) => {
+              onChange={async (_event, value: string) => {
                 const modifiedValue = value.replace(/ /g, '');
                 if (modifiedValue !== '') {
                   let newValue = Number.isInteger(Number(modifiedValue))
@@ -60,8 +59,8 @@ all users."
                   setPvcSize(modifiedValue);
                 }
               }}
-            />
-            <InputGroupText variant={InputGroupTextVariant.plain}>GiB</InputGroupText>
+            /></InputGroupItem>
+            <InputGroupText >GiB</InputGroupText>
           </InputGroup>
         </StackItem>
         <StackItem>

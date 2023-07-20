@@ -19,7 +19,7 @@ const SupportedAppTitle: React.FC<SupportedAppTitleProps> = ({ odhApp, showProvi
     icon = (
       <span style={{ whiteSpace: 'nowrap' }}>
         <span style={{ verticalAlign: 'text-bottom' }}>{splitTitle[splitTitle.length - 1]}</span>
-        <Tooltip removeFindDomNode content={`${ODH_PRODUCT_NAME} certified and supported`}>
+        <Tooltip  content={`${ODH_PRODUCT_NAME} certified and supported`}>
           <Button variant="plain" style={{ padding: 0 }}>
             <img
               style={{ marginLeft: 'var(--pf-global--spacer--xs)' }}

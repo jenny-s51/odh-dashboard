@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { DropdownDirection } from '@patternfly/react-core';
+import {
+	DropdownDirection
+} from '@patternfly/react-core/deprecated';
 import { ActionsColumn, Td, Tr } from '@patternfly/react-table';
 import { Link } from 'react-router-dom';
 import ResourceNameTooltip from '~/components/ResourceNameTooltip';

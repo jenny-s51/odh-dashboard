@@ -264,7 +264,7 @@ const ManageServingRuntimeModal: React.FC<ManageServingRuntimeModalProps> = ({
                       id="alt-form-checkbox-route"
                       name="alt-form-checkbox-route"
                       isChecked={createData.externalRoute}
-                      onChange={(check) => setCreateData('externalRoute', check)}
+                      onChange={(_event, check) => setCreateData('externalRoute', check)}
                     />
                   </FormGroup>
                 </FormSection>

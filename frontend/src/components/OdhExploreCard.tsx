@@ -4,8 +4,6 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardHeaderMain,
-  CardActions,
   Flex,
   FlexItem,
 } from '@patternfly/react-core';
@@ -55,19 +53,13 @@ const OdhExploreCard: React.FC<OdhExploreCardProps> = ({
       data-id={odhApp.metadata.name}
       id={odhApp.metadata.name}
       role="listitem"
-      isHoverable={!disabled}
+      
       isSelectable={!disabled}
       isSelected={isSelected}
       className={cardClasses}
       onClick={() => !disabled && onSelect()}
     >
-      <CardHeader>
-        <CardHeaderMain style={{ maxWidth: '33%', width: '100%' }}>
-          <BrandImage src={odhApp.spec.img} alt={odhApp.spec.displayName} />
-        </CardHeaderMain>
-        {!dashboardConfig.spec.dashboardConfig.disableISVBadges && (
-          <CardActions hasNoOffset>
-            <Flex
+      <CardHeader {...(!dashboardConfig.spec.dashboardConfig.disableISVBadges && {actions: { actions: <><Flex
               spaceItems={{ default: 'spaceItemsSm' }}
               alignItems={{ default: 'alignItemsCenter' }}
               direction={{ default: 'column' }}
@@ -83,9 +75,11 @@ const OdhExploreCard: React.FC<OdhExploreCardProps> = ({
               {odhApp.spec.beta && (
                 <FlexItem className="odh-card__partner-badge odh-m-beta">Beta</FlexItem>
               )}
-            </Flex>
-          </CardActions>
-        )}
+            </Flex></>, hasNoOffset: true, className: undefined}})} >
+        actions={<>
+          <BrandImage src={odhApp.spec.img} alt={odhApp.spec.displayName} />
+        </>}
+        
       </CardHeader>
       <SupportedAppTitle odhApp={odhApp} showProvider />
       <CardBody>{odhApp.spec.description}</CardBody>

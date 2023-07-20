@@ -46,7 +46,7 @@ const EnvUploadField: React.FC<EnvUploadFieldProps> = ({
         dropzoneProps={{
           accept: '.yaml',
         }}
-        onDataChange={(data) => {
+        onDataChange={(_event, data) => {
           setFileValue(data);
           try {
             const parsedData = parse(data);

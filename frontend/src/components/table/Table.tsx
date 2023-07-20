@@ -7,7 +7,7 @@ import {
   ToolbarItem,
 } from '@patternfly/react-core';
 import {
-  TableComposable,
+  Table /* data-codemods */,
   Thead,
   Tr,
   Th,
@@ -81,7 +81,7 @@ const Table = <T,>({
   const showPagination = enablePagination && allData.length > minPageSize;
   const pagination = (variant: 'top' | 'bottom') => (
     <Pagination
-      perPageComponent="button"
+      
       itemCount={allData.length}
       perPage={pageSize}
       page={page}
@@ -102,14 +102,14 @@ const Table = <T,>({
           <ToolbarContent>
             {toolbarContent}
             {showPagination && (
-              <ToolbarItem variant="pagination" alignment={{ default: 'alignRight' }}>
+              <ToolbarItem variant="pagination" align={{ default: 'alignRight' }}>
                 {pagination('top')}
               </ToolbarItem>
             )}
           </ToolbarContent>
         </Toolbar>
       )}
-      <TableComposable {...props}>
+      <Table {...props}>
         {caption && <Caption>{caption}</Caption>}
         <Thead>
           <Tr>
@@ -155,7 +155,7 @@ const Table = <T,>({
             {footerRow && footerRow(page)}
           </>
         )}
-      </TableComposable>
+      </Table>
       {emptyTableView && data.length === 0 && (
         <div style={{ padding: 'var(--pf-global--spacer--2xl) 0', textAlign: 'center' }}>
           {emptyTableView}
@@ -164,7 +164,7 @@ const Table = <T,>({
       {showPagination && (
         <Toolbar>
           <ToolbarContent>
-            <ToolbarItem variant="pagination" alignment={{ default: 'alignRight' }}>
+            <ToolbarItem variant="pagination" align={{ default: 'alignRight' }}>
               {pagination('bottom')}
             </ToolbarItem>
           </ToolbarContent>

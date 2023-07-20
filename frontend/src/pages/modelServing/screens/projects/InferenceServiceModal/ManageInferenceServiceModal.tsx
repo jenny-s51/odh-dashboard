@@ -192,7 +192,7 @@ const ManageInferenceServiceModal: React.FC<ManageInferenceServiceModalProps> = 
                 isRequired
                 id="inference-service-name-input"
                 value={createData.name}
-                onChange={(name) => setCreateData('name', name)}
+                onChange={(_event, name) => setCreateData('name', name)}
               />
             </FormGroup>
           </StackItem>

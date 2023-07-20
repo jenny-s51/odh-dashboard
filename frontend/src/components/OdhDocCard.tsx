@@ -2,11 +2,9 @@ import React from 'react';
 import classNames from 'classnames';
 import {
   Card,
-  CardActions,
   CardBody,
   CardFooter,
   CardHeader,
-  CardHeaderMain,
   CardTitle,
   Stack,
   StackItem,
@@ -138,16 +136,14 @@ const OdhDocCard: React.FC<OdhDocCardProps> = ({ odhDoc, favorite, updateFavorit
       isSelected={selected}
       isSelectable
     >
-      <CardHeader>
-        <CardHeaderMain style={{ maxWidth: '33%', width: '100%' }}>
+      <CardHeader actions={{ actions: <><FavoriteButton isFavorite={favorite} onClick={() => updateFavorite(!favorite)} /></>, hasNoOffset: true, className: undefined}} >
+        actions={<>
           <BrandImage
             src={odhDoc.spec.img || odhDoc.spec.icon || ''}
             alt={odhDoc.spec.displayName}
           />
-        </CardHeaderMain>
-        <CardActions hasNoOffset>
-          <FavoriteButton isFavorite={favorite} onClick={() => updateFavorite(!favorite)} />
-        </CardActions>
+        </>}
+        
       </CardHeader>
       <CardTitle>
         <TextContent>
@@ -164,7 +160,7 @@ const OdhDocCard: React.FC<OdhDocCardProps> = ({ odhDoc, favorite, updateFavorit
             <DocCardBadges odhDoc={odhDoc} />
           </StackItem>
           <StackItem>
-            <Tooltip removeFindDomNode content={odhDoc.spec.description}>
+            <Tooltip  content={odhDoc.spec.description}>
               <span className="odh-card__body-text">{odhDoc.spec.description}</span>
             </Tooltip>
           </StackItem>

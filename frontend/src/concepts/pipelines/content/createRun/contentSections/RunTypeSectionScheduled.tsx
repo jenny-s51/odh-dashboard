@@ -71,7 +71,7 @@ const RunTypeSectionScheduled: React.FC<RunTypeSectionScheduledProps> = ({ data,
             <ClipboardCopy
               hoverTip="Copy"
               clickTip="Copied"
-              onChange={(value) => {
+              onChange={(_event, value) => {
                 if (typeof value === 'string') {
                   onChange({ ...data, value });
                 }

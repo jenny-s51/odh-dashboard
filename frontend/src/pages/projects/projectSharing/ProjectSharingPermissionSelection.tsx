@@ -1,4 +1,7 @@
-import { Select, SelectOption } from '@patternfly/react-core';
+import {
+	Select,
+	SelectOption
+} from '@patternfly/react-core/deprecated';
 import React from 'react';
 import { ProjectSharingRoleType } from './types';
 import { castProjectSharingRoleType, roleLabel } from './utils';
@@ -36,7 +39,7 @@ const ProjectSharingPermissionSelection: React.FC<ProjectSharingPermissionSelect
           setIsOpen(false);
         }
       }}
-      onToggle={setIsOpen}
+      onToggle={(_event, val) => setIsOpen(val)}
       placeholderText={selection}
       direction="down"
     >

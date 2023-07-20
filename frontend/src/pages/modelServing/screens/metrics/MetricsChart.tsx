@@ -15,8 +15,9 @@ import {
   ChartGroup,
   ChartThreshold,
   ChartVoronoiContainer,
-  getResizeObserver,
+  
 } from '@patternfly/react-charts';
+import {getResizeObserver} from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
 import { ContextResourceData, PrometheusQueryRangeResultValue } from '~/types';
 import { TimeframeTime } from '~/pages/modelServing/screens/const';
@@ -108,7 +109,7 @@ const MetricsChart: React.FC<MetricsChartProps> = ({ title, color, metrics, unit
                 </>
               ) : (
                 <>
-                  <EmptyStateIcon variant="container" component={Spinner} />
+                  <EmptyStateIcon  icon={Spinner} />
                   <Title headingLevel="h4" size="lg">
                     Loading
                   </Title>
