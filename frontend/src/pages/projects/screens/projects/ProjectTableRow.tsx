@@ -16,7 +16,6 @@ import ListNotebookState from '~/pages/projects/notebook/ListNotebookState';
 import ResourceNameTooltip from '~/components/ResourceNameTooltip';
 import { getProjectOwner } from '~/pages/projects/utils';
 import ProjectLink from './ProjectLink';
-import './ProjectTableRow.scss';
 
 type ProjectTableRowProps = {
   obj: ProjectKind;
@@ -39,7 +38,7 @@ const ProjectTableRow: React.FC<ProjectTableRowProps> = ({
       <Td dataLabel="Name">
         <Flex spaceItems={{ default: 'spaceItemsXs' }} alignItems={{ default: 'alignItemsCenter' }}>
           {project.metadata.labels?.[KnownLabels.DASHBOARD_RESOURCE] && (
-            <FlexItem className="odh-projects__label">
+            <FlexItem style={{ display: 'flex' }}>
               <Tooltip content="Data Science">
                 <Label isCompact color="green">
                   DS

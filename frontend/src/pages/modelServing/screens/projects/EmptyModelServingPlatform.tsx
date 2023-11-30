@@ -5,7 +5,7 @@ import { WrenchIcon } from '@patternfly/react-icons';
 const EmptyModelServingPlatform: React.FC = () => (
   <EmptyState variant="xs">
     <EmptyStateIcon icon={WrenchIcon} />
-    <Title headingLevel="h3" size="lg">
+    <Title headingLevel="h3">
       No model serving platform selected
     </Title>
     <EmptyStateBody>
