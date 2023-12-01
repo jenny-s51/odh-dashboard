@@ -1,10 +1,4 @@
 import React from 'react';
-import {
-  ApplicationLauncher,
-  ApplicationLauncherGroup,
-  ApplicationLauncherItem,
-  ApplicationLauncherSeparator,
-} from '@patternfly/react-core/deprecated';
 import openshiftLogo from '~/images/openshift.svg';
 import { useWatchConsoleLinks } from '~/utilities/useWatchConsoleLinks';
 import { ODH_PRODUCT_NAME } from '~/utilities/const';
@@ -12,6 +6,15 @@ import { getOpenShiftConsoleServerURL } from '~/utilities/clusterUtils';
 import { useClusterInfo } from '~/redux/selectors/clusterInfo';
 import { ApplicationAction, Section } from '~/types';
 import { useAppContext } from './AppContext';
+import {
+  Divider,
+  Dropdown,
+  DropdownGroup,
+  DropdownItem,
+  DropdownList,
+  MenuToggle,
+} from '@patternfly/react-core';
+import { ThIcon } from '@patternfly/react-icons';
 
 const odhConsoleLinkName = 'rhodslink';
 
@@ -23,7 +26,7 @@ export const getOCMAction = (
     return {
       label: 'OpenShift Cluster Manager',
       href: `https://cloud.redhat.com/openshift/details/${clusterID}`,
-      image: <img src={openshiftLogo} alt="" />,
+      image: <img src={openshiftLogo} alt="" style={{ width: '36px' }} />,
     };
   }
   return null;
@@ -38,7 +41,7 @@ export const getOpenShiftConsoleAction = (serverURL?: string): ApplicationAction
   return {
     label: 'OpenShift Console',
     href,
-    image: <img src={openshiftLogo} alt="" />,
+    image: <img src={openshiftLogo} alt="" style={{ width: '36px' }} />,
   };
 };
 
@@ -59,6 +62,8 @@ const sectionSortValue = (section: Section): number => {
 
 const AppLauncher: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const menuRef = React.useRef<HTMLDivElement>(null);
+
   const { clusterID, clusterBranding, serverURL } = useClusterInfo();
   const { consoleLinks } = useWatchConsoleLinks();
   const { dashboardConfig } = useAppContext();
@@ -125,36 +130,55 @@ const AppLauncher: React.FC = () => {
     return null;
   }
 
-  return (
-    <ApplicationLauncher
-      aria-label="Application launcher"
-      onSelect={onSelect}
-      onToggle={onToggle}
-      isOpen={isOpen}
-      items={applicationSections.map((section, sectionIndex) => (
-        <ApplicationLauncherGroup key={section.label} label={section.label}>
+  const menuItems = [
+    applicationSections.map((section, sectionIndex) => (
+      <DropdownGroup key={section.label} label={section.label}>
+        <DropdownList>
           {section.actions.map((action) => (
-            <ApplicationLauncherItem
+            <DropdownItem
               key={action.label}
-              href={action.href}
-              isExternal
+              to={action.href}
+              isExternalLink
               icon={action.image}
               rel="noopener noreferrer"
               target="_blank"
             >
               {action.label}
-            </ApplicationLauncherItem>
+            </DropdownItem>
           ))}
-          <>
-            {sectionIndex < applicationSections.length - 1 && (
-              <ApplicationLauncherSeparator key={`separator-${sectionIndex}`} />
-            )}
-          </>
-        </ApplicationLauncherGroup>
-      ))}
-      position="right"
-      isGrouped
-    />
+          {sectionIndex < applicationSections.length - 1 && (
+            <Divider key={`separator-${sectionIndex}`} />
+          )}
+        </DropdownList>
+      </DropdownGroup>
+    )),
+  ];
+
+  return (
+    // eslint-disable-next-line no-console
+    <Dropdown
+      aria-label="Application launcher"
+      isOpen={isOpen}
+      onOpenChange={(isOpen) => setIsOpen(isOpen)}
+      onOpenChangeKeys={['Escape']}
+      toggle={(toggleRef) => (
+        <MenuToggle
+          aria-label="Toggle"
+          ref={toggleRef}
+          variant="plain"
+          onClick={onToggle}
+          isExpanded={isOpen}
+          style={{ width: 'auto' }}
+        >
+          <ThIcon />
+        </MenuToggle>
+      )}
+      ref={menuRef}
+      // eslint-disable-next-line no-console
+      onSelect={(_ev, value) => console.log('selected', value)}
+    >
+      {menuItems}
+    </Dropdown>
   );
 };
 
