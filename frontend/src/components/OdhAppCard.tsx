@@ -8,10 +8,14 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
+  DropdownList,
+  MenuToggle,
+  MenuToggleElement,
   Popover,
 } from '@patternfly/react-core';
-import { Dropdown, DropdownItem, KebabToggle } from '@patternfly/react-core/deprecated';
-import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+// import { Dropdown, DropdownItem, KebabToggle } from '@patternfly/react-core/deprecated';
+import { Dropdown, DropdownItem } from '@patternfly/react-core';
+import { EllipsisVIcon, ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { OdhApplication } from '~/types';
 import { getLaunchStatus, launchQuickStart } from '~/utilities/quickStartUtils';
 import EnableModal from '~/pages/exploreApplication/EnableModal';
@@ -42,7 +46,7 @@ const OdhAppCard: React.FC<OdhAppCardProps> = ({ odhApp }) => {
   const dispatch = useAppDispatch();
 
   const onToggle = (value: boolean) => {
-    setIsOpen(value);
+    setIsOpen(!isOpen);
   };
 
   const onOpenKebab = () => {
@@ -183,18 +187,29 @@ const OdhAppCard: React.FC<OdhAppCardProps> = ({ odhApp }) => {
               {disabled ? disabledPopover : null}
               <Dropdown
                 onSelect={onOpenKebab}
-                toggle={<KebabToggle onToggle={(e, value: boolean) => onToggle(value)} />}
+                // toggle={<KebabToggle onToggle={(e, value: boolean) => onToggle(value)} />}
+                toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
+                  <MenuToggle
+                    ref={toggleRef}
+                    aria-label="Card actions"
+                    variant="plain"
+                    onClick={(e) => onToggle}
+                    isExpanded={isOpen}
+                  >
+                    <EllipsisVIcon />
+                  </MenuToggle>
+                )}
                 isOpen={isOpen}
+                onOpenChange={(isOpen) => setIsOpen(isOpen)}
                 isPlain
-                dropdownItems={dropdownItems}
-                position={'right'}
-              />
+              >
+                <DropdownList>
+                {dropdownItems}
+                </DropdownList>
+                </Dropdown>
             </>
           ),
-          hasNoOffset: true,
-          className: undefined,
         }}
-        style={{ paddingRight: 0 }}
       >
         <BrandImage src={odhApp.spec.img} alt={odhApp.spec.displayName} />
       </CardHeader>
