@@ -1,7 +1,6 @@
 import BiasConfigurationTable, {
   BiasConfigurationTableProps,
 } from '~/pages/modelServing/screens/metrics/bias/BiasConfigurationPage/BiasConfigurationTable';
-import { mockInferenceServiceK8sResource } from '~/__mocks__/mockInferenceServiceK8sResource';
 import { InferenceServiceKind } from '~/k8sTypes';
 import { BiasMetricConfig } from '~/concepts/trustyai/types';
 import { BiasMetricType } from '~/api';
@@ -26,7 +25,22 @@ const mockBiasMetricConfigs: BiasMetricConfig[] = [
     thresholdDelta: 0.5,
     batchSize: 5000,
   },
+  {
+    id: 'test_id_2',
+    name: 'test_name_2',
+    metricType: BiasMetricType.DIR,
+    protectedAttribute: 'test_protected_attribute_2',
+    outcomeName: 'test_outcome_name_2',
+    favorableOutcome: 'test_favorable_outcome_2',
+    privilegedAttribute: 'privileged_attribute_2',
+    unprivilegedAttribute: 'unprivileged_attribute_2',
+    modelId: 'model_id_2',
+    thresholdDelta: 0.5,
+    batchSize: 5000,
+  },
 ];
+
+export const EmptyStateBiasMetrics: BiasMetricConfig[] = [];
 
 const inferenceService: InferenceServiceKind = {
   data: {},
@@ -67,15 +81,35 @@ const defaultArgs: BiasConfigurationTableProps = {
   inferenceService,
   onConfigure: () => {
     // do something
-    console.log('onConfigure was called');
+    // eslint-disable no-console
+    // console.log('onConfigure was called');
   },
   refresh: () => {
     // do something
-    console.log('refresh was called');
+    // eslint-disable no-console
+    // console.log('refresh was called');
   },
   biasMetricConfigs: mockBiasMetricConfigs,
 };
 
+const emptyArgs = {
+  inferenceService,
+  onConfigure: () => {
+    // do something
+    // eslint-disable no-console
+    // console.log('onConfigure was called');
+  },
+  refresh: () => {
+    // do something
+    // eslint-disable no-console
+    // console.log('refresh was called');
+  },
+  biasMetricConfigs: [],
+};
 export const Default = {
   args: defaultArgs,
+};
+
+export const Empty = {
+  args: emptyArgs,
 };

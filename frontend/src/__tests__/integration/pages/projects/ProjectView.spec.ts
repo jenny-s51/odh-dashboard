@@ -25,11 +25,10 @@ test('Project view page', async ({ page }) => {
   await expect(page.getByText('Non-DS Project 2', { exact: true })).toBeVisible();
   await expect(page.getByText('Non-DS Project 3', { exact: true })).toBeVisible();
 
-  await page.getByLabel('Filter type').locator('button').click();
-  await expect(page.getByRole('listitem')).toHaveCount(11);
+  await page.locator('#search-field-toggle').click();
+  await expect(page.getByRole('listitem')).toHaveCount(2);
   await expect(page.getByRole('listitem').nth(0)).toHaveText('Name');
-  await expect(page.getByRole('listitem').nth(1)).toHaveText('Description');
-  await expect(page.getByRole('listitem').nth(2)).toHaveText('User');
+  await expect(page.getByRole('listitem').nth(1)).toHaveText('User');
 });
 
 test('Create project', async ({ page }) => {

@@ -22,6 +22,7 @@ const ProjectModelMetricsConfigurationPage: React.FC = () => {
         { label: 'Metric configuration', isActive: true },
       ]}
       inferenceService={model}
+      loaded={true}
     />
   );
 };

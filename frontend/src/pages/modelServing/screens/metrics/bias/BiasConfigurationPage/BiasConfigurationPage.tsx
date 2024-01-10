@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-  Breadcrumb,
+  // Breadcrumb,
   Button,
   EmptyStateVariant,
   PageSection,
@@ -9,25 +9,34 @@ import {
 import { useNavigate } from 'react-router-dom';
 import ApplicationsPage from '~/pages/ApplicationsPage';
 import { BreadcrumbItemType } from '~/types';
-import { useModelBiasData } from '~/concepts/trustyai/context/useModelBiasData';
+// import { useModelBiasData } from '~/concepts/trustyai/context/useModelBiasData';
 import { InferenceServiceKind } from '~/k8sTypes';
 import { getInferenceServiceDisplayName } from '~/pages/modelServing/screens/global/utils';
-import { getBreadcrumbItemComponents } from '~/pages/modelServing/screens/metrics/utils';
+// import { getBreadcrumbItemComponents } from '~/pages/modelServing/screens/metrics/utils';
 import ManageBiasConfigurationModal from '~/pages/modelServing/screens/metrics/bias/BiasConfigurationPage/BiasConfigurationModal/ManageBiasConfigurationModal';
 import { MetricsTabKeys } from '~/pages/modelServing/screens/metrics/types';
+import { BiasMetricConfig } from '~/concepts/trustyai/types';
 import BiasConfigurationTable from './BiasConfigurationTable';
 import BiasConfigurationEmptyState from './BiasConfigurationEmptyState';
 
-type BiasConfigurationPageProps = {
-  breadcrumbItems: BreadcrumbItemType[];
+export type BiasConfigurationPageProps = {
+  breadcrumbItems?: BreadcrumbItemType[];
   inferenceService: InferenceServiceKind;
+  biasMetricConfigs?: BiasMetricConfig[];
+  refresh?: () => void;
+  loaded: boolean;
+  title?: string;
+  loadError?: boolean;
 };
 
 const BiasConfigurationPage: React.FC<BiasConfigurationPageProps> = ({
-  breadcrumbItems,
+  // breadcrumbItems,
   inferenceService,
+  biasMetricConfigs,
+  refresh,
+  loaded,
+  loadError,
 }) => {
-  const { biasMetricConfigs, loaded, loadError, refresh } = useModelBiasData();
   const navigate = useNavigate();
   const firstRender = React.useRef(true);
   const [isOpen, setOpen] = React.useState(false);
@@ -36,7 +45,7 @@ const BiasConfigurationPage: React.FC<BiasConfigurationPageProps> = ({
     if (loaded && !loadError) {
       if (firstRender.current) {
         firstRender.current = false;
-        if (biasMetricConfigs.length === 0) {
+        if (biasMetricConfigs?.length === 0) {
           setOpen(true);
         }
       }
@@ -48,17 +57,17 @@ const BiasConfigurationPage: React.FC<BiasConfigurationPageProps> = ({
       <ApplicationsPage
         title="Bias metric configuration"
         description="Manage the configuration of model bias metrics."
-        breadcrumb={<Breadcrumb>{getBreadcrumbItemComponents(breadcrumbItems)}</Breadcrumb>}
+        // breadcrumb={<Breadcrumb>{getBreadcrumbItemComponents(breadcrumbItems)}</Breadcrumb>}
         headerAction={
           <Button onClick={() => navigate(`../${MetricsTabKeys.BIAS}`, { relative: 'path' })}>
-            {biasMetricConfigs.length === 0
+            {biasMetricConfigs?.length === 0
               ? `Back to ${getInferenceServiceDisplayName(inferenceService)}`
               : 'View metrics'}
           </Button>
         }
-        loaded={loaded}
+        loaded={loaded!}
         provideChildrenPadding
-        empty={biasMetricConfigs.length === 0}
+        empty={biasMetricConfigs?.length === 0}
         emptyStatePage={
           <PageSection isFilled variant={PageSectionVariants.light}>
             <BiasConfigurationEmptyState
@@ -79,7 +88,7 @@ const BiasConfigurationPage: React.FC<BiasConfigurationPageProps> = ({
         isOpen={isOpen}
         onClose={(submit) => {
           if (submit) {
-            refresh();
+            refresh!();
           }
           setOpen(false);
         }}

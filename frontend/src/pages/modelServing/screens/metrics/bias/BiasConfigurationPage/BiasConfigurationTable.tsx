@@ -1,20 +1,21 @@
 import * as React from 'react';
 import { Button, ButtonVariant, ToolbarItem } from '@patternfly/react-core';
 import DashboardSearchField, { SearchType } from '~/concepts/dashboard/DashboardSearchField';
-import { BiasMetricConfig } from '~/concepts/trustyai/types';
 import { InferenceServiceKind } from '~/k8sTypes';
+import { BiasMetricConfig } from '~/concepts/trustyai/types';
 import DeleteBiasConfigurationModal from '~/pages/modelServing/screens/metrics/bias/BiasConfigurationPage/BiasConfigurationModal/DeleteBiasConfigurationModal';
 import DashboardEmptyTableView from '~/concepts/dashboard/DashboardEmptyTableView';
 import { Table } from '~/components/table';
 import ManageBiasConfigurationModal from '~/pages/modelServing/screens/metrics/bias/BiasConfigurationPage/BiasConfigurationModal/ManageBiasConfigurationModal';
-import BiasConfigurationTableRow from './BiasConfigurationTableRow';
 import { columns } from './tableData';
+// import { useModelBiasData } from "~/concepts/trustyai/context/useModelBiasData";
+import BiasConfigurationTableRow from './BiasConfigurationTableRow';
 
 export type BiasConfigurationTableProps = {
   inferenceService: InferenceServiceKind;
   onConfigure: () => void;
-  biasMetricConfigs: BiasMetricConfig[];
-  refresh: () => void;
+  biasMetricConfigs?: BiasMetricConfig[];
+  refresh?: () => void;
 };
 
 const BiasConfigurationTable: React.FC<BiasConfigurationTableProps> = ({
@@ -23,12 +24,14 @@ const BiasConfigurationTable: React.FC<BiasConfigurationTableProps> = ({
   biasMetricConfigs,
   refresh,
 }) => {
+  // const { biasMetricConfigs, refresh } = useModelBiasData();
+
   const [searchType, setSearchType] = React.useState<SearchType>(SearchType.NAME);
   const [search, setSearch] = React.useState('');
   const [cloneConfiguration, setCloneConfiguration] = React.useState<BiasMetricConfig>();
   const [deleteConfiguration, setDeleteConfiguration] = React.useState<BiasMetricConfig>();
 
-  const filteredConfigurations = biasMetricConfigs.filter((configuration) => {
+  const filteredConfigurations = biasMetricConfigs?.filter((configuration) => {
     if (!search) {
       return true;
     }
@@ -60,7 +63,7 @@ const BiasConfigurationTable: React.FC<BiasConfigurationTableProps> = ({
   return (
     <>
       <Table
-        data={filteredConfigurations}
+        data={filteredConfigurations!}
         columns={columns}
         defaultSortColumn={1}
         disableRowRenderSupport
@@ -102,7 +105,7 @@ const BiasConfigurationTable: React.FC<BiasConfigurationTableProps> = ({
         isOpen={!!cloneConfiguration}
         onClose={(submit) => {
           if (submit) {
-            refresh();
+            refresh!();
           }
           setCloneConfiguration(undefined);
         }}
@@ -112,7 +115,7 @@ const BiasConfigurationTable: React.FC<BiasConfigurationTableProps> = ({
         configurationToDelete={deleteConfiguration}
         onClose={(deleted) => {
           if (deleted) {
-            refresh();
+            refresh!();
           }
           setDeleteConfiguration(undefined);
         }}
