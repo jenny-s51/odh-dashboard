@@ -50,7 +50,7 @@ const ApplicationsPage: React.FC<ApplicationsPageProps> = ({
   provideChildrenPadding,
 }) => {
   const renderHeader = () => (
-    <PageSection variant={PageSectionVariants.light}>
+    <PageSection variant={PageSectionVariants.default}>
       <Stack hasGutter>
         <StackItem>
           <Split hasGutter>
@@ -115,7 +115,7 @@ const ApplicationsPage: React.FC<ApplicationsPageProps> = ({
 
     if (provideChildrenPadding) {
       return (
-        <PageSection variant="light" isFilled>
+        <PageSection variant="default" isFilled>
           {children}
         </PageSection>
       );

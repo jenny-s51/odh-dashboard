@@ -9,7 +9,7 @@ const ProjectSettingsPage = (): ReactElement => {
   const biasMetricsAreaAvailable = useIsAreaAvailable(SupportedArea.BIAS_METRICS).status;
 
   return (
-    <PageSection isFilled aria-label="project-settings-page-section" variant="light">
+    <PageSection isFilled aria-label="project-settings-page-section" variant="default">
       <Stack hasGutter>
         {biasMetricsAreaAvailable && (
           <StackItem>

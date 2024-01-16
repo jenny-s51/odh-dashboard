@@ -46,7 +46,7 @@ const ProjectSharing: React.FC = () => {
   }
 
   return (
-    <PageSection isFilled aria-label="project-sharing-page-section" variant="light">
+    <PageSection isFilled aria-label="project-sharing-page-section" variant="default">
       <Stack hasGutter>
         <StackItem>Add users and groups that can access the project.</StackItem>
         <StackItem>

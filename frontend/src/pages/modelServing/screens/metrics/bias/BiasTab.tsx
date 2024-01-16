@@ -37,7 +37,7 @@ const BiasTab: React.FC = () => {
 
   if (loadError) {
     return (
-      <PageSection isFilled variant={PageSectionVariants.light}>
+      <PageSection isFilled variant={PageSectionVariants.default}>
         <EmptyState variant={EmptyStateVariant.lg}>
           <EmptyStateHeader
             titleText="TrustyAI Error"

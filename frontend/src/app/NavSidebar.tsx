@@ -53,7 +53,7 @@ const NavSidebar: React.FC = () => {
   const userNavData = useBuildNavData();
 
   return (
-    <PageSidebar theme="dark">
+    <PageSidebar>
       <PageSidebarBody>
         <Nav theme="dark" aria-label="Nav">
           <NavList>

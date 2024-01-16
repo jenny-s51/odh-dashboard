@@ -29,7 +29,7 @@ const GenericHorizontalBar: React.FC<GenericHorizontalBarProps> = ({ activeKey, 
   return (
     <>
       <PageSection
-        variant={PageSectionVariants.light}
+        variant={PageSectionVariants.default}
         type="tabs"
         isFilled
         aria-label="horizontal-bar-tab-section"
@@ -55,7 +55,7 @@ const GenericHorizontalBar: React.FC<GenericHorizontalBarProps> = ({ activeKey, 
         </Tabs>
       </PageSection>
       <PageSection
-        variant={PageSectionVariants.light}
+        variant={PageSectionVariants.default}
         isFilled
         aria-label="horizontal-bar-content-section"
         padding={{ default: 'noPadding' }}

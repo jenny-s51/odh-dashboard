@@ -30,7 +30,7 @@ const GlobalPipelineRunsTab: React.FC = () => {
         aria-label="Scheduled tab"
         className="odh-tabcontent-fix"
       >
-        <PageSection isFilled variant="light">
+        <PageSection isFilled variant="default">
           <ScheduledRuns />
         </PageSection>
       </Tab>
@@ -40,7 +40,7 @@ const GlobalPipelineRunsTab: React.FC = () => {
         aria-label="Triggered runs tab"
         className="odh-tabcontent-fix"
       >
-        <PageSection isFilled variant="light">
+        <PageSection isFilled variant="default">
           <TriggeredRuns />
         </PageSection>
       </Tab>

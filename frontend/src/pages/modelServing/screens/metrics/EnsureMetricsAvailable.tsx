@@ -36,7 +36,7 @@ const EnsureMetricsAvailable: React.FC<EnsureMetricsAvailableProps> = ({
   // Check for errors first as `loaded` prop will always be false when there is an error. If you check
   // for loaded first, you'll get an infinite spinner.
   if (error?.response?.status === 403) {
-    return <UnauthorizedError variant={PageSectionVariants.light} accessDomain={accessDomain} />;
+    return <UnauthorizedError variant={PageSectionVariants.default} accessDomain={accessDomain} />;
   }
 
   if (readyCount !== metrics.length) {

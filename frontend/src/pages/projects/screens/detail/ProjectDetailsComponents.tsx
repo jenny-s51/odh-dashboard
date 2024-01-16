@@ -63,7 +63,7 @@ const ProjectDetailsComponents: React.FC = () => {
   ];
 
   return (
-    <PageSection isFilled aria-label="project-details-page-section" variant="light">
+    <PageSection isFilled aria-label="project-details-page-section" variant="default">
       <GenericSidebar
         sections={sections.map(({ id }) => id)}
         titles={ProjectSectionTitles}

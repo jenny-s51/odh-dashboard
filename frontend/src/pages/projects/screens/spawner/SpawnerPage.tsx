@@ -150,7 +150,7 @@ const SpawnerPage: React.FC<SpawnerPageProps> = ({ existingNotebook }) => {
         isFilled
         id={ScrollableSelectorID}
         aria-label="spawner-page-spawner-section"
-        variant="light"
+        variant="default"
       >
         <GenericSidebar sections={sectionIDs} titles={SpawnerPageSectionTitles}>
           <Form style={{ maxWidth: 600 }}>
@@ -233,7 +233,7 @@ const SpawnerPage: React.FC<SpawnerPageProps> = ({ existingNotebook }) => {
           </Form>
         </GenericSidebar>
       </PageSection>
-      <PageSection stickyOnBreakpoint={{ default: 'bottom' }} variant="light">
+      <PageSection stickyOnBreakpoint={{ default: 'bottom' }} variant="default">
         <Stack hasGutter>
           {restartNotebooks.length !== 0 && (
             <StackItem>

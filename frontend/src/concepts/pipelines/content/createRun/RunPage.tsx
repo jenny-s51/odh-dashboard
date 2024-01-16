@@ -25,7 +25,7 @@ const RunPage: React.FC<RunPageProps> = ({ cloneRun, contextPath }) => {
 
   return (
     <>
-      <PageSection isFilled variant="light">
+      <PageSection isFilled variant="default">
         <GenericSidebar
           sections={Object.values(CreateRunPageSections)}
           titles={runPageSectionTitles}
@@ -34,7 +34,7 @@ const RunPage: React.FC<RunPageProps> = ({ cloneRun, contextPath }) => {
           <RunForm data={formData} onValueChange={(key, value) => setFormDataValue(key, value)} />
         </GenericSidebar>
       </PageSection>
-      <PageSection stickyOnBreakpoint={{ default: 'bottom' }} variant="light">
+      <PageSection stickyOnBreakpoint={{ default: 'bottom' }} variant="default">
         <RunPageFooter data={formData} contextPath={contextPath ?? `/pipelineRuns/${namespace}`} />
       </PageSection>
     </>
