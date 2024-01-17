@@ -154,11 +154,13 @@ export const usePipelinesAPI = (): UsePipelinesAPI => {
 };
 
 type CreatePipelineServerButtonProps = {
-  variant: 'primary' | 'secondary';
+  variant: 'primary' | 'secondary' | 'link';
+  title?: string;
 };
 
 export const CreatePipelineServerButton: React.FC<CreatePipelineServerButtonProps> = ({
   variant,
+  title = 'Configure pipeline server',
 }) => {
   const [configureModalVisible, setConfigureModalVisible] = React.useState(false);
   const { refreshState } = React.useContext(PipelinesContext);
@@ -168,7 +170,7 @@ export const CreatePipelineServerButton: React.FC<CreatePipelineServerButtonProp
       <Stack hasGutter>
         <StackItem>
           <Button variant={variant} onClick={() => setConfigureModalVisible(true)}>
-            Configure pipeline server
+            {title}
           </Button>
         </StackItem>
       </Stack>
