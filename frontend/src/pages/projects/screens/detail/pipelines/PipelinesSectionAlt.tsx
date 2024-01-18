@@ -53,7 +53,7 @@ const PipelinesSectionAlt: React.FC = () => {
             title="Start by configuring a pipeline server"
             description="Standardize and automate machine learning workflows to enable you to further enhance and deploy your data science models."
             icon={() => <img style={{ height: '320px' }} src={emptyStateImg} alt="Workbenches" />}
-            primaryActions={
+            actions={
               rbacLoaded && allowCreate ? (
                 <CreatePipelineServerButton variant={ButtonVariant.primary} />
               ) : null

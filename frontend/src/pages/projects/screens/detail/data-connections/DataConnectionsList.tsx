@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button } from '@patternfly/react-core';
+import { Button, Divider, Flex, FlexItem, PageSection, Popover } from '@patternfly/react-core';
 import EmptyDetailsList from '~/pages/projects/screens/detail/EmptyDetailsList';
 import { ProjectSectionID } from '~/pages/projects/screens/detail/types';
 import DetailsSection from '~/pages/projects/screens/detail/DetailsSection';
@@ -7,6 +7,8 @@ import { ProjectSectionTitles } from '~/pages/projects/screens/detail/const';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import DataConnectionsTable from './DataConnectionsTable';
 import ManageDataConnectionModal from './ManageDataConnectionModal';
+import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
+import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 
 const DataConnectionsList: React.FC = () => {
   const {
@@ -16,25 +18,78 @@ const DataConnectionsList: React.FC = () => {
   const [open, setOpen] = React.useState(false);
 
   const isDataConnectionsEmpty = connections.length === 0;
+  let icon;
+
+  icon = (
+    <img
+      style={{
+        marginLeft: 'var(--pf-v5-global--spacer--xs)',
+        marginRight: 'var(--pf-v5-global--spacer--xs)',
+        verticalAlign: 'middle',
+      }}
+      src="../images/UI_icon-Red_Hat-Connected-RGB.svg"
+      alt="Data connections icon"
+    />
+  );
 
   return (
     <>
       <DetailsSection
+        icon={icon}
         id={ProjectSectionID.DATA_CONNECTIONS}
         title={ProjectSectionTitles[ProjectSectionID.DATA_CONNECTIONS] || ''}
-        actions={[
-          <Button
-            key={`action-${ProjectSectionID.DATA_CONNECTIONS}`}
-            variant="secondary"
-            onClick={() => setOpen(true)}
+        popover={
+          <Popover
+            headerContent={'About data connections'}
+            bodyContent={
+              'Adding a data connection to your project allows you to connect data inputs to your workbenches.'
+            }
           >
-            Add data connection
-          </Button>,
-        ]}
+            <DashboardPopupIconButton
+              icon={
+                <OutlinedQuestionCircleIcon
+                  style={{ marginLeft: 'var(--pf-v5-global--spacer--md)' }}
+                />
+              }
+              aria-label="More info"
+            />
+          </Popover>
+        }
+        actions={
+          !isDataConnectionsEmpty
+            ? [
+                <Button
+                  key={`action-${ProjectSectionID.DATA_CONNECTIONS}`}
+                  variant="primary"
+                  onClick={() => setOpen(true)}
+                >
+                  Add data connection
+                </Button>,
+              ]
+            : undefined
+        }
         isLoading={!loaded}
         isEmpty={isDataConnectionsEmpty}
         loadError={error}
-        emptyState={<EmptyDetailsList title="No data connections" />}
+        emptyState={
+          <Flex>
+            <FlexItem>
+              <EmptyDetailsList
+                actions={[
+                  <Button
+                    key={`action-${ProjectSectionID.DATA_CONNECTIONS}`}
+                    variant="secondary"
+                    size="lg"
+                    onClick={() => setOpen(true)}
+                  >
+                    Add data connection
+                  </Button>,
+                ]}
+                description="Adding a data connection to your project allows you to connect data inputs to your workbenches"
+              />
+            </FlexItem>
+          </Flex>
+        }
       >
         <DataConnectionsTable connections={connections} refreshData={refreshAllProjectData} />
       </DetailsSection>

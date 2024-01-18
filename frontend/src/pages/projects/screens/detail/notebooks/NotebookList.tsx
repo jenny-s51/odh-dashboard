@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Button } from '@patternfly/react-core';
+import {
+  Button,
+  Divider,
+  Flex,
+  FlexItem,
+  Icon,
+  PageSection,
+  Popover,
+} from '@patternfly/react-core';
 import { useNavigate } from 'react-router-dom';
 import EmptyDetailsList from '~/pages/projects/screens/detail/EmptyDetailsList';
 import { ProjectSectionID } from '~/pages/projects/screens/detail/types';
@@ -8,6 +16,11 @@ import { ProjectSectionTitles } from '~/pages/projects/screens/detail/const';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import { FAST_POLL_INTERVAL } from '~/utilities/const';
 import NotebookTable from './NotebookTable';
+import { HelpIcon, OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
+import WrenchIcon from '~/images/UI_icon-Red_Hat-Wrench-RGB.svg';
+// import WrenchIcon from '@patternfly/react-icons/dist/esm/icons/wrench-icon';
+
+import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 
 const NotebookList: React.FC = () => {
   const {
@@ -18,6 +31,19 @@ const NotebookList: React.FC = () => {
   const navigate = useNavigate();
   const projectName = currentProject.metadata.name;
   const isNotebooksEmpty = notebookStates.length === 0;
+  let icon;
+
+  icon = (
+    <img
+      style={{
+        marginLeft: 'var(--pf-v5-global--spacer--xs)',
+        marginRight: 'var(--pf-v5-global--spacer--xs)',
+        verticalAlign: 'middle',
+      }}
+      src="../images/UI_icon-Red_Hat-Wrench-RGB.svg"
+      alt="Notebooks icon"
+    />
+  );
 
   React.useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
@@ -30,21 +56,59 @@ const NotebookList: React.FC = () => {
   return (
     <>
       <DetailsSection
+        icon={icon}
         id={ProjectSectionID.WORKBENCHES}
         title={ProjectSectionTitles[ProjectSectionID.WORKBENCHES] || ''}
-        actions={[
-          <Button
-            key={`action-${ProjectSectionID.WORKBENCHES}`}
-            onClick={() => navigate(`/projects/${projectName}/spawner`)}
-            variant="secondary"
+        popover={
+          <Popover
+            headerContent={'About workbenches'}
+            bodyContent={
+              'Creating a workbench allows you to add a Jupyter notebook to your project.'
+            }
           >
-            Create workbench
-          </Button>,
+            <DashboardPopupIconButton
+              icon={
+                <OutlinedQuestionCircleIcon
+                  style={{ marginLeft: 'var(--pf-v5-global--spacer--md)' }}
+                />
+              }
+              aria-label="More info"
+            />
+          </Popover>
+        }
+        actions={[
+          !isNotebooksEmpty && (
+            <Button
+              key={`action-${ProjectSectionID.WORKBENCHES}`}
+              onClick={() => navigate(`/projects/${projectName}/spawner`)}
+              variant="primary"
+            >
+              Create workbench
+            </Button>
+          ),
         ]}
         isLoading={!loaded}
         loadError={loadError}
         isEmpty={isNotebooksEmpty}
-        emptyState={<EmptyDetailsList title="No workbenches" />}
+        emptyState={
+          <Flex>
+            <FlexItem>
+              <EmptyDetailsList
+                description="Creating a workbench allows you to add a Jupyter notebook to your project."
+                actions={[
+                  <Button
+                    key={`action-${ProjectSectionID.WORKBENCHES}`}
+                    onClick={() => navigate(`/projects/${projectName}/spawner`)}
+                    variant="secondary"
+                    size="lg"
+                  >
+                    Create workbench
+                  </Button>,
+                ]}
+              />
+            </FlexItem>
+          </Flex>
+        }
       >
         <NotebookTable notebookStates={notebookStates} refresh={refresh} />
       </DetailsSection>
