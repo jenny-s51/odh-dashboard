@@ -48,7 +48,7 @@ const StorageListAlt: React.FC = () => {
             icon={() => (
               <img style={{ height: '320px' }} src={emptyStateImg} alt="Cluster storage" />
             )}
-            primaryActions={
+            actions={
               rbacLoaded && allowCreate ? (
                 <Button
                   onClick={() => setOpen(true)}

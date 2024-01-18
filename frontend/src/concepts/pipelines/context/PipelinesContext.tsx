@@ -160,7 +160,7 @@ type CreatePipelineServerButtonProps = {
 
 export const CreatePipelineServerButton: React.FC<CreatePipelineServerButtonProps> = ({
   variant,
-  title = 'Configure pipeline server',
+  title = 'Create pipeline',
 }) => {
   const [configureModalVisible, setConfigureModalVisible] = React.useState(false);
   const { refreshState } = React.useContext(PipelinesContext);
@@ -170,6 +170,7 @@ export const CreatePipelineServerButton: React.FC<CreatePipelineServerButtonProp
       <Stack hasGutter>
         <StackItem>
           <Button
+            size="lg"
             variant={variant}
             onClick={(e) => {
               e.stopPropagation();

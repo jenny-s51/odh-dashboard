@@ -2,10 +2,9 @@ import * as React from 'react';
 
 import { Button, Icon, Skeleton, Tooltip, Truncate } from '@patternfly/react-core';
 import { ActionsColumn, Tbody, Td, Tr } from '@patternfly/react-table';
-import { ExclamationCircleIcon } from '@patternfly/react-icons';
+import { ExclamationCircleIcon, PlayIcon } from '@patternfly/react-icons';
 import { useNavigate } from 'react-router-dom';
 import { KnownLabels, ServingRuntimeKind } from '~/k8sTypes';
-import EmptyTableCellForAlignment from '~/pages/projects/components/EmptyTableCellForAlignment';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import { ServingRuntimeTableTabs } from '~/pages/modelServing/screens/types';
 import { ProjectSectionID } from '~/pages/projects/screens/detail/types';
@@ -25,6 +24,7 @@ type ServingRuntimeTableRowProps = {
   onDeployModel: (obj: ServingRuntimeKind) => void;
   expandedServingRuntimeName?: string;
   allowDelete: boolean;
+  rowIndex: number;
 };
 
 const ServingRuntimeTableRow: React.FC<ServingRuntimeTableRowProps> = ({
@@ -34,6 +34,7 @@ const ServingRuntimeTableRow: React.FC<ServingRuntimeTableRowProps> = ({
   onDeployModel,
   expandedServingRuntimeName,
   allowDelete,
+  rowIndex,
 }) => {
   const navigate = useNavigate();
 
@@ -49,6 +50,7 @@ const ServingRuntimeTableRow: React.FC<ServingRuntimeTableRowProps> = ({
   } = React.useContext(ProjectDetailsContext);
 
   const [expandedColumn, setExpandedColumn] = React.useState<ServingRuntimeTableTabs>();
+  const [isExpanded, setExpanded] = React.useState(false);
 
   React.useEffect(() => {
     if (expandedServingRuntimeName === obj.metadata.name) {
@@ -81,8 +83,16 @@ const ServingRuntimeTableRow: React.FC<ServingRuntimeTableRowProps> = ({
 
   return (
     <Tbody isExpanded={!!expandedColumn}>
-      <Tr>
-        <EmptyTableCellForAlignment />
+      <Tr {...(rowIndex % 2 === 0 && { isStriped: true })}>
+        <Td
+          expand={{
+            rowIndex,
+            expandId: 'notebook-row-item',
+            isExpanded,
+            onToggle: () => setExpanded(!isExpanded),
+          }}
+        />
+
         <Td
           dataLabel="Model Server Name"
           compoundExpand={compoundExpandParams(ServingRuntimeTableTabs.TYPE, false)}
@@ -150,7 +160,8 @@ const ServingRuntimeTableRow: React.FC<ServingRuntimeTableRowProps> = ({
           <Button
             onClick={() => onDeployModel(obj)}
             key={`action-${ProjectSectionID.CLUSTER_STORAGES}`}
-            variant="secondary"
+            variant="link"
+            icon={<PlayIcon />}
           >
             Deploy model
           </Button>

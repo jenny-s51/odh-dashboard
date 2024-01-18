@@ -41,7 +41,7 @@ const NotebookTableRow: React.FC<NotebookTableRowProps> = ({
 
   return (
     <Tbody isExpanded={isExpanded}>
-      <Tr>
+      <Tr {...(rowIndex % 2 === 0 && { isStriped: true })}>
         <Td
           expand={{
             rowIndex,

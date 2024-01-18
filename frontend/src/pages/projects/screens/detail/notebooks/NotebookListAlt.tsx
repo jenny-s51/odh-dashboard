@@ -55,7 +55,7 @@ const NotebookListAlt: React.FC = () => {
             title="Start by creating a workbench"
             description="Creating a workbench allows you to add a Jupyter notebook to your project."
             icon={() => <img style={{ height: '320px' }} src={emptyStateImg} alt="Workbenches" />}
-            primaryActions={
+            actions={
               rbacLoaded && allowCreate ? (
                 <Button
                   key={`action-${ProjectSectionID.WORKBENCHES}`}
