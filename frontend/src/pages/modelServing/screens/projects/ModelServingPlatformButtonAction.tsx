@@ -22,7 +22,7 @@ const ModelServingPlatformButtonAction: React.FC<ModelServingPlatformButtonActio
       isLoading={!templatesLoaded}
       isAriaDisabled={!templatesLoaded || emptyTemplates}
       onClick={onClick}
-      variant="secondary"
+      variant="primary"
     >
       {isProjectModelMesh ? 'Add model server' : 'Deploy model'}
     </Button>

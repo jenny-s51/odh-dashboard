@@ -22,19 +22,21 @@ type ProjectTableRowProps = {
   isRefreshing: boolean;
   setEditData: (data: ProjectKind) => void;
   setDeleteData: (data: ProjectKind) => void;
+  rowIndex?: number;
 };
 const ProjectTableRow: React.FC<ProjectTableRowProps> = ({
   obj: project,
   isRefreshing,
   setEditData,
   setDeleteData,
+  rowIndex
 }) => {
   const [notebookStates, loaded, error] = useProjectNotebookStates(project.metadata.name);
   const owner = getProjectOwner(project);
 
   const item = useProjectTableRowItems(project, isRefreshing, setEditData, setDeleteData);
   return (
-    <Tr>
+    <Tr {...(rowIndex && rowIndex % 2 === 0 && { isStriped: true })}>
       <Td dataLabel="Name">
         <Flex spaceItems={{ default: 'spaceItemsXs' }} alignItems={{ default: 'alignItemsCenter' }}>
           {project.metadata.labels?.[KnownLabels.DASHBOARD_RESOURCE] && (

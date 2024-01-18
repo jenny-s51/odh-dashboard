@@ -7,6 +7,9 @@ import NoPipelineServer from '~/concepts/pipelines/NoPipelineServer';
 import ImportPipelineButton from '~/concepts/pipelines/content/import/ImportPipelineButton';
 import PipelinesList from '~/pages/projects/screens/detail/pipelines/PipelinesList';
 import PipelineServerActions from '~/concepts/pipelines/content/pipelinesDetails/pipeline/PipelineServerActions';
+import { Flex, FlexItem, Popover } from '@patternfly/react-core';
+import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
+import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 
 const PipelinesSection: React.FC = () => {
   const {
@@ -16,26 +19,68 @@ const PipelinesSection: React.FC = () => {
 
   const [isPipelinesEmpty, setIsPipelinesEmpty] = React.useState(false);
 
+  let icon;
+
+  icon = (
+    <img
+      style={{
+        marginLeft: 'var(--pf-v5-global--spacer--xs)',
+        marginRight: 'var(--pf-v5-global--spacer--xs)',
+        verticalAlign: 'middle',
+      }}
+      src="../images/UI_icon-Red_Hat-Branch-RGB.svg"
+      alt="Pipelines branch icon"
+    />
+  );
+
   return (
     <>
       <DetailsSection
+        icon={icon}
         id={ProjectSectionID.PIPELINES}
         title={ProjectSectionTitles[ProjectSectionID.PIPELINES]}
-        actions={[
-          <ImportPipelineButton
-            isDisabled={!installed}
-            key={`action-${ProjectSectionID.PIPELINES}`}
-            variant="secondary"
-          />,
-          <PipelineServerActions
-            key={`action-${ProjectSectionID.PIPELINES}-1`}
-            isDisabled={!initializing && !installed}
-            variant="kebab"
-          />,
-        ]}
+        popover={
+          <Popover
+            headerContent={'About pipelines'}
+            bodyContent={
+              'Standardize and automate machine learning workflows to enable you to further enchance and deploy your data science models.'
+            }
+          >
+            <DashboardPopupIconButton
+              icon={
+                <OutlinedQuestionCircleIcon
+                  style={{ marginLeft: 'var(--pf-v5-global--spacer--md)' }}
+                />
+              }
+              aria-label="More info"
+            />
+          </Popover>
+        }
+        actions={
+          installed
+            ? [
+                <ImportPipelineButton
+                  isDisabled={!installed}
+                  key={`action-${ProjectSectionID.PIPELINES}`}
+                  variant="secondary"
+                />,
+                <PipelineServerActions
+                  key={`action-${ProjectSectionID.PIPELINES}-1`}
+                  isDisabled={!initializing && !installed}
+                  variant="kebab"
+                />,
+              ]
+            : undefined
+        }
         isLoading={(!apiAvailable && installed) || initializing}
         isEmpty={!installed}
-        emptyState={<NoPipelineServer variant="secondary" />}
+        emptyState={
+          <Flex>
+            <FlexItem>
+              <NoPipelineServer variant="secondary" />
+            </FlexItem>
+          </Flex>
+        }
         showDivider={isPipelinesEmpty}
       >
         {timedOut ? (
