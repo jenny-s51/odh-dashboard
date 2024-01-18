@@ -3,19 +3,30 @@ import classNames from 'classnames';
 import {
   Alert,
   Bullseye,
+  Divider,
   Flex,
   FlexItem,
+  Icon,
+  PageSection,
+  Popover,
   Spinner,
   Stack,
   StackItem,
+  Text,
+  TextContent,
   Title,
 } from '@patternfly/react-core';
 import { ProjectSectionID } from './types';
+import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
+import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 
 type DetailsSectionProps = {
   id: ProjectSectionID;
   actions?: React.ReactNode[];
+  icon?: React.ReactNode;
   title: string;
+  description?: string;
+  popover?: React.ReactNode;
   isLoading: boolean;
   loadError?: Error;
   isEmpty: boolean;
@@ -27,6 +38,7 @@ type DetailsSectionProps = {
 
 const DetailsSection: React.FC<DetailsSectionProps> = ({
   actions,
+  icon,
   children,
   emptyState,
   id,
@@ -34,6 +46,8 @@ const DetailsSection: React.FC<DetailsSectionProps> = ({
   isLoading,
   loadError,
   title,
+  description,
+  popover,
   labels,
   showDivider,
 }) => {
@@ -69,18 +83,26 @@ const DetailsSection: React.FC<DetailsSectionProps> = ({
       })}
     >
       <StackItem>
-        <Flex>
-          <FlexItem>
-            <Title id={`${id}-title`} headingLevel="h2" size="xl">
-              {title}
-            </Title>
-          </FlexItem>
-          {actions && <FlexItem>{actions}</FlexItem>}
-          {labels && <FlexItem align={{ default: 'alignRight' }}>{labels}</FlexItem>}
+        <Flex direction={{ default: 'column', md: 'row' }} gap={{ default: 'gapMd' }}>
+          <Flex flex={{ default: 'flex_1' }}>
+            <FlexItem>
+              <Title id={`${id}-title`} headingLevel="h2" size="xl">
+                {icon}
+                {title}
+                {popover}
+              </Title>
+              <TextContent>{description && <Text component="p">{description}</Text>}</TextContent>
+            </FlexItem>
+          </Flex>
+          <Flex direction={{ default: 'column', md: 'row' }}>
+            {actions && <FlexItem>{actions}</FlexItem>}
+            {labels && <FlexItem align={{ default: 'alignRight' }}>{labels}</FlexItem>}
+          </Flex>
         </Flex>
       </StackItem>
-      <StackItem>{renderContent()}</StackItem>
+      {renderContent()}
     </Stack>
+
   );
 };
 
