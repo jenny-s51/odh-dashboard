@@ -85,7 +85,7 @@ const OverviewCard: React.FC<OverviewCardProps> = ({
           title={title}
           description={description}
           icon={icon}
-          primaryActions={
+          actions={
             actionButton ||
             (allowCreate ? (
               <Button
@@ -125,7 +125,7 @@ const OverviewCard: React.FC<OverviewCardProps> = ({
         title={`${count}`}
         description={title}
         icon={icon}
-        primaryActions={
+        actions={
           actionButton ||
           (allowCreate ? (
             <Button

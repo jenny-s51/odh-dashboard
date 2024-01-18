@@ -46,7 +46,7 @@ const DataConnectionsListAlt: React.FC = () => {
             title="Start by adding a data connection"
             description="Adding a data connection to your project allows you toconnect data inputs to your workbenches."
             icon={() => <img style={{ height: '320px' }} src={emptyStateImg} alt="Workbenches" />}
-            primaryActions={
+            actions={
               rbacLoaded && allowCreate ? (
                 <Button
                   key={`action-${ProjectSectionID.DATA_CONNECTIONS}`}
