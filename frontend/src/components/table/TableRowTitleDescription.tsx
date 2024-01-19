@@ -22,7 +22,7 @@ const TableRowTitleDescription: React.FC<TableRowTitleDescriptionProps> = ({
     descriptionNode = descriptionAsMarkdown ? (
       <MarkdownView conciseDisplay markdown={description} />
     ) : (
-      <Text style={{ color: "--pf-v5-global--Color--200"}}>{description}</Text>
+      <Text style={{ color: '--pf-v5-global--Color--200' }}>{description}</Text>
     );
   }
 

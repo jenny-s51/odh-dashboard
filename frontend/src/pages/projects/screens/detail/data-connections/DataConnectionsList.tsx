@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { Button, Divider, Flex, FlexItem, PageSection, Popover } from '@patternfly/react-core';
+import { Button, Flex, FlexItem, Popover } from '@patternfly/react-core';
+import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 import EmptyDetailsList from '~/pages/projects/screens/detail/EmptyDetailsList';
 import { ProjectSectionID } from '~/pages/projects/screens/detail/types';
 import DetailsSection from '~/pages/projects/screens/detail/DetailsSection';
 import { ProjectSectionTitles } from '~/pages/projects/screens/detail/const';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
+import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 import DataConnectionsTable from './DataConnectionsTable';
 import ManageDataConnectionModal from './ManageDataConnectionModal';
-import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
-import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 
 const DataConnectionsList: React.FC = () => {
   const {
@@ -18,9 +18,7 @@ const DataConnectionsList: React.FC = () => {
   const [open, setOpen] = React.useState(false);
 
   const isDataConnectionsEmpty = connections.length === 0;
-  let icon;
-
-  icon = (
+  const icon = (
     <img
       style={{
         marginLeft: 'var(--pf-v5-global--spacer--xs)',
@@ -40,10 +38,8 @@ const DataConnectionsList: React.FC = () => {
         title={ProjectSectionTitles[ProjectSectionID.DATA_CONNECTIONS] || ''}
         popover={
           <Popover
-            headerContent={'About data connections'}
-            bodyContent={
-              'Adding a data connection to your project allows you to connect data inputs to your workbenches.'
-            }
+            headerContent="About data connections"
+            bodyContent="Adding a data connection to your project allows you to connect data inputs to your workbenches."
           >
             <DashboardPopupIconButton
               icon={

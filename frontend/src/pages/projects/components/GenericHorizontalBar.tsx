@@ -8,12 +8,14 @@ import {
   TabContent,
   TabContentBody,
   PageSection,
+  PageSectionProps,
   PageSectionVariants,
 } from '@patternfly/react-core';
 import { SVGIconProps } from '@patternfly/react-icons/dist/esm/createIcon';
 
 type GenericHorizontalBarProps = {
   activeKey: string | null;
+  padding?: PageSectionProps['padding'];
   sections: {
     title: string;
     component: React.ReactNode;
@@ -22,7 +24,11 @@ type GenericHorizontalBarProps = {
   }[];
 };
 
-const GenericHorizontalBar: React.FC<GenericHorizontalBarProps> = ({ activeKey, sections }) => {
+const GenericHorizontalBar: React.FC<GenericHorizontalBarProps> = ({
+  activeKey,
+  sections,
+  padding,
+}) => {
   const [queryParams, setQueryParams] = useSearchParams();
 
   React.useEffect(() => {
@@ -68,7 +74,7 @@ const GenericHorizontalBar: React.FC<GenericHorizontalBarProps> = ({ activeKey, 
         variant={PageSectionVariants.light}
         isFilled
         aria-label="horizontal-bar-content-section"
-        padding={{ default: 'noPadding' }}
+        padding={padding}
       >
         {sections
           .filter((section) => section.id === activeKey)
