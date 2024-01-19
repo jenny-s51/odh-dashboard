@@ -14,7 +14,9 @@ import useProjectTableRowItems from '~/pages/projects/screens/projects/useProjec
 import useProjectNotebookStates from '~/pages/projects/notebook/useProjectNotebookStates';
 import ListNotebookState from '~/pages/projects/notebook/ListNotebookState';
 import ResourceNameTooltip from '~/components/ResourceNameTooltip';
+import projectIcon from '~/images/project-icon.svg';
 import { getProjectOwner } from '~/pages/projects/utils';
+import { useAppSelector } from '~/redux/hooks';
 import ProjectLink from './ProjectLink';
 
 type ProjectTableRowProps = {
@@ -31,6 +33,7 @@ const ProjectTableRow: React.FC<ProjectTableRowProps> = ({
 }) => {
   const [notebookStates, loaded, error] = useProjectNotebookStates(project.metadata.name);
   const owner = getProjectOwner(project);
+  const alternateUI = useAppSelector((state) => state.alternateUI);
 
   const item = useProjectTableRowItems(project, isRefreshing, setEditData, setDeleteData);
   return (
@@ -40,9 +43,13 @@ const ProjectTableRow: React.FC<ProjectTableRowProps> = ({
           {project.metadata.labels?.[KnownLabels.DASHBOARD_RESOURCE] && (
             <FlexItem style={{ display: 'flex' }}>
               <Tooltip content="Data Science">
-                <Label isCompact color="green">
-                  DS
-                </Label>
+                {alternateUI ? (
+                  <img style={{ height: '24px' }} src={projectIcon} alt="prioject" />
+                ) : (
+                  <Label isCompact color="green">
+                    DS
+                  </Label>
+                )}
               </Tooltip>
             </FlexItem>
           )}

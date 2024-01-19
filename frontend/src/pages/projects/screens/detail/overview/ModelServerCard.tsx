@@ -72,12 +72,14 @@ const ModelServerCard: React.FC = () => {
         title="Model servers"
         description="Allow apps to send requests to your models."
         icon={() => <img style={{ height: '32px' }} src={emptyStateImg} alt="Model Servers" />}
-        getStartedAction={
+        allowCreate={false}
+        actionButton={
           shouldShowPlatformSelection || platformError ? undefined : (
             <ModelServingPlatformButtonAction
               isProjectModelMesh={isProjectModelMesh}
               emptyTemplates={emptyTemplates}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 setPlatformSelected(
                   isProjectModelMesh ? ServingRuntimePlatform.MULTI : ServingRuntimePlatform.SINGLE,
                 );
