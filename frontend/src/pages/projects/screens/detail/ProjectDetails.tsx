@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Breadcrumb, BreadcrumbItem } from '@patternfly/react-core';
+import { Breadcrumb, BreadcrumbItem, Flex, FlexItem } from '@patternfly/react-core';
 import { CogIcon, CubeIcon, UsersIcon } from '@patternfly/react-icons';
 import { Link } from 'react-router-dom';
 import ApplicationsPage from '~/pages/ApplicationsPage';
@@ -15,6 +15,7 @@ import ModelServingPlatform from '~/pages/modelServing/screens/projects/ModelSer
 import useModelServingEnabled from '~/pages/modelServing/useModelServingEnabled';
 import { useAppSelector } from '~/redux/hooks';
 import { useQueryParams } from '~/utilities/useQueryParams';
+import projectIcon from '~/images/project-icon.svg';
 import useCheckLogoutParams from './useCheckLogoutParams';
 import ProjectDetailsComponents from './ProjectDetailsComponents';
 import ProjectOverview from './overview/ProjectOverview';
@@ -111,7 +112,21 @@ const ProjectDetails: React.FC = () => {
   };
   return (
     <ApplicationsPage
-      title={displayName}
+      title={
+        alternateUI ? (
+          <Flex
+            spaceItems={{ default: 'spaceItemsSm' }}
+            alignItems={{ default: 'alignItemsFlexStart' }}
+          >
+            <FlexItem>
+              <img style={{ height: '32px' }} src={projectIcon} alt="prioject" />
+            </FlexItem>
+            <FlexItem>{displayName}</FlexItem>
+          </Flex>
+        ) : (
+          displayName
+        )
+      }
       description={description}
       breadcrumb={
         <Breadcrumb>
