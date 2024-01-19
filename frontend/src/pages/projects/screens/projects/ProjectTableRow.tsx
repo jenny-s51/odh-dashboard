@@ -31,7 +31,7 @@ const ProjectTableRow: React.FC<ProjectTableRowProps> = ({
   isRefreshing,
   setEditData,
   setDeleteData,
-  rowIndex
+  rowIndex,
 }) => {
   const [notebookStates, loaded, error] = useProjectNotebookStates(project.metadata.name);
   const owner = getProjectOwner(project);

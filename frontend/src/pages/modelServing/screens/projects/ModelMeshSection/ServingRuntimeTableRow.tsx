@@ -1,11 +1,10 @@
 import * as React from 'react';
 
 import { Button, Icon, Skeleton, Tooltip, Truncate } from '@patternfly/react-core';
-import { ActionsColumn, ExpandableRowContent, Tbody, Td, Tr } from '@patternfly/react-table';
+import { ActionsColumn, Tbody, Td, Tr } from '@patternfly/react-table';
 import { ExclamationCircleIcon, PlayIcon } from '@patternfly/react-icons';
 import { useNavigate } from 'react-router-dom';
 import { KnownLabels, ServingRuntimeKind } from '~/k8sTypes';
-import EmptyTableCellForAlignment from '~/pages/projects/components/EmptyTableCellForAlignment';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import { ServingRuntimeTableTabs } from '~/pages/modelServing/screens/types';
 import { ProjectSectionID } from '~/pages/projects/screens/detail/types';
@@ -105,9 +104,7 @@ const ServingRuntimeTableRow: React.FC<ServingRuntimeTableRowProps> = ({
         <Td dataLabel="Serving Runtime">
           <Truncate content={getDisplayNameFromServingRuntimeTemplate(obj)} />
         </Td>
-        <Td
-          dataLabel="Deployed models"
-        >
+        <Td dataLabel="Deployed models">
           {inferenceServicesLoaded ? (
             <>
               {modelInferenceServices.length}{' '}
@@ -126,9 +123,7 @@ const ServingRuntimeTableRow: React.FC<ServingRuntimeTableRowProps> = ({
             <Skeleton />
           )}
         </Td>
-        <Td
-          dataLabel="Tokens"
-        >
+        <Td dataLabel="Tokens">
           {secretsLoaded ? (
             <>
               {!isServingRuntimeTokenEnabled(obj) ? 'Tokens disabled' : tokens.length}{' '}

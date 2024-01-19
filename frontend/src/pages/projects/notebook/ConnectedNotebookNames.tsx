@@ -35,7 +35,7 @@ const ConnectedNotebookNames: React.FC<ConnectedNotebookNamesProps> = ({
     <List isPlain>
       {connectedNotebooks.map((notebook) => (
         <ListItem key={notebook.metadata.uid}>
-          {<Badge isRead>{getNotebookDisplayName(notebook)}</Badge>}
+          <Badge isRead>{getNotebookDisplayName(notebook)}</Badge>
         </ListItem>
       ))}
     </List>

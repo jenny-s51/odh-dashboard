@@ -3,12 +3,8 @@ import classNames from 'classnames';
 import {
   Alert,
   Bullseye,
-  Divider,
   Flex,
   FlexItem,
-  Icon,
-  PageSection,
-  Popover,
   Spinner,
   Stack,
   StackItem,
@@ -17,8 +13,6 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { ProjectSectionID } from './types';
-import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
-import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 
 type DetailsSectionProps = {
   id: ProjectSectionID;
@@ -102,7 +96,6 @@ const DetailsSection: React.FC<DetailsSectionProps> = ({
       </StackItem>
       {renderContent()}
     </Stack>
-
   );
 };
 
