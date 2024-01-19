@@ -49,9 +49,9 @@ const PipelinesSectionAlt: React.FC = () => {
     <>
       <DetailsSectionAlt
         id={ProjectSectionID.PIPELINES}
-        icon={!!installed && icon}
-        title={!!installed && ProjectSectionTitles[ProjectSectionID.PIPELINES]}
-        popover={!!installed &&
+        icon={!!installed ? icon : undefined}
+        title={!!installed ? ProjectSectionTitles[ProjectSectionID.PIPELINES] : ''}
+        popover={!!installed ?
           <Popover
             headerContent={'About pipelines'}
             bodyContent={
@@ -67,8 +67,8 @@ const PipelinesSectionAlt: React.FC = () => {
               aria-label="More info"
             />
           </Popover>
-        }
-        badge={!!installed && <Badge>{}</Badge>}
+        : undefined}
+        badge={!!installed ? <Badge>{}</Badge> : undefined}
         actions={[
           <ImportPipelineButton
             isDisabled={!installed}

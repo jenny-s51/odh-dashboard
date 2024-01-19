@@ -64,7 +64,7 @@ const DataConnectionsListAlt: React.FC = () => {
             />
           </Popover>
         }
-        actions={ !isDataConnectionsEmpty && [
+        actions={ !isDataConnectionsEmpty ? [
           <Button
             key={`action-${ProjectSectionID.DATA_CONNECTIONS}`}
             variant="primary"
@@ -72,7 +72,7 @@ const DataConnectionsListAlt: React.FC = () => {
           >
             Add data connection
           </Button>,
-        ]}
+        ] : undefined}
         isLoading={!loaded}
         isEmpty={isDataConnectionsEmpty}
         loadError={error}

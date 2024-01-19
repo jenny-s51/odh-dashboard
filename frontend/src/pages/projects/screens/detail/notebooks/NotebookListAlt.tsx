@@ -53,14 +53,14 @@ const NotebookListAlt: React.FC = () => {
     <>
       <DetailsSectionAlt
         id={ProjectSectionID.WORKBENCHES}
-        icon={!isNotebooksEmpty && icon}
-        title={!isNotebooksEmpty && ProjectSectionTitles[ProjectSectionID.WORKBENCHES] || ''}
-        badge={!isNotebooksEmpty &&
+        icon={!isNotebooksEmpty ? icon : undefined}
+        title={!isNotebooksEmpty ? ProjectSectionTitles[ProjectSectionID.WORKBENCHES] || '' : ''}
+        badge={!isNotebooksEmpty ?
           <Badge style={{ marginLeft: 'var(--pf-v5-global--spacer--sm)' }}>
             {' '}
             {notebookStates.length}
           </Badge>
-        }
+        : undefined}
         popover={!isNotebooksEmpty &&
           <Popover
             headerContent={'About workbenches'}
@@ -78,7 +78,7 @@ const NotebookListAlt: React.FC = () => {
             />
           </Popover>
         }
-        actions={ !isNotebooksEmpty && [
+        actions={ !isNotebooksEmpty ? [
           <Button
             key={`action-${ProjectSectionID.WORKBENCHES}`}
             onClick={() => navigate(`/projects/${projectName}/spawner`)}
@@ -86,7 +86,7 @@ const NotebookListAlt: React.FC = () => {
           >
             Create workbench
           </Button>,
-        ]}
+        ] : undefined}
         isLoading={!loaded}
         loadError={loadError}
         isEmpty={isNotebooksEmpty}

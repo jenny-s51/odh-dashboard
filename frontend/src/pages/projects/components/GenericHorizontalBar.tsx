@@ -8,13 +8,14 @@ import {
   TabContent,
   TabContentBody,
   PageSection,
+  PageSectionProps,
   PageSectionVariants,
 } from '@patternfly/react-core';
 import { SVGIconProps } from '@patternfly/react-icons/dist/esm/createIcon';
 
 type GenericHorizontalBarProps = {
   activeKey: string | null;
-  padding?: boolean;
+  padding?: PageSectionProps["padding"];
   sections: {
     title: string;
     component: React.ReactNode;
