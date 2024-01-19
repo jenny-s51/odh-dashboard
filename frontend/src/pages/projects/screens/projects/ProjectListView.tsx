@@ -55,6 +55,7 @@ const ProjectListView: React.FC<ProjectListViewProps> = ({ allowCreate, scope })
     <>
       <Table
         enablePagination
+        isStriped
         data={filteredProjects}
         columns={columns}
         emptyTableView={

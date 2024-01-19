@@ -1,13 +1,6 @@
 import * as React from 'react';
 import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
-import {
-  Alert,
-  Button,
-  Card,
-  Flex,
-  Label,
-  Popover,
-} from '@patternfly/react-core';
+import { Alert, Button, Card, Flex, Label, Popover } from '@patternfly/react-core';
 import EmptyDetailsList from '~/pages/projects/screens/detail/EmptyDetailsList';
 import DetailsSection from '~/pages/projects/screens/detail/DetailsSection';
 import { ProjectSectionID } from '~/pages/projects/screens/detail/types';
@@ -24,11 +17,11 @@ import { getProjectModelServingPlatform } from '~/pages/modelServing/screens/pro
 import { ProjectsContext } from '~/concepts/projects/ProjectsContext';
 import KServeInferenceServiceTable from '~/pages/modelServing/screens/projects/KServeSection/KServeInferenceServiceTable';
 import useServingPlatformStatuses from '~/pages/modelServing/useServingPlatformStatuses';
+import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 import ManageServingRuntimeModal from './ServingRuntimeModal/ManageServingRuntimeModal';
 import ModelMeshServingRuntimeTable from './ModelMeshSection/ServingRuntimeTable';
 import ModelServingPlatformButtonAction from './ModelServingPlatformButtonAction';
 import ManageKServeModal from './kServeModal/ManageKServeModal';
-import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 
 const ModelServingPlatform: React.FC = () => {
   const [platformSelected, setPlatformSelected] = React.useState<
@@ -85,9 +78,7 @@ const ModelServingPlatform: React.FC = () => {
     }
   };
 
-  let icon;
-
-  icon = (
+  const icon = (
     <img
       style={{
         marginLeft: 'var(--pf-v5-global--spacer--xs)',
@@ -105,15 +96,11 @@ const ModelServingPlatform: React.FC = () => {
         icon={icon}
         id={ProjectSectionID.MODEL_SERVER}
         title={ProjectSectionTitles[ProjectSectionID.MODEL_SERVER]}
-        description={
-          'Select the type of model serving platform to be used when deploying models in this project.'
-        }
+        description="Select the type of model serving platform to be used when deploying models in this project."
         popover={
           <Popover
-            headerContent={'About model serving'}
-            bodyContent={
-              'Deploy a trained data science model to serve intelligent applications with an endpoint that allows apps to send requests to the model.'
-            }
+            headerContent="About model serving"
+            bodyContent="Deploy a trained data science model to serve intelligent applications with an endpoint that allows apps to send requests to the model."
           >
             <DashboardPopupIconButton
               icon={
@@ -152,7 +139,7 @@ const ModelServingPlatform: React.FC = () => {
           <Flex>
             <Card isPlain>
               <EmptyDetailsList
-                title={'Single model serving platform'}
+                title="Single model serving platform"
                 description={
                   'Each model is deployed from its own model server. Choose this option when you have a small number of large models to deploy.\n'
                 }
@@ -172,10 +159,8 @@ const ModelServingPlatform: React.FC = () => {
             </Card>
             <Card isPlain>
               <EmptyDetailsList
-                title={'Multi-model serving platform'}
-                description={
-                  'Multiple models can be deployed from a single model server. Choose this option when you have a large number of small models to deploy that can share server resources.'
-                }
+                title="Multi-model serving platform"
+                description="Multiple models can be deployed from a single model server. Choose this option when you have a large number of small models to deploy that can share server resources."
                 actions={[
                   <Button
                     key={`action-${ProjectSectionID.WORKBENCHES}`}

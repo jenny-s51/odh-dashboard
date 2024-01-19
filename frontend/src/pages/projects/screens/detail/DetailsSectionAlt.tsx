@@ -8,6 +8,8 @@ import {
   Spinner,
   Stack,
   StackItem,
+  Text,
+  TextContent,
   Title,
 } from '@patternfly/react-core';
 import { ProjectSectionID } from './types';
@@ -15,7 +17,11 @@ import { ProjectSectionID } from './types';
 type DetailsSectionAltProps = {
   id: ProjectSectionID;
   actions?: React.ReactNode[];
+  icon?: React.ReactNode;
   title: string;
+  description?: string;
+  badge?: React.ReactNode;
+  popover?: React.ReactNode;
   isLoading: boolean;
   loadError?: Error;
   isEmpty: boolean;
@@ -27,6 +33,7 @@ type DetailsSectionAltProps = {
 
 const DetailsSectionAlt: React.FC<DetailsSectionAltProps> = ({
   actions,
+  icon,
   children,
   emptyState,
   id,
@@ -34,6 +41,9 @@ const DetailsSectionAlt: React.FC<DetailsSectionAltProps> = ({
   isLoading,
   loadError,
   title,
+  badge,
+  description,
+  popover,
   labels,
   showDivider,
 }) => {
@@ -68,20 +78,28 @@ const DetailsSectionAlt: React.FC<DetailsSectionAltProps> = ({
         'odh-details-section--divide': !loadError && (isLoading || isEmpty || showDivider),
       })}
     >
-      {!isEmpty ? (
-        <StackItem>
-          <Flex>
-            <FlexItem>
-              <Title id={`${id}-title`} headingLevel="h2" size="xl">
-                {title}
-              </Title>
-            </FlexItem>
+      <StackItem>
+        <Flex direction={{ default: 'column', md: 'row' }} gap={{ default: 'gapMd' }}>
+          <Flex flex={{ default: 'flex_1' }}>
+            {!isEmpty ? (
+              <FlexItem>
+                <Title id={`${id}-title`} headingLevel="h2" size="xl">
+                  {icon}
+                  {title}
+                  {badge}
+                  {popover}
+                </Title>
+                <TextContent>{description && <Text component="p">{description}</Text>}</TextContent>
+              </FlexItem>
+            ) : null}
+          </Flex>
+          <Flex direction={{ default: 'column', md: 'row' }}>
             {actions && <FlexItem>{actions}</FlexItem>}
             {labels && <FlexItem align={{ default: 'alignRight' }}>{labels}</FlexItem>}
           </Flex>
-        </StackItem>
-      ) : null}
-      <StackItem>{renderContent()}</StackItem>
+        </Flex>
+      </StackItem>
+      {renderContent()}
     </Stack>
   );
 };
