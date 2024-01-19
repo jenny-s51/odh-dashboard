@@ -18,9 +18,12 @@ import { FAST_POLL_INTERVAL } from '~/utilities/const';
 import NotebookTable from './NotebookTable';
 import { HelpIcon, OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 import WrenchIcon from '~/images/UI_icon-Red_Hat-Wrench-RGB.svg';
+import { useAccessReview } from '~/api';
+import { AccessReviewResource } from '~/pages/projects/screens/detail/const';
 // import WrenchIcon from '@patternfly/react-icons/dist/esm/icons/wrench-icon';
 
 import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
+import NotebookCardEmpty from "./NotebookCardEmpty";
 
 const NotebookList: React.FC = () => {
   const {
@@ -31,6 +34,12 @@ const NotebookList: React.FC = () => {
   const navigate = useNavigate();
   const projectName = currentProject.metadata.name;
   const isNotebooksEmpty = notebookStates.length === 0;
+
+  const [allowCreate, rbacLoaded] = useAccessReview({
+    ...AccessReviewResource,
+    namespace: currentProject.metadata.name,
+  });
+
   let icon;
 
   icon = (
@@ -57,6 +66,7 @@ const NotebookList: React.FC = () => {
     <>
       <DetailsSection
         icon={icon}
+        // className="odh-project-details"
         id={ProjectSectionID.WORKBENCHES}
         title={ProjectSectionTitles[ProjectSectionID.WORKBENCHES] || ''}
         popover={
@@ -90,25 +100,7 @@ const NotebookList: React.FC = () => {
         isLoading={!loaded}
         loadError={loadError}
         isEmpty={isNotebooksEmpty}
-        emptyState={
-          <Flex>
-            <FlexItem>
-              <EmptyDetailsList
-                description="Creating a workbench allows you to add a Jupyter notebook to your project."
-                actions={[
-                  <Button
-                    key={`action-${ProjectSectionID.WORKBENCHES}`}
-                    onClick={() => navigate(`/projects/${projectName}/spawner`)}
-                    variant="secondary"
-                    size="lg"
-                  >
-                    Create workbench
-                  </Button>,
-                ]}
-              />
-            </FlexItem>
-          </Flex>
-        }
+        emptyState={<NotebookCardEmpty allowCreate={rbacLoaded && allowCreate} />}
       >
         <NotebookTable notebookStates={notebookStates} refresh={refresh} />
       </DetailsSection>

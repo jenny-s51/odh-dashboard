@@ -9,7 +9,7 @@ type OverviewCardProps = {
   loading?: boolean;
   loadError?: Error;
   count: number;
-  title: string;
+  title?: string;
   description?: string;
   icon?: React.ComponentType;
   ignoreEmptyState?: boolean;
@@ -46,7 +46,7 @@ const OverviewCard: React.FC<OverviewCardProps> = ({
 
   if (loading) {
     return (
-      <div className={css('odh-project-overview__card loading')}>
+      <div className={css('odh-project-details__card loading')}>
         <EmptyDetailsList
           variant="xs"
           description="Loading..."
@@ -58,7 +58,7 @@ const OverviewCard: React.FC<OverviewCardProps> = ({
 
   if (loadError) {
     return (
-      <div className={css('odh-project-overview__card error')}>
+      <div className={css('odh-project-details__card error')}>
         <EmptyDetailsList
           variant="xs"
           description={
@@ -79,27 +79,30 @@ const OverviewCard: React.FC<OverviewCardProps> = ({
   }
   if (!count && !ignoreEmptyState) {
     return (
-      <div className={css('odh-project-overview__card', typeModifier)}>
-        <EmptyDetailsList
-          variant="lg"
-          title={title}
-          description={description}
-          icon={icon}
-          actions={
-            actionButton ||
-            (allowCreate ? (
-              <Button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onAction && onAction();
-                }}
-                variant="link"
-              >
-                {createText}
-              </Button>
-            ) : undefined)
-          }
-        />
+      <div className={css('odh-project-details', typeModifier)}>
+        <div className={css('odh-project-details__card', typeModifier)}>
+          <EmptyDetailsList
+            variant="lg"
+            title={title}
+            description={description}
+            icon={icon}
+            actions={
+              actionButton ||
+              (allowCreate ? (
+                <Button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onAction && onAction();
+                  }}
+                  variant="secondary"
+                  size="lg"
+                >
+                  {createText}
+                </Button>
+              ) : undefined)
+            }
+          />
+        </div>
       </div>
     );
   }
@@ -107,7 +110,7 @@ const OverviewCard: React.FC<OverviewCardProps> = ({
   return (
     <div
       className={css(
-        'odh-project-overview__card with-counts',
+        'odh-project-details__card with-counts',
         typeModifier,
         navSection && 'm-is-clickable',
       )}

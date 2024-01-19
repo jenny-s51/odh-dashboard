@@ -9,6 +9,10 @@ import DataConnectionsTable from './DataConnectionsTable';
 import ManageDataConnectionModal from './ManageDataConnectionModal';
 import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
+import DataConnectionsCardEmpty from './DataConnectionsCardEmpty';
+
+import { useAccessReview } from '~/api';
+import { AccessReviewResource } from '~/pages/projects/screens/detail/const';
 
 const DataConnectionsList: React.FC = () => {
   const {
@@ -16,6 +20,12 @@ const DataConnectionsList: React.FC = () => {
     refreshAllProjectData,
   } = React.useContext(ProjectDetailsContext);
   const [open, setOpen] = React.useState(false);
+
+  const [allowCreate, rbacLoaded] = useAccessReview({
+    ...AccessReviewResource,
+    namespace: currentProject.metadata.name,
+  });
+
 
   const isDataConnectionsEmpty = connections.length === 0;
   let icon;
@@ -71,25 +81,7 @@ const DataConnectionsList: React.FC = () => {
         isLoading={!loaded}
         isEmpty={isDataConnectionsEmpty}
         loadError={error}
-        emptyState={
-          <Flex>
-            <FlexItem>
-              <EmptyDetailsList
-                actions={[
-                  <Button
-                    key={`action-${ProjectSectionID.DATA_CONNECTIONS}`}
-                    variant="secondary"
-                    size="lg"
-                    onClick={() => setOpen(true)}
-                  >
-                    Add data connection
-                  </Button>,
-                ]}
-                description="Adding a data connection to your project allows you to connect data inputs to your workbenches"
-              />
-            </FlexItem>
-          </Flex>
-        }
+        emptyState={<DataConnectionsCardEmpty allowCreate={rbacLoaded && allowCreate} />}
       >
         <DataConnectionsTable connections={connections} refreshData={refreshAllProjectData} />
       </DetailsSection>
