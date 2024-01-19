@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { Flex, FlexItem, Popover } from '@patternfly/react-core';
+import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 import { ProjectSectionID } from '~/pages/projects/screens/detail/types';
 import { ProjectSectionTitles } from '~/pages/projects/screens/detail/const';
 import DetailsSection from '~/pages/projects/screens/detail/DetailsSection';
@@ -7,8 +9,6 @@ import NoPipelineServer from '~/concepts/pipelines/NoPipelineServer';
 import ImportPipelineButton from '~/concepts/pipelines/content/import/ImportPipelineButton';
 import PipelinesList from '~/pages/projects/screens/detail/pipelines/PipelinesList';
 import PipelineServerActions from '~/concepts/pipelines/content/pipelinesDetails/pipeline/PipelineServerActions';
-import { Flex, FlexItem, Popover } from '@patternfly/react-core';
-import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 
 const PipelinesSection: React.FC = () => {
@@ -19,9 +19,7 @@ const PipelinesSection: React.FC = () => {
 
   const [isPipelinesEmpty, setIsPipelinesEmpty] = React.useState(false);
 
-  let icon;
-
-  icon = (
+  const icon = (
     <img
       style={{
         marginLeft: 'var(--pf-v5-global--spacer--xs)',
@@ -41,10 +39,8 @@ const PipelinesSection: React.FC = () => {
         title={ProjectSectionTitles[ProjectSectionID.PIPELINES]}
         popover={
           <Popover
-            headerContent={'About pipelines'}
-            bodyContent={
-              'Standardize and automate machine learning workflows to enable you to further enchance and deploy your data science models.'
-            }
+            headerContent="About pipelines"
+            bodyContent="Standardize and automate machine learning workflows to enable you to further enchance and deploy your data science models."
           >
             <DashboardPopupIconButton
               icon={

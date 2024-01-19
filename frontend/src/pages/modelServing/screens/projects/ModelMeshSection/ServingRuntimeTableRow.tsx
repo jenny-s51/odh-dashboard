@@ -104,14 +104,7 @@ const ServingRuntimeTableRow: React.FC<ServingRuntimeTableRowProps> = ({
         <Td dataLabel="Serving Runtime">
           <Truncate content={getDisplayNameFromServingRuntimeTemplate(obj)} />
         </Td>
-        <Td
-          dataLabel="Deployed models"
-          compoundExpand={
-            inferenceServicesLoaded
-              ? compoundExpandParams(ServingRuntimeTableTabs.DEPLOYED_MODELS, false)
-              : undefined
-          }
-        >
+        <Td dataLabel="Deployed models">
           {inferenceServicesLoaded ? (
             <>
               {modelInferenceServices.length}{' '}
@@ -130,17 +123,7 @@ const ServingRuntimeTableRow: React.FC<ServingRuntimeTableRowProps> = ({
             <Skeleton />
           )}
         </Td>
-        <Td
-          dataLabel="Tokens"
-          compoundExpand={
-            secretsLoaded
-              ? compoundExpandParams(
-                  ServingRuntimeTableTabs.TOKENS,
-                  tokens.length === 0 || !isServingRuntimeTokenEnabled(obj),
-                )
-              : undefined
-          }
-        >
+        <Td dataLabel="Tokens">
           {secretsLoaded ? (
             <>
               {!isServingRuntimeTokenEnabled(obj) ? 'Tokens disabled' : tokens.length}{' '}

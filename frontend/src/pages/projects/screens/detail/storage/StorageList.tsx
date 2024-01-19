@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { Button, Divider, Flex, FlexItem, PageSection, Popover } from '@patternfly/react-core';
+import { Button, Flex, FlexItem, Popover } from '@patternfly/react-core';
+import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 import EmptyDetailsList from '~/pages/projects/screens/detail/EmptyDetailsList';
 import DetailsSection from '~/pages/projects/screens/detail/DetailsSection';
 import { ProjectSectionID } from '~/pages/projects/screens/detail/types';
 import { ProjectSectionTitles } from '~/pages/projects/screens/detail/const';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
+import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 import ManageStorageModal from './ManageStorageModal';
 import StorageTable from './StorageTable';
-import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
-import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 
 const StorageList: React.FC = () => {
   const [isOpen, setOpen] = React.useState(false);
@@ -19,9 +19,7 @@ const StorageList: React.FC = () => {
 
   const isPvcsEmpty = pvcs.length === 0;
 
-  let icon;
-
-  icon = (
+  const icon = (
     <img
       style={{
         marginLeft: 'var(--pf-v5-global--spacer--xs)',
@@ -41,10 +39,8 @@ const StorageList: React.FC = () => {
         title={ProjectSectionTitles[ProjectSectionID.CLUSTER_STORAGES] || ''}
         popover={
           <Popover
-            headerContent={'About cluster storage'}
-            bodyContent={
-              'For data science projects that require data to be retained, you can add cluster storage to the project.'
-            }
+            headerContent="About cluster storage"
+            bodyContent="For data science projects that require data to be retained, you can add cluster storage to the project."
           >
             <DashboardPopupIconButton
               icon={

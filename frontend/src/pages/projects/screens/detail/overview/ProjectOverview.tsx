@@ -1,9 +1,7 @@
 import * as React from 'react';
 import {
   EmptyState,
-  EmptyStateActions,
   EmptyStateBody,
-  EmptyStateFooter,
   EmptyStateHeader,
   EmptyStateIcon,
   Label,
@@ -11,7 +9,6 @@ import {
   Spinner,
 } from '@patternfly/react-core';
 import { ChartDonut } from '@patternfly/react-charts';
-import { PlusCircleIcon } from '@patternfly/react-icons';
 import emptyStateImg from '~/images/empty-state-projects-overview.svg';
 import projectBackgroundImage from '~/images/project-overview-background-img.svg';
 import projectIcon from '~/images/project-icon.svg';
@@ -188,6 +185,7 @@ const ProjectOverview: React.FC = () => {
     <PageSection
       className="odh-project-overview"
       isFilled
+      padding={{ default: 'noPadding' }}
       aria-label="project-details-page-section"
       variant="light"
     >

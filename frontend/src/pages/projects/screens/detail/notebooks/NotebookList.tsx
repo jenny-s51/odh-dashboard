@@ -1,26 +1,15 @@
 import * as React from 'react';
-import {
-  Button,
-  Divider,
-  Flex,
-  FlexItem,
-  Icon,
-  PageSection,
-  Popover,
-} from '@patternfly/react-core';
+import { Button, Flex, FlexItem, Popover } from '@patternfly/react-core';
 import { useNavigate } from 'react-router-dom';
+import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 import EmptyDetailsList from '~/pages/projects/screens/detail/EmptyDetailsList';
 import { ProjectSectionID } from '~/pages/projects/screens/detail/types';
 import DetailsSection from '~/pages/projects/screens/detail/DetailsSection';
 import { ProjectSectionTitles } from '~/pages/projects/screens/detail/const';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import { FAST_POLL_INTERVAL } from '~/utilities/const';
-import NotebookTable from './NotebookTable';
-import { HelpIcon, OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
-import WrenchIcon from '~/images/UI_icon-Red_Hat-Wrench-RGB.svg';
-// import WrenchIcon from '@patternfly/react-icons/dist/esm/icons/wrench-icon';
-
 import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
+import NotebookTable from './NotebookTable';
 
 const NotebookList: React.FC = () => {
   const {
@@ -31,9 +20,7 @@ const NotebookList: React.FC = () => {
   const navigate = useNavigate();
   const projectName = currentProject.metadata.name;
   const isNotebooksEmpty = notebookStates.length === 0;
-  let icon;
-
-  icon = (
+  const icon = (
     <img
       style={{
         marginLeft: 'var(--pf-v5-global--spacer--xs)',
@@ -61,10 +48,8 @@ const NotebookList: React.FC = () => {
         title={ProjectSectionTitles[ProjectSectionID.WORKBENCHES] || ''}
         popover={
           <Popover
-            headerContent={'About workbenches'}
-            bodyContent={
-              'Creating a workbench allows you to add a Jupyter notebook to your project.'
-            }
+            headerContent="About workbenches"
+            bodyContent="Creating a workbench allows you to add a Jupyter notebook to your project."
           >
             <DashboardPopupIconButton
               icon={
