@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button } from '@patternfly/react-core';
+import { Badge, Button, Popover } from '@patternfly/react-core';
 import { useNavigate } from 'react-router-dom';
 import EmptyDetailsList from '~/pages/projects/screens/detail/EmptyDetailsList';
 import { ProjectSectionID } from '~/pages/projects/screens/detail/types';
@@ -10,6 +10,8 @@ import { useAccessReview } from '~/api';
 import emptyStateImg from '~/images/empty-state-notebooks.svg';
 import DetailsSectionAlt from '~/pages/projects/screens/detail/DetailsSectionAlt';
 import NotebookTable from './NotebookTable';
+import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
+import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 
 const NotebookListAlt: React.FC = () => {
   const {
@@ -33,16 +35,54 @@ const NotebookListAlt: React.FC = () => {
     return () => clearInterval(interval);
   }, [notebookStates, refreshNotebooks]);
 
+  let icon;
+
+  icon = (
+    <img
+      style={{
+        marginLeft: 'var(--pf-v5-global--spacer--xs)',
+        marginRight: 'var(--pf-v5-global--spacer--xs)',
+        verticalAlign: 'middle',
+      }}
+      src="../images/UI_icon-Red_Hat-Wrench-RGB.svg"
+      alt="Notebooks icon"
+    />
+  );
+
   return (
     <>
       <DetailsSectionAlt
         id={ProjectSectionID.WORKBENCHES}
-        title={ProjectSectionTitles[ProjectSectionID.WORKBENCHES] || ''}
-        actions={[
+        icon={!isNotebooksEmpty && icon}
+        title={!isNotebooksEmpty && ProjectSectionTitles[ProjectSectionID.WORKBENCHES] || ''}
+        badge={!isNotebooksEmpty &&
+          <Badge style={{ marginLeft: 'var(--pf-v5-global--spacer--sm)' }}>
+            {' '}
+            {notebookStates.length}
+          </Badge>
+        }
+        popover={!isNotebooksEmpty &&
+          <Popover
+            headerContent={'About workbenches'}
+            bodyContent={
+              'Creating a workbench allows you to add a Jupyter notebook to your project.'
+            }
+          >
+            <DashboardPopupIconButton
+              icon={
+                <OutlinedQuestionCircleIcon
+                  style={{ marginLeft: 'var(--pf-v5-global--spacer--md)' }}
+                />
+              }
+              aria-label="More info"
+            />
+          </Popover>
+        }
+        actions={ !isNotebooksEmpty && [
           <Button
             key={`action-${ProjectSectionID.WORKBENCHES}`}
             onClick={() => navigate(`/projects/${projectName}/spawner`)}
-            variant="secondary"
+            variant="primary"
           >
             Create workbench
           </Button>,

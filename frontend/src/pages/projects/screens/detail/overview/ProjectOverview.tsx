@@ -164,6 +164,7 @@ const ProjectOverview: React.FC = () => {
     <PageSection
       className="odh-project-overview"
       isFilled
+      padding={{ default: 'noPadding' }}
       aria-label="project-details-page-section"
       variant="light"
     >

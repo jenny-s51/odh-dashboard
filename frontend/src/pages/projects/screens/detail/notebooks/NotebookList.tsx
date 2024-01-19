@@ -17,8 +17,7 @@ import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import { FAST_POLL_INTERVAL } from '~/utilities/const';
 import NotebookTable from './NotebookTable';
 import { HelpIcon, OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
-import WrenchIcon from '~/images/UI_icon-Red_Hat-Wrench-RGB.svg';
-// import WrenchIcon from '@patternfly/react-icons/dist/esm/icons/wrench-icon';
+
 
 import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 
