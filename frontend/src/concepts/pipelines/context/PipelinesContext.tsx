@@ -166,10 +166,16 @@ export const CreatePipelineServerButton: React.FC<CreatePipelineServerButtonProp
   const { refreshState } = React.useContext(PipelinesContext);
 
   return (
-    <>
+    <div onClick={(e) => e.stopPropagation()}>
       <Stack hasGutter>
         <StackItem>
-          <Button variant={variant} onClick={() => setConfigureModalVisible(true)}>
+          <Button
+            variant={variant}
+            onClick={(e) => {
+              e.stopPropagation();
+              setConfigureModalVisible(true);
+            }}
+          >
             {title}
           </Button>
         </StackItem>
@@ -181,7 +187,7 @@ export const CreatePipelineServerButton: React.FC<CreatePipelineServerButtonProp
           refreshState();
         }}
       />
-    </>
+    </div>
   );
 };
 

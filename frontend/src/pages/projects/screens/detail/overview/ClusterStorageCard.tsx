@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { Button } from '@patternfly/react-core';
 import emptyStateImg from '~/images/UI_icon-Red_Hat-Storage-RGB.svg';
 import ManageStorageModal from '~/pages/projects/screens/detail/storage/ManageStorageModal';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
-import { ProjectSectionID } from '~/pages/projects/screens/detail/types';
 import OverviewCard from './OverviewCard';
 
 type ClusterStorageCardProps = {
@@ -25,17 +23,9 @@ const ClusterStorageCard: React.FC<ClusterStorageCardProps> = ({ allowCreate }) 
         title="Cluster storage"
         description="Save and retain data for your projects."
         icon={() => <img style={{ height: '32px' }} src={emptyStateImg} alt="Workbenches" />}
-        getStartedAction={
-          allowCreate ? (
-            <Button
-              key={`action-${ProjectSectionID.CLUSTER_STORAGES}`}
-              onClick={() => setOpen(true)}
-              variant="link"
-            >
-              Get started
-            </Button>
-          ) : null
-        }
+        allowCreate={allowCreate}
+        onAction={() => setOpen(true)}
+        createText="Add cluster storage"
         typeModifier="cluster-storage"
         navSection="cluster-storage"
       />

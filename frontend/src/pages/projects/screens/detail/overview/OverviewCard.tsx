@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { css } from '@patternfly/react-styles';
 import { useSearchParams } from 'react-router-dom';
-import { Spinner } from '@patternfly/react-core';
+import { Button, Spinner } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import EmptyDetailsList from '~/pages/projects/screens/detail/EmptyDetailsList';
 
@@ -13,7 +13,10 @@ type OverviewCardProps = {
   description?: string;
   icon?: React.ComponentType;
   ignoreEmptyState?: boolean;
-  getStartedAction?: React.ReactNode;
+  allowCreate?: boolean;
+  actionButton?: React.ReactNode;
+  onAction?: () => void;
+  createText?: string;
   typeModifier:
     | 'notebook'
     | 'pipeline'
@@ -32,7 +35,10 @@ const OverviewCard: React.FC<OverviewCardProps> = ({
   description,
   icon,
   ignoreEmptyState,
-  getStartedAction,
+  allowCreate,
+  actionButton,
+  onAction,
+  createText,
   typeModifier,
   navSection,
 }) => {
@@ -79,7 +85,20 @@ const OverviewCard: React.FC<OverviewCardProps> = ({
           title={title}
           description={description}
           icon={icon}
-          primaryActions={getStartedAction}
+          primaryActions={
+            actionButton ||
+            (allowCreate ? (
+              <Button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onAction && onAction();
+                }}
+                variant="link"
+              >
+                Get started
+              </Button>
+            ) : undefined)
+          }
         />
       </div>
     );
@@ -101,7 +120,26 @@ const OverviewCard: React.FC<OverviewCardProps> = ({
           : undefined
       }
     >
-      <EmptyDetailsList variant="lg" title={`${count}`} description={title} icon={icon} />
+      <EmptyDetailsList
+        variant="lg"
+        title={`${count}`}
+        description={title}
+        icon={icon}
+        primaryActions={
+          actionButton ||
+          (allowCreate ? (
+            <Button
+              onClick={(e) => {
+                e.stopPropagation();
+                onAction && onAction();
+              }}
+              variant="link"
+            >
+              {createText}
+            </Button>
+          ) : undefined)
+        }
+      />
     </div>
   );
 };

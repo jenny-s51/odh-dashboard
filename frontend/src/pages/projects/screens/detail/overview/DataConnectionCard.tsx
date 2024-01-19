@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { Button } from '@patternfly/react-core';
-import { ProjectSectionID } from '~/pages/projects/screens/detail/types';
+import { ConnectedIcon } from '@patternfly/react-icons';
 import ManageDataConnectionModal from '~/pages/projects/screens/detail/data-connections/ManageDataConnectionModal';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import OverviewCard from './OverviewCard';
-import { ConnectedIcon } from '@patternfly/react-icons';
 
 type DataConnectionCardProps = {
   allowCreate: boolean;
@@ -25,17 +23,9 @@ const DataConnectionCard: React.FC<DataConnectionCardProps> = ({ allowCreate }) 
         title="Data connections"
         description="Connect data inputs to your workbenches."
         icon={() => <ConnectedIcon style={{ height: '32px' }} alt="Workbenches" />}
-        getStartedAction={
-          allowCreate ? (
-            <Button
-              key={`action-${ProjectSectionID.DATA_CONNECTIONS}`}
-              onClick={() => setOpen(true)}
-              variant="link"
-            >
-              Get started
-            </Button>
-          ) : null
-        }
+        allowCreate={allowCreate}
+        onAction={() => setOpen(true)}
+        createText="Add data connection"
         typeModifier="data-connections"
         navSection="data-connections"
       />
