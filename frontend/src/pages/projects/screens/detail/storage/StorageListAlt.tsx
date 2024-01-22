@@ -7,6 +7,7 @@ import { AccessReviewResource, ProjectSectionTitles } from '~/pages/projects/scr
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import { useAccessReview } from '~/api';
 import emptyStateImg from '~/images/empty-state-cluster-storage.svg';
+import iconImg from '~/images/UI_icon-Red_Hat-Storage-RGB.svg';
 import DetailsSectionAlt from '~/pages/projects/screens/detail/DetailsSectionAlt';
 import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 import StorageTable from './StorageTable';
@@ -26,38 +27,22 @@ const StorageListAlt: React.FC = () => {
 
   const isPvcsEmpty = pvcs.length === 0;
 
-  const icon = (
-    <img
-      style={{
-        marginLeft: 'var(--pf-v5-global--spacer--xs)',
-        marginRight: 'var(--pf-v5-global--spacer--xs)',
-        verticalAlign: 'middle',
-      }}
-      src="../images/UI_icon-Red_Hat-Storage-RGB.svg"
-      alt="Storage icon"
-    />
-  );
-
   return (
     <>
       <DetailsSectionAlt
         id={ProjectSectionID.CLUSTER_STORAGES}
-        icon={icon}
+        typeModifier="cluster-storage"
+        iconSrc={iconImg}
+        iconAlt="Storage icon"
         title={ProjectSectionTitles[ProjectSectionID.CLUSTER_STORAGES] || ''}
-        badge={
-          <Badge style={{ marginLeft: 'var(--pf-v5-global--spacer--sm)' }}>{pvcs.length}</Badge>
-        }
+        badge={<Badge>{pvcs.length}</Badge>}
         popover={
           <Popover
             headerContent="About cluster storage"
             bodyContent="For data science projects that require data to be retained, you can add cluster storage to the project."
           >
             <DashboardPopupIconButton
-              icon={
-                <OutlinedQuestionCircleIcon
-                  style={{ marginLeft: 'var(--pf-v5-global--spacer--md)' }}
-                />
-              }
+              icon={<OutlinedQuestionCircleIcon />}
               aria-label="More info"
             />
           </Popover>
