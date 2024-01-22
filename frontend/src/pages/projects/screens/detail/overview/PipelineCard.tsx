@@ -23,6 +23,7 @@ const PipelineCard: React.FC<PipelineCardProps> = ({ allowCreate }) => {
         allowCreate ? (
           <CreatePipelineServerButton
             variant="link"
+            size="sm"
             title={pipelines.length ? 'Import pipeline' : 'Get started'}
           />
         ) : null

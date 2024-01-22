@@ -8,6 +8,7 @@ import {
   Stack,
   StackItem,
 } from '@patternfly/react-core';
+import { ButtonProps } from '@patternfly/react-core/src/components/Button/Button';
 import { ProjectKind } from '~/k8sTypes';
 import { byName, ProjectsContext } from '~/concepts/projects/ProjectsContext';
 import DeletePipelineServerModal from '~/concepts/pipelines/content/DeletePipelineServerModal';
@@ -155,11 +156,13 @@ export const usePipelinesAPI = (): UsePipelinesAPI => {
 
 type CreatePipelineServerButtonProps = {
   variant: 'primary' | 'secondary' | 'link';
+  size?: ButtonProps['size'];
   title?: string;
 };
 
 export const CreatePipelineServerButton: React.FC<CreatePipelineServerButtonProps> = ({
   variant,
+  size = 'lg',
   title = 'Create pipeline',
 }) => {
   const [configureModalVisible, setConfigureModalVisible] = React.useState(false);
@@ -170,7 +173,7 @@ export const CreatePipelineServerButton: React.FC<CreatePipelineServerButtonProp
       <Stack hasGutter>
         <StackItem>
           <Button
-            size="lg"
+            size={size}
             variant={variant}
             onClick={(e) => {
               e.stopPropagation();
