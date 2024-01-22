@@ -35,32 +35,15 @@ const NotebookListAlt: React.FC = () => {
     return () => clearInterval(interval);
   }, [notebookStates, refreshNotebooks]);
 
-  const icon = (
-    <img
-      style={{
-        marginLeft: 'var(--pf-v5-global--spacer--xs)',
-        marginRight: 'var(--pf-v5-global--spacer--xs)',
-        verticalAlign: 'middle',
-      }}
-      src="../images/UI_icon-Red_Hat-Wrench-RGB.svg"
-      alt="Notebooks icon"
-    />
-  );
-
   return (
     <>
       <DetailsSectionAlt
+        typeModifier="notebook"
         id={ProjectSectionID.WORKBENCHES}
-        icon={!isNotebooksEmpty && icon}
+        iconSrc="../images/UI_icon-Red_Hat-Wrench-RGB.svg"
+        iconAlt="Notebooks icon"
         title={(!isNotebooksEmpty && ProjectSectionTitles[ProjectSectionID.WORKBENCHES]) || ''}
-        badge={
-          !isNotebooksEmpty ? (
-            <Badge style={{ marginLeft: 'var(--pf-v5-global--spacer--sm)' }}>
-              {' '}
-              {notebookStates.length}
-            </Badge>
-          ) : undefined
-        }
+        badge={<Badge>{notebookStates.length}</Badge>}
         popover={
           !isNotebooksEmpty && (
             <Popover
@@ -68,11 +51,7 @@ const NotebookListAlt: React.FC = () => {
               bodyContent="Creating a workbench allows you to add a Jupyter notebook to your project."
             >
               <DashboardPopupIconButton
-                icon={
-                  <OutlinedQuestionCircleIcon
-                    style={{ marginLeft: 'var(--pf-v5-global--spacer--md)' }}
-                  />
-                }
+                icon={<OutlinedQuestionCircleIcon />}
                 aria-label="More info"
               />
             </Popover>

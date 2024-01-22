@@ -142,13 +142,13 @@ const OverviewCard: React.FC<OverviewCardProps> = ({
           : undefined
       }
     >
-      <EmptyState variant="lg">
+      <EmptyState variant="sm">
         <EmptyStateHeader
-          titleText={<>{title}</>}
+          titleText={<>{`${count}`}</>}
           icon={icon && <EmptyStateIcon icon={icon ?? PlusCircleIcon} />}
           headingLevel="h3"
         />
-        <EmptyStateBody>{description}</EmptyStateBody>
+        <EmptyStateBody>{title}</EmptyStateBody>
         {actionButton || allowCreate ? (
           <EmptyStateFooter>
             <EmptyStateActions>

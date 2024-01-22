@@ -26,30 +26,14 @@ const DataConnectionsListAlt: React.FC = () => {
 
   const isDataConnectionsEmpty = connections.length === 0;
 
-  const icon = (
-    <img
-      style={{
-        marginLeft: 'var(--pf-v5-global--spacer--xs)',
-        marginRight: 'var(--pf-v5-global--spacer--xs)',
-        verticalAlign: 'middle',
-      }}
-      src="../images/UI_icon-Red_Hat-Connected-RGB.svg"
-      alt="Data connections icon"
-    />
-  );
-
   return (
     <>
       <DetailsSectionAlt
-        icon={!isDataConnectionsEmpty && icon}
+        typeModifier="data-connections"
+        iconSrc="../images/UI_icon-Red_Hat-Connected-RGB.svg"
+        iconAlt="Data connections icon"
         id={ProjectSectionID.DATA_CONNECTIONS}
-        badge={
-          !isDataConnectionsEmpty && (
-            <Badge style={{ marginLeft: 'var(--pf-v5-global--spacer--sm)' }}>
-              {connections.length}
-            </Badge>
-          )
-        }
+        badge={<Badge>{connections.length}</Badge>}
         title={
           (!isDataConnectionsEmpty && ProjectSectionTitles[ProjectSectionID.DATA_CONNECTIONS]) || ''
         }
@@ -60,11 +44,7 @@ const DataConnectionsListAlt: React.FC = () => {
               bodyContent="Adding a data connection to your project allows you to connect data inputs to your workbenches."
             >
               <DashboardPopupIconButton
-                icon={
-                  <OutlinedQuestionCircleIcon
-                    style={{ marginLeft: 'var(--pf-v5-global--spacer--md)' }}
-                  />
-                }
+                icon={<OutlinedQuestionCircleIcon />}
                 aria-label="More info"
               />
             </Popover>
@@ -104,7 +84,7 @@ const DataConnectionsListAlt: React.FC = () => {
           />
         }
       >
-        {isDataConnectionsEmpty ? (
+        {!isDataConnectionsEmpty ? (
           <DataConnectionsTable connections={connections} refreshData={refreshAllProjectData} />
         ) : null}
       </DetailsSectionAlt>

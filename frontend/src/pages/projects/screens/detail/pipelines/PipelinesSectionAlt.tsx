@@ -12,14 +12,18 @@ import ImportPipelineButton from '~/concepts/pipelines/content/import/ImportPipe
 import PipelinesList from '~/pages/projects/screens/detail/pipelines/PipelinesList';
 import PipelineServerActions from '~/concepts/pipelines/content/pipelinesDetails/pipeline/PipelineServerActions';
 import emptyStateImg from '~/images/empty-state-pipelines.svg';
+import iconImg from '~/images/UI_icon-Red_Hat-Branch-RGB.svg';
 import { useAccessReview } from '~/api';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import DetailsSectionAlt from '~/pages/projects/screens/detail/DetailsSectionAlt';
 import EmptyDetailsView from '~/pages/projects/screens/detail/EmptyDetailsView';
 import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
+import usePipelines from '~/concepts/pipelines/apiHooks/usePipelines';
+import { LIMIT_MAX_ITEM_COUNT } from '~/concepts/pipelines/const';
 
 const PipelinesSectionAlt: React.FC = () => {
   const { currentProject } = React.useContext(ProjectDetailsContext);
+  const [pipelines, loaded, loadError] = usePipelines(LIMIT_MAX_ITEM_COUNT);
   const {
     apiAvailable,
     pipelinesServer: { initializing, installed, timedOut },
@@ -31,23 +35,13 @@ const PipelinesSectionAlt: React.FC = () => {
     namespace: currentProject.metadata.name,
   });
 
-  const icon = (
-    <img
-      style={{
-        marginLeft: 'var(--pf-v5-global--spacer--xs)',
-        marginRight: 'var(--pf-v5-global--spacer--xs)',
-        verticalAlign: 'middle',
-      }}
-      src="../images/UI_icon-Red_Hat-Branch-RGB.svg"
-      alt="Pipelines branch icon"
-    />
-  );
-
   return (
     <>
       <DetailsSectionAlt
         id={ProjectSectionID.PIPELINES}
-        icon={icon}
+        typeModifier="pipeline"
+        iconSrc={iconImg}
+        iconAlt="Pipelines branch icon"
         title={ProjectSectionTitles[ProjectSectionID.PIPELINES]}
         popover={
           installed ? (
@@ -56,17 +50,13 @@ const PipelinesSectionAlt: React.FC = () => {
               bodyContent="Standardize and automate machine learning workflows to enable you to further enhance and deploy your data science models."
             >
               <DashboardPopupIconButton
-                icon={
-                  <OutlinedQuestionCircleIcon
-                    style={{ marginLeft: 'var(--pf-v5-global--spacer--md)' }}
-                  />
-                }
+                icon={<OutlinedQuestionCircleIcon />}
                 aria-label="More info"
               />
             </Popover>
           ) : null
         }
-        badge={installed && <Badge>{}</Badge>}
+        badge={installed && <Badge>{pipelines.length}</Badge>}
         actions={[
           <ImportPipelineButton
             isDisabled={!installed}
@@ -79,11 +69,12 @@ const PipelinesSectionAlt: React.FC = () => {
             variant="kebab"
           />,
         ]}
-        isLoading={(!apiAvailable && installed) || initializing}
-        isEmpty={!installed}
+        isLoading={(!apiAvailable && installed) || initializing || (installed && !loaded)}
+        isEmpty={!installed || pipelines.length === 0}
+        loadError={loadError}
         emptyState={
           <EmptyDetailsView
-            title="Start by configuring a pipeline server"
+            title="Start by creating a pipeline"
             description="Standardize and automate machine learning workflows to enable you to further enhance and deploy your data science models."
             iconImage={emptyStateImg}
             allowCreate={rbacLoaded && allowCreate}
