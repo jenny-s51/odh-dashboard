@@ -22,7 +22,12 @@ const DataConnectionCard: React.FC<DataConnectionCardProps> = ({ allowCreate }) 
         count={dataConnections.length}
         title="Data connections"
         description="Connect data inputs to your workbenches."
-        icon={() => <ConnectedIcon style={{ height: '32px' }} alt="Workbenches" />}
+        icon={() => (
+          <ConnectedIcon
+            className="odh-project-overview__card--icon m-data-connection"
+            alt="Data connections"
+          />
+        )}
         allowCreate={allowCreate}
         onAction={() => setOpen(true)}
         createText="Add data connection"

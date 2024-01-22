@@ -12,12 +12,17 @@ import {
   TextContent,
   Title,
 } from '@patternfly/react-core';
+import { css } from '@patternfly/react-styles';
 import { ProjectSectionID } from './types';
+
+import './DetailsSectionAlt.scss';
 
 type DetailsSectionAltProps = {
   id: ProjectSectionID;
   actions?: React.ReactNode[];
-  icon?: React.ReactNode;
+  iconSrc: string;
+  iconAlt: string;
+  typeModifier?: string;
   title: string;
   description?: string;
   badge?: React.ReactNode;
@@ -33,7 +38,9 @@ type DetailsSectionAltProps = {
 
 const DetailsSectionAlt: React.FC<DetailsSectionAltProps> = ({
   actions,
-  icon,
+  iconSrc,
+  iconAlt,
+  typeModifier,
   children,
   emptyState,
   id,
@@ -78,27 +85,43 @@ const DetailsSectionAlt: React.FC<DetailsSectionAltProps> = ({
         'odh-details-section--divide': !loadError && (isLoading || isEmpty || showDivider),
       })}
     >
-      <StackItem>
-        <Flex direction={{ default: 'column', md: 'row' }} gap={{ default: 'gapMd' }}>
-          <Flex flex={{ default: 'flex_1' }}>
-            {!isEmpty ? (
+      {!isEmpty ? (
+        <StackItem>
+          <Flex
+            className={css('odh-details__header', typeModifier)}
+            direction={{ default: 'column', md: 'row' }}
+            gap={{ default: 'gapMd' }}
+          >
+            <Flex flex={{ default: 'flex_1' }}>
               <FlexItem>
-                <Title id={`${id}-title`} headingLevel="h2" size="xl">
-                  {icon}
-                  {title}
-                  {badge}
-                  {popover}
-                </Title>
+                <Flex
+                  direction={{ default: 'row' }}
+                  gap={{ default: 'gapSm' }}
+                  alignItems={{ default: 'alignItemsCenter' }}
+                >
+                  <div className="odh-details__header--icon">
+                    <img src={iconSrc} alt={iconAlt} />
+                  </div>
+                  <FlexItem>
+                    <Title id={`${id}-title`} headingLevel="h2" size="xl">
+                      {title}
+                    </Title>
+                  </FlexItem>
+                  <FlexItem>{badge}</FlexItem>
+                  <FlexItem>{popover}</FlexItem>
+                </Flex>
+              </FlexItem>
+              <FlexItem>
                 <TextContent>{description && <Text component="p">{description}</Text>}</TextContent>
               </FlexItem>
-            ) : null}
+            </Flex>
+            <Flex direction={{ default: 'column', md: 'row' }}>
+              {actions && <FlexItem>{actions}</FlexItem>}
+              {labels && <FlexItem align={{ default: 'alignRight' }}>{labels}</FlexItem>}
+            </Flex>
           </Flex>
-          <Flex direction={{ default: 'column', md: 'row' }}>
-            {actions && <FlexItem>{actions}</FlexItem>}
-            {labels && <FlexItem align={{ default: 'alignRight' }}>{labels}</FlexItem>}
-          </Flex>
-        </Flex>
-      </StackItem>
+        </StackItem>
+      ) : null}
       {renderContent()}
     </Stack>
   );

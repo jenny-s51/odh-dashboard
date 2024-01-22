@@ -11,11 +11,11 @@ import { useAccessReview } from '~/api';
 import ProjectSettingsPage from '~/pages/projects/projectSettings/ProjectSettingsPage';
 import { SupportedArea, useIsAreaAvailable } from '~/concepts/areas';
 import { useAppContext } from '~/app/AppContext';
-import ModelServingPlatform from '~/pages/modelServing/screens/projects/ModelServingPlatform';
 import useModelServingEnabled from '~/pages/modelServing/useModelServingEnabled';
 import { useAppSelector } from '~/redux/hooks';
 import { useQueryParams } from '~/utilities/useQueryParams';
 import projectIcon from '~/images/project-icon.svg';
+import ModelServingPlatformAlt from '~/pages/modelServing/screens/projects/ModelServingPlatformAlt';
 import useCheckLogoutParams from './useCheckLogoutParams';
 import ProjectDetailsComponents from './ProjectDetailsComponents';
 import ProjectOverview from './overview/ProjectOverview';
@@ -31,7 +31,6 @@ const ProjectDetails: React.FC = () => {
   const description = getProjectDescription(currentProject);
   const biasMetricsAreaAvailable = useIsAreaAvailable(SupportedArea.BIAS_METRICS).status;
   const projectSharingEnabled = useIsAreaAvailable(SupportedArea.DS_PROJECTS_PERMISSIONS).status;
-  // const { state } = useLocation();
   const [allowCreate, rbacLoaded] = useAccessReview({
     ...AccessReviewResource,
     namespace: currentProject.metadata.name,
@@ -99,7 +98,13 @@ const ProjectDetails: React.FC = () => {
             ? [{ id: 'pipelines', title: 'Pipelines', component: <PipelinesSectionAlt /> }]
             : []),
           ...(modelServingEnabled
-            ? [{ id: 'model-servers', title: 'Model servers', component: <ModelServingPlatform /> }]
+            ? [
+                {
+                  id: 'model-servers',
+                  title: 'Model servers',
+                  component: <ModelServingPlatformAlt />,
+                },
+              ]
             : []),
           ...(projectSharingEnabled
             ? [{ id: 'permissions', title: 'Permissions', component: <ProjectSharing /> }]
