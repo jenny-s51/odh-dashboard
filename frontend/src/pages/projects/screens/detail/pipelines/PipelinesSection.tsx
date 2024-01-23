@@ -9,8 +9,8 @@ import ImportPipelineButton from '~/concepts/pipelines/content/import/ImportPipe
 import PipelinesList from '~/pages/projects/screens/detail/pipelines/PipelinesList';
 import PipelineServerActions from '~/concepts/pipelines/content/pipelinesDetails/pipeline/PipelineServerActions';
 import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
+import pipelineImage from '~/images/UI_icon-Red_Hat-Branch-RGB.svg';
 import EmptyPipelinesSectionCard from './EmptyPipelinesSectionCard';
-import pipelineImage from '~images/UI_icon-Red_Hat-Branch-RGB.svg';
 
 const PipelinesSection: React.FC = () => {
   const {
