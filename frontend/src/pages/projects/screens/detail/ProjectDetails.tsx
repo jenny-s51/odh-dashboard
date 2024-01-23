@@ -52,7 +52,6 @@ const ProjectDetails: React.FC = () => {
         return (
           <GenericHorizontalBar
             activeKey={state}
-            padding={{ default: 'noPadding' }}
             sections={[
               {
                 id: 'components',

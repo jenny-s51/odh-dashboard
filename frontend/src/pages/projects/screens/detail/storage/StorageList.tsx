@@ -81,23 +81,6 @@ const StorageList: React.FC = () => {
         loadError={loadError}
         emptyState={
           <StorageCardEmpty allowCreate={rbacLoaded && allowCreate} />
-          // <Flex>
-          //   <FlexItem>
-          //     <EmptyDetailsList
-          //       actions={[
-          //         <Button
-          //           onClick={() => setOpen(true)}
-          //           key={`action-${ProjectSectionID.CLUSTER_STORAGES}`}
-          //           variant="secondary"
-          //           size="lg"
-          //         >
-          //           Add cluster storage
-          //         </Button>,
-          //       ]}
-          //       description="For data science projects that require data to be retained, you can add cluster storage to the project"
-          //     />
-          //   </FlexItem>
-          // </Flex>
         }
       >
         <StorageTable pvcs={pvcs} refresh={refresh} onAddPVC={() => setOpen(true)} />

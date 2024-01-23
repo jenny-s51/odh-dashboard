@@ -11,7 +11,6 @@ import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconBut
 import { useAccessReview } from '~/api';
 import { AccessReviewResource } from '~/pages/projects/screens/detail/const';
 import NotebookTable from '~/pages/projects/screens/detail/notebooks/NotebookTable';
-// import WrenchIcon from '@patternfly/react-icons/dist/esm/icons/wrench-icon';
 
 import NotebookCardEmpty from './NotebookCardEmpty';
 
@@ -55,7 +54,6 @@ const NotebookList: React.FC = () => {
     <>
       <DetailsSection
         icon={icon}
-        // className="odh-project-details"
         id={ProjectSectionID.WORKBENCHES}
         title={ProjectSectionTitles[ProjectSectionID.WORKBENCHES] || ''}
         popover={
