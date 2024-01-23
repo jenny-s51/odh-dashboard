@@ -26,16 +26,7 @@ const EmptyDetailsList: React.FC<EmptyDetailsListProps> = ({
   actions,
   secondaryActions,
 }) => (
-  <EmptyState
-    // isFullHeight
-    // style={{
-    //   border: 'dashed',
-    //   borderColor: 'var(--pf-v5-global--Color--400)',
-    //   borderWidth: '1.5px',
-    //   marginBottom: 'var(--pf-v5-global--spacer--xl)',
-    // }}
-    variant={variant}
-  >
+  <EmptyState isFullHeight variant={variant}>
     <EmptyStateHeader
       titleText={<>{title}</>}
       icon={icon && <EmptyStateIcon icon={icon ?? PlusCircleIcon} />}

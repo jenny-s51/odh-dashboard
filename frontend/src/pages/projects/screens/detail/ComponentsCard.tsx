@@ -108,7 +108,7 @@ const OverviewCard: React.FC<OverviewCardProps> = ({
   return (
     <div
       className={css(
-        'odh-project-details__card with-counts',
+        'odh-project-details__card',
         typeModifier,
         navSection && 'm-is-clickable',
       )}

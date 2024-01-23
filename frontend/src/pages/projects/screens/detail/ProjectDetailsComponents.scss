@@ -1,7 +1,3 @@
-// .odh-project-details-components__item:has(> .odh-details-section--divide):has(+ .odh-project-details-components__item) {
-//   padding-bottom: var(--pf-v5-global--spacer--lg);
-// }
-
 .odh-details-section--divide {
   padding-bottom: var(--pf-v5-global--spacer--xl);
 }
@@ -142,49 +138,9 @@
 
     }
 
-    &.model-server {
-      // width: 40%;
-
-    }
-
     &.data-connections {
       width: 40%;
 
-    }
-
-    &.with-counts {
-      border: none;
-
-      .pf-v5-c-empty-state__body {
-        color: initial;
-        --pf-v5-c-empty-state--body--FontSize: 18px;
-        --pf-v5-c-empty-state__body--MarginTop: var(--pf-v5-global--spacer--xs);
-      }
-
-      .pf-v5-c-empty-state__icon {
-        background: var(--pf-v5-global--BackgroundColor--100);
-      }
-
-      .pf-v5-c-empty-state__title-text {
-        font-size: var(--pf-v5-global--FontSize--3xl);
-      }
-
-
-      &.user {
-        border: 1px dashed var(--pf-v5-global--BorderColor--200);
-
-        .pf-v5-c-empty-state__icon {
-          background: var(--pf-v5-global--BackgroundColor--200);
-        }
-      }
-
-      &.group {
-        border: 1px dashed var(--pf-v5-global--BorderColor--200);
-
-        .pf-v5-c-empty-state__icon {
-          background: var(--pf-v5-global--BackgroundColor--200);
-        }
-      }
     }
 
     &.m-is-clickable {
