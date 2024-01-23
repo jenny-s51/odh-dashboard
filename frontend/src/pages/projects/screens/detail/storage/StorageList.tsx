@@ -7,10 +7,10 @@ import { AccessReviewResource, ProjectSectionTitles } from '~/pages/projects/scr
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 import { useAccessReview } from '~/api';
+import storageIcon from '~/images/UI_icon-Red_Hat-Storage-RGB.svg';
 import ManageStorageModal from './ManageStorageModal';
 import StorageTable from './StorageTable';
 import StorageCardEmpty from './StorageCardEmpty';
-import storageIcon from '~images/UI_icon-Red_Hat-Storage-RGB.svg';
 
 const StorageList: React.FC = () => {
   const [isOpen, setOpen] = React.useState(false);
