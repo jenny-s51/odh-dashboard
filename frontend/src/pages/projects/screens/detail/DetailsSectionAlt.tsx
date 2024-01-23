@@ -5,6 +5,7 @@ import {
   Bullseye,
   Flex,
   FlexItem,
+  PageSection,
   Spinner,
   Stack,
   StackItem,
@@ -79,51 +80,55 @@ const DetailsSectionAlt: React.FC<DetailsSectionAltProps> = ({
   };
 
   return (
-    <Stack
-      hasGutter
-      className={classNames({
-        'odh-details-section--divide': !loadError && (isLoading || isEmpty || showDivider),
-      })}
-    >
-      {!isEmpty ? (
-        <StackItem>
-          <Flex
-            className={css('odh-details__header', typeModifier)}
-            direction={{ default: 'column', md: 'row' }}
-            gap={{ default: 'gapMd' }}
-          >
-            <Flex flex={{ default: 'flex_1' }}>
-              <FlexItem>
-                <Flex
-                  direction={{ default: 'row' }}
-                  gap={{ default: 'gapSm' }}
-                  alignItems={{ default: 'alignItemsCenter' }}
-                >
-                  <div className="odh-details__header--icon">
-                    <img src={iconSrc} alt={iconAlt} />
-                  </div>
-                  <FlexItem>
-                    <Title id={`${id}-title`} headingLevel="h2" size="xl">
-                      {title}
-                    </Title>
-                  </FlexItem>
-                  <FlexItem>{badge}</FlexItem>
-                  <FlexItem>{popover}</FlexItem>
-                </Flex>
-              </FlexItem>
-              <FlexItem>
-                <TextContent>{description && <Text component="p">{description}</Text>}</TextContent>
-              </FlexItem>
+    <PageSection isFilled aria-label="details-section" variant="light">
+      <Stack
+        hasGutter
+        className={classNames({
+          'odh-details-section--divide': !loadError && (isLoading || isEmpty || showDivider),
+        })}
+      >
+        {!isEmpty ? (
+          <StackItem>
+            <Flex
+              className={css('odh-details__header', typeModifier)}
+              direction={{ default: 'column', md: 'row' }}
+              gap={{ default: 'gapMd' }}
+            >
+              <Flex flex={{ default: 'flex_1' }}>
+                <FlexItem>
+                  <Flex
+                    direction={{ default: 'row' }}
+                    gap={{ default: 'gapSm' }}
+                    alignItems={{ default: 'alignItemsCenter' }}
+                  >
+                    <div className="odh-details__header--icon">
+                      <img src={iconSrc} alt={iconAlt} />
+                    </div>
+                    <FlexItem>
+                      <Title id={`${id}-title`} headingLevel="h2" size="xl">
+                        {title}
+                      </Title>
+                    </FlexItem>
+                    <FlexItem>{badge}</FlexItem>
+                    <FlexItem>{popover}</FlexItem>
+                  </Flex>
+                </FlexItem>
+                <FlexItem>
+                  <TextContent>
+                    {description && <Text component="p">{description}</Text>}
+                  </TextContent>
+                </FlexItem>
+              </Flex>
+              <Flex direction={{ default: 'column', md: 'row' }}>
+                {actions && <FlexItem>{actions}</FlexItem>}
+                {labels && <FlexItem align={{ default: 'alignRight' }}>{labels}</FlexItem>}
+              </Flex>
             </Flex>
-            <Flex direction={{ default: 'column', md: 'row' }}>
-              {actions && <FlexItem>{actions}</FlexItem>}
-              {labels && <FlexItem align={{ default: 'alignRight' }}>{labels}</FlexItem>}
-            </Flex>
-          </Flex>
-        </StackItem>
-      ) : null}
-      {renderContent()}
-    </Stack>
+          </StackItem>
+        ) : null}
+        {renderContent()}
+      </Stack>
+    </PageSection>
   );
 };
 

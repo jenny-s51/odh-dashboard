@@ -74,14 +74,7 @@ const PipelinesSection: React.FC = () => {
         }
         isLoading={(!apiAvailable && installed) || initializing}
         isEmpty={!installed}
-        emptyState={
-          <EmptyPipelinesSectionCard allowCreate />
-          // <Flex>
-          //   <FlexItem>
-          //     <NoPipelineServer variant="secondary" />
-          //   </FlexItem>
-          // </Flex>
-        }
+        emptyState={<EmptyPipelinesSectionCard allowCreate />}
         showDivider={isPipelinesEmpty}
       >
         {timedOut ? (
