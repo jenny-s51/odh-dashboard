@@ -79,9 +79,7 @@ const StorageList: React.FC = () => {
         isLoading={!loaded}
         isEmpty={isPvcsEmpty}
         loadError={loadError}
-        emptyState={
-          <StorageCardEmpty allowCreate={rbacLoaded && allowCreate} />
-        }
+        emptyState={<StorageCardEmpty allowCreate={rbacLoaded && allowCreate} />}
       >
         <StorageTable pvcs={pvcs} refresh={refresh} onAddPVC={() => setOpen(true)} />
       </DetailsSection>

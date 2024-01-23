@@ -8,7 +8,6 @@ import {
   TabContent,
   TabContentBody,
   PageSection,
-  PageSectionProps,
   PageSectionVariants,
 } from '@patternfly/react-core';
 import { SVGIconProps } from '@patternfly/react-icons/dist/esm/createIcon';
