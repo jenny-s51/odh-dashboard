@@ -7,6 +7,7 @@ import { ProjectSectionTitles } from '~/pages/projects/screens/detail/const';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 import { useAccessReview } from '~/api';
+import dataConnectionImage from '~/images/UI_icon-Red_Hat-Connected-RGB.svg';
 import { AccessReviewResource } from '~/pages/projects/screens/detail/const';
 import DataConnectionsTable from './DataConnectionsTable';
 import ManageDataConnectionModal from './ManageDataConnectionModal';
@@ -26,23 +27,12 @@ const DataConnectionsList: React.FC = () => {
   });
 
   const isDataConnectionsEmpty = connections.length === 0;
-  const icon = (
-    <img
-      style={{
-        marginLeft: 'var(--pf-v5-global--spacer--xs)',
-        marginRight: 'var(--pf-v5-global--spacer--xs)',
-        verticalAlign: 'sub',
-        width: '32px',
-      }}
-      src="../images/UI_icon-Red_Hat-Connected-RGB.svg"
-      alt="Data connections icon"
-    />
-  );
 
   return (
     <>
       <DetailsSection
-        icon={icon}
+        iconSrc={dataConnectionImage}
+        iconAlt="Data connections icon"
         id={ProjectSectionID.DATA_CONNECTIONS}
         title={ProjectSectionTitles[ProjectSectionID.DATA_CONNECTIONS] || ''}
         popover={
@@ -52,11 +42,7 @@ const DataConnectionsList: React.FC = () => {
               bodyContent="Adding a data connection to your project allows you to connect data inputs to your workbenches."
             >
               <DashboardPopupIconButton
-                icon={
-                  <OutlinedQuestionCircleIcon
-                    style={{ marginLeft: 'var(--pf-v5-global--spacer--md)' }}
-                  />
-                }
+                icon={<OutlinedQuestionCircleIcon />}
                 aria-label="More info"
               />
             </Popover>

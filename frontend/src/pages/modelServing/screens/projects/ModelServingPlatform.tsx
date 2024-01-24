@@ -86,23 +86,11 @@ const ModelServingPlatform: React.FC = () => {
     }
   };
 
-  const icon = (
-    <img
-      style={{
-        marginLeft: 'var(--pf-v5-global--spacer--xs)',
-        marginRight: 'var(--pf-v5-global--spacer--md)',
-        verticalAlign: 'sub',
-        width: '32px',
-      }}
-      src={serverIcon}
-      alt="Server icon"
-    />
-  );
-
   return (
     <>
       <DetailsSection
-        icon={icon}
+        iconSrc={serverIcon}
+        iconAlt="Server"
         id={ProjectSectionID.MODEL_SERVER}
         title={ProjectSectionTitles[ProjectSectionID.MODEL_SERVER]}
         description="Select the type of model serving platform to be used when deploying models in this project."
@@ -113,11 +101,7 @@ const ModelServingPlatform: React.FC = () => {
               bodyContent="Deploy a trained data science model to serve intelligent applications with an endpoint that allows apps to send requests to the model."
             >
               <DashboardPopupIconButton
-                icon={
-                  <OutlinedQuestionCircleIcon
-                    style={{ marginLeft: 'var(--pf-v5-global--spacer--md)' }}
-                  />
-                }
+                icon={<OutlinedQuestionCircleIcon />}
                 aria-label="More info"
               />
             </Popover>
