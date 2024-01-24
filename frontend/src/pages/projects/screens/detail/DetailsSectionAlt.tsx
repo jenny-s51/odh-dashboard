@@ -93,6 +93,7 @@ const DetailsSectionAlt: React.FC<DetailsSectionAltProps> = ({
               className={css('odh-details__header', typeModifier)}
               direction={{ default: 'column', md: 'row' }}
               gap={{ default: 'gapMd' }}
+              alignItems={{ md: 'alignItemsCenter' }}
             >
               <Flex flex={{ default: 'flex_1' }}>
                 <FlexItem>

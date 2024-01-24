@@ -27,23 +27,11 @@ const StorageList: React.FC = () => {
 
   const isPvcsEmpty = pvcs.length === 0;
 
-  const icon = (
-    <img
-      style={{
-        marginLeft: 'var(--pf-v5-global--spacer--xs)',
-        marginRight: 'var(--pf-v5-global--spacer--xs)',
-        verticalAlign: 'sub',
-        width: '32px',
-      }}
-      src={storageIcon}
-      alt="Storage icon"
-    />
-  );
-
   return (
     <>
       <DetailsSection
-        icon={icon}
+        iconSrc={storageIcon}
+        iconAlt="Storage"
         id={ProjectSectionID.CLUSTER_STORAGES}
         title={ProjectSectionTitles[ProjectSectionID.CLUSTER_STORAGES] || ''}
         popover={
@@ -53,11 +41,7 @@ const StorageList: React.FC = () => {
               bodyContent="For data science projects that require data to be retained, you can add cluster storage to the project."
             >
               <DashboardPopupIconButton
-                icon={
-                  <OutlinedQuestionCircleIcon
-                    style={{ marginLeft: 'var(--pf-v5-global--spacer--md)' }}
-                  />
-                }
+                icon={<OutlinedQuestionCircleIcon />}
                 aria-label="More info"
               />
             </Popover>

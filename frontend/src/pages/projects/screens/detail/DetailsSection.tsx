@@ -16,7 +16,8 @@ import { ProjectSectionID } from './types';
 type DetailsSectionProps = {
   id: ProjectSectionID;
   actions?: React.ReactNode[];
-  icon?: React.ReactNode;
+  iconSrc: string;
+  iconAlt: string;
   title: string;
   description?: string;
   popover?: React.ReactNode;
@@ -31,7 +32,8 @@ type DetailsSectionProps = {
 
 const DetailsSection: React.FC<DetailsSectionProps> = ({
   actions,
-  icon,
+  iconSrc,
+  iconAlt,
   children,
   emptyState,
   id,
@@ -70,14 +72,26 @@ const DetailsSection: React.FC<DetailsSectionProps> = ({
   return (
     <Stack hasGutter className="odh-details-section--divide">
       <StackItem>
-        <Flex direction={{ default: 'column', md: 'row' }} gap={{ default: 'gapMd' }}>
-          <Flex flex={{ default: 'flex_1' }}>
+        <Flex
+          direction={{ default: 'column', md: 'row' }}
+          gap={{ default: 'gapMd' }}
+          alignItems={{ md: 'alignItemsCenter' }}
+        >
+          <Flex flex={{ default: 'flex_1' }} direction={{ default: 'column' }}>
             <FlexItem>
-              <Title id={`${id}-title`} headingLevel="h2" size="xl">
-                {icon}
-                {title}
+              <Flex
+                direction={{ default: 'row' }}
+                gap={{ default: 'gapXs' }}
+                alignItems={{ md: 'alignItemsCenter' }}
+              >
+                <img style={{ width: '32px' }} src={iconSrc} alt={iconAlt} />
+                <FlexItem>
+                  <Title id={`${id}-title`} headingLevel="h2" size="xl">
+                    {title}
+                  </Title>
+                </FlexItem>
                 {popover}
-              </Title>
+              </Flex>
               <TextContent>{description && <Text component="p">{description}</Text>}</TextContent>
             </FlexItem>
           </Flex>

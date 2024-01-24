@@ -20,23 +20,11 @@ const PipelinesSection: React.FC = () => {
 
   const [isPipelinesEmpty, setIsPipelinesEmpty] = React.useState(false);
 
-  const icon = (
-    <img
-      style={{
-        marginLeft: 'var(--pf-v5-global--spacer--xs)',
-        marginRight: 'var(--pf-v5-global--spacer--xs)',
-        verticalAlign: 'sub',
-        width: '32px',
-      }}
-      src={pipelineImage}
-      alt="Pipelines branch icon"
-    />
-  );
-
   return (
     <>
       <DetailsSection
-        icon={icon}
+        iconSrc={pipelineImage}
+        iconAlt="Pipelines"
         id={ProjectSectionID.PIPELINES}
         title={ProjectSectionTitles[ProjectSectionID.PIPELINES]}
         popover={
@@ -46,11 +34,7 @@ const PipelinesSection: React.FC = () => {
               bodyContent="Standardize and automate machine learning workflows to enable you to further enchance and deploy your data science models."
             >
               <DashboardPopupIconButton
-                icon={
-                  <OutlinedQuestionCircleIcon
-                    style={{ marginLeft: 'var(--pf-v5-global--spacer--md)' }}
-                  />
-                }
+                icon={<OutlinedQuestionCircleIcon />}
                 aria-label="More info"
               />
             </Popover>
