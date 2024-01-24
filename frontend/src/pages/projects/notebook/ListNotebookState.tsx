@@ -38,7 +38,7 @@ const ListNotebookState: React.FC<ListNotebookStateProps> = ({
         <div className="odh-list-notebook-state">
           {notebookStates.map((state) => (
             <React.Fragment key={state.notebook.metadata.name}>
-              <NotebookRouteLink notebook={state.notebook} isRunning={state.isRunning} />
+              <NotebookRouteLink className="odh-list-notebook-state__notebook" notebook={state.notebook} isRunning={state.isRunning} />
               <NotebookStatusToggle
                 notebookState={state}
                 doListen
