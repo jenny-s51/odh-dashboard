@@ -19,7 +19,7 @@ const DataConnectionCard: React.FC<DataConnectionCardProps> = ({ allowCreate }) 
         loading={!loaded}
         loadError={error}
         count={dataConnections.length}
-        description="Adding a data connection to your project allows you to connect data inputs to your workbenches"
+        description="Adding a data connection to your project allows you to connect data inputs to your workbenches."
         allowCreate={allowCreate}
         onAction={() => setOpen(true)}
         createText="Add data connection"

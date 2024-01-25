@@ -28,43 +28,6 @@
     }
   }
 
-  &__chart-inner {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 240px;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: var(--pf-v5-global--spacer--sm);
-
-    img {
-      width: 64px;
-      height: 64px;
-    }
-  }
-
-  &__chart-title {
-    font-size: 18px;
-  }
-
-  &__legend {
-    display: flex;
-    gap: var(--pf-v5-global--spacer--lg);
-    flex-wrap: wrap;
-    justify-content: center;
-
-    &-item {
-      align-items: center;
-      display: flex;
-      gap: var(--pf-v5-global--spacer--sm);
-
-      &--color {
-        width: 16px;
-        height: 16px;
-      }
-    }
-  }
 
   &__components {
     flex: 1;
@@ -92,6 +55,10 @@
       rotate: 180deg;
     }
 
+    .pf-v5-c-empty-state {
+      position: relative;
+    }
+
     .pf-v5-c-empty-state__header {
       align-items: center;
       display: flex;
@@ -100,30 +67,12 @@
 
     .pf-v5-c-empty-state__body {
       margin-block-start: var(--pf-v5-global--spacer--xs);
+      padding-bottom: var(--pf-v5-global--spacer--sm);
     }
 
-    .pf-v5-c-empty-state__icon {
-      width: 64px;
-      height: 64px;
-      background: var(--pf-v5-global--BackgroundColor--200);
-      border-radius: 32px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-block-end: var(--pf-v5-global--spacer--md);
-    }
-
-    .pf-v5-c-empty-state__footer {
-      margin-block-start: var(--pf-v5-global--spacer--sm);
-    }
-
-    &.notebook {
-      width: 40%;
-    }
-
-    &.pipeline {
-      width: 40%;
-
+    .pf-v5-c-empty-state__actions > button {
+      position: absolute;
+      bottom: var(--pf-v5-global--spacer--md);
     }
 
     &.loading,
@@ -133,14 +82,25 @@
       }
     }
 
+    &.notebook {
+      width: 40%;
+      padding-bottom: var(--pf-v5-global--spacer--md);
+    }
+
+    &.pipeline {
+      width: 40%;
+      padding-bottom: var(--pf-v5-global--spacer--md);
+    }
+
     &.cluster-storage {
       width: 40%;
+      padding-bottom: var(--pf-v5-global--spacer--md);
 
     }
 
     &.data-connections {
       width: 40%;
-
+      padding-bottom: var(--pf-v5-global--spacer--md);
     }
 
     &.m-is-clickable {

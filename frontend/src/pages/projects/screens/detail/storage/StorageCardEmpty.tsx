@@ -19,7 +19,7 @@ const ClusterStorageCard: React.FC<ClusterStorageCardProps> = ({ allowCreate }) 
         loading={!loaded}
         loadError={error}
         count={pvcs.length}
-        description="For data science projects that require data to be retained, you can add cluster storage to the project"
+        description="For data science projects that require data to be retained, you can add cluster storage to the project."
         allowCreate={allowCreate}
         onAction={() => setOpen(true)}
         createText="Add cluster storage"

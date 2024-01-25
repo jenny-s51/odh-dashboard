@@ -55,7 +55,7 @@ const EmptySingleModelServingCard: React.FC<DataConnectionCardProps> = ({ allowC
         description="Each model is deployed from its own model server. Choose this option when you have a small number of large models to deploy."
         allowCreate={allowCreate}
         onAction={() => setOpen(true)}
-        createText="Add model server"
+        createText="Deploy model"
         typeModifier="model-server"
         navSection="model-server"
       />

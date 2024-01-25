@@ -94,7 +94,6 @@ const OverviewCard: React.FC<OverviewCardProps> = ({
                   onAction && onAction();
                 }}
                 variant="secondary"
-                size="lg"
               >
                 {createText}
               </Button>
