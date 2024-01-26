@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Flex, FlexItem } from '@patternfly/react-core';
-import { ArrowRightIcon } from '@patternfly/react-icons';
 import {
   pipelineRunsPageDescription,
   pipelineRunsPageTitle,
@@ -8,6 +7,7 @@ import {
 import PipelineCoreApplicationPage from '~/pages/pipelines/global/PipelineCoreApplicationPage';
 import EnsureAPIAvailability from '~/concepts/pipelines/EnsureAPIAvailability';
 import { useAppSelector } from '~/redux/hooks';
+import pipelineRunIcon from '~/images/UI_icon-Red_Hat-Double_arrow_right-RGB.svg';
 import GlobalPipelineRunsTabs from './GlobalPipelineRunsTabs';
 
 const GlobalPipelineRuns: React.FC = () => {
@@ -30,7 +30,7 @@ const GlobalPipelineRuns: React.FC = () => {
                   height: 40,
                 }}
               >
-                <ArrowRightIcon style={{ width: 32, height: 32 }} />
+                <img style={{ height: 32 }} src={pipelineRunIcon} alt="project" />
               </div>
             </FlexItem>
             <FlexItem>{pipelineRunsPageTitle}</FlexItem>

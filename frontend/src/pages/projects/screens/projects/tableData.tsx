@@ -24,3 +24,35 @@ export const columns: SortableData<ProjectKind>[] = [
     sortable: false,
   },
 ];
+export const columnsAlt: SortableData<ProjectKind>[] = [
+  {
+    field: 'expand',
+    label: '',
+    sortable: false,
+  },
+  {
+    field: 'name',
+    label: 'Name',
+    sortable: (a, b) => getProjectDisplayName(a).localeCompare(getProjectDisplayName(b)),
+  },
+  {
+    field: 'status',
+    label: 'Status',
+    sortable: true,
+  },
+  {
+    field: 'createdBy',
+    label: 'Created by',
+    sortable: true,
+  },
+  {
+    field: 'created',
+    label: 'Created',
+    sortable: (a, b) => getProjectCreationTime(a) - getProjectCreationTime(b),
+  },
+  {
+    field: 'kebab',
+    label: '',
+    sortable: false,
+  },
+];
