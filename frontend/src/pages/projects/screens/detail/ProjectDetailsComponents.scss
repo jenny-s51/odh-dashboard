@@ -59,15 +59,20 @@
       position: relative;
     }
 
+    .pf-v5-c-empty-state__title {
+      position: absolute;
+      top: var(--pf-v5-global--spacer--md)
+    }
+
     .pf-v5-c-empty-state__header {
       align-items: center;
       display: flex;
       flex-direction: column;
+      padding-bottom: 24px;
     }
 
     .pf-v5-c-empty-state__body {
       margin-block-start: var(--pf-v5-global--spacer--xs);
-      padding-bottom: var(--pf-v5-global--spacer--sm);
     }
 
     .pf-v5-c-empty-state__actions > button {

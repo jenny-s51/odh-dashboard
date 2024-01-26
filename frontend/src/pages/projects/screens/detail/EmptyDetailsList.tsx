@@ -27,11 +27,13 @@ const EmptyDetailsList: React.FC<EmptyDetailsListProps> = ({
   secondaryActions,
 }) => (
   <EmptyState isFullHeight variant={variant}>
-    <EmptyStateHeader
-      titleText={<>{title}</>}
-      icon={icon && <EmptyStateIcon icon={icon ?? PlusCircleIcon} />}
-      headingLevel="h3"
-    />
+    {title && (
+      <EmptyStateHeader
+        titleText={<>{title}</>}
+        icon={icon && <EmptyStateIcon icon={icon ?? PlusCircleIcon} />}
+        headingLevel="h3"
+      />
+    )}
     <EmptyStateBody>{description}</EmptyStateBody>
     {actions || secondaryActions ? (
       <EmptyStateFooter>
