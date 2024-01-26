@@ -24,6 +24,7 @@ type NotebookTableRowProps = {
   onNotebookDelete: (notebook: NotebookKind) => void;
   onNotebookAddStorage: (notebook: NotebookKind) => void;
   canEnablePipelines: boolean;
+  compact?: boolean;
 };
 
 const NotebookTableRow: React.FC<NotebookTableRowProps> = ({
@@ -32,6 +33,7 @@ const NotebookTableRow: React.FC<NotebookTableRowProps> = ({
   onNotebookDelete,
   onNotebookAddStorage,
   canEnablePipelines,
+  compact,
 }) => {
   const { currentProject } = React.useContext(ProjectDetailsContext);
   const navigate = useNavigate();
@@ -42,20 +44,26 @@ const NotebookTableRow: React.FC<NotebookTableRowProps> = ({
   return (
     <Tbody isExpanded={isExpanded}>
       <Tr {...(rowIndex % 2 === 0 && { isStriped: true })}>
-        <Td
-          expand={{
-            rowIndex,
-            expandId: 'notebook-row-item',
-            isExpanded,
-            onToggle: () => setExpanded(!isExpanded),
-          }}
-        />
-        <Td dataLabel="Name">
-          <TableRowTitleDescription
-            title={getNotebookDisplayName(obj.notebook)}
-            resource={obj.notebook}
-            description={getNotebookDescription(obj.notebook)}
+        {!compact ? (
+          <Td
+            expand={{
+              rowIndex,
+              expandId: 'notebook-row-item',
+              isExpanded,
+              onToggle: () => setExpanded(!isExpanded),
+            }}
           />
+        ) : null}
+        <Td dataLabel="Name">
+          {compact ? (
+            getNotebookDisplayName(obj.notebook)
+          ) : (
+            <TableRowTitleDescription
+              title={getNotebookDisplayName(obj.notebook)}
+              resource={obj.notebook}
+              description={compact ? undefined : getNotebookDescription(obj.notebook)}
+            />
+          )}
         </Td>
         <Td dataLabel="Notebook image">
           <NotebookImageDisplayName
@@ -65,21 +73,23 @@ const NotebookTableRow: React.FC<NotebookTableRowProps> = ({
             isExpanded={isExpanded}
           />
         </Td>
-        <Td dataLabel="Container size">
-          <Flex
-            spaceItems={{ default: 'spaceItemsXs' }}
-            alignItems={{ default: 'alignItemsCenter' }}
-          >
-            <FlexItem>{notebookSize?.name ?? 'Unknown'}</FlexItem>
-            {sizeError && (
-              <Tooltip content={sizeError}>
-                <Icon aria-label="error icon" role="button" status="danger" tabIndex={0}>
-                  <ExclamationCircleIcon />
-                </Icon>
-              </Tooltip>
-            )}
-          </Flex>
-        </Td>
+        {!compact ? (
+          <Td dataLabel="Container size">
+            <Flex
+              spaceItems={{ default: 'spaceItemsXs' }}
+              alignItems={{ default: 'alignItemsCenter' }}
+            >
+              <FlexItem>{notebookSize?.name ?? 'Unknown'}</FlexItem>
+              {sizeError && (
+                <Tooltip content={sizeError}>
+                  <Icon aria-label="error icon" role="button" status="danger" tabIndex={0}>
+                    <ExclamationCircleIcon />
+                  </Icon>
+                </Tooltip>
+              )}
+            </Flex>
+          </Td>
+        ) : null}
         <Td dataLabel="Status">
           <NotebookStatusToggle
             notebookState={obj}
@@ -94,54 +104,58 @@ const NotebookTableRow: React.FC<NotebookTableRowProps> = ({
         <Td>
           <NotebookRouteLink label="Open" notebook={obj.notebook} isRunning={obj.isRunning} />
         </Td>
-        <Td isActionCell>
-          <ActionsColumn
-            items={[
-              {
-                isDisabled: obj.isStarting || obj.isStopping,
-                title: 'Edit workbench',
-                onClick: () => {
-                  navigate(
-                    `/projects/${currentProject.metadata.name}/spawner/${obj.notebook.metadata.name}`,
-                  );
+        {!compact ? (
+          <Td isActionCell>
+            <ActionsColumn
+              items={[
+                {
+                  isDisabled: obj.isStarting || obj.isStopping,
+                  title: 'Edit workbench',
+                  onClick: () => {
+                    navigate(
+                      `/projects/${currentProject.metadata.name}/spawner/${obj.notebook.metadata.name}`,
+                    );
+                  },
                 },
-              },
-              {
-                title: 'Delete workbench',
-                onClick: () => {
-                  onNotebookDelete(obj.notebook);
+                {
+                  title: 'Delete workbench',
+                  onClick: () => {
+                    onNotebookDelete(obj.notebook);
+                  },
                 },
-              },
-            ]}
-          />
-        </Td>
+              ]}
+            />
+          </Td>
+        ) : null}
       </Tr>
-      <Tr isExpanded={isExpanded}>
-        <Td />
-        <Td dataLabel="Workbench storages">
-          <ExpandableRowContent>
-            <NotebookStorageBars notebook={obj.notebook} onAddStorage={onNotebookAddStorage} />
-          </ExpandableRowContent>
-        </Td>
-        <Td dataLabel="Packages">
-          <ExpandableRowContent>
-            {notebookImage &&
-            notebookImage.imageAvailability !== NotebookImageAvailability.DELETED ? (
-              <NotebookImagePackageDetails dependencies={notebookImage.dependencies} />
-            ) : (
-              'Unknown package info'
-            )}
-          </ExpandableRowContent>
-        </Td>
-        <Td dataLabel="Limits">
-          <ExpandableRowContent>
-            {notebookSize && <NotebookSizeDetails notebookSize={notebookSize} />}
-          </ExpandableRowContent>
-        </Td>
-        <Td />
-        <Td />
-        <Td />
-      </Tr>
+      {!compact ? (
+        <Tr isExpanded={isExpanded}>
+          <Td />
+          <Td dataLabel="Workbench storages">
+            <ExpandableRowContent>
+              <NotebookStorageBars notebook={obj.notebook} onAddStorage={onNotebookAddStorage} />
+            </ExpandableRowContent>
+          </Td>
+          <Td dataLabel="Packages">
+            <ExpandableRowContent>
+              {notebookImage &&
+              notebookImage.imageAvailability !== NotebookImageAvailability.DELETED ? (
+                <NotebookImagePackageDetails dependencies={notebookImage.dependencies} />
+              ) : (
+                'Unknown package info'
+              )}
+            </ExpandableRowContent>
+          </Td>
+          <Td dataLabel="Limits">
+            <ExpandableRowContent>
+              {notebookSize && <NotebookSizeDetails notebookSize={notebookSize} />}
+            </ExpandableRowContent>
+          </Td>
+          <Td />
+          <Td />
+          <Td />
+        </Tr>
+      ) : null}
     </Tbody>
   );
 };

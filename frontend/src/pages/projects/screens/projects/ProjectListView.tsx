@@ -9,8 +9,10 @@ import { useAppContext } from '~/app/AppContext';
 import LaunchJupyterButton from '~/pages/projects/screens/projects/LaunchJupyterButton';
 import { ProjectsContext } from '~/concepts/projects/ProjectsContext';
 import { ProjectScope } from '~/pages/projects/types';
+import { useAppSelector } from '~/redux/hooks';
+import ProjectTableRowAlt from '~/pages/projects/screens/projects/ProjectTableRowAlt';
 import NewProjectButton from './NewProjectButton';
-import { columns } from './tableData';
+import { columns, columnsAlt } from './tableData';
 import ProjectTableRow from './ProjectTableRow';
 import DeleteProjectModal from './DeleteProjectModal';
 import ManageProjectModal from './ManageProjectModal';
@@ -26,6 +28,7 @@ const ProjectListView: React.FC<ProjectListViewProps> = ({ allowCreate, scope })
   const navigate = useNavigate();
   const [searchType, setSearchType] = React.useState<SearchType>(SearchType.NAME);
   const [search, setSearch] = React.useState('');
+  const alternateUI = useAppSelector((state) => state.alternateUI);
   const filteredProjects = (
     scope === ProjectScope.ALL_PROJECTS ? projects : dataScienceProjects
   ).filter((project) => {
@@ -55,9 +58,10 @@ const ProjectListView: React.FC<ProjectListViewProps> = ({ allowCreate, scope })
     <>
       <Table
         enablePagination
-        isStriped
+        isStriped={!alternateUI}
         data={filteredProjects}
-        columns={columns}
+        columns={alternateUI ? columnsAlt : columns}
+        disableRowRenderSupport={alternateUI}
         emptyTableView={
           <>
             No projects match your filters.{' '}
@@ -67,15 +71,27 @@ const ProjectListView: React.FC<ProjectListViewProps> = ({ allowCreate, scope })
           </>
         }
         data-id="project-view-table"
-        rowRenderer={(project) => (
-          <ProjectTableRow
-            key={project.metadata.uid}
-            obj={project}
-            isRefreshing={refreshIds.includes(project.metadata.uid || '')}
-            setEditData={(data) => setEditData(data)}
-            setDeleteData={(data) => setDeleteData(data)}
-          />
-        )}
+        rowRenderer={(project, i) =>
+          alternateUI ? (
+            <ProjectTableRowAlt
+              key={project.metadata.uid}
+              obj={project}
+              rowIndex={i}
+              isRefreshing={refreshIds.includes(project.metadata.uid || '')}
+              setEditData={(data) => setEditData(data)}
+              setDeleteData={(data) => setDeleteData(data)}
+            />
+          ) : (
+            <ProjectTableRow
+              key={project.metadata.uid}
+              obj={project}
+              rowIndex={i}
+              isRefreshing={refreshIds.includes(project.metadata.uid || '')}
+              setEditData={(data) => setEditData(data)}
+              setDeleteData={(data) => setDeleteData(data)}
+            />
+          )
+        }
         toolbarContent={
           <React.Fragment>
             <ToolbarItem>
