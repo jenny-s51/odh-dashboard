@@ -22,7 +22,8 @@ const NotebookCard: React.FC<NotebookCardProps> = ({ allowCreate }) => {
       count={notebooks.length}
       title="Workbenches"
       description="Add a Jupyter notebook to your project."
-      icon={() => <img style={{ height: '32px' }} src={emptyStateImg} alt="Workbenches" />}
+      imgSrc={emptyStateImg}
+      imgAlt="Workbenches"
       allowCreate={allowCreate}
       onAction={() => navigate(`/projects/${currentProject.metadata.name}/spawner`)}
       createText="Create workbench"

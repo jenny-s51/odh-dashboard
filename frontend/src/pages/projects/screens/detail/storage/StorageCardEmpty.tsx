@@ -1,30 +1,25 @@
 import * as React from 'react';
 import ManageStorageModal from '~/pages/projects/screens/detail/storage/ManageStorageModal';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
-import ComponentsCard from '~/pages/projects/screens/detail/ComponentsCard';
+import EmptyComponentsCard from '~/pages/projects/screens/detail/EmptyComponentsCard';
 
-type ClusterStorageCardProps = {
+type StorageCardEmptyProps = {
   allowCreate: boolean;
 };
 
-const ClusterStorageCard: React.FC<ClusterStorageCardProps> = ({ allowCreate }) => {
+const StorageCardEmpty: React.FC<StorageCardEmptyProps> = ({ allowCreate }) => {
   const {
-    pvcs: { data: pvcs, loaded, error, refresh },
+    pvcs: { refresh },
   } = React.useContext(ProjectDetailsContext);
   const [isOpen, setOpen] = React.useState(false);
 
   return (
     <>
-      <ComponentsCard
-        loading={!loaded}
-        loadError={error}
-        count={pvcs.length}
+      <EmptyComponentsCard
         description="For data science projects that require data to be retained, you can add cluster storage to the project"
         allowCreate={allowCreate}
         onAction={() => setOpen(true)}
         createText="Add cluster storage"
-        typeModifier="cluster-storage"
-        navSection="cluster-storage"
       />
       <ManageStorageModal
         isOpen={isOpen}
@@ -39,4 +34,4 @@ const ClusterStorageCard: React.FC<ClusterStorageCardProps> = ({ allowCreate }) 
   );
 };
 
-export default ClusterStorageCard;
+export default StorageCardEmpty;

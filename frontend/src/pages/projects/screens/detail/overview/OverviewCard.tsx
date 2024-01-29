@@ -11,7 +11,7 @@ import {
   EmptyStateIcon,
   Spinner,
 } from '@patternfly/react-core';
-import { ExclamationCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
+import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
 type OverviewCardProps = {
   loading?: boolean;
@@ -19,7 +19,8 @@ type OverviewCardProps = {
   count: number;
   title: string;
   description?: string;
-  icon?: React.ComponentType;
+  imgSrc?: string;
+  imgAlt?: string;
   allowCreate?: boolean;
   actionButton?: React.ReactNode;
   onAction?: () => void;
@@ -40,7 +41,8 @@ const OverviewCard: React.FC<OverviewCardProps> = ({
   count,
   title,
   description,
-  icon,
+  imgSrc,
+  imgAlt,
   allowCreate,
   actionButton,
   onAction,
@@ -98,7 +100,13 @@ const OverviewCard: React.FC<OverviewCardProps> = ({
         <EmptyState variant="lg">
           <EmptyStateHeader
             titleText={<>{title}</>}
-            icon={icon && <EmptyStateIcon icon={icon ?? PlusCircleIcon} />}
+            icon={
+              imgSrc ? (
+                <EmptyStateIcon
+                  icon={() => <img style={{ height: '32px' }} src={imgSrc} alt={imgAlt} />}
+                />
+              ) : undefined
+            }
             headingLevel="h3"
           />
           <EmptyStateBody>{description}</EmptyStateBody>
@@ -143,7 +151,13 @@ const OverviewCard: React.FC<OverviewCardProps> = ({
       <EmptyState variant="sm">
         <EmptyStateHeader
           titleText={<>{`${count}`}</>}
-          icon={icon && <EmptyStateIcon icon={icon ?? PlusCircleIcon} />}
+          icon={
+            imgSrc ? (
+              <EmptyStateIcon
+                icon={() => <img style={{ height: '32px' }} src={imgSrc} alt={imgAlt} />}
+              />
+            ) : undefined
+          }
           headingLevel="h3"
         />
         <EmptyStateBody>{title}</EmptyStateBody>

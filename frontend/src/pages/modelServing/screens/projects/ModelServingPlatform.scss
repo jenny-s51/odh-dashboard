@@ -21,6 +21,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: var(--pf-v5-global--spacer--md);
+      width: fit-content;
     }
     &--card {
       cursor: pointer;

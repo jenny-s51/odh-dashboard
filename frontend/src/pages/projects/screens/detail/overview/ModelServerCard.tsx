@@ -18,7 +18,8 @@ const ModelServerCard: React.FC = () => {
       count={modelServers.length}
       title="Model servers"
       description="Allow apps to send requests to your models."
-      icon={() => <img style={{ height: '32px' }} src={emptyStateImg} alt="Model Servers" />}
+      imgSrc={emptyStateImg}
+      imgAlt="Model Servers"
       allowCreate
       onAction={() => navigate(`/projects/${currentProject.metadata.name}?section=model-servers`)}
       typeModifier="model-server"

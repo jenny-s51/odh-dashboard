@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { CodeBranchIcon } from '@patternfly/react-icons';
 import { CreatePipelineServerButton } from '~/concepts/pipelines/context';
 import usePipelines from '~/concepts/pipelines/apiHooks/usePipelines';
 import { LIMIT_MAX_ITEM_COUNT } from '~/concepts/pipelines/const';
+import emptyStateImg from '~/images/UI_icon-Red_Hat-Branch-RGB.svg';
 import OverviewCard from './OverviewCard';
 
 type PipelineCardProps = {
@@ -17,7 +17,8 @@ const PipelineCard: React.FC<PipelineCardProps> = ({ allowCreate }) => {
       count={pipelines.length}
       title="Pipelines"
       description="Further enhance and deploy your models."
-      icon={() => <CodeBranchIcon style={{ height: '32px' }} alt="Pipelines" />}
+      imgSrc={emptyStateImg}
+      imgAlt="Pipelines"
       allowCreate={allowCreate}
       actionButton={
         allowCreate ? (

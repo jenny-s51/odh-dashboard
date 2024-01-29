@@ -29,7 +29,8 @@ const UserGroupsCard: React.FC = () => {
           queryParams.set('section', 'permissions');
           setQueryParams(queryParams);
         }}
-        icon={() => <img style={{ height: '32px' }} src={userCardImage} alt="Users" />}
+        imgSrc={userCardImage}
+        imgAlt="Users"
         typeModifier="user"
         navSection="permissions"
       />
@@ -44,7 +45,8 @@ const UserGroupsCard: React.FC = () => {
           queryParams.set('section', 'permissions');
           setQueryParams(queryParams);
         }}
-        icon={() => <img style={{ height: '32px' }} src={groupCardImage} alt="Groups" />}
+        imgSrc={groupCardImage}
+        imgAlt="Groups"
         typeModifier="group"
         navSection="permissions"
       />

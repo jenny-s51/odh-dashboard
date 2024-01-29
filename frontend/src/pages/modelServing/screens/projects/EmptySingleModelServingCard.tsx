@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import { ServingRuntimePlatform } from '~/types';
-import ComponentsCard from '~/pages/projects/screens/detail/ComponentsCard';
+import EmptyComponentsCard from '~/pages/projects/screens/detail/EmptyComponentsCard';
 import { ProjectsContext } from '~/concepts/projects/ProjectsContext';
 import {
   getSortedTemplates,
@@ -10,12 +10,14 @@ import {
 } from '~/pages/modelServing/customServingRuntimes/utils';
 import ManageKServeModal from './kServeModal/ManageKServeModal';
 
-type DataConnectionCardProps = {
+type EmptySingleModelServingCardProps = {
   allowCreate: boolean;
 };
-const EmptySingleModelServingCard: React.FC<DataConnectionCardProps> = ({ allowCreate }) => {
+const EmptySingleModelServingCard: React.FC<EmptySingleModelServingCardProps> = ({
+  allowCreate,
+}) => {
   const {
-    dataConnections: { data: dataConnections, loaded, error },
+    dataConnections: { data: dataConnections },
   } = React.useContext(ProjectDetailsContext);
   const [open, setOpen] = React.useState(false);
 
@@ -47,17 +49,12 @@ const EmptySingleModelServingCard: React.FC<DataConnectionCardProps> = ({ allowC
 
   return (
     <>
-      <ComponentsCard
-        loading={!loaded}
-        loadError={error}
-        count={dataConnections.length}
+      <EmptyComponentsCard
         title="Single model serving platform"
         description="Each model is deployed from its own model server. Choose this option when you have a small number of large models to deploy."
         allowCreate={allowCreate}
         onAction={() => setOpen(true)}
         createText="Add model server"
-        typeModifier="model-server"
-        navSection="model-server"
       />
       <ManageKServeModal
         isOpen={open}

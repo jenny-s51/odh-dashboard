@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import { ServingRuntimePlatform } from '~/types';
-import ComponentsCard from '~/pages/projects/screens/detail/ComponentsCard';
+import EmptyComponentsCard from '~/pages/projects/screens/detail/EmptyComponentsCard';
 import { ProjectsContext } from '~/concepts/projects/ProjectsContext';
 import {
   getSortedTemplates,
@@ -14,9 +14,6 @@ type DataConnectionCardProps = {
   allowCreate: boolean;
 };
 const EmptyMultiModelServingCard: React.FC<DataConnectionCardProps> = ({ allowCreate }) => {
-  const {
-    dataConnections: { data: dataConnections, loaded, error },
-  } = React.useContext(ProjectDetailsContext);
   const [open, setOpen] = React.useState(false);
 
   const {
@@ -46,17 +43,12 @@ const EmptyMultiModelServingCard: React.FC<DataConnectionCardProps> = ({ allowCr
 
   return (
     <>
-      <ComponentsCard
-        loading={!loaded}
-        loadError={error}
-        count={dataConnections.length}
+      <EmptyComponentsCard
         title="Multi-model serving platform"
         description="Multiple models can be deployed from a single model server. Choose this option when you have a large number of small models to deploy that can share server resources."
         allowCreate={allowCreate}
         onAction={() => setOpen(true)}
-        createText="Add model server"
-        typeModifier="model-server"
-        navSection="model-server"
+        createText="Deploy model"
       />
       <ManageServingRuntimeModal
         isOpen={open}

@@ -1,0 +1,11 @@
+.odh-empty-details {
+  height: 100%;
+  .pf-v5-c-empty-state__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  &__spacer {
+    flex: 1
+  }
+}

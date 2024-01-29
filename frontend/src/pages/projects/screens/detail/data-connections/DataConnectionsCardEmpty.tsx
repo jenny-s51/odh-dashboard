@@ -1,30 +1,22 @@
 import * as React from 'react';
 import ManageDataConnectionModal from '~/pages/projects/screens/detail/data-connections/ManageDataConnectionModal';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
-import ComponentsCard from '~/pages/projects/screens/detail/ComponentsCard';
+import EmptyComponentsCard from '~/pages/projects/screens/detail/EmptyComponentsCard';
 
-type DataConnectionCardProps = {
+type DataConnectionCardEmptyProps = {
   allowCreate: boolean;
 };
-const DataConnectionCard: React.FC<DataConnectionCardProps> = ({ allowCreate }) => {
-  const {
-    dataConnections: { data: dataConnections, loaded, error },
-    refreshAllProjectData,
-  } = React.useContext(ProjectDetailsContext);
+const DataConnectionCardEmpty: React.FC<DataConnectionCardEmptyProps> = ({ allowCreate }) => {
+  const { refreshAllProjectData } = React.useContext(ProjectDetailsContext);
   const [open, setOpen] = React.useState(false);
 
   return (
     <>
-      <ComponentsCard
-        loading={!loaded}
-        loadError={error}
-        count={dataConnections.length}
+      <EmptyComponentsCard
         description="Adding a data connection to your project allows you to connect data inputs to your workbenches"
         allowCreate={allowCreate}
         onAction={() => setOpen(true)}
         createText="Add data connection"
-        typeModifier="data-connections"
-        navSection="data-connections"
       />
       <ManageDataConnectionModal
         isOpen={open}
@@ -39,4 +31,4 @@ const DataConnectionCard: React.FC<DataConnectionCardProps> = ({ allowCreate }) 
   );
 };
 
-export default DataConnectionCard;
+export default DataConnectionCardEmpty;

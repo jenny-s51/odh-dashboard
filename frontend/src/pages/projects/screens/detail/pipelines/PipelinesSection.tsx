@@ -10,7 +10,7 @@ import PipelinesList from '~/pages/projects/screens/detail/pipelines/PipelinesLi
 import PipelineServerActions from '~/concepts/pipelines/content/pipelinesDetails/pipeline/PipelineServerActions';
 import DashboardPopupIconButton from '~/concepts/dashboard/DashboardPopupIconButton';
 import pipelineImage from '~/images/UI_icon-Red_Hat-Branch-RGB.svg';
-import EmptyPipelinesSectionCard from './EmptyPipelinesSectionCard';
+import PipelinesCardEmpty from './PipelinesCardEmpty';
 
 const PipelinesSection: React.FC = () => {
   const {
@@ -58,7 +58,7 @@ const PipelinesSection: React.FC = () => {
         }
         isLoading={(!apiAvailable && installed) || initializing}
         isEmpty={!installed}
-        emptyState={<EmptyPipelinesSectionCard allowCreate />}
+        emptyState={<PipelinesCardEmpty allowCreate />}
         showDivider={isPipelinesEmpty}
       >
         {timedOut ? (

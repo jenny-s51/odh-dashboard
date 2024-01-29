@@ -98,10 +98,6 @@
       flex-direction: column;
     }
 
-    .pf-v5-c-empty-state__body {
-      margin-block-start: var(--pf-v5-global--spacer--xs);
-    }
-
     .pf-v5-c-empty-state__icon {
       width: 64px;
       height: 64px;
@@ -114,16 +110,7 @@
     }
 
     .pf-v5-c-empty-state__footer {
-      margin-block-start: var(--pf-v5-global--spacer--sm);
-    }
-
-    &.notebook {
-      width: 40%;
-    }
-
-    &.pipeline {
-      width: 40%;
-
+      margin-block-start: var(--pf-v5-global--spacer--md);
     }
 
     &.loading,
@@ -133,19 +120,12 @@
       }
     }
 
-    &.cluster-storage {
-      width: 40%;
-
-    }
-
-    &.data-connections {
-      width: 40%;
-
+    &.m-is-empty {
+      width: 400px;
     }
 
     &.m-is-clickable {
       cursor: pointer;
     }
   }
-
 }

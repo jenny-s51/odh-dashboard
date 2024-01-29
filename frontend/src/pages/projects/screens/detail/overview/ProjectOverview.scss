@@ -6,10 +6,10 @@
   gap: var(--pf-v5-global--spacer--lg);
   &__project {
     background: var(--pf-v5-global--palette--blue-50);
-    flex: 1;
     border-radius: 18px;
     position: relative;
     padding-bottom: var(--pf-v5-global--spacer--md);
+    flex: 1;
     &-info {
       margin: var(--pf-v5-global--spacer--3xl);
       z-index: 100;
@@ -60,10 +60,10 @@
   }
   &__components {
     flex: 1;
-    width: 82%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: calc(50% - (var(--pf-v5-global--spacer--md) / 2)) calc(50% - (var(--pf-v5-global--spacer--md) / 2));
     gap: var(--pf-v5-global--spacer--md);
+    max-width: 670px;
   }
   &__card {
     border-radius: 18px;
@@ -207,7 +207,7 @@
   }
   &__user-group-card {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: calc(50% - (var(--pf-v5-global--spacer--md) / 2)) calc(50% - (var(--pf-v5-global--spacer--md) / 2));
     gap: var(--pf-v5-global--spacer--md);
   }
 }

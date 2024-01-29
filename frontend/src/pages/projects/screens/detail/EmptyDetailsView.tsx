@@ -8,10 +8,12 @@ import {
   EmptyStateFooter,
 } from '@patternfly/react-core';
 
+import './EmptyDetailsView.scss';
+
 type EmptyDetailsViewProps = {
-  title: string;
+  title?: string;
   description?: string;
-  iconImage: string;
+  iconImage?: string;
   allowCreate: boolean;
   createButton?: React.ReactNode;
 };
@@ -23,13 +25,18 @@ const EmptyDetailsView: React.FC<EmptyDetailsViewProps> = ({
   allowCreate,
   createButton,
 }) => (
-  <EmptyState variant="lg">
+  <EmptyState className="odh-empty-details" variant="lg">
     <EmptyStateHeader
       titleText={<>{title}</>}
-      icon={<EmptyStateIcon icon={() => <img style={{ height: '320px' }} src={iconImage} />} />}
+      icon={
+        iconImage ? (
+          <EmptyStateIcon icon={() => <img style={{ height: '320px' }} src={iconImage} />} />
+        ) : undefined
+      }
       headingLevel="h3"
     />
     <EmptyStateBody>{description}</EmptyStateBody>
+    <div className="odh-empty-details__spacer" />
     {allowCreate ? (
       <EmptyStateFooter>
         <EmptyStateActions>{createButton}</EmptyStateActions>

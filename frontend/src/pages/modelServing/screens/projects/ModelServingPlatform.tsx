@@ -26,6 +26,8 @@ import ModelServingPlatformButtonAction from './ModelServingPlatformButtonAction
 import EmptySingleModelServingCard from './EmptySingleModelServingCard';
 import EmptyMultiModelServingCard from './EmptyMultiModelServingCard';
 
+import './ModelServingPlatform.scss';
+
 const ModelServingPlatform: React.FC = () => {
   const [platformSelected, setPlatformSelected] = React.useState<
     ServingRuntimePlatform | undefined
@@ -129,7 +131,7 @@ const ModelServingPlatform: React.FC = () => {
         isEmpty={!shouldShowPlatformSelection && emptyModelServer}
         loadError={platformError || servingRuntimeError || templateError}
         emptyState={
-          <div className="odh-project-overview__components">
+          <div className="odh-model-serving-platform__empty-state--cards">
             <EmptySingleModelServingCard allowCreate={rbacLoaded && allowCreate} />
             <EmptyMultiModelServingCard allowCreate={rbacLoaded && allowCreate} />
           </div>

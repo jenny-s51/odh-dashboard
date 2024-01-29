@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { ConnectedIcon } from '@patternfly/react-icons';
 import ManageDataConnectionModal from '~/pages/projects/screens/detail/data-connections/ManageDataConnectionModal';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
+import emptyStateImg from '~/images/UI_icon-Red_Hat-Connected-RGB.svg';
 import OverviewCard from './OverviewCard';
 
 type DataConnectionCardProps = {
@@ -22,12 +22,8 @@ const DataConnectionCard: React.FC<DataConnectionCardProps> = ({ allowCreate }) 
         count={dataConnections.length}
         title="Data connections"
         description="Connect data inputs to your workbenches."
-        icon={() => (
-          <ConnectedIcon
-            className="odh-project-overview__card--icon m-data-connection"
-            alt="Data connections"
-          />
-        )}
+        imgSrc={emptyStateImg}
+        imgAlt="Data connections"
         allowCreate={allowCreate}
         onAction={() => setOpen(true)}
         createText="Add data connection"

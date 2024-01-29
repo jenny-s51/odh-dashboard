@@ -22,7 +22,8 @@ const ClusterStorageCard: React.FC<ClusterStorageCardProps> = ({ allowCreate }) 
         count={pvcs.length}
         title="Cluster storage"
         description="Save and retain data for your projects."
-        icon={() => <img style={{ height: '32px' }} src={emptyStateImg} alt="Workbenches" />}
+        imgSrc={emptyStateImg}
+        imgAlt="Workbenches"
         allowCreate={allowCreate}
         onAction={() => setOpen(true)}
         createText="Add cluster storage"
