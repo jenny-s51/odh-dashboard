@@ -6,7 +6,6 @@ import { ExclamationCircleIcon, PlayIcon } from '@patternfly/react-icons';
 import { useNavigate } from 'react-router-dom';
 import { KnownLabels, ServingRuntimeKind } from '~/k8sTypes';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
-import { ServingRuntimeTableTabs } from '~/pages/modelServing/screens/types';
 import { ProjectSectionID } from '~/pages/projects/screens/detail/types';
 import { getDisplayNameFromServingRuntimeTemplate } from '~/pages/modelServing/customServingRuntimes/utils';
 import { SupportedArea, useIsAreaAvailable } from '~/concepts/areas';
@@ -32,7 +31,6 @@ const ServingRuntimeTableRow: React.FC<ServingRuntimeTableRowProps> = ({
   onDeleteServingRuntime,
   onEditServingRuntime,
   onDeployModel,
-  expandedServingRuntimeName,
   allowDelete,
   rowIndex,
 }) => {
@@ -49,14 +47,7 @@ const ServingRuntimeTableRow: React.FC<ServingRuntimeTableRowProps> = ({
     filterTokens,
   } = React.useContext(ProjectDetailsContext);
 
-  const [expandedColumn, setExpandedColumn] = React.useState<ServingRuntimeTableTabs>();
   const [isExpanded, setExpanded] = React.useState(false);
-
-  React.useEffect(() => {
-    if (expandedServingRuntimeName === obj.metadata.name) {
-      setExpandedColumn(ServingRuntimeTableTabs.DEPLOYED_MODELS);
-    }
-  }, [expandedServingRuntimeName, obj.metadata.name]);
 
   const tokens = filterTokens(obj.metadata.name);
 
@@ -66,37 +57,19 @@ const ServingRuntimeTableRow: React.FC<ServingRuntimeTableRowProps> = ({
     useIsAreaAvailable(SupportedArea.PERFORMANCE_METRICS).status &&
     currentProject.metadata.labels?.[KnownLabels.MODEL_SERVING_PROJECT] === 'true';
 
-  const compoundExpandParams = (
-    col: ServingRuntimeTableTabs,
-    isDisabled: boolean,
-  ): React.ComponentProps<typeof Td>['compoundExpand'] =>
-    !isDisabled
-      ? {
-          isExpanded: expandedColumn === col,
-          onToggle: (_, __, colIndex: ServingRuntimeTableTabs) => {
-            setExpandedColumn(expandedColumn === colIndex ? undefined : colIndex);
-          },
-          columnIndex: col,
-          expandId: `expand-table-row-${obj.metadata.name}-${col}`,
-        }
-      : undefined;
-
   return (
-    <Tbody isExpanded={!!expandedColumn}>
+    <Tbody isExpanded={isExpanded}>
       <Tr {...(rowIndex % 2 === 0 && { isStriped: true })}>
         <Td
           expand={{
             rowIndex,
-            expandId: 'notebook-row-item',
+            expandId: `expand-table-row-${obj.metadata.name}-${rowIndex}`,
             isExpanded,
             onToggle: () => setExpanded(!isExpanded),
           }}
         />
 
-        <Td
-          dataLabel="Model Server Name"
-          compoundExpand={compoundExpandParams(ServingRuntimeTableTabs.TYPE, false)}
-        >
+        <Td dataLabel="Model Server Name">
           {obj.metadata.annotations?.['openshift.io/display-name'] ||
             obj.spec.builtInAdapter?.serverType ||
             'Custom Runtime'}
@@ -179,13 +152,8 @@ const ServingRuntimeTableRow: React.FC<ServingRuntimeTableRowProps> = ({
           />
         </Td>
       </Tr>
-      <Tr isExpanded={!!expandedColumn}>
-        <ServingRuntimeTableExpandedSection
-          activeColumn={expandedColumn}
-          obj={obj}
-          onClose={() => setExpandedColumn(undefined)}
-          onDeployModel={() => onDeployModel(obj)}
-        />
+      <Tr isExpanded={isExpanded}>
+        <ServingRuntimeTableExpandedSection obj={obj} />
       </Tr>
     </Tbody>
   );
