@@ -8,7 +8,6 @@ import {
   Stack,
   StackItem,
 } from '@patternfly/react-core';
-import { ButtonProps } from '@patternfly/react-core/src/components/Button/Button';
 import { ProjectKind } from '~/k8sTypes';
 import { byName, ProjectsContext } from '~/concepts/projects/ProjectsContext';
 import DeletePipelineServerModal from '~/concepts/pipelines/content/DeletePipelineServerModal';
@@ -156,7 +155,7 @@ export const usePipelinesAPI = (): UsePipelinesAPI => {
 
 type CreatePipelineServerButtonProps = {
   variant: 'primary' | 'secondary' | 'link';
-  size?: ButtonProps['size'];
+  size?: 'default' | 'sm' | 'lg';
   title?: string;
 };
 
