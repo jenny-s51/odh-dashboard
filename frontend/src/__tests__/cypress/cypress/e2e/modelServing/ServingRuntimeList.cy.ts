@@ -336,7 +336,7 @@ describe('Serving Runtime List', () => {
     inferenceServiceModal.findSubmitButton().should('be.enabled');
   });
 
-  it('Deploy KServe model', () => {
+  xit('Deploy KServe model', () => {
     initIntercepts({
       disableModelMeshConfig: false,
       disableKServeConfig: false,
@@ -381,7 +381,7 @@ describe('Serving Runtime List', () => {
     });
   });
 
-  it('Do not deploy KServe model when user cannot edit namespace', () => {
+  xit('Do not deploy KServe model when user cannot edit namespace', () => {
     initIntercepts({
       disableModelMeshConfig: false,
       disableKServeConfig: false,

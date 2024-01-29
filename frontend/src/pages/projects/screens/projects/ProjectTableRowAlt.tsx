@@ -12,7 +12,7 @@ import { ActionsColumn, Tbody, Td, Tr } from '@patternfly/react-table';
 import { KnownLabels, ProjectKind } from '~/k8sTypes';
 import useProjectTableRowItems from '~/pages/projects/screens/projects/useProjectTableRowItems';
 import ResourceNameTooltip from '~/components/ResourceNameTooltip';
-import projectIcon from '~/images/project-icon.svg';
+import projectIcon from '~/images/UI_icon-Red_Hat-Folder-RGB.svg';
 import { getProjectOwner } from '~/pages/projects/utils';
 import Status from '~/components/Status';
 import NotebookTable from '~/pages/projects/screens/detail/notebooks/NotebookTable';

@@ -11,7 +11,7 @@ import {
 import { ChartDonut } from '@patternfly/react-charts';
 import emptyStateImg from '~/images/empty-state-projects-overview.svg';
 import projectBackgroundImage from '~/images/project-overview-background-img.svg';
-import projectIcon from '~/images/project-icon.svg';
+import projectIcon from '~/images/UI_icon-Red_Hat-Folder-RGB.svg';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import { useAccessReview } from '~/api';
 import { AccessReviewResource } from '~/pages/projects/screens/detail/const';

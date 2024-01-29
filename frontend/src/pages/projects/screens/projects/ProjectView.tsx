@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Flex, FlexItem } from '@patternfly/react-core';
-import projectIcon from '~/images/project-icon.svg';
+import projectIcon from '~/images/UI_icon-Red_Hat-Folder-RGB.svg';
 import ApplicationsPage from '~/pages/ApplicationsPage';
 import { useAccessReview } from '~/api';
 import { AccessReviewResourceAttributes } from '~/k8sTypes';

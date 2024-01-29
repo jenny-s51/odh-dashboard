@@ -14,7 +14,7 @@ import { useAppContext } from '~/app/AppContext';
 import useModelServingEnabled from '~/pages/modelServing/useModelServingEnabled';
 import { useAppSelector } from '~/redux/hooks';
 import { useQueryParams } from '~/utilities/useQueryParams';
-import projectIcon from '~/images/project-icon.svg';
+import projectIcon from '~/images/UI_icon-Red_Hat-Folder-RGB.svg';
 import ModelServingPlatformAlt from '~/pages/modelServing/screens/projects/ModelServingPlatformAlt';
 import useCheckLogoutParams from './useCheckLogoutParams';
 import ProjectDetailsComponents from './ProjectDetailsComponents';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import userCardImage from '~/images/card-img-user.svg';
-import groupCardImage from '~/images/card-img-group.svg';
+import userCardImage from '~/images/Icon-Red_Hat-User-Black.jpg';
+import groupCardImage from '~/images/Icon-Red_Hat-Shared_workspace-Black.jpg';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import { filterRoleBindingSubjects } from '~/pages/projects/projectSharing/utils';
 import { ProjectSharingRBType } from '~/pages/projects/projectSharing/types';

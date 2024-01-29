@@ -14,7 +14,7 @@ import useProjectTableRowItems from '~/pages/projects/screens/projects/useProjec
 import useProjectNotebookStates from '~/pages/projects/notebook/useProjectNotebookStates';
 import ListNotebookState from '~/pages/projects/notebook/ListNotebookState';
 import ResourceNameTooltip from '~/components/ResourceNameTooltip';
-import projectIcon from '~/images/project-icon.svg';
+import projectIcon from '~/images/UI_icon-Red_Hat-Folder-RGB.svg';
 import { getProjectOwner } from '~/pages/projects/utils';
 import { useAppSelector } from '~/redux/hooks';
 import ProjectLink from './ProjectLink';
