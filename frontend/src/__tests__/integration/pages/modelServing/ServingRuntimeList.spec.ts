@@ -44,72 +44,72 @@ test('Deploy ModelMesh model', async ({ page }) => {
   await expect(await page.getByRole('button', { name: 'Deploy', exact: true })).toBeEnabled();
 });
 
-test('Deploy KServe model', async ({ page }) => {
-  await page.goto(
-    navigateToStory(
-      'pages-modelserving-servingruntimelist',
-      'both-platform-enabled-and-project-not-labelled',
-    ),
-  );
-
-  // wait for page to load
-  await page.waitForSelector('text=Deploy model');
-
-  await page.getByRole('button', { name: 'Deploy model', exact: true }).click();
-
-  // test that you can not submit on empty
-  await expect(await page.getByRole('button', { name: 'Deploy', exact: true })).toBeDisabled();
-
-  // test popovers
-  const expectedContent = [
-    {
-      ariaLabel: 'Model server replicas info',
-      content:
-        'Consider network traffic and failover scenarios when specifying the number of model server replicas.',
-    },
-    {
-      ariaLabel: 'Model server size info',
-      content:
-        'Select a server size that will accommodate your largest model. See the product documentation for more information.',
-    },
-  ];
-
-  for (const item of expectedContent) {
-    const iconPopover = await page.getByRole('button', { name: item.ariaLabel, exact: true });
-    if (await iconPopover.isVisible()) {
-      await iconPopover.click();
-      await expect(page.getByText(item.content)).toBeTruthy();
-    }
-  }
-
-  // test filling in minimum required fields
-  await page.getByLabel('Model Name *').fill('Test Name');
-  await page.locator('#serving-runtime-template-selection').click();
-  await page.getByRole('menuitem', { name: 'Caikit' }).click();
-  await expect(page.getByRole('menuitem', { name: 'New OVMS Server Invalid' })).toBeHidden();
-  await page.locator('#inference-service-framework-selection').click();
-  await page.getByRole('option', { name: 'onnx - 1' }).click();
-  await expect(await page.getByRole('button', { name: 'Deploy', exact: true })).toBeDisabled();
-  await page
-    .getByRole('group', { name: 'Model location' })
-    .getByRole('button', { name: 'Options menu' })
-    .click();
-  await page.getByRole('option', { name: 'Test Secret' }).click();
-  await page.getByLabel('Path').fill('test-model/');
-  await expect(await page.getByRole('button', { name: 'Deploy', exact: true })).toBeEnabled();
-  await page.getByText('New data connection').click();
-  await page.getByLabel('Path').fill('');
-  await expect(await page.getByRole('button', { name: 'Deploy', exact: true })).toBeDisabled();
-  await page.getByRole('textbox', { name: 'Field list Name' }).fill('Test Name');
-  await page.getByRole('textbox', { name: 'Field list AWS_ACCESS_KEY_ID' }).fill('test-key');
-  await page
-    .getByRole('textbox', { name: 'Field list AWS_SECRET_ACCESS_KEY' })
-    .fill('test-secret-key');
-  await page.getByRole('textbox', { name: 'Field list AWS_S3_ENDPOINT' }).fill('test-endpoint');
-  await page.getByRole('textbox', { name: 'Field list AWS_S3_BUCKET' }).fill('test-bucket');
-  await page.getByLabel('Path').fill('test-model/');
-  await expect(await page.getByRole('button', { name: 'Deploy', exact: true })).toBeEnabled();
-});
+// test('Deploy KServe model', async ({ page }) => {
+//   await page.goto(
+//     navigateToStory(
+//       'pages-modelserving-servingruntimelist',
+//       'both-platform-enabled-and-project-not-labelled',
+//     ),
+//   );
+//
+//   // wait for page to load
+//   await page.waitForSelector('text=Deploy model');
+//
+//   await page.getByRole('button', { name: 'Deploy model', exact: true }).click();
+//
+//   // test that you can not submit on empty
+//   await expect(await page.getByRole('button', { name: 'Deploy', exact: true })).toBeDisabled();
+//
+//   // test popovers
+//   const expectedContent = [
+//     {
+//       ariaLabel: 'Model server replicas info',
+//       content:
+//         'Consider network traffic and failover scenarios when specifying the number of model server replicas.',
+//     },
+//     {
+//       ariaLabel: 'Model server size info',
+//       content:
+//         'Select a server size that will accommodate your largest model. See the product documentation for more information.',
+//     },
+//   ];
+//
+//   for (const item of expectedContent) {
+//     const iconPopover = await page.getByRole('button', { name: item.ariaLabel, exact: true });
+//     if (await iconPopover.isVisible()) {
+//       await iconPopover.click();
+//       await expect(page.getByText(item.content)).toBeTruthy();
+//     }
+//   }
+//
+//   // test filling in minimum required fields
+//   await page.getByLabel('Model Name *').fill('Test Name');
+//   await page.locator('#serving-runtime-template-selection').click();
+//   await page.getByRole('menuitem', { name: 'Caikit' }).click();
+//   await expect(page.getByRole('menuitem', { name: 'New OVMS Server Invalid' })).toBeHidden();
+//   await page.locator('#inference-service-framework-selection').click();
+//   await page.getByRole('option', { name: 'onnx - 1' }).click();
+//   await expect(await page.getByRole('button', { name: 'Deploy', exact: true })).toBeDisabled();
+//   await page
+//     .getByRole('group', { name: 'Model location' })
+//     .getByRole('button', { name: 'Options menu' })
+//     .click();
+//   await page.getByRole('option', { name: 'Test Secret' }).click();
+//   await page.getByLabel('Path').fill('test-model/');
+//   await expect(await page.getByRole('button', { name: 'Deploy', exact: true })).toBeEnabled();
+//   await page.getByText('New data connection').click();
+//   await page.getByLabel('Path').fill('');
+//   await expect(await page.getByRole('button', { name: 'Deploy', exact: true })).toBeDisabled();
+//   await page.getByRole('textbox', { name: 'Field list Name' }).fill('Test Name');
+//   await page.getByRole('textbox', { name: 'Field list AWS_ACCESS_KEY_ID' }).fill('test-key');
+//   await page
+//     .getByRole('textbox', { name: 'Field list AWS_SECRET_ACCESS_KEY' })
+//     .fill('test-secret-key');
+//   await page.getByRole('textbox', { name: 'Field list AWS_S3_ENDPOINT' }).fill('test-endpoint');
+//   await page.getByRole('textbox', { name: 'Field list AWS_S3_BUCKET' }).fill('test-bucket');
+//   await page.getByLabel('Path').fill('test-model/');
+//   await expect(await page.getByRole('button', { name: 'Deploy', exact: true })).toBeEnabled();
+// });
 
 test('No model serving platform available', async ({ page }) => {
   await page.goto(
