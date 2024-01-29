@@ -12,7 +12,7 @@ import { ProjectScope } from '~/pages/projects/types';
 import { useAppSelector } from '~/redux/hooks';
 import ProjectTableRowAlt from '~/pages/projects/screens/projects/ProjectTableRowAlt';
 import NewProjectButton from './NewProjectButton';
-import { columns, columnsAlt } from './tableData';
+import { columns, columnsAlt, subColumns } from './tableData';
 import ProjectTableRow from './ProjectTableRow';
 import DeleteProjectModal from './DeleteProjectModal';
 import ManageProjectModal from './ManageProjectModal';
@@ -58,9 +58,10 @@ const ProjectListView: React.FC<ProjectListViewProps> = ({ allowCreate, scope })
     <>
       <Table
         enablePagination
-        isStriped={!alternateUI}
         data={filteredProjects}
+        hasNestedHeader={!alternateUI}
         columns={alternateUI ? columnsAlt : columns}
+        subColumns={alternateUI ? undefined : subColumns}
         disableRowRenderSupport={alternateUI}
         emptyTableView={
           <>

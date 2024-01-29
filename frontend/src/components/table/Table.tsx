@@ -24,7 +24,9 @@ import { SortableData } from './types';
 
 type TableProps<DataType> = {
   data: DataType[];
-  columns: SortableData<DataType>[];
+  hasNestedHeader?: boolean;
+  columns?: SortableData<DataType>[];
+  subColumns?: SortableData<DataType>[];
   defaultSortColumn?: number;
   rowRenderer: (data: DataType, rowIndex: number) => React.ReactNode;
   enablePagination?: boolean;
@@ -43,7 +45,9 @@ type TableProps<DataType> = {
 
 const Table = <T,>({
   data: allData,
+  hasNestedHeader,
   columns,
+  subColumns,
   defaultSortColumn = 0,
   rowRenderer,
   enablePagination,
@@ -60,8 +64,8 @@ const Table = <T,>({
 }: TableProps<T>): React.ReactElement => {
   const [page, setPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(minPageSize);
-  const sort = useTableColumnSort<T>(columns, defaultSortColumn);
-  const sortedData = sort.transformData(allData);
+  const sort = useTableColumnSort<T>(columns ?? [], defaultSortColumn);
+  const sortedData = columns ? sort.transformData(allData) : allData;
 
   let data: T[];
   if (truncateRenderingAt) {
@@ -98,6 +102,43 @@ const Table = <T,>({
     />
   );
 
+  const renderColumnHeader = (col: SortableData<T>, i: number, isSubheader?: boolean) => {
+    if (col.field === CHECKBOX_FIELD_ID && selectAll) {
+      return (
+        <Th
+          key="select-all-checkbox"
+          colSpan={col.colSpan}
+          rowSpan={col.rowSpan}
+          hasRightBorder={col.hasRightBorder}
+          select={{
+            isSelected: selectAll.selected,
+            onSelect: (e, value) => selectAll.onSelect(value),
+          }}
+          // TODO: Log PF bug -- when there are no rows this gets truncated
+          style={{ minWidth: '45px' }}
+          isSubheader={isSubheader}
+        />
+      );
+    }
+
+    return col.label ? (
+      <Th
+        key={col.field + i}
+        colSpan={col.colSpan}
+        rowSpan={col.rowSpan}
+        hasRightBorder={col.hasRightBorder}
+        sort={col.sortable ? sort.getColumnSort(i) : undefined}
+        width={col.width}
+        info={col.info}
+      >
+        {col.label}
+      </Th>
+    ) : (
+      // Table headers cannot be empty for a11y, table cells can -- https://dequeuniversity.com/rules/axe/4.0/empty-table-header
+      <Td key={col.field + i} width={col.width} />
+    );
+  };
+
   return (
     <>
       {(toolbarContent || showPagination) && (
@@ -114,39 +155,14 @@ const Table = <T,>({
       )}
       <PFTable {...props}>
         {caption && <Caption>{caption}</Caption>}
-        <Thead noWrap>
-          <Tr>
-            {columns.map((col, i) => {
-              if (col.field === CHECKBOX_FIELD_ID && selectAll) {
-                return (
-                  <Th
-                    key="select-all-checkbox"
-                    select={{
-                      isSelected: selectAll.selected,
-                      onSelect: (e, value) => selectAll.onSelect(value),
-                    }}
-                    // TODO: Log PF bug -- when there are no rows this gets truncated
-                    style={{ minWidth: '45px' }}
-                  />
-                );
-              }
-
-              return col.label ? (
-                <Th
-                  key={col.field + i}
-                  sort={col.sortable ? sort.getColumnSort(i) : undefined}
-                  width={col.width}
-                  info={col.info}
-                >
-                  {col.label}
-                </Th>
-              ) : (
-                // Table headers cannot be empty for a11y, table cells can -- https://dequeuniversity.com/rules/axe/4.0/empty-table-header
-                <Td key={col.field + i} width={col.width} />
-              );
-            })}
-          </Tr>
-        </Thead>
+        {columns ? (
+          <Thead noWrap hasNestedHeader={hasNestedHeader}>
+            <Tr>{columns.map((col, i) => renderColumnHeader(col, i))}</Tr>
+            {subColumns?.length ? (
+              <Tr>{subColumns.map((col, i) => renderColumnHeader(col, i, true))}</Tr>
+            ) : null}
+          </Thead>
+        ) : null}
         {disableRowRenderSupport ? (
           <>
             {data.map((row, rowIndex) => rowRenderer(row, rowIndex))}

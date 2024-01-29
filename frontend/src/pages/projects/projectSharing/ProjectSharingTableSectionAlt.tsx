@@ -12,8 +12,8 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { RoleBindingKind } from '~/k8sTypes';
-import userCardImage from '~/images/Icon-Red_Hat-User-Black.jpg';
-import groupCardImage from '~/images/Icon-Red_Hat-Shared_workspace-Black.jpg';
+import userCardImage from '~/images/UI_icon-Red_Hat-User-RGB.svg';
+import groupCardImage from '~/images/UI_icon-Red_Hat-Shared_workspace-RGB.svg';
 import ProjectSharingTable from './ProjectSharingTable';
 import { ProjectSharingRBType } from './types';
 

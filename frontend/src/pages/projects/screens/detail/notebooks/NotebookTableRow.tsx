@@ -3,6 +3,7 @@ import { ActionsColumn, ExpandableRowContent, Tbody, Td, Tr } from '@patternfly/
 import { Flex, FlexItem, Icon, Tooltip } from '@patternfly/react-core';
 import { useNavigate } from 'react-router-dom';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
+import WorkbenchImage from '~/images/UI_icon-Red_Hat-Wrench-RGB.svg';
 import { NotebookState } from '~/pages/projects/notebook/types';
 import { getNotebookDescription, getNotebookDisplayName } from '~/pages/projects/utils';
 import NotebookRouteLink from '~/pages/projects/notebook/NotebookRouteLink';
@@ -56,7 +57,23 @@ const NotebookTableRow: React.FC<NotebookTableRowProps> = ({
         ) : null}
         <Td dataLabel="Name">
           {compact ? (
-            getNotebookDisplayName(obj.notebook)
+            <div
+              style={{
+                display: 'flex',
+                gap: 'var(--pf-v5-global--spacer--xs)',
+                alignItems: 'baseline',
+                flexWrap: 'nowrap',
+              }}
+            >
+              <div style={{ width: 20, position: 'relative' }}>
+                <img
+                  style={{ width: 20, position: 'relative', top: 4 }}
+                  src={WorkbenchImage}
+                  alt="workbenches"
+                />
+              </div>
+              <div style={{ whiteSpace: 'nowrap' }}>{getNotebookDisplayName(obj.notebook)}</div>
+            </div>
           ) : (
             <TableRowTitleDescription
               title={getNotebookDisplayName(obj.notebook)}

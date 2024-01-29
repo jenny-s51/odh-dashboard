@@ -1,0 +1,9 @@
+.odh-project-table {
+  &__workbench-column {
+    padding: var(--pf-v5-global--spacer--md) 0 0 !important;
+    vertical-align: middle !important;
+    tr:last-of-type {
+      border-bottom: 0;
+    }
+  }
+}

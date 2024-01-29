@@ -3,6 +3,7 @@ import {
   Flex,
   FlexItem,
   Label,
+  Spinner,
   Text,
   TextVariants,
   Timestamp,
@@ -12,12 +13,16 @@ import { ActionsColumn, Td, Tr } from '@patternfly/react-table';
 import { KnownLabels, ProjectKind } from '~/k8sTypes';
 import useProjectTableRowItems from '~/pages/projects/screens/projects/useProjectTableRowItems';
 import useProjectNotebookStates from '~/pages/projects/notebook/useProjectNotebookStates';
-import ListNotebookState from '~/pages/projects/notebook/ListNotebookState';
 import ResourceNameTooltip from '~/components/ResourceNameTooltip';
 import projectIcon from '~/images/UI_icon-Red_Hat-Folder-RGB.svg';
 import { getProjectOwner } from '~/pages/projects/utils';
 import { useAppSelector } from '~/redux/hooks';
+import Status from '~/components/Status';
+import NotebookNamesTable from '~/pages/projects/screens/detail/notebooks/NotebookNamesTable';
+import NotebookStatusTable from '~/pages/projects/screens/detail/notebooks/NotebookStatusTable';
 import ProjectLink from './ProjectLink';
+
+import './ProjectTableRow.scss';
 
 type ProjectTableRowProps = {
   obj: ProjectKind;
@@ -33,7 +38,7 @@ const ProjectTableRow: React.FC<ProjectTableRowProps> = ({
   setDeleteData,
   rowIndex,
 }) => {
-  const [notebookStates, loaded, error] = useProjectNotebookStates(project.metadata.name);
+  const [notebookStates, loaded] = useProjectNotebookStates(project.metadata.name);
   const owner = getProjectOwner(project);
   const alternateUI = useAppSelector((state) => state.alternateUI);
 
@@ -63,19 +68,31 @@ const ProjectTableRow: React.FC<ProjectTableRowProps> = ({
         </Flex>
         {owner && <Text component={TextVariants.small}>{owner}</Text>}
       </Td>
-      <Td dataLabel="Workbench status">
-        <ListNotebookState
-          notebookStates={notebookStates}
-          loaded={loaded}
-          error={error}
-          namespace={project.metadata.name}
-        />
+      <Td dataLabel="Status">
+        <Status status={project.status?.phase || 'unknown'} />
       </Td>
       <Td dataLabel="Created">
         {project.metadata.creationTimestamp ? (
           <Timestamp date={new Date(project.metadata.creationTimestamp)} />
         ) : (
           'Unknown'
+        )}
+      </Td>
+      <Td
+        dataLabel="Name"
+        className={notebookStates?.length ? 'odh-project-table__workbench-column' : undefined}
+      >
+        {loaded ? (
+          <NotebookNamesTable notebookStates={notebookStates} project={project.metadata.name} />
+        ) : (
+          <Spinner size="sm" />
+        )}
+      </Td>
+      <Td dataLabel="Status" className="odh-project-table__workbench-column">
+        {loaded ? (
+          <NotebookStatusTable notebookStates={notebookStates} project={project.metadata.name} />
+        ) : (
+          <Spinner size="sm" />
         )}
       </Td>
       <Td isActionCell>

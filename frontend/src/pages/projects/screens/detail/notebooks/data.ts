@@ -47,7 +47,7 @@ export const columns: SortableData<NotebookState>[] = [
 export const compactColumns: SortableData<NotebookState>[] = [
   {
     field: 'name',
-    label: 'Name',
+    label: 'Workbench',
     width: 30,
     sortable: (a, b) =>
       getNotebookDisplayName(a.notebook).localeCompare(getNotebookDisplayName(b.notebook)),
