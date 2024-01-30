@@ -10,7 +10,10 @@ import {
 } from '@patternfly/react-core';
 import { AppContext } from '~/app/AppContext';
 import { InferenceServiceKind, ServingRuntimeKind } from '~/k8sTypes';
-import { getServingRuntimeSizes } from '~/pages/modelServing/screens/projects/utils';
+import {
+  getInferenceServiceFromServingRuntime,
+  getServingRuntimeSizes,
+} from '~/pages/modelServing/screens/projects/utils';
 import useServingAcceleratorProfile from '~/pages/modelServing/screens/projects/useServingAcceleratorProfile';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import InferenceServiceCards from '~/pages/modelServing/screens/global/InferenceServiceCards';
@@ -31,6 +34,8 @@ const ServingRuntimeDetails: React.FC<ServingRuntimeDetailsProps> = ({ obj, isvc
     inferenceServices: { data: inferenceServices },
     refreshAllProjectData,
   } = React.useContext(ProjectDetailsContext);
+
+  const modelInferenceServices = getInferenceServiceFromServingRuntime(inferenceServices, obj);
 
   return (
     <>
@@ -62,9 +67,9 @@ const ServingRuntimeDetails: React.FC<ServingRuntimeDetailsProps> = ({ obj, isvc
           </DescriptionListGroup>
         )}
       </DescriptionList>
-      {inferenceServices && (
+      {modelInferenceServices && (
         <InferenceServiceCards
-          inferenceServices={inferenceServices}
+          inferenceServices={modelInferenceServices}
           servingRuntimes={[obj]}
           refresh={() => {
             refreshAllProjectData();
