@@ -122,8 +122,6 @@ const ModelServingPlatformAlt: React.FC = () => {
         }
         actions={
           shouldShowPlatformSelection || platformError
-            ? undefined
-            : shouldShowPlatformSelection
             ? [
                 <ModelServingPlatformButtonAction
                   isProjectModelMesh={isProjectModelMesh}

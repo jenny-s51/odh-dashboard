@@ -86,10 +86,7 @@ const OverviewCard: React.FC<OverviewCardProps> = ({
             }
             headingLevel="h3"
           />
-          <EmptyStateBody>
-            {loadError.message ??
-              'There was an issue loading the resources. Please try again later.'}
-          </EmptyStateBody>
+          <EmptyStateBody>{loadError.message}</EmptyStateBody>
         </EmptyState>
       </div>
     );

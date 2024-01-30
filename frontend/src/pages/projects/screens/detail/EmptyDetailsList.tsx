@@ -7,7 +7,6 @@ import {
   EmptyStateActions,
   EmptyStateFooter,
 } from '@patternfly/react-core';
-import { PlusCircleIcon } from '@patternfly/react-icons';
 
 type EmptyDetailsListProps = {
   variant?: 'xs' | 'sm' | 'lg' | 'xl' | 'full';
@@ -29,7 +28,7 @@ const EmptyDetailsList: React.FC<EmptyDetailsListProps> = ({
   <EmptyState isFullHeight variant={variant}>
     <EmptyStateHeader
       titleText={<>{title}</>}
-      icon={icon && <EmptyStateIcon icon={icon ?? PlusCircleIcon} />}
+      icon={icon && <EmptyStateIcon icon={icon} />}
       headingLevel="h3"
     />
     <EmptyStateBody>{description}</EmptyStateBody>

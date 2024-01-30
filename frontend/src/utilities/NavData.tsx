@@ -35,7 +35,7 @@ export const isNavDataHref = (navData: NavDataItem): navData is NavDataHref =>
 export const isNavDataGroup = (navData: NavDataItem): navData is NavDataGroup =>
   !!(navData as NavDataGroup).children;
 export const isNavOption = (navData: NavDataItem): navData is NavOption =>
-  !!(navData as NavOption)?.child;
+  !!(navData as NavOption).child;
 
 const useAreaCheck = <T,>(area: SupportedArea, success: T[]): T[] =>
   useIsAreaAvailable(area).status ? success : [];

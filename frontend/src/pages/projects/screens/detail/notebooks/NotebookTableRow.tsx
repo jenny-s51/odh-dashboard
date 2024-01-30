@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import WorkbenchImage from '~/images/UI_icon-Red_Hat-Wrench-RGB.svg';
 import { NotebookState } from '~/pages/projects/notebook/types';
-import { getNotebookDescription, getNotebookDisplayName } from '~/pages/projects/utils';
+import { getNotebookDisplayName } from '~/pages/projects/utils';
 import NotebookRouteLink from '~/pages/projects/notebook/NotebookRouteLink';
 import NotebookStatusToggle from '~/pages/projects/notebook/NotebookStatusToggle';
 import { NotebookKind } from '~/k8sTypes';
@@ -78,7 +78,6 @@ const NotebookTableRow: React.FC<NotebookTableRowProps> = ({
             <TableRowTitleDescription
               title={getNotebookDisplayName(obj.notebook)}
               resource={obj.notebook}
-              description={compact ? undefined : getNotebookDescription(obj.notebook)}
             />
           )}
         </Td>

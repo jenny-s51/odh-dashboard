@@ -25,7 +25,7 @@ const NotebooksColumn: React.FC<NotebooksColumnProps> = ({ projectName }) => {
     );
   }
 
-  if (!notebookStates?.length) {
+  if (!notebookStates.length) {
     return (
       <Td colSpan={2} style={{ fontSize: 'var(--pf-v5-global--FontSize--sm' }}>
         Add a Jupyter notebook to your project.{' '}
