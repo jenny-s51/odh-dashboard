@@ -67,7 +67,7 @@ const ServingRuntimeDetails: React.FC<ServingRuntimeDetailsProps> = ({ obj, isvc
           </DescriptionListGroup>
         )}
       </DescriptionList>
-      {modelInferenceServices && (
+      {modelInferenceServices.length && (
         <InferenceServiceCards
           inferenceServices={modelInferenceServices}
           servingRuntimes={[obj]}

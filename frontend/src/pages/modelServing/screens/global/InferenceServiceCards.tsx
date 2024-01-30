@@ -56,7 +56,7 @@ const InferenceServiceCards: React.FC<InferenceServiceCardsProps> = ({ inference
                 actions: (
                   <>
                     <Dropdown
-                      isOpen={!!state[key] ?? false}
+                      isOpen={!!state[key] !== false ? state[key] : false}
                       onOpenChange={(isOpen) => setState({ [key]: isOpen })}
                       toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
                         <MenuToggle
