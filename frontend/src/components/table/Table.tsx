@@ -130,6 +130,7 @@ const Table = <T,>({
         sort={col.sortable ? sort.getColumnSort(i) : undefined}
         width={col.width}
         info={col.info}
+        isSubheader={isSubheader}
       >
         {col.label}
       </Th>

@@ -7,7 +7,6 @@ import useProjectTableRowItems from '~/pages/projects/screens/projects/useProjec
 import ResourceNameTooltip from '~/components/ResourceNameTooltip';
 import projectIcon from '~/images/UI_icon-Red_Hat-Folder-RGB.svg';
 import { getProjectOwner } from '~/pages/projects/utils';
-import Status from '~/components/Status';
 import NotebookTable from '~/pages/projects/screens/detail/notebooks/NotebookTable';
 import useProjectNotebookStates from '~/pages/projects/notebook/useProjectNotebookStates';
 import ProjectLink from './ProjectLink';
@@ -34,7 +33,7 @@ const ProjectTableRowAlt: React.FC<ProjectTableRowAltProps> = ({
   const item = useProjectTableRowItems(project, isRefreshing, setEditData, setDeleteData);
   return (
     <Tbody isExpanded={isExpanded}>
-      <Tr {...(rowIndex % 2 === 0 && { isStriped: true })}>
+      <Tr>
         <Td
           expand={{
             rowIndex,
@@ -57,9 +56,6 @@ const ProjectTableRowAlt: React.FC<ProjectTableRowAltProps> = ({
             <ProjectLink project={project} />
           </ResourceNameTooltip>
         </Td>
-        <Td dataLabel="Status">
-          <Status status={project.status?.phase || 'unknown'} />
-        </Td>
         <Td dataLabel="Created by">{owner && <Text>{owner}</Text>}</Td>
         <Td dataLabel="Created">
           {project.metadata.creationTimestamp ? (
@@ -73,16 +69,7 @@ const ProjectTableRowAlt: React.FC<ProjectTableRowAltProps> = ({
         </Td>
       </Tr>
       <Tr isExpanded={isExpanded}>
-        <Td
-          colSpan={6}
-          style={{
-            paddingLeft: 78,
-            paddingTop: 8,
-            paddingBottom: 8,
-            backgroundColor:
-              rowIndex % 2 === 0 ? 'var(--pf-v5-global--BackgroundColor--light-200)' : undefined,
-          }}
-        >
+        <Td colSpan={6} style={{ paddingLeft: 78, paddingTop: 8, paddingBottom: 8 }}>
           {loaded ? (
             <>
               {notebookStates.length ? (

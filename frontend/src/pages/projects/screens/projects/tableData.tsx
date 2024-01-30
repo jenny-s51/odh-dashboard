@@ -7,7 +7,7 @@ export const columns: SortableData<ProjectKind>[] = [
     field: 'project',
     label: 'Project',
     sortable: false,
-    colSpan: 3,
+    colSpan: 2,
     hasRightBorder: true,
   },
   {
@@ -29,11 +29,6 @@ export const subColumns: SortableData<ProjectKind>[] = [
     field: 'name',
     label: 'Name',
     sortable: (a, b) => getProjectDisplayName(a).localeCompare(getProjectDisplayName(b)),
-  },
-  {
-    field: 'status',
-    label: 'Status',
-    sortable: false,
   },
   {
     field: 'created',
@@ -63,11 +58,6 @@ export const columnsAlt: SortableData<ProjectKind>[] = [
     field: 'name',
     label: 'Name',
     sortable: (a, b) => getProjectDisplayName(a).localeCompare(getProjectDisplayName(b)),
-  },
-  {
-    field: 'status',
-    label: 'Status',
-    sortable: true,
   },
   {
     field: 'createdBy',

@@ -86,7 +86,6 @@ const ProjectListView: React.FC<ProjectListViewProps> = ({ allowCreate, scope })
             <ProjectTableRow
               key={project.metadata.uid}
               obj={project}
-              rowIndex={i}
               isRefreshing={refreshIds.includes(project.metadata.uid || '')}
               setEditData={(data) => setEditData(data)}
               setDeleteData={(data) => setDeleteData(data)}
