@@ -99,6 +99,10 @@ const useResourcesNav = (): NavDataHref[] => [
   { id: 'resources', label: 'Resources', href: '/resources' },
 ];
 
+const useJennyTopologyNav = (): NavDataHref[] => [
+  { id: 'topology-sandbox', label: "Jenny's Topology Sandbox", href: '/jennytopology' },
+];
+
 const useCustomNotebooksNav = (): NavDataHref[] =>
   useAreaCheck<NavDataHref>(SupportedArea.BYON, [
     {
@@ -174,4 +178,5 @@ export const useBuildNavData = (): NavDataItem[] => [
   ...useModelServingNav(),
   ...useResourcesNav(),
   ...useSettingsNav(),
+  ...useJennyTopologyNav(),
 ];

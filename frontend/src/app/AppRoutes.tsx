@@ -30,15 +30,12 @@ const CustomServingRuntimeRoutes = React.lazy(
 );
 const GroupSettingsPage = React.lazy(() => import('../pages/groupSettings/GroupSettings'));
 const LearningCenterPage = React.lazy(() => import('../pages/learningCenter/LearningCenter'));
+const TopologySandbox = React.lazy(() => import('../pages/topologySandbox/TopologySandbox'));
 const BYONImagesPage = React.lazy(() => import('../pages/BYONImages/BYONImages'));
 const NotFound = React.lazy(() => import('../pages/NotFound'));
 
 const DependencyMissingPage = React.lazy(
   () => import('../pages/dependencies/DependencyMissingPage'),
-);
-
-const AcceleratorProfileRoutes = React.lazy(
-  () => import('../pages/acceleratorProfiles/AcceleratorProfilesRoutes'),
 );
 
 const AppRoutes: React.FC = () => {
@@ -60,6 +57,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/" element={<InstalledApplications />} />
         <Route path="/explore" element={<ExploreApplications />} />
         <Route path="/resources" element={<LearningCenterPage />} />
+        <Route path="/jennyTopology" element={<TopologySandbox />} />
 
         <Route path="/projects/*" element={<ProjectViewRoutes />} />
 
@@ -80,7 +78,6 @@ const AppRoutes: React.FC = () => {
           <>
             <Route path="/notebookImages" element={<BYONImagesPage />} />
             <Route path="/clusterSettings" element={<ClusterSettingsPage />} />
-            <Route path="/acceleratorProfiles/*" element={<AcceleratorProfileRoutes />} />
             <Route path="/servingRuntimes/*" element={<CustomServingRuntimeRoutes />} />
             <Route path="/groupSettings" element={<GroupSettingsPage />} />
           </>

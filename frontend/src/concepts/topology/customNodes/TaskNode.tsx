@@ -7,6 +7,8 @@ import {
   NodeModel,
   WithSelectionProps,
   observer,
+  EllipseAnchor,
+  useAnchor,
 } from '@patternfly/react-topology';
 import { StandardTaskNodeData } from '~/concepts/topology/types';
 
@@ -15,15 +17,18 @@ type DemoTaskNodeProps = WithSelectionProps & {
 };
 
 const StandardTaskNode: React.FC<DemoTaskNodeProps> = ({ element, onSelect, selected }) => {
+  // @ts-ignore
+  // useAnchor(EllipseAnchor);
+
   const data = element.getData();
 
-  const whenDecorator = data?.whenStatus ? (
-    <WhenDecorator element={element} status={data.whenStatus} leftOffset={DEFAULT_WHEN_OFFSET} />
-  ) : null;
+  // const whenDecorator = data?.whenStatus ? (
+  //   <WhenDecorator element={element} status={data.whenStatus} leftOffset={DEFAULT_WHEN_OFFSET} />
+  // ) : null;
 
   return (
     <TaskNode onSelect={onSelect} selected={selected} element={element} status={data?.status}>
-      {whenDecorator}
+      {/* {whenDecorator} */}
     </TaskNode>
   );
 };
