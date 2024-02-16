@@ -29,8 +29,6 @@ import {
 import StyleNode from './StyleNode';
 import StyleGroup from './StyleGroup';
 import StyleEdge from './StyleEdge';
-import CustomPathNode from './CustomPathNode';
-import CustomPolygonNode from './CustomPolygonNode';
 
 const CONNECTOR_SOURCE_DROP = 'connector-src-drop';
 const CONNECTOR_TARGET_DROP = 'connector-target-drop';
@@ -90,10 +88,6 @@ const stylesComponentFactory: ComponentFactory = (
           )
         )
       );
-    case 'node-path':
-      return CustomPathNode;
-    case 'node-polygon':
-      return CustomPolygonNode;
     case 'group':
       return withDndDrop(groupDropTargetSpec)(
         withContextMenu(() => defaultMenu)(withDragNode(nodeDragSourceSpec('group'))(withSelection()(StyleGroup)))

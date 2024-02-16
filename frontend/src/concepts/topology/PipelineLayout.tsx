@@ -24,8 +24,7 @@ import { useDemoPipelineNodes } from './useDemoPipelineNodes';
 import { usePipelineOptions } from "./usePipelineOptions";
 import './topology.css';
 import { GROUPED_PIPELINE_NODE_SEPARATION_HORIZONTAL } from "./TaskGroupEdge";
-import defaultComponentFactory from "./defaultcomponentFactory";
-import { pipeline } from "stream";
+import stylesComponentFactory from "./stylesComponentFactory";
 
 export const PIPELINE_NODE_SEPARATION_VERTICAL = 65;
 
@@ -38,12 +37,11 @@ const TopologyPipelineLayout: React.FC = () => {
   const [selectedIds, setSelectedIds] = React.useState<string[]>();
 
   const controller = useVisualizationController();
-  const { contextToolbar, showContextMenu, showBadges, showIcons, showGroups, badgeTooltips } =
+  const { contextToolbar, showContextMenu, showBadges, showGroups, badgeTooltips } =
     usePipelineOptions(true);
   const pipelineNodes = useDemoPipelineNodes(
     showContextMenu,
     showBadges,
-    showIcons,
     badgeTooltips,
     'PipelineDagreLayout',
     showGroups,
@@ -96,6 +94,7 @@ export const PipelineLayout = React.memo(() => {
   const controller = new Visualization();
   controller.setFitToScreenOnLayout(true);
   controller.registerComponentFactory(pipelineComponentFactory);
+  controller.registerComponentFactory(stylesComponentFactory);
   controller.registerLayoutFactory(
     (type: string, graph: Graph): Layout | undefined =>
       new PipelineDagreLayout(graph, {

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  DefaultGroup,
   GraphElement,
   Node,
   observer,
@@ -12,7 +11,7 @@ import {
 } from '@patternfly/react-topology';
 import AlternateIcon from '@patternfly/react-icons/dist/esm/icons/regions-icon';
 import DefaultIcon from '@patternfly/react-icons/dist/esm/icons/builder-image-icon';
-import CoolNewDefaultGroup from "./customGroups/CoolNewDefaultGroup";
+import CoolNewDefaultGroup from "./CoolNewDefaultGroup";
 
 const ICON_PADDING = 20;
 

@@ -37,19 +37,23 @@
   --pf-v5-c-toolbar__expandable-content--lg--PaddingBottom: 0;
   --pf-v5-c-toolbar--PaddingBottom: 0;
 }
+
 .pf-ri__topology-demo .pf-v5-c-toolbar__item .pf-v5-l-flex {
   --pf-v5-l-flex--FlexWrap: no-wrap;
 }
+
 .pf-ri__topology-demo .pf-v5-c-toolbar__item .pf-v5-c-form-control {
   width: 85px;
 }
+
 .pf-ri-topology-context-menu {
   z-index: 1050;
 }
 
 .pf-ri-topology-context-menu__kebab-wrapper.pf-v5-c-dropdown__menu-item {
-   padding: 0;
+  padding: 0;
 }
+
 .pf-ri__topology-demo__package-input {
   width: 75px;
 }
@@ -60,11 +64,11 @@
   stroke: var(--pf-v5-global--palette--black-1000);
 }
 
-.pf-ri-topology__node__background.pf-m-selected  {
+.pf-ri-topology__node__background.pf-m-selected {
   fill: var(--pf-v5-global--active-color--100);
 }
 
-.pf-ri-topology__node__background.pf-m-hover  {
+.pf-ri-topology__node__background.pf-m-hover {
   fill: var(--pf-v5-global--palette--green-300);
 }
 
@@ -72,16 +76,30 @@
   fill: var(--pf-v5-global--palette--light-blue-200);
 }
 
-.pf-v5-c-page__main-section#\/topology-demo-page-section, .pf-v5-c-page__main-section#\/topology-pipelines-demo-page-section {
+.pf-v5-c-page__main-section#\/topology-demo-page-section,
+.pf-v5-c-page__main-section#\/topology-pipelines-demo-page-section {
   --pf-v5-c-page__main-section--PaddingTop: 0;
   --pf-v5-c-page__main-section--PaddingRight: 0;
   --pf-v5-c-page__main-section--PaddingLeft: 0;
   --pf-v5-c-page__main-section--PaddingBottom: 0;
 }
 
-.topology-demo-badge > rect {
+.topology-demo-badge>rect {
   fill: var(--pf-v5-global--palette--red-100);
 }
-.topology-demo-badge > text {
+
+.topology-demo-badge>text {
   fill: var(--pf-v5-global--palette--gold-100);
+}
+
+g.pf-topology-pipelines__pill.pf-m-danger.pf-m-selected.pf-m-selectable svg.pf-v5-svg.list-lead-icon {
+  fill: var(--pf-v5-global--icon--Color--dark--light);
+}
+
+g.pf-topology-pipelines__pill.pf-m-selected.pf-m-selectable svg.pf-v5-svg.monitoring-lead-icon {
+  fill: var(--pf-v5-global--icon--Color--dark--light);
+}
+
+.pf-topology__group__border {
+  border: 2px solid #D2D2D2
 }

@@ -19,9 +19,9 @@ export const usePipelineOptions = (
 
   const contextToolbar = (
     <>
-      <ToolbarItem>
+      {/* <ToolbarItem>
         <Checkbox id="icons-switch" isChecked={showIcons} onChange={(_event, checked) => setShowIcons(checked)} label="Show icons" />
-      </ToolbarItem>
+      </ToolbarItem> */}
       <ToolbarItem>
         <Checkbox id="badges-switch" isChecked={showBadges} onChange={(_event, checked) => setShowBadges(checked)} label="Show badges" />
       </ToolbarItem>

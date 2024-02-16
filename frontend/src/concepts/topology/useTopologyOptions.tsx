@@ -20,7 +20,7 @@ import {
 
 import { Controller, Model, NodeShape } from '@patternfly/react-topology';
 import { DefaultEdgeOptions, DefaultNodeOptions, GeneratorEdgeOptions, GeneratorNodeOptions } from "./generator";
-import { NODE_SHAPES } from "./styleUtils";
+import { NODE_SHAPES, NODE_STATUSES } from "./styleUtils";
 
 const GRAPH_LAYOUT_OPTIONS = ['x', 'y', 'visible', 'style', 'layout', 'scale', 'scaleExtent', 'layers'];
 const NODE_LAYOUT_OPTIONS = ['x', 'y', 'visible', 'style', 'collapsed', 'width', 'height', 'shape'];
@@ -51,7 +51,7 @@ export const useTopologyOptions = (
   const [numNodes, setNumNodes] = React.useState<number>(6);
   const [numEdges, setNumEdges] = React.useState<number>(2);
   const [numGroups, setNumGroups] = React.useState<number>(1);
-  const [nestedLevel, setNestedLevel] = React.useState<number>(0);
+  const [nestedLevel, setNestedLevel] = React.useState<number | null>(0);
   const [medScale, setMedScale] = React.useState<number>(0.5);
   const [lowScale, setLowScale] = React.useState<number>(0.3);
   const [creationCounts, setCreationCounts] = React.useState<{ numNodes: number; numEdges: number; numGroups: number }>(

@@ -9,9 +9,9 @@ import {
 } from '@patternfly/react-topology';
 import { CubeIcon } from '@patternfly/react-icons/dist/esm/icons/cube-icon';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
-import { Icon } from '@patternfly/react-core';
 import { ListIcon } from '@patternfly/react-icons/dist/esm/icons/list-icon';
 import { MonitoringIcon } from '@patternfly/react-icons/dist/esm/icons/monitoring-icon';
+import './topology.css';
 
 export const NODE_PADDING_VERTICAL = 45;
 export const NODE_PADDING_HORIZONTAL = 15;
@@ -37,49 +37,6 @@ export const TASK_STATUSES = [
   RunStatus.Idle,
 ];
 
-export const taskNodes = [
-  {
-    status: undefined,
-    showIcon: false,
-  },
-  {
-    status: RunStatus.Succeeded,
-    showIcon: true,
-  },
-  {
-    status: RunStatus.Failed,
-    showIcon: true,
-  },
-  {
-    status: RunStatus.Running,
-    showIcon: true,
-  },
-  {
-    status: RunStatus.InProgress,
-    showIcon: true,
-  },
-  {
-    status: RunStatus.FailedToStart,
-    showIcon: true,
-  },
-  {
-    status: RunStatus.Skipped,
-    showIcon: true,
-  },
-  {
-    status: RunStatus.Cancelled,
-    showIcon: true,
-  },
-  {
-    status: RunStatus.Pending,
-    showIcon: true,
-  },
-  {
-    status: RunStatus.Idle,
-    showIcon: true,
-  },
-];
-
 const STATUS_PER_ROW = 4;
 const GRAPH_MARGIN_TOP = 40;
 const PARALLEL_TASKS_COUNT = 3;
@@ -89,9 +46,7 @@ const FINALLY_TASKS_COUNT = 2;
 export const useDemoPipelineNodes = (
   showContextMenu: boolean,
   showBadges: boolean,
-  showIcons: boolean,
-  // isMetricArtifact: boolean,
-  // isNonMetricArtifact: boolean,
+  // showIcons: boolean,
   badgeTooltips: boolean,
   layout?: string,
   showGroups = false,
@@ -103,10 +58,7 @@ export const useDemoPipelineNodes = (
       const task: PipelineNodeModel = {
         id: `task-${status}`,
         type: DEFAULT_TASK_NODE_TYPE,
-        label: `${(
-            status || 'No status'
-          )
-        } Task`,
+        label: `${status || 'No status'} Task`,
         width: DEFAULT_TASK_WIDTH + (showContextMenu ? 10 : 0) + (showBadges ? 40 : 0),
         height: DEFAULT_TASK_HEIGHT,
         style: {
@@ -170,6 +122,9 @@ export const useDemoPipelineNodes = (
           label: `Parallel Sub-Task ${i}`,
           width: DEFAULT_TASK_WIDTH + (showContextMenu ? 10 : 0) + (showBadges ? 40 : 0),
           height: DEFAULT_TASK_HEIGHT,
+          data: {
+            leadIcon: <CubeIcon width={16} height={16} />,
+          },
           style: {
             padding: [NODE_PADDING_VERTICAL, NODE_PADDING_HORIZONTAL],
           },
@@ -206,16 +161,16 @@ export const useDemoPipelineNodes = (
           children: parallelTasks.map((t) => t.id),
           group: true,
           label: 'Parallel tasks',
-          // collapsed: true,
+          collapsed: true,
           data: {
             selected: true,
             badge: 'Label',
-            badgeColor: '#F2F0FC',
-            badgeTextColor: '#5752d1',
-            badgeBorderColor: '#CBC1FF',
-            // collapsedWidth: 75,
-            // collapsedHeight: 75,
-            // collapsible: true,
+            badgeColor: '#F0F0F0',
+            badgeTextColor: '#000000',
+            badgeBorderColor: '#F0F0F0',
+            collapsedWidth: 75,
+            collapsedHeight: 42,
+            collapsible: true,
           },
         });
       }
@@ -260,16 +215,15 @@ export const useDemoPipelineNodes = (
               type: 'task-group',
               children: [],
               group: true,
-              // collapsed: true,
               label: `Group ${task.data.columnGroup}`,
+              collapsed: true,
               data: {
-                badge: 'Label',
-                badgeColor: '#F2F0FC',
-                badgeTextColor: '#5752d1',
-                badgeBorderColor: '#CBC1FF',
-                // collapsedWidth: 75,
-                // collapsedHeight: 75,
-                // collapsible: true,
+                collapsedWidth: 75,
+                collapsedHeight: 42,
+                collapsible: true,
+                badgeColor: '#F0F0F0',
+                badgeTextColor: '#000000',
+                badgeBorderColor: '#F0F0F0',
               },
             };
             acc.push(taskGroup);
@@ -285,7 +239,7 @@ export const useDemoPipelineNodes = (
     const iconTask1: PipelineNodeModel = {
       id: `task-icon-1`,
       type: DEFAULT_TASK_NODE_TYPE,
-      label: `Lead icon task`,
+      label: `iris_dataset`,
       width: DEFAULT_TASK_WIDTH + (showContextMenu ? 10 : 0) + (showBadges ? 40 : 0),
       height: DEFAULT_TASK_HEIGHT,
       style: {
@@ -300,8 +254,9 @@ export const useDemoPipelineNodes = (
       badge: showBadges ? '3/4' : undefined,
       badgeTooltips,
       showContextMenu,
+      showStatusState: false,
       columnGroup: (TASK_STATUSES.length % STATUS_PER_ROW) + 1,
-      leadIcon: <MonitoringIcon width={16} height={16} />,
+      leadIcon: <ListIcon className="list-lead-icon" width={23} height={23} />,
     };
 
     if (!layout) {
@@ -315,7 +270,7 @@ export const useDemoPipelineNodes = (
     const iconTask2: PipelineNodeModel = {
       id: `task-icon-2`,
       type: DEFAULT_TASK_NODE_TYPE,
-      label: `Lead icon task`,
+      label: 'iris_dataset',
       width: DEFAULT_TASK_WIDTH + (showContextMenu ? 10 : 0) + (showBadges ? 40 : 0),
       height: DEFAULT_TASK_HEIGHT,
       style: {
@@ -330,8 +285,8 @@ export const useDemoPipelineNodes = (
       badgeTooltips,
       showContextMenu,
       columnGroup: (TASK_STATUSES.length % STATUS_PER_ROW) + 1,
-      showStatusState: true,
-      leadIcon: <ListIcon width={20} height={20} />,
+      showStatusState: false,
+      leadIcon: <MonitoringIcon className="monitoring-lead-icon" width={23} height={23} />,
     };
 
     if (!layout) {

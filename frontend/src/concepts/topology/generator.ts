@@ -52,7 +52,7 @@ export const DefaultNodeOptions: GeneratorNodeOptions = {
   nodeLabels: true,
   nodeSecondaryLabels: false,
   nodeBadges: false,
-  nodeIcons: false,
+  nodeIcons: true,
   smallNodes: false,
   contextMenus: false,
   hulledOutline: true

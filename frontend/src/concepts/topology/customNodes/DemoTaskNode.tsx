@@ -48,7 +48,6 @@ const DemoTaskNode: React.FunctionComponent<DemoTaskNodeProps> = ({
   const whenDecorator = data.whenStatus ? (
     <WhenDecorator
       element={element}
-      status={data.whenStatus}
       leftOffset={hasTaskIcon ? DEFAULT_WHEN_OFFSET + (nodeElement.getBounds().height - 4) * 0.75 : DEFAULT_WHEN_OFFSET}
     />
   ) : null;

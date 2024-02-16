@@ -2,7 +2,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import { GraphElement, TaskEdge } from '@patternfly/react-topology';
 
-export const GROUPED_PIPELINE_NODE_SEPARATION_HORIZONTAL = 200;
+export const GROUPED_PIPELINE_NODE_SEPARATION_HORIZONTAL = 300;
 
 interface DemoTaskEdgeProps {
   element: GraphElement;
