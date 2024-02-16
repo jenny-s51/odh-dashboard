@@ -325,24 +325,7 @@ const TaskNodeInner: React.FC<TaskNodeInnerProps> = observer(
       </text>
     );
 
-
-    const getRunStatusModifier = (status) => {
-      switch (status) {
-        case RunStatus.Succeeded:
-          return styles.modifiers.success;
-        case RunStatus.Running:
-        case RunStatus.InProgress:
-          return styles.modifiers.running;
-        case RunStatus.FailedToStart:
-          return styles.modifiers.warning;
-        case RunStatus.Failed:
-          return styles.modifiers.danger;
-        default:
-          return '';
-      }
-    };
-
-        const runStatusModifier = getRunStatusModifier(status);
+    const runStatusModifier = getRunStatusModifier(status);
 
     const pillClasses = css(
       styles.topologyPipelinesPill,
