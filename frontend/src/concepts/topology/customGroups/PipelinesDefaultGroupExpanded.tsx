@@ -84,7 +84,7 @@ export function computeLabelLocation(points: PointWithSize[]): PointWithSize {
   ];
 }
 
-const CoolNewDefaultGroupExpanded: React.FunctionComponent<DefaultGroupExpandedProps> = ({
+const PipelinesDefaultGroupExpanded: React.FunctionComponent<DefaultGroupExpandedProps> = ({
   className,
   element,
   collapsible,
@@ -274,4 +274,4 @@ const CoolNewDefaultGroupExpanded: React.FunctionComponent<DefaultGroupExpandedP
   );
 };
 
-export default observer(CoolNewDefaultGroupExpanded);
+export default observer(PipelinesDefaultGroupExpanded);

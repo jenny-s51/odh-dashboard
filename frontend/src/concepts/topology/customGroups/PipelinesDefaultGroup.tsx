@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 
-import CoolNewDefaultGroupExpanded from './CoolNewDefaultGroupExpanded';
+import PipelinesDefaultGroupExpanded from './PipelinesDefaultGroupExpanded';
 import { OnSelect } from '@patternfly/react-table';
 import {
   GraphElement,
@@ -14,7 +14,7 @@ import {
   Node,
 } from '@patternfly/react-topology';
 import { isNode } from 'yaml';
-import CoolNewDefaultGroupCollapsed from "./CoolNewDefaultGroupCollapsed";
+import PipelinesDefaultGroupCollapsed from "./PipelinesDefaultGroupCollapsed";
 
 interface DefaultGroupProps {
   /** Additional classes added to the group */
@@ -107,17 +107,17 @@ const DefaultGroupInner: React.FunctionComponent<DefaultGroupInnerProps> = obser
 
     if (element.isCollapsed()) {
       return (
-        <CoolNewDefaultGroupCollapsed
+        <PipelinesDefaultGroupCollapsed
           className={className}
           element={element}
-          badge={`${childCount}`}
+          badge={`${childCount}/${childCount}`}
           onCollapseChange={handleCollapse}
           {...rest}
         />
       );
     }
     return (
-      <CoolNewDefaultGroupExpanded
+      <PipelinesDefaultGroupExpanded
         className={className}
         element={element}
         onCollapseChange={handleCollapse}
@@ -127,15 +127,15 @@ const DefaultGroupInner: React.FunctionComponent<DefaultGroupInnerProps> = obser
   },
 );
 
-const CoolNewDefaultGroup: React.FunctionComponent<DefaultGroupProps> = ({
+const PipelinesDefaultGroup: React.FunctionComponent<DefaultGroupProps> = ({
   element,
   ...rest
 }: DefaultGroupProps) => {
-  // if (!isNode(element)) {
-  //   throw new Error('DefaultGroup must be used only on Node elements');
-  // }
+  if (!isNode(element)) {
+    throw new Error('DefaultGroup must be used only on Node elements');
+  }
 
   return <DefaultGroupInner element={element} {...rest} />;
 };
 
-export default CoolNewDefaultGroup;
+export default PipelinesDefaultGroup;

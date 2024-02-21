@@ -16,13 +16,13 @@ import {
   useCombineRefs,
   useHover,
   useSize,
-  truncateMiddle,
 } from '@patternfly/react-topology';
 import { Badge } from '@patternfly/react-core';
 import '../css/custom-topology-components.css';
+// import { truncateMiddle } from "@patternfly/react-topology/src/utils/truncate-middle";
 
-const NODE_SHADOW_FILTER_ID_HOVER = 'NodeShadowsFilterId--hover';
-const NODE_SHADOW_FILTER_ID_DANGER = 'NodeShadowsFilterId--danger';
+export const NODE_SHADOW_FILTER_ID_HOVER = 'NodeShadowsFilterId--hover';
+export const NODE_SHADOW_FILTER_ID_DANGER = 'NodeShadowsFilterId--danger';
 
 type NodeLabelProps = {
   children?: string;
@@ -236,7 +236,7 @@ const CustomNodeLabel: React.FunctionComponent<NodeLabelProps> = ({
             />
           </>
         )}
-        {textSize && secondaryLabel && (
+        {/* {textSize && secondaryLabel && (
           <>
             <line
               className={css(styles.topologyNodeSeparator)}
@@ -259,7 +259,7 @@ const CustomNodeLabel: React.FunctionComponent<NodeLabelProps> = ({
                 : secondaryLabel}
             </text>
           </>
-        )}
+        )} */}
         {textSize && (labelIconClass || labelIcon) && (
           <LabelIcon
             x={iconSpace}

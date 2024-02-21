@@ -11,7 +11,7 @@ import {
 } from '@patternfly/react-topology';
 import AlternateIcon from '@patternfly/react-icons/dist/esm/icons/regions-icon';
 import DefaultIcon from '@patternfly/react-icons/dist/esm/icons/builder-image-icon';
-import CoolNewDefaultGroup from "./CoolNewDefaultGroup";
+import PipelinesDefaultGroup from "./PipelinesDefaultGroup";
 
 const ICON_PADDING = 20;
 
@@ -75,7 +75,7 @@ const StyleGroup: React.FunctionComponent<StyleGroupProps> = ({
   }, [data]);
 
   return (
-    <CoolNewDefaultGroup
+    <PipelinesDefaultGroup
       onContextMenu={data.showContextMenu ? onContextMenu : undefined}
       contextMenuOpen={contextMenuOpen}
       element={element}
@@ -87,7 +87,7 @@ const StyleGroup: React.FunctionComponent<StyleGroupProps> = ({
       {...passedData}
     >
       {groupElement.isCollapsed() ? renderIcon() : null}
-    </CoolNewDefaultGroup>
+    </PipelinesDefaultGroup>
   );
 };
 

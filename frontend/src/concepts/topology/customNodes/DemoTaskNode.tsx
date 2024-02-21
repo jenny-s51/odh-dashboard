@@ -6,6 +6,7 @@ import {
   GraphElement,
   Layer,
   Node,
+  RunStatus,
   ScaleDetailsLevel,
   TaskNode,
   TOP_LAYER,
@@ -15,6 +16,7 @@ import {
   WithSelectionProps
 } from '@patternfly/react-topology';
 import { PopoverProps } from '@patternfly/react-core';
+import DemoTaskNodeInner from "./DemoTaskNodeInner";
 
 type DemoTaskNodeProps = {
   element: GraphElement;
@@ -54,7 +56,7 @@ const DemoTaskNode: React.FunctionComponent<DemoTaskNodeProps> = ({
 
   // Set the badgePopoverParams, but if the node has badgeTooltips, this will be ignored
   const badgePopoverParams: PopoverProps = {
-    headerContent: 'Popover header',
+    headerContent: nodeElement.getLabel(),
     bodyContent: DEMO_TIP_TEXT,
     footerContent: 'Popover footer'
   };
@@ -62,19 +64,18 @@ const DemoTaskNode: React.FunctionComponent<DemoTaskNodeProps> = ({
   return (
     <Layer id={detailsLevel !== ScaleDetailsLevel.high && hover ? TOP_LAYER : DEFAULT_LAYER}>
       <g ref={hoverRef}>
-        <TaskNode
+        <DemoTaskNodeInner
           element={element}
-          onContextMenu={data.showContextMenu ? onContextMenu : undefined}
-          contextMenuOpen={contextMenuOpen}
-          scaleNode={(hover || contextMenuOpen) && detailsLevel !== ScaleDetailsLevel.high}
+          scaleNode={hover && detailsLevel !== ScaleDetailsLevel.high}
           hideDetailsAtMedium
+          hiddenDetailsShownStatuses={[RunStatus.Running, RunStatus.Succeeded, RunStatus.Failed, RunStatus.Cancelled]}
           {...passedData}
           {...rest}
           badgePopoverParams={badgePopoverParams}
           badgeTooltip={data.badgeTooltips && DEMO_TIP_TEXT}
         >
           {whenDecorator}
-        </TaskNode>
+        </DemoTaskNodeInner>
       </g>
     </Layer>
   );

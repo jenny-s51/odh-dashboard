@@ -256,7 +256,7 @@ export const useDemoPipelineNodes = (
       showContextMenu,
       showStatusState: false,
       columnGroup: (TASK_STATUSES.length % STATUS_PER_ROW) + 1,
-      leadIcon: <ListIcon className="list-lead-icon" width={23} height={23} />,
+      leadIcon: <ListIcon className="list-lead-icon" width={16} height={16} />,
     };
 
     if (!layout) {
@@ -286,7 +286,7 @@ export const useDemoPipelineNodes = (
       showContextMenu,
       columnGroup: (TASK_STATUSES.length % STATUS_PER_ROW) + 1,
       showStatusState: false,
-      leadIcon: <MonitoringIcon className="monitoring-lead-icon" width={23} height={23} />,
+      leadIcon: <MonitoringIcon className="monitoring-lead-icon" width={16} height={16} />,
     };
 
     if (!layout) {

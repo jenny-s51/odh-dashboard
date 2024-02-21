@@ -27,6 +27,7 @@ import {
 import { NODE_SHADOW_FILTER_ID_HOVER } from '@patternfly/react-topology/dist/esm/components/nodes/NodeShadows';
 import CustomNodeLabel from '../customNodes/CustomNodeLabel';
 import '../css/custom-topology-components.css';
+import { Button, Popover } from '@patternfly/react-core';
 
 type DefaultGroupCollapsedProps = {
   children?: React.ReactNode;
@@ -57,7 +58,7 @@ type DefaultGroupCollapsedProps = {
   WithDndDropProps &
   WithContextMenuProps;
 
-const CoolNewDefaultGroupCollapsed: React.FunctionComponent<DefaultGroupCollapsedProps> = ({
+const PipelinesDefaultGroupCollapsed: React.FunctionComponent<DefaultGroupCollapsedProps> = ({
   className,
   element,
   collapsible,
@@ -100,6 +101,8 @@ const CoolNewDefaultGroupCollapsed: React.FunctionComponent<DefaultGroupCollapse
   const isHover = hover !== undefined ? hover : hovered;
   const childCount = element.getAllNodeChildren().length;
   const [badgeSize, badgeRef] = useSize([childCount]);
+  const badgeLabelTriggerRef = React.useRef();
+  const myRef = React.useRef();
 
   const groupClassName = css(
     styles.topologyGroup,
@@ -124,7 +127,7 @@ const CoolNewDefaultGroupCollapsed: React.FunctionComponent<DefaultGroupCollapse
       {/* <Layer>
         <g ref={refs} onClick={onSelect}>
           <> */}
-            {/* <g transform={`translate(${collapsedShadowOffset * 2}, ${-collapsedHeight / 2})`}>
+      {/* <g transform={`translate(${collapsedShadowOffset * 2}, ${-collapsedHeight / 2})`}>
               <rect
                 className={css(styles.topologyNodeBackground, 'pf-m-disabled')}
                 x={0}
@@ -135,8 +138,9 @@ const CoolNewDefaultGroupCollapsed: React.FunctionComponent<DefaultGroupCollapse
                 ry={22}
               />
             </g> */}
-            // TODO : uncomment the block below if we want to keep the collapsed offset nodes
-            {/* <g transform={`translate(${collapsedShadowOffset}, ${-collapsedHeight / 2})`}>
+      // TODO : uncomment the block below to keep the collapsed offset nodes... may need design
+      input
+      {/* <g transform={`translate(${collapsedShadowOffset}, ${-collapsedHeight / 2})`}>
               <rect
                 className={css(styles.topologyNodeBackground, 'pf-m-disabled')}
                 x={collapsedWidth}
@@ -172,38 +176,48 @@ const CoolNewDefaultGroupCollapsed: React.FunctionComponent<DefaultGroupCollapse
         />
       )} */}
       {showLabel && (
-        <CustomNodeLabel
-          className={styles.topologyGroupLabel}
-          x={0}
-          y={-collapsedHeight / 2}
-          paddingX={8}
-          paddingY={5}
-          dragRef={dragNodeRef ? dragLabelRef : undefined}
-          status={element.getNodeStatus()}
-          secondaryLabel={secondaryLabel}
-          truncateLength={truncateLength}
-          badge={badge}
-          badgeLocation={badgeLocation}
-          badgeColor={badgeColor}
-          badgeTextColor={badgeTextColor}
-          badgeBorderColor={badgeBorderColor}
-          badgeClassName={badgeClassName}
-          labelIconClass={labelIconClass}
-          labelIcon={labelIcon}
-          labelIconPadding={labelIconPadding}
-          onContextMenu={onContextMenu}
-          contextMenuOpen={contextMenuOpen}
-          hover={isHover || labelHover}
-          actionIcon={collapsible ? <ExpandIcon /> : undefined}
-          onActionIconClick={() => onCollapseChange(element, false)}
+        <Popover
+          triggerRef={myRef}
+          triggerAction="hover"
+          aria-label="Hoverable popover"
+          headerContent={element.getLabel()}
+          bodyContent={<div>This popover opens on hover.</div>}
+          footerContent="Popover footer"
         >
-          {label || element.getLabel()}
-        </CustomNodeLabel>
+          <g ref={myRef}>
+            <CustomNodeLabel
+              className={styles.topologyGroupLabel}
+              x={0}
+              y={-collapsedHeight / 2}
+              paddingX={8}
+              paddingY={5}
+              dragRef={dragNodeRef ? dragLabelRef : undefined}
+              status={element.getNodeStatus()}
+              secondaryLabel={secondaryLabel}
+              truncateLength={truncateLength}
+              badge={badge}
+              badgeLocation={badgeLocation}
+              badgeColor={badgeColor}
+              badgeTextColor={badgeTextColor}
+              badgeBorderColor={badgeBorderColor}
+              badgeClassName={badgeClassName}
+              labelIconClass={labelIconClass}
+              labelIcon={labelIcon}
+              labelIconPadding={labelIconPadding}
+              onContextMenu={onContextMenu}
+              contextMenuOpen={contextMenuOpen}
+              hover={isHover || labelHover}
+              actionIcon={collapsible ? <ExpandIcon /> : undefined}
+              onActionIconClick={() => onCollapseChange(element, false)}
+            >
+              {label || element.getLabel()}
+            </CustomNodeLabel>
+          </g>
+        </Popover>
       )}
-
       {/* {children} */}
     </g>
   );
 };
 
-export default observer(CoolNewDefaultGroupCollapsed);
+export default observer(PipelinesDefaultGroupCollapsed);

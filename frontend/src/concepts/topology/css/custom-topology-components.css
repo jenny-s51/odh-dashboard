@@ -45,3 +45,12 @@ g.pf-topology__node__action-icon.action-icon-collapsed .pf-topology__node__actio
 g.pf-topology__node__action-icon.action-icon-expanded .pf-topology__node__action-icon__icon {
   color: white;
 }
+
+svg.pf-v5-svg.list-lead-icon {
+  fill: var(--pf-v5-global--icon--Color--light);
+}
+
+svg.pf-v5-svg.monitoring-lead-icon {
+  fill: var(--pf-v5-global--icon--Color--light);
+}
+
