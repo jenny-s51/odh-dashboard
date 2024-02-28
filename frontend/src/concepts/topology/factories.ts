@@ -7,6 +7,7 @@ import {
   ComponentFactory,
   ModelKind,
   DefaultNode,
+  TaskNode,
   SpacerNode,
   DEFAULT_TASK_NODE_TYPE,
   DefaultTaskGroup,
@@ -15,9 +16,9 @@ import {
   DEFAULT_FINALLY_NODE_TYPE,
 } from '@patternfly/react-topology';
 import TaskEdge from './TaskEdge';
-import DemoTaskNode from './customNodes/DemoTaskNode';
-import PipelinesDefaultGroup from './customGroups/PipelinesDefaultGroup';
+import ArtifactNode from './customNodes/ArtifactNode';
 import StyleGroup from './StyleGroup';
+import PipelinesTaskNode from "./customNodes/PipelinesTaskNode";
 // import DefaultTaskGroup from "./customGroups/DefaultTaskGroup";
 // Topology gap... their types have issues with Strict TS mode
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -31,10 +32,10 @@ export const pipelineComponentFactory: ComponentFactory = (kind, type) => {
     case DEFAULT_TASK_NODE_TYPE:
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-
+      return withSelection()(PipelinesTaskNode);
       // TODO: differentiate bw taksnodes that always show pill vs always lead icon
-      // case 'leadicon-node:'
-      return withSelection()(DemoTaskNode);
+    case 'artifact-node':
+      return withSelection()(ArtifactNode);
     case DEFAULT_SPACER_NODE_TYPE:
       return SpacerNode;
     case 'finally-group':

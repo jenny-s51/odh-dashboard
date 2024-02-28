@@ -22,22 +22,18 @@ import { usePipelinesAPI } from '~/concepts/pipelines/context';
 import { PipelineCoreDetailsPageComponent } from '~/concepts/pipelines/content/types';
 import DeletePipelineCoreResourceModal from '~/concepts/pipelines/content/DeletePipelineCoreResourceModal';
 import { PipelineTopology, PipelineTopologyEmpty } from '~/concepts/topology';
-import PipelineDetailsActions from "~/concepts/pipelines/content/pipelinesDetails/pipeline/PipelineDetailsActions";
-import PipelineNotFound from "~/concepts/pipelines/content/pipelinesDetails/pipeline/PipelineNotFound";
-import SelectedTaskDrawerContent from "~/concepts/pipelines/content/pipelinesDetails/pipeline/SelectedTaskDrawerContent";
-import { useDemoPipelineNodes } from "~/concepts/topology/useDemoPipelineNodes";
-import { usePipelineOptions } from "~/concepts/topology/usePipelineOptions";
-import { PipelineLayout } from "~/concepts/topology/PipelineLayout";
-import { TopologyPipelinesGettingStartedDemo } from "~/concepts/topology/GettingStartedDemo";
-import { DEFAULT_FINALLY_NODE_TYPE } from "@patternfly/react-topology";
-import { TopologyPackage } from "~/concepts/topology/TopologyPackage";
+import PipelineDetailsActions from '~/concepts/pipelines/content/pipelinesDetails/pipeline/PipelineDetailsActions';
+import PipelineNotFound from '~/concepts/pipelines/content/pipelinesDetails/pipeline/PipelineNotFound';
+import SelectedTaskDrawerContent from '~/concepts/pipelines/content/pipelinesDetails/pipeline/SelectedTaskDrawerContent';
+import { usePipelineOptions } from '~/concepts/topology/usePipelineOptions';
+import { PipelineLayout } from '~/concepts/topology/PipelineLayout';
 import '~/concepts/topology/topology.css';
 
 enum PipelineDetailsTab {
   GRAPH,
   YAML,
 }
-type TodoPreview = Omit<PipelineCoreDetailsPageComponent, "breadcrumbPath">;
+type TodoPreview = Omit<PipelineCoreDetailsPageComponent, 'breadcrumbPath'>;
 
 const PipelineDetails = () => {
   const { pipelineId } = useParams();
@@ -50,9 +46,7 @@ const PipelineDetails = () => {
   const [selectedId, setSelectedId] = React.useState<string | null>(null);
   const { taskMap, nodes } = usePipelineTaskTopology(pipelineRun);
 
-  const { showBadges, showIcons, showGroups, badgeTooltips } = usePipelineOptions(
-    true
-  );
+  const { showBadges, showIcons, showGroups, badgeTooltips } = usePipelineOptions(true);
   // const pipelineNodes = useDemoPipelineNodes(
   //   showBadges,
   //   showIcons,
@@ -63,11 +57,7 @@ const PipelineDetails = () => {
 
   if (pipelineLoadError) {
     return (
-      <ApplicationsPage
-        title="Topology sandbox"
-        empty={false}
-        loaded={!pipelineLoad}
-      >
+      <ApplicationsPage title="Topology sandbox" empty={false} loaded={!pipelineLoad}>
         <PipelineNotFound />
       </ApplicationsPage>
     );
@@ -85,7 +75,7 @@ const PipelineDetails = () => {
         >
           <DrawerContentBody style={{ display: 'flex', flexDirection: 'column' }}>
             <ApplicationsPage
-              title={<Truncate content={"Topology v2 sandbox"} />}
+              title={<Truncate content={'Topology v2 sandbox'} />}
               description={
                 pipeline ? <MarkdownView conciseDisplay markdown={pipeline.description} /> : ''
               }
@@ -132,10 +122,8 @@ const PipelineDetails = () => {
                   hidden={PipelineDetailsTab.GRAPH !== activeTabKey}
                   style={{ height: '100%' }}
                 >
-                    <PipelineLayout />
-                    {/* <TopologyPackage /> */}
-
-
+                  <PipelineLayout />
+                  {/* <TopologyPackage /> */}
                 </TabContent>
                 {/* <TabContent
                   id={`tabContent-${PipelineDetailsTab.YAML}`}

@@ -28,6 +28,7 @@ import { NODE_SHADOW_FILTER_ID_HOVER } from '@patternfly/react-topology/dist/esm
 import CustomNodeLabel from '../customNodes/CustomNodeLabel';
 import '../css/custom-topology-components.css';
 import { Button, Popover } from '@patternfly/react-core';
+import MyRectComponent from "./MyRectComponent";
 
 type DefaultGroupCollapsedProps = {
   children?: React.ReactNode;

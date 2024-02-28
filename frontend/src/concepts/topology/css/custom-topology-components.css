@@ -9,7 +9,7 @@
   stroke: var(--pf-v5-global--active-color--100)
 }
 
-.pf-topology__group.pf-m-selected .pf-topology__node__action-icon__icon {
+.pf-topology__group.pf-m-selected.pf-m-danger .pf-topology__node__action-icon__icon {
   color: white;
 }
 
@@ -32,6 +32,7 @@
 .action-icon-collapsed {
   fill: white;
   stroke: var(--pf-v5-global--active-color--100);
+  pointer-events: all;
 }
 
 .action-icon-expanded {
@@ -54,3 +55,38 @@ svg.pf-v5-svg.monitoring-lead-icon {
   fill: var(--pf-v5-global--icon--Color--light);
 }
 
+g.pf-topology-pipelines__pill.pf-m-danger.pf-m-selected.pf-m-selectable svg.pf-v5-svg.list-lead-icon {
+  fill: var(--pf-v5-global--icon--Color--dark--light);
+}
+
+/* g.pf-topology-pipelines__pill.pf-m-selected.pf-m-selectable svg.pf-v5-svg.monitoring-lead-icon {
+  fill: var(--pf-v5-global--icon--Color--dark--light);
+} */
+
+.pf-topology-pipelines__pill.pf-m-selected:not(.pf-m-danger):not(.pf-m-success):not(.pf-m-warning):not(.pf-m-skipped):not(.pf-m-in-progress) .pf-topology-pipelines__pill-background {
+  fill: white;
+  stroke: var(--pf-v5-global--active-color--100);
+  stroke-width: 3px;
+}
+
+.pf-topology-pipelines__pill.pf-m-selected:not(.pf-m-danger):not(.pf-m-success):not(.pf-m-warning):not(.pf-m-skipped):not(.pf-m-in-progress) .pf-topology-pipelines__pill-text {
+  fill: black;
+}
+
+.pf-topology-pipelines__pill-text .pf-topology-pipelines__pill>.pf-topology-pipelines__pill-background {
+  stroke: none;
+}
+
+.pf-topology-pipelines__pill .pf-m-danger .pf-m-selectable>.pf-v5-svg .list-lead-icon {
+  fill: var(--pf-topology-pipelines__pill-background--m-danger--Fill)
+}
+
+.pf-topology__group__border:hover {
+  stroke: var(--pf-v5-global--active-color--100);
+}
+
+.pf-topology__node__action-icon__background {
+  fill: white;
+  stroke-width: 1;
+  color: var(--pf-v5-global--active-color--100);
+}

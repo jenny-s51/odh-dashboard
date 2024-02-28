@@ -15,6 +15,7 @@ import {
 } from '@patternfly/react-topology';
 import { isNode } from 'yaml';
 import PipelinesDefaultGroupCollapsed from "./PipelinesDefaultGroupCollapsed";
+import MyRectComponent from "./MyRectComponent";
 
 interface DefaultGroupProps {
   /** Additional classes added to the group */
@@ -114,6 +115,7 @@ const DefaultGroupInner: React.FunctionComponent<DefaultGroupInnerProps> = obser
           onCollapseChange={handleCollapse}
           {...rest}
         />
+
       );
     }
     return (
@@ -131,9 +133,9 @@ const PipelinesDefaultGroup: React.FunctionComponent<DefaultGroupProps> = ({
   element,
   ...rest
 }: DefaultGroupProps) => {
-  if (!isNode(element)) {
-    throw new Error('DefaultGroup must be used only on Node elements');
-  }
+  // if (!isNode(element)) {
+  //   throw new Error('DefaultGroup must be used only on Node elements');
+  // }
 
   return <DefaultGroupInner element={element} {...rest} />;
 };

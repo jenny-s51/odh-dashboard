@@ -94,6 +94,8 @@ const CustomNodeLabel: React.FunctionComponent<NodeLabelProps> = ({
   ...other
 }) => {
   const [labelHover, labelHoverRef] = useHover();
+  const [expandIconHovered, setExpandIconHovered] = React.useState(false);
+
   const refs = useCombineRefs(
     dragRef,
     typeof truncateLength === 'number' ? labelHoverRef : undefined,
@@ -109,6 +111,16 @@ const CustomNodeLabel: React.FunctionComponent<NodeLabelProps> = ({
   const [badgeSize, badgeRef] = useSize([badge]);
   const [actionSize, actionRef] = useSize([actionIcon, paddingX]);
   const [contextSize, contextRef] = useSize([onContextMenu, paddingX]);
+
+  const onMouseEnter = (e) => {
+    console.log('mouse enetered');
+    setExpandIconHovered(true);
+  };
+
+  const onMouseLeave = (e) => {
+    console.log('mouse letft');
+    setExpandIconHovered(false);
+  };
 
   const {
     width,
@@ -206,6 +218,7 @@ const CustomNodeLabel: React.FunctionComponent<NodeLabelProps> = ({
     filterId = NODE_SHADOW_FILTER_ID_HOVER;
   }
 
+  console.log('expandIconhovered', expandIconHovered);
   return (
     <>
       <g className={className} ref={refs} transform={`translate(${startX}, ${startY})`}>
@@ -219,8 +232,9 @@ const CustomNodeLabel: React.FunctionComponent<NodeLabelProps> = ({
               width={actionStartX + paddingX + backgroundHeight}
               height={height + paddingY * 4}
               stroke-width={2}
-              stroke={'gray'}
-              fill="none"
+              stroke={expandIconHovered ? 'var(--pf-v5-global--active-color--100)' : 'gray'}
+              fill="#00000000"
+              pointerEvents={'all'}
               stroke-dasharray={4}
             />
             <rect
@@ -289,30 +303,25 @@ const CustomNodeLabel: React.FunctionComponent<NodeLabelProps> = ({
           />
         )}
       </g>
-      <rect
+      <g
         className={isExpanded ? 'action-icon-expanded' : 'action-icon-collapsed'}
         key={`rect-${filterId}`} // update key to force remount on filter update
         filter={filterId && createSvgIdUrl(filterId)}
-        x={actionStartX + paddingX}
-        y={-height / 2}
-        width={backgroundHeight}
-        height={backgroundHeight}
-      ></rect>
-      <LabelActionIcon
-        ref={actionRef}
-        x={actionStartX + paddingX}
-        y={-height / 2}
-        height={backgroundHeight}
-        paddingX={paddingX}
-        paddingY={paddingY}
-        icon={actionIcon}
-        className={
-          isExpanded
-            ? 'action-icon-expanded'
-            : 'action-icon-collapsed'
-        }
-        onClick={onActionIconClick}
-      />
+        onMouseEnter={() => setExpandIconHovered(true)}
+        onMouseLeave={() => setExpandIconHovered(false)}
+      >
+        <LabelActionIcon
+          ref={actionRef}
+          x={actionStartX + paddingX}
+          y={-height / 2}
+          height={backgroundHeight}
+          paddingX={paddingX}
+          paddingY={paddingY}
+          icon={actionIcon}
+          className={isExpanded ? 'action-icon-expanded' : 'action-icon-collapsed'}
+          onClick={onActionIconClick}
+        />
+      </g>
     </>
   );
 };

@@ -92,13 +92,7 @@
   fill: var(--pf-v5-global--palette--gold-100);
 }
 
-g.pf-topology-pipelines__pill.pf-m-danger.pf-m-selected.pf-m-selectable svg.pf-v5-svg.list-lead-icon {
-  fill: var(--pf-v5-global--icon--Color--dark--light);
-}
 
-g.pf-topology-pipelines__pill.pf-m-selected.pf-m-selectable svg.pf-v5-svg.monitoring-lead-icon {
-  fill: var(--pf-v5-global--icon--Color--dark--light);
-}
 
 .pf-topology__group__border {
   border: 2px solid #D2D2D2

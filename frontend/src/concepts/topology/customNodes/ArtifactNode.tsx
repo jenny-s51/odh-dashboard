@@ -18,14 +18,14 @@ import {
 import { PopoverProps } from '@patternfly/react-core';
 import DemoTaskNodeInner from "./DemoTaskNodeInner";
 
-type DemoTaskNodeProps = {
+type ArtifactNodeProps = {
   element: GraphElement;
 } & WithContextMenuProps & WithSelectionProps;
 
 const DEMO_TIP_TEXT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.';
 
-const DemoTaskNode: React.FunctionComponent<DemoTaskNodeProps> = ({
+const ArtifactNode: React.FunctionComponent<ArtifactNodeProps> = ({
   element,
   onContextMenu,
   contextMenuOpen,
@@ -81,4 +81,4 @@ const DemoTaskNode: React.FunctionComponent<DemoTaskNodeProps> = ({
   );
 };
 
-export default observer(DemoTaskNode);
+export default observer(ArtifactNode);

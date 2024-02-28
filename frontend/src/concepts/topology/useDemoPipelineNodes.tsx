@@ -238,8 +238,8 @@ export const useDemoPipelineNodes = (
 
     const iconTask1: PipelineNodeModel = {
       id: `task-icon-1`,
-      type: DEFAULT_TASK_NODE_TYPE,
-      label: `iris_dataset`,
+      type: 'artifact-node',
+      label: `iris_dataset (Type: dataset)`,
       width: DEFAULT_TASK_WIDTH + (showContextMenu ? 10 : 0) + (showBadges ? 40 : 0),
       height: DEFAULT_TASK_HEIGHT,
       style: {
@@ -267,10 +267,11 @@ export const useDemoPipelineNodes = (
     }
     tasks.push(iconTask1);
 
-    const iconTask2: PipelineNodeModel = {
+    const iconTask2: PipelineNodeModel & {artifactType?: string} = {
       id: `task-icon-2`,
-      type: DEFAULT_TASK_NODE_TYPE,
-      label: 'iris_dataset',
+      type: 'artifact-node',
+      label: 'iris_dataset (Type: metric)',
+      artifactType: 'metric',
       width: DEFAULT_TASK_WIDTH + (showContextMenu ? 10 : 0) + (showBadges ? 40 : 0),
       height: DEFAULT_TASK_HEIGHT,
       style: {
