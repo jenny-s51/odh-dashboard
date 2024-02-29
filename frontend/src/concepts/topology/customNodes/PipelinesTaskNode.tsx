@@ -2,7 +2,6 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import {
   DEFAULT_LAYER,
-  DEFAULT_WHEN_OFFSET,
   GraphElement,
   Layer,
   Node,
@@ -11,7 +10,6 @@ import {
   TaskNode,
   TOP_LAYER,
   useHover,
-  WhenDecorator,
   WithContextMenuProps,
   WithSelectionProps,
 } from '@patternfly/react-topology';

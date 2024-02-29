@@ -18,32 +18,32 @@ import {
   DEFAULT_EDGE_TYPE,
   DEFAULT_SPACER_NODE_TYPE,
   DEFAULT_FINALLY_NODE_TYPE,
+  TOP_TO_BOTTOM,
 } from '@patternfly/react-topology';
 import { GROUPED_EDGE_TYPE, pipelineComponentFactory } from './factories';
+import { usePipelineOptions } from './usePipelineOptions';
 import { useDemoPipelineNodes } from './useDemoPipelineNodes';
-import { usePipelineOptions } from "./usePipelineOptions";
-import './topology.css';
-import { GROUPED_PIPELINE_NODE_SEPARATION_HORIZONTAL } from "./TaskGroupEdge";
-import stylesComponentFactory from "./stylesComponentFactory";
+import { GROUPED_PIPELINE_NODE_SEPARATION_HORIZONTAL } from './TaskGroupEdge';
 
 export const PIPELINE_NODE_SEPARATION_VERTICAL = 65;
 
 export const LAYOUT_TITLE = 'Layout';
 
+const GROUP_PREFIX = 'Grouped_';
+const VERTICAL_SUFFIX = '_Vertical';
 const PIPELINE_LAYOUT = 'PipelineLayout';
-const GROUPED_PIPELINE_LAYOUT = 'GroupedPipelineLayout';
-
 const TopologyPipelineLayout: React.FC = () => {
   const [selectedIds, setSelectedIds] = React.useState<string[]>();
 
   const controller = useVisualizationController();
-  const { contextToolbar, showContextMenu, showBadges, showGroups, badgeTooltips } =
+  const { contextToolbar, showContextMenu, showBadges, showIcons, showGroups, badgeTooltips } =
     usePipelineOptions(true);
   const pipelineNodes = useDemoPipelineNodes(
     showContextMenu,
     showBadges,
+    showIcons,
     badgeTooltips,
-    'PipelineDagreLayout',
+    controller.getGraph().getLayout(),
     showGroups,
   );
 
@@ -67,7 +67,7 @@ const TopologyPipelineLayout: React.FC = () => {
           type: 'graph',
           x: 25,
           y: 25,
-          layout: showGroups ? GROUPED_PIPELINE_LAYOUT : PIPELINE_LAYOUT,
+          layout: `${showGroups ? GROUP_PREFIX : ''}${PIPELINE_LAYOUT}${VERTICAL_SUFFIX}`,
         },
         nodes,
         edges,
@@ -94,15 +94,14 @@ export const PipelineLayout = React.memo(() => {
   const controller = new Visualization();
   controller.setFitToScreenOnLayout(true);
   controller.registerComponentFactory(pipelineComponentFactory);
-  controller.registerComponentFactory(stylesComponentFactory);
   controller.registerLayoutFactory(
     (type: string, graph: Graph): Layout | undefined =>
       new PipelineDagreLayout(graph, {
         nodesep: PIPELINE_NODE_SEPARATION_VERTICAL,
-        ranksep:
-          type === GROUPED_PIPELINE_LAYOUT
-            ? GROUPED_PIPELINE_NODE_SEPARATION_HORIZONTAL
-            : NODE_SEPARATION_HORIZONTAL,
+        rankdir: TOP_TO_BOTTOM,
+        ranksep: type.startsWith(GROUP_PREFIX)
+          ? GROUPED_PIPELINE_NODE_SEPARATION_HORIZONTAL
+          : NODE_SEPARATION_HORIZONTAL,
         ignoreGroups: true,
       }),
   );

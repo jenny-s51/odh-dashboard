@@ -1,17 +1,11 @@
-import { Tooltip } from '@patternfly/react-core';
 import {
-  RunStatus,
-  StatusIcon,
   useHover,
   observer,
   Node,
   isNode,
   TaskNode,
-  EllipseAnchor,
   useAnchor,
   AnchorEnd,
-  Point,
-  AbstractAnchor,
   getRunStatusModifier,
   ScaleDetailsLevel,
   useScaleNode,
@@ -21,14 +15,14 @@ import {
 import { TaskNodeProps } from '@patternfly/react-topology/dist/esm/pipelines/components/nodes/TaskNode';
 import { css } from '@patternfly/react-styles';
 import styles from '@patternfly/react-topology/src/css/topology-pipelines.css';
-import React from 'react';
+import React, { LegacyRef } from 'react';
 import IconSourceAnchor from './IconSourceAnchor';
 import '../css/custom-topology-components.css';
 
 type DemoTaskNodeInnerProps = Omit<TaskNodeProps, 'element'> & { element: Node };
 
 const DemoTaskNodeIcon: React.FC<DemoTaskNodeInnerProps> = observer(
-  ({ element, statusIconSize = 16, selected, status, onSelect, leadIcon, scaleNode, ...rest }) => {
+  ({ element, statusIconSize = 16, selected, status = '', onSelect, leadIcon, scaleNode, ...rest }) => {
     const statusBackgroundRadius = statusIconSize / 2 + 4;
     const scale = element.getGraph().getScale();
     const height = element.getBounds().height;
@@ -80,7 +74,11 @@ const DemoTaskNodeIcon: React.FC<DemoTaskNodeInnerProps> = observer(
             className="pf-topology-pipelines__pill-background"
           />
         )}
-        <g transform={detailsLevel !== ScaleDetailsLevel.high ? `translate(4, 4)` : `translate(18, 14)`}>
+        <g
+          transform={
+            detailsLevel !== ScaleDetailsLevel.high ? `translate(4, 4)` : `translate(18, 14)`
+          }
+        >
           <g className={css(styles.topologyPipelinesStatusIcon)}>{leadIcon}</g>
         </g>
       </g>
@@ -90,7 +88,11 @@ const DemoTaskNodeIcon: React.FC<DemoTaskNodeInnerProps> = observer(
 
 const SCALE_UP_TIME = 200;
 
-const DemoTaskNodeInner: React.FC<DemoTaskNodeInnerProps> = ({ element, scaleNode, ...rest }) => {
+const DemoTaskNodeInner: React.FC<DemoTaskNodeInnerProps> = ({
+  element,
+  scaleNode = false,
+  ...rest
+}) => {
   const [isHover, hoverRef] = useHover();
   const detailsLevel = element.getGraph().getDetailsLevel();
 
@@ -111,7 +113,7 @@ const DemoTaskNodeInner: React.FC<DemoTaskNodeInnerProps> = ({ element, scaleNod
   return (
     <g
       className={css('pf-topology__pipelines__task-node')}
-      ref={hoverRef}
+      ref={hoverRef as LegacyRef<SVGGElement>}
     >
       {isHover ? (
         <TaskNode truncateLength={25} element={element} hover scaleNode {...rest} />

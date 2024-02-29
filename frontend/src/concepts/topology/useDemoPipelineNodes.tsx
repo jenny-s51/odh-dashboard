@@ -46,7 +46,7 @@ const FINALLY_TASKS_COUNT = 2;
 export const useDemoPipelineNodes = (
   showContextMenu: boolean,
   showBadges: boolean,
-  // showIcons: boolean,
+  showIcons: boolean,
   badgeTooltips: boolean,
   layout?: string,
   showGroups = false,

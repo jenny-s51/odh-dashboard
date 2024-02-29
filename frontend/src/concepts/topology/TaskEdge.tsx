@@ -5,48 +5,48 @@ import {
   observer,
   Edge,
   integralShapePath,
-  DEFAULT_SPACER_NODE_TYPE,
-  ConnectorArrow,
-  EllipseAnchor,
-  useAnchor,
-  Point,
+  GraphElement,
+  DagreLayoutOptions,
+  TOP_TO_BOTTOM,
+  isEdge,
 } from '@patternfly/react-topology';
-// import { integralShapeTopDown } from "./IntegralShapeTopDown";
-import { start } from "repl";
 interface TaskEdgeProps {
-  element: Edge;
+  /** The graph edge element to represent */
+  element: GraphElement;
+  /** Additional classes added to the edge */
   className?: string;
+  /** Offset for integral shape path */
   nodeSeparation?: number;
 }
 
-const TaskEdge: React.FunctionComponent<TaskEdgeProps> = ({
-  element,
-  className,
-  nodeSeparation,
-}) => {
-  const startPoint = element.getStartPoint();
-  const endPoint = element.getEndPoint();
-  const groupClassName = css(styles.topologyEdge, className);
-  const startIndent: number = element.getData()?.indent || 0;
-  const testEnd = new Point(endPoint.x, endPoint.y + 100)
+type TaskEdgeInnerProps = Omit<TaskEdgeProps, 'element'> & { element: Edge };
 
-  return (
-    <g data-test-id="task-handler" className={groupClassName}>
-      <path
-        fillOpacity={0}
-        d={integralShapePath(startPoint, endPoint, startIndent, nodeSeparation)}
-        shapeRendering="geometricPrecision"
-      />
+const TaskEdgeInner: React.FunctionComponent<TaskEdgeInnerProps> = observer(
+  ({ element, className, nodeSeparation }) => {
+    const startPoint = element.getStartPoint();
+    const endPoint = element.getEndPoint();
+    const groupClassName = css(styles.topologyEdge, className);
+    const startIndent: number = element.getData()?.indent || 0;
+    const verticalLayout =
+      (element.getGraph().getLayoutOptions?.() as DagreLayoutOptions)?.rankdir === TOP_TO_BOTTOM;
 
-      {element.getTarget().getType() !== DEFAULT_SPACER_NODE_TYPE ? (
-        <ConnectorArrow
-          className={styles.topologyEdge}
-          startPoint={endPoint.clone().translate(-1, 0)}
-          endPoint={endPoint}
+    return (
+      <g data-test-id="task-handler" className={groupClassName} fillOpacity={0}>
+        <path
+          d={integralShapePath(startPoint, endPoint, startIndent, nodeSeparation, verticalLayout)}
+          transform="translate(0.5,0.5)"
+          shapeRendering="geometricPrecision"
         />
-      ) : null}
-    </g>
-  );
+      </g>
+    );
+  },
+);
+
+const TaskEdge: React.FunctionComponent<TaskEdgeProps> = ({ element, ...rest }: TaskEdgeProps) => {
+  if (!isEdge(element)) {
+    throw new Error('TaskEdge must be used only on Edge elements');
+  }
+  return <TaskEdgeInner element={element as Edge} {...rest} />;
 };
 
-export default observer(TaskEdge);
+export default TaskEdge;

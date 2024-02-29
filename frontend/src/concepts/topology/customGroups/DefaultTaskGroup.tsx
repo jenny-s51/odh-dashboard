@@ -95,7 +95,7 @@ const DefaultTaskGroupInner: React.FunctionComponent<DefaultTaskGroupInnerProps>
     const [hovered, hoverRef] = useHover();
     const [labelHover, labelHoverRef] = useHover();
     const dragLabelRef = useDragNode()[1];
-    const refs = useCombineRefs<SVGPathElement>(hoverRef, dragNodeRef);
+    const refs = useCombineRefs<SVGPathElement>(hoverRef as React.Ref<SVGPathElement>, dragNodeRef);
     const isHover = hover !== undefined ? hover : hovered;
     const labelPosition = element.getLabelPosition();
     const nodeElement = element as Node;

@@ -18,11 +18,14 @@ import {
 import TaskEdge from './TaskEdge';
 import ArtifactNode from './customNodes/ArtifactNode';
 import StyleGroup from './StyleGroup';
-import PipelinesTaskNode from "./customNodes/PipelinesTaskNode";
+import PipelinesTaskNode from './customNodes/PipelinesTaskNode';
+import DemoTaskGroupEdge from './TaskGroupEdge';
 // import DefaultTaskGroup from "./customGroups/DefaultTaskGroup";
 // Topology gap... their types have issues with Strict TS mode
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
+
+export const GROUPED_EDGE_TYPE = 'GROUPED_EDGE';
 
 export const pipelineComponentFactory: ComponentFactory = (kind, type) => {
   if (kind === ModelKind.graph) {
@@ -33,7 +36,6 @@ export const pipelineComponentFactory: ComponentFactory = (kind, type) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       return withSelection()(PipelinesTaskNode);
-      // TODO: differentiate bw taksnodes that always show pill vs always lead icon
     case 'artifact-node':
       return withSelection()(ArtifactNode);
     case DEFAULT_SPACER_NODE_TYPE:
@@ -46,6 +48,8 @@ export const pipelineComponentFactory: ComponentFactory = (kind, type) => {
       return FinallyNode;
     case DEFAULT_EDGE_TYPE:
       return TaskEdge;
+    case GROUPED_EDGE_TYPE:
+      return DemoTaskGroupEdge;
     default:
       return undefined;
   }

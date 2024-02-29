@@ -97,8 +97,8 @@ const CustomNodeLabel: React.FunctionComponent<NodeLabelProps> = ({
   const [expandIconHovered, setExpandIconHovered] = React.useState(false);
 
   const refs = useCombineRefs(
-    dragRef,
-    typeof truncateLength === 'number' ? labelHoverRef : undefined,
+    dragRef as React.Ref<Element>,
+    (typeof truncateLength === 'number' ? labelHoverRef : undefined) as React.Ref<Element>,
   );
 
   const [textSize, textRef] = useSize([children, truncateLength, className, labelHover]);
