@@ -64,7 +64,7 @@ const GroupHull: React.FunctionComponent<GroupHullProps> = ({
     return (
       <g>
         <rect
-          ref={refs}
+          ref={refs as React.LegacyRef<SVGRectElement>}
           x={0}
           y={0}
           width={width}

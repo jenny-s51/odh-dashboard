@@ -118,10 +118,10 @@ const PipelinesDefaultGroupExpanded: React.FunctionComponent<DefaultGroupExpande
   const [hovered, hoverRef] = useHover();
   const [labelHover, labelHoverRef] = useHover();
   const dragLabelRef = useDragNode()[1];
-  const refs = useCombineRefs<SVGPathElement>(hoverRef, dragNodeRef);
+  const refs = useCombineRefs<SVGPathElement>(hoverRef as React.Ref<SVGPathElement>, dragNodeRef as React.Ref<SVGPathElement>);
   const isHover = hover !== undefined ? hover : hovered;
   const anchorRef = useSvgAnchor();
-  const outlineRef = useCombineRefs(dndDropRef, anchorRef);
+  const outlineRef = useCombineRefs(dndDropRef as React.Ref<Element>, anchorRef);
   const labelLocation = React.useRef<PointWithSize>();
   const pathRef = React.useRef<string>();
   const boxRef = React.useRef<Rect | null>(null);
@@ -208,7 +208,7 @@ const PipelinesDefaultGroupExpanded: React.FunctionComponent<DefaultGroupExpande
 
   return (
     <g
-      ref={labelHoverRef}
+      ref={labelHoverRef as React.Ref<SVGGElement>}
       onContextMenu={onContextMenu}
       onClick={onSelect}
       className={groupClassName}
@@ -221,15 +221,15 @@ const PipelinesDefaultGroupExpanded: React.FunctionComponent<DefaultGroupExpande
           className={innerGroupClassName}
         >
           {hulledOutline ? (
-            <path ref={outlineRef} className={styles.topologyGroupBackground} d={pathRef.current} />
+            <path ref={outlineRef as React.LegacyRef<SVGPathElement>} className={styles.topologyGroupBackground} d={pathRef.current} />
           ) : (
             <rect
-              ref={outlineRef}
+              ref={outlineRef as React.LegacyRef<SVGRectElement>}
               className={styles.topologyGroupBackground}
-              x={boxRef.current.x}
-              y={boxRef.current.y}
-              width={boxRef.current.width}
-              height={boxRef.current.height}
+              x={boxRef.current?.x}
+              y={boxRef.current?.y}
+              width={boxRef.current?.width}
+              height={boxRef.current?.height}
             />
           )}
         </g>

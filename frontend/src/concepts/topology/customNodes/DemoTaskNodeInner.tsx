@@ -11,6 +11,7 @@ import {
   useScaleNode,
   getNodeScaleTranslation,
   action,
+  RunStatus,
 } from '@patternfly/react-topology';
 import { TaskNodeProps } from '@patternfly/react-topology/dist/esm/pipelines/components/nodes/TaskNode';
 import { css } from '@patternfly/react-styles';
@@ -22,13 +23,13 @@ import '../css/custom-topology-components.css';
 type DemoTaskNodeInnerProps = Omit<TaskNodeProps, 'element'> & { element: Node };
 
 const DemoTaskNodeIcon: React.FC<DemoTaskNodeInnerProps> = observer(
-  ({ element, statusIconSize = 16, selected, status = '', onSelect, leadIcon, scaleNode, ...rest }) => {
+  ({ element, statusIconSize = 16, selected, status, onSelect, leadIcon, scaleNode, ...rest }) => {
     const statusBackgroundRadius = statusIconSize / 2 + 4;
     const scale = element.getGraph().getScale();
     const height = element.getBounds().height;
     const upScale = 1 / scale;
 
-    const runStatusModifier = getRunStatusModifier(status);
+    const runStatusModifier = status && getRunStatusModifier(status);
     const detailsLevel = element.getGraph().getDetailsLevel();
 
     useAnchor(

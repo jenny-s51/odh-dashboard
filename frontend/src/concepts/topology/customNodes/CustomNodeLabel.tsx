@@ -112,16 +112,6 @@ const CustomNodeLabel: React.FunctionComponent<NodeLabelProps> = ({
   const [actionSize, actionRef] = useSize([actionIcon, paddingX]);
   const [contextSize, contextRef] = useSize([onContextMenu, paddingX]);
 
-  const onMouseEnter = (e) => {
-    console.log('mouse enetered');
-    setExpandIconHovered(true);
-  };
-
-  const onMouseLeave = (e) => {
-    console.log('mouse letft');
-    setExpandIconHovered(false);
-  };
-
   const {
     width,
     height,
@@ -221,7 +211,7 @@ const CustomNodeLabel: React.FunctionComponent<NodeLabelProps> = ({
   console.log('expandIconhovered', expandIconHovered);
   return (
     <>
-      <g className={className} ref={refs} transform={`translate(${startX}, ${startY})`}>
+      <g className={className} ref={refs as React.LegacyRef<SVGGElement>} transform={`translate(${startX}, ${startY})`}>
         <NodeShadows />
         {textSize && (
           <>
@@ -285,14 +275,15 @@ const CustomNodeLabel: React.FunctionComponent<NodeLabelProps> = ({
             padding={labelIconPadding}
           />
         )}
-        <text {...other} ref={textRef} x={iconSpace + paddingX} y={0} dy="0.35em">
-          {truncateLength > 0 && !labelHover
+        <text {...other} ref={textRef as React.LegacyRef<SVGTextElement>} x={iconSpace + paddingX} y={0} dy="0.35em">
+          {/* {truncateLength && truncateLength > 0 && !labelHover && children
             ? truncateMiddle(children, { length: truncateLength })
-            : children}
+            : children} */}
+            {children}
         </text>
         {textSize && badge && (
           <LabelBadge
-            ref={badgeRef}
+            ref={badgeRef as React.Ref<SVGRectElement>}
             x={iconSpace + textSize.width + paddingX * 2}
             y={badgeStartY}
             badge={badge}
@@ -319,7 +310,7 @@ const CustomNodeLabel: React.FunctionComponent<NodeLabelProps> = ({
           paddingY={paddingY}
           icon={actionIcon}
           className={isExpanded ? 'action-icon-expanded' : 'action-icon-collapsed'}
-          onClick={onActionIconClick}
+          onClick={() => onActionIconClick}
         />
       </g>
     </>

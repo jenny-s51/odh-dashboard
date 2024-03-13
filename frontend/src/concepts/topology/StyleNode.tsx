@@ -155,7 +155,7 @@ const StyleNode: React.FunctionComponent<StyleNodeProps> = ({
   const LabelIcon = passedData.labelIcon;
   return (
     <Layer id={hover ? TOP_LAYER : DEFAULT_LAYER}>
-      <g ref={hoverRef}>
+      <g ref={hoverRef as React.LegacyRef<SVGGElement>}>
         <DefaultNode
           element={element}
           scaleLabel={detailsLevel !== ScaleDetailsLevel.low}

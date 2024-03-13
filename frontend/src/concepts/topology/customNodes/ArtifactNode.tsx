@@ -46,7 +46,8 @@ const ArtifactNode: React.FunctionComponent<ArtifactNodeProps> = ({
     return newData;
   }, [data]);
 
-  const hasTaskIcon = !!(data.taskIconClass || data.taskIcon);
+  // const hasTaskIcon = !!(data.taskIconClass || data.taskIcon);
+  const hasTaskIcon = true;
   const whenDecorator = data.whenStatus ? (
     <WhenDecorator
       element={element}
@@ -63,7 +64,7 @@ const ArtifactNode: React.FunctionComponent<ArtifactNodeProps> = ({
 
   return (
     <Layer id={detailsLevel !== ScaleDetailsLevel.high && hover ? TOP_LAYER : DEFAULT_LAYER}>
-      <g ref={hoverRef}>
+      <g ref={hoverRef as React.LegacyRef<SVGGElement>}>
         <DemoTaskNodeInner
           element={element}
           scaleNode={hover && detailsLevel !== ScaleDetailsLevel.high}

@@ -44,7 +44,7 @@ const PipelinesTaskNode: React.FunctionComponent<PipelinesTaskNodeProps> = ({
     return newData;
   }, [data]);
 
-  const hasTaskIcon = !!(data.taskIconClass || data.taskIcon);
+  // const hasTaskIcon = !!(data.taskIconClass || data.taskIcon);
 
   // Set the badgePopoverParams, but if the node has badgeTooltips, this will be ignored
   const badgePopoverParams: PopoverProps = {
@@ -55,10 +55,10 @@ const PipelinesTaskNode: React.FunctionComponent<PipelinesTaskNodeProps> = ({
 
   return (
     <Layer id={detailsLevel !== ScaleDetailsLevel.high && hover ? TOP_LAYER : DEFAULT_LAYER}>
-      <g ref={hoverRef}>
+      <g ref={hoverRef as React.LegacyRef<SVGGElement>}>
         <TaskNode
           element={element}
-          onContextMenu={data.showContextMenu ? onContextMenu : undefined}
+          onContextMenu={data?.showContextMenu ? onContextMenu : undefined}
           contextMenuOpen={contextMenuOpen}
           scaleNode={(hover || contextMenuOpen) && detailsLevel !== ScaleDetailsLevel.high}
           hideDetailsAtMedium
@@ -71,7 +71,7 @@ const PipelinesTaskNode: React.FunctionComponent<PipelinesTaskNodeProps> = ({
           {...passedData}
           {...rest}
           badgePopoverParams={badgePopoverParams}
-          badgeTooltip={data.badgeTooltips && DEMO_TIP_TEXT}
+          badgeTooltip={data?.badgeTooltips && DEMO_TIP_TEXT}
         ></TaskNode>
       </g>
     </Layer>

@@ -10,6 +10,12 @@ import {
   useVisualizationController,
   VisualizationSurface,
   getSpacerNodes,
+  TOP_TO_BOTTOM,
+  PipelineDagreLayout,
+  Graph,
+  LEFT_TO_RIGHT,
+  Layout,
+  NODE_SEPARATION_HORIZONTAL,
 } from '@patternfly/react-topology';
 import {
   EmptyState,
@@ -18,6 +24,9 @@ import {
   EmptyStateHeader,
 } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
+import { PIPELINE_LAYOUT, PIPELINE_NODE_SEPARATION_VERTICAL } from "./const";
+import { GROUPED_PIPELINE_NODE_SEPARATION_HORIZONTAL } from "./TaskGroupEdge";
+import { pipelineComponentFactory } from "./factories";
 
 type PipelineVisualizationSurfaceProps = {
   nodes: PipelineNodeModel[];
@@ -38,8 +47,25 @@ const PipelineVisualizationSurface: React.FC<PipelineVisualizationSurfaceProps> 
     // TODO: We can have a weird edge issue if the node is off by a few pixels vertically from the center
     const edges = getEdgesFromNodes(renderNodes);
     try {
+      controller.registerComponentFactory(pipelineComponentFactory);
+      controller.registerLayoutFactory(
+        (type: string, graph: Graph): Layout | undefined =>
+          new PipelineDagreLayout(graph, {
+            nodesep: PIPELINE_NODE_SEPARATION_VERTICAL,
+            rankdir: TOP_TO_BOTTOM,
+            // ranksep:
+            //   type === GROUPED_PIPELINE_LAYOUT ? GROUPED_PIPELINE_NODE_SEPARATION_HORIZONTAL : NODE_SEPARATION_HORIZONTAL,
+            //   type.startsWith(GROUP_PREFIX) ? GROUPED_PIPELINE_NODE_SEPARATION_HORIZONTAL : NODE_SEPARATION_HORIZONTAL,
+            ignoreGroups: true
+          })
+      );
       controller.fromModel(
         {
+          graph: {
+            layout: PIPELINE_LAYOUT,
+            id: 'g1',
+            type: 'graph'
+          },
           nodes: renderNodes,
           edges,
         },
