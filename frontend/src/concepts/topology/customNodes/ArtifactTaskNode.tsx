@@ -118,6 +118,7 @@ const ArtifactTaskNodeInner: React.FC<ArtifactTaskNodeInnerProps> = observer(
               hover
               selected={selected}
               onSelect={onSelect}
+              hiddenDetailsShownStatuses={[]}
               status={data?.status}
               scaleNode={isHover}
               {...rest}
