@@ -11,6 +11,7 @@ import {
   translateStatusForNode,
 } from './parseUtils';
 import { KubeFlowTaskTopology } from './pipelineTaskTypes';
+import { createArtifactNode } from '~/concepts/topology/utils';
 
 const EMPTY_STATE: KubeFlowTaskTopology = { taskMap: {}, nodes: [] };
 
@@ -64,10 +65,12 @@ export const usePipelineTaskTopology = (
         const id = artifactId ?? artifactKey;
 
         nodes.push(
-          createNode({
+          createArtifactNode({
             id,
             label,
+            artifactType: data.schemaTitle,
             runAfter: [taskId],
+            status: translateStatusForNode(status?.state),
           }),
         );
 
