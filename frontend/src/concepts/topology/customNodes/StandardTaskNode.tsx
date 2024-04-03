@@ -1,30 +1,57 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
 import {
-  TaskNode,
+  DEFAULT_LAYER,
   DEFAULT_WHEN_OFFSET,
-  Node,
+  DEFAULT_WHEN_SIZE,
+  GraphElement,
+  Layer,
+  ScaleDetailsLevel,
+  TaskNode,
+  TOP_LAYER,
+  useHover,
   WhenDecorator,
-  NodeModel,
+  WithContextMenuProps,
   WithSelectionProps,
-  observer,
 } from '@patternfly/react-topology';
-import { StandardTaskNodeData } from '~/concepts/topology/types';
 
-type DemoTaskNodeProps = WithSelectionProps & {
-  element: Node<NodeModel, StandardTaskNodeData>;
-};
+type StandardTaskNodeProps = {
+  element: GraphElement;
+} & WithContextMenuProps &
+  WithSelectionProps;
 
-const StandardTaskNode: React.FC<DemoTaskNodeProps> = ({ element, onSelect, selected }) => {
+const StandardTaskNode: React.FunctionComponent<StandardTaskNodeProps> = ({
+  element,
+  onSelect,
+  selected,
+  ...rest
+}) => {
   const data = element.getData();
+  const [hover, hoverRef] = useHover();
+  const detailsLevel = element.getGraph().getDetailsLevel();
 
   const whenDecorator = data?.whenStatus ? (
     <WhenDecorator element={element} status={data.whenStatus} leftOffset={DEFAULT_WHEN_OFFSET} />
   ) : null;
 
   return (
-    <TaskNode onSelect={onSelect} selected={selected} element={element} status={data?.status}>
-      {whenDecorator}
-    </TaskNode>
+    <Layer id={detailsLevel !== ScaleDetailsLevel.high && hover ? TOP_LAYER : DEFAULT_LAYER}>
+      <g ref={hoverRef as React.LegacyRef<SVGGElement>}>
+        <TaskNode
+          element={element}
+          onSelect={onSelect}
+          selected={selected}
+          scaleNode={hover && detailsLevel !== ScaleDetailsLevel.high}
+          status={data?.status}
+          hideDetailsAtMedium
+          whenOffset={data?.whenStatus ? DEFAULT_WHEN_OFFSET : 0}
+          whenSize={data?.whenStatus ? DEFAULT_WHEN_SIZE : 0}
+          {...rest}
+        >
+          {whenDecorator}
+        </TaskNode>
+      </g>
+    </Layer>
   );
 };
 

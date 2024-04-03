@@ -7,6 +7,7 @@ import {
   integralShapePath,
   DEFAULT_SPACER_NODE_TYPE,
   ConnectorArrow,
+  DagreLayoutOptions,
 } from '@patternfly/react-topology';
 
 interface TaskEdgeProps {
@@ -24,19 +25,20 @@ const TaskEdge: React.FunctionComponent<TaskEdgeProps> = ({
   const endPoint = element.getEndPoint();
   const groupClassName = css(styles.topologyEdge, className);
   const startIndent: number = element.getData()?.indent || 0;
+  const verticalLayout = (element.getGraph().getLayoutOptions?.() as DagreLayoutOptions)?.rankdir === 'TB';
 
   return (
     <g data-test-id="task-handler" className={groupClassName}>
       <path
         fillOpacity={0}
-        d={integralShapePath(startPoint, endPoint, startIndent, nodeSeparation)}
+        d={integralShapePath(startPoint, endPoint, startIndent, nodeSeparation, verticalLayout)}
         shapeRendering="geometricPrecision"
       />
 
       {element.getTarget().getType() !== DEFAULT_SPACER_NODE_TYPE ? (
         <ConnectorArrow
           className={styles.topologyEdge}
-          startPoint={endPoint.clone().translate(-1, 0)}
+          startPoint={endPoint.clone().translate(0, -1)}
           endPoint={endPoint}
         />
       ) : null}

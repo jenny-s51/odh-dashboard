@@ -1,0 +1,70 @@
+.pf-topology__node__label__background.pf-m-disabled {
+  --pf-topology__node__label__background--Fill: var(--pf-topology__node--m-disabled--Background--Fill);
+  --pf-topology__node__label__background--Stroke: var(--pf-topology__node--m-disabled--Background--Stroke);
+}
+
+.pf-topology__group__action__label {
+  fill: #fff;
+  stroke-width: 1;
+  stroke: var(--pf-v5-global--active-color--100)
+}
+
+.pf-topology__group.pf-m-selected.pf-m-danger .pf-topology__node__action-icon__icon {
+  color: white;
+}
+
+.pf-topology__group.pf-m-selected .pf-topology__group__label>text {
+  fill: white;
+  font-size: var(--pf-v5-global--FontSize--sm);
+  pointer-events: none;
+}
+
+.action-icon-collapsed {
+  fill: white;
+  stroke: var(--pf-v5-global--active-color--100);
+  pointer-events: all;
+}
+
+.action-icon-expanded {
+  fill: var(--pf-v5-global--active-color--100);
+}
+
+g.pf-topology__node__action-icon.action-icon-collapsed .pf-topology__node__action-icon__icon {
+  color: var(--pf-v5-global--active-color--100);
+}
+
+g.pf-topology__node__action-icon.action-icon-expanded .pf-topology__node__action-icon__icon {
+  color: white;
+}
+
+svg.pf-v5-svg.list-lead-icon {
+  fill: var(--pf-v5-global--icon--Color--light);
+}
+
+svg.pf-v5-svg.monitoring-lead-icon {
+  fill: var(--pf-v5-global--icon--Color--light);
+}
+
+g.pf-topology-pipelines__pill.pf-m-danger.pf-m-selected.pf-m-selectable svg.pf-v5-svg.list-lead-icon {
+  fill: var(--pf-v5-global--icon--Color--dark--light);
+}
+
+.pf-topology-pipelines__pill-text .pf-topology-pipelines__pill>.pf-topology-pipelines__pill-background {
+  stroke: none;
+}
+
+.pf-topology-pipelines__pill .pf-m-danger .pf-m-selectable>.pf-v5-svg .list-lead-icon {
+  fill: var(--pf-topology-pipelines__pill-background--m-danger--Fill)
+}
+
+.pf-topology__group__border:hover {
+  stroke: var(--pf-v5-global--active-color--100);
+}
+
+.pf-topology-pipelines__artifact-icon {
+  color: var(--pf-v5-global--icon--Color--light);
+}
+
+.pf-topology-pipelines__pill.pf-m-selected.pf-m-selectable g.pf-topology-pipelines__artifact-icon {
+  color: white;
+}
