@@ -7,7 +7,8 @@ import {
   PipelineDagreGroupsLayout,
   Visualization,
 } from '@patternfly/react-topology';
-import { pipelineComponentFactory } from '~/concepts/topology/factories';
+import pipelineElementFactory from '@patternfly/react-topology/dist/esm/pipelines/elements/pipelineElementFactory';
+import { pipelineComponentFactory, pipelineGroupsComponentFactory } from './factories';
 import { PIPELINE_LAYOUT, PIPELINE_NODE_SEPARATION_VERTICAL } from './const';
 
 const useTopologyController = (graphId: string): Visualization | null => {
@@ -16,7 +17,9 @@ const useTopologyController = (graphId: string): Visualization | null => {
   React.useEffect(() => {
     const visualizationController = new Visualization();
     visualizationController.setFitToScreenOnLayout(true);
+    visualizationController.registerElementFactory(pipelineElementFactory);
     visualizationController.registerComponentFactory(pipelineComponentFactory);
+    visualizationController.registerComponentFactory(pipelineGroupsComponentFactory);
     visualizationController.registerLayoutFactory(
       (type: string, graph: Graph): Layout | undefined =>
         new PipelineDagreGroupsLayout(graph, {
