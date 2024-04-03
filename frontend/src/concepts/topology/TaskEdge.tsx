@@ -25,7 +25,8 @@ const TaskEdge: React.FunctionComponent<TaskEdgeProps> = ({
   const endPoint = element.getEndPoint();
   const groupClassName = css(styles.topologyEdge, className);
   const startIndent: number = element.getData()?.indent || 0;
-  const verticalLayout = (element.getGraph().getLayoutOptions?.() as DagreLayoutOptions)?.rankdir === 'TB';
+  const verticalLayout =
+    (element.getGraph().getLayoutOptions?.() as DagreLayoutOptions).rankdir === 'TB';
 
   return (
     <g data-test-id="task-handler" className={groupClassName}>

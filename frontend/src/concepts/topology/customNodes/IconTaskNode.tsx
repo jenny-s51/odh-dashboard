@@ -16,15 +16,13 @@ import {
   action,
   isNode,
   useHover,
-  RunStatus,
 } from '@patternfly/react-topology';
-import { StandardTaskNodeData } from '~/concepts/topology/types';
 import { ListIcon, MonitoringIcon } from '@patternfly/react-icons';
 import { TaskNodeProps } from '@patternfly/react-topology/dist/esm/pipelines/components/nodes/TaskNode';
 import { css } from '@patternfly/react-styles';
-import styles from '@patternfly/react-topology/src/css/topology-pipelines.css';
+import { StandardTaskNodeData } from '~/concepts/topology/types';
 import IconSourceAnchor from './IconSourceAnchor';
-import '../css/custom-topology-components.css';
+import '~/concepts/topology/css/custom-topology-components.css';
 
 type IconTaskNodeInnerProps = WithSelectionProps & {
   element: Node<NodeModel, StandardTaskNodeData>;
@@ -34,7 +32,7 @@ const IconTaskNode: React.FC<IconTaskNodeInnerProps> = observer(
   ({ element, statusIconSize = 16, selected, status, onSelect, leadIcon, scaleNode, ...rest }) => {
     const statusBackgroundRadius = statusIconSize / 2 + 4;
     const scale = element.getGraph().getScale();
-    const height = element.getBounds().height;
+    const { height } = element.getBounds();
     const upScale = 1 / scale;
 
     const runStatusModifier = status && getRunStatusModifier(status);

@@ -1,6 +1,7 @@
 import { PipelineRunKFv2, PipelineSpecVariable, TaskKF } from '~/concepts/pipelines/kfTypes';
 import { createNode } from '~/concepts/topology';
 import { NodeConstructDetails, PipelineNodeModelExpanded } from '~/concepts/topology/types';
+import { createArtifactNode, createGroupNode } from '~/concepts/topology/utils';
 import {
   composeArtifactType,
   parseComponentsForArtifactRelationship,
@@ -10,7 +11,6 @@ import {
   translateStatusForNode,
 } from './parseUtils';
 import { KubeFlowTaskTopology } from './pipelineTaskTypes';
-import { createArtifactNode, createGroupNode } from '~/concepts/topology/utils';
 
 const EMPTY_STATE: KubeFlowTaskTopology = { taskMap: {}, nodes: [] };
 
