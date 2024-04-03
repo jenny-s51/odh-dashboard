@@ -10,6 +10,9 @@ export const ICON_TASK_NODE_TYPE = 'ICON_TASK_NODE';
 export const ARTIFACT_NODE_WIDTH = 44;
 export const ARTIFACT_NODE_HEIGHT = NODE_HEIGHT;
 
+export const NODE_PADDING_VERTICAL = 40;
+export const NODE_PADDING_HORIZONTAL = 15;
+
 export const createNode = (details: NodeConstructDetails): PipelineNodeModelExpanded => ({
   id: details.id,
   label: details.label,
@@ -32,4 +35,24 @@ export const createArtifactNode = (details: NodeConstructDetails): PipelineNodeM
   height: ARTIFACT_NODE_HEIGHT,
   runAfterTasks: details.runAfter,
   data: { status: details.status ?? undefined, artifactType: details.artifactType },
+});
+
+export const createGroupNode = (details: NodeConstructDetails): PipelineNodeModelExpanded => ({
+  id: details.id,
+  label: details.id,
+  type: 'Execution',
+  group: true,
+  width: NODE_WIDTH,
+  height: NODE_HEIGHT,
+  runAfterTasks: details.runAfter,
+  style: {
+    padding: [NODE_PADDING_VERTICAL, NODE_PADDING_HORIZONTAL],
+  },
+  children: details.tasks ?? undefined,
+  data: details.status
+    ? {
+        status: details.status,
+        artifactType: details.artifactType,
+      }
+    : undefined,
 });

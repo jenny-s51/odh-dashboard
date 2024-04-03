@@ -1,7 +1,7 @@
 import { PipelineRunKFv2, PipelineSpecVariable, TaskKF } from '~/concepts/pipelines/kfTypes';
 import { createNode } from '~/concepts/topology';
-import { PipelineNodeModelExpanded } from '~/concepts/topology/types';
-import { createArtifactNode } from '~/concepts/topology/utils';
+import { NodeConstructDetails, PipelineNodeModelExpanded } from '~/concepts/topology/types';
+import { createArtifactNode, createGroupNode } from '~/concepts/topology/utils';
 import {
   composeArtifactType,
   parseComponentsForArtifactRelationship,
@@ -112,10 +112,11 @@ export const usePipelineTaskTopology = (
       }
 
       nodes.push(
-        createNode({
+        createGroupNode({
           id: taskId,
           label: taskName,
           runAfter,
+          tasks: tasks.map((i) => i.id),
           status: translateStatusForNode(status?.state),
         }),
       );
