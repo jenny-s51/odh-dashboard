@@ -31,15 +31,25 @@ const PipelineVisualizationSurface: React.FC<PipelineVisualizationSurfaceProps> 
   const controller = useVisualizationController();
   const [error, setError] = React.useState<Error | null>();
   React.useEffect(() => {
-    const spacerNodes = getSpacerNodes(nodes);
+    const currentModel = controller.toModel();
+    const updateNodes = nodes.map((node) => {
+      const currentNode = currentModel.nodes?.find((n) => n.id === node.id);
+      if (currentNode) {
+        return { ...node, collapsed: currentNode.collapsed };
+      }
+      return node;
+    });
+
+    const spacerNodes = getSpacerNodes(updateNodes);
 
     // Dagre likes the root nodes to be first in the order
-    const renderNodes = [...spacerNodes, ...nodes].sort(
+    const renderNodes = [...spacerNodes, ...updateNodes].sort(
       (a, b) => (a.runAfterTasks?.length ?? 0) - (b.runAfterTasks?.length ?? 0),
     );
 
     // TODO: We can have a weird edge issue if the node is off by a few pixels vertically from the center
     const edges = getEdgesFromNodes(renderNodes);
+
     try {
       controller.fromModel(
         {
