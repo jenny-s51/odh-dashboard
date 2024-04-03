@@ -189,10 +189,11 @@ export const usePipelineTaskTopology = (
       });
     } else {
       nodes.push(
-        createNode({
+        createGroupNode({
           id: taskId,
           label: taskName,
           runAfter,
+          tasks: tasks.map((i) => i.id),
           status: translateStatusForNode(status?.state),
         }),
       );
