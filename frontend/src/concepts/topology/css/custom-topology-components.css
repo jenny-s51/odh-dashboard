@@ -13,7 +13,7 @@
   color: white;
 }
 
-.pf-topology__group.pf-m-selected .pf-topology__group__label>text {
+.pf-topology__group.pf-m-selected .pf-topology__group__label > text {
   fill: white;
   font-size: var(--pf-v5-global--FontSize--sm);
   pointer-events: none;
@@ -49,11 +49,12 @@ g.pf-topology-pipelines__pill.pf-m-danger.pf-m-selected.pf-m-selectable svg.pf-v
   fill: var(--pf-v5-global--icon--Color--dark--light);
 }
 
-.pf-topology-pipelines__pill-text .pf-topology-pipelines__pill>.pf-topology-pipelines__pill-background {
+.pf-topology-pipelines__pill-text .pf-topology-pipelines__pill > .pf-topology-pipelines__pill-background {
   stroke: none;
 }
 
-.pf-topology-pipelines__pill .pf-m-danger .pf-m-selectable>.pf-v5-svg .list-lead-icon {
+
+.pf-topology-pipelines__pill .pf-m-danger .pf-m-selectable > .pf-v5-svg .list-lead-icon {
   fill: var(--pf-topology-pipelines__pill-background--m-danger--Fill)
 }
 
@@ -65,6 +66,38 @@ g.pf-topology-pipelines__pill.pf-m-danger.pf-m-selected.pf-m-selectable svg.pf-v
   color: var(--pf-v5-global--icon--Color--light);
 }
 
-.pf-topology-pipelines__pill.pf-m-selected.pf-m-selectable g.pf-topology-pipelines__artifact-icon {
+
+/* default status */
+.pf-topology-pipelines__pill.pf-m-selected.pf-m-selectable g svg.pf-v5-svg.pf-topology-pipelines__artifact-icon {
+  color: white;
+}
+
+.pf-topology-pipelines__pill.pf-m-selected.pf-m-selectable .pf-topology-pipelines__artifact-icon {
+  color: white;
+}
+
+.pf-topology-pipelines__pill.pf-m-selected.pf-m-selectable g svg.pf-v5-svg.pf-topology-pipelines__monitoring-icon {
+  color: white;
+}
+
+.pf-topology-pipelines__pill.pf-m-selected.pf-m-selectable .pf-topology-pipelines__monitoring-icon {
+  color: white;
+}
+
+/* success status */
+.pf-topology-pipelines__pill.pf-m-hover.pf-m-success.pf-m-selected.pf-m-selectable g svg.pf-v5-svg.pf-topology-pipelines__artifact-icon  {
+  color: white;
+}
+
+.pf-topology-pipelines__pill.pf-m-hover.pf-m-success.pf-m-selected.pf-m-selectable g svg.pf-v5-svg.pf-topology-pipelines__monitoring-icon  {
+  color: white;
+}
+
+/* danger status */
+.pf-topology-pipelines__pill.pf-m-hover.pf-m-danger.pf-m-selected.pf-m-selectable g svg.pf-v5-svg.pf-topology-pipelines__artifact-icon  {
+  color: white;
+}
+
+.pf-topology-pipelines__pill.pf-m-hover.pf-m-danger.pf-m-selected.pf-m-selectable g svg.pf-v5-svg.pf-topology-pipelines__monitoring-icon  {
   color: white;
 }

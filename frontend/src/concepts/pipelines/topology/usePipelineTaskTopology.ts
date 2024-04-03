@@ -70,6 +70,7 @@ export const usePipelineTaskTopology = (
             label,
             artifactType: data.schemaTitle,
             runAfter: [taskId],
+            status: translateStatusForNode(status?.state)
           }),
         );
 

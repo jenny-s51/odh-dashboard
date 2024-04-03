@@ -36,15 +36,16 @@ const IconTaskNode: React.FC<IconTaskNodeInnerProps> = observer(
     const upScale = 1 / scale;
 
     const runStatusModifier = status && getRunStatusModifier(status);
+    console.log('run status', runStatusModifier);
     const detailsLevel = element.getGraph().getDetailsLevel();
 
-    useAnchor(
-      React.useCallback(
-        (node: Node) => new IconSourceAnchor(node, statusIconSize),
-        [statusIconSize],
-      ),
-      AnchorEnd.source,
-    );
+    // useAnchor(
+    //   React.useCallback(
+    //     (node: Node) => new IconSourceAnchor(node, statusIconSize),
+    //     [statusIconSize],
+    //   ),
+    //   AnchorEnd.source,
+    // );
 
     return (
       <g
@@ -133,6 +134,14 @@ const IconTaskNodeInner: React.FC<IconTaskNodeInnerProps> = ({
           truncateLength={30}
           element={element}
           hover
+          leadIcon={
+            data?.artifactType === 'system.Metrics' ? (
+              <MonitoringIcon className="pf-topology-pipelines__monitoring-icon" />
+            ) : (
+              <ListIcon className="pf-topology-pipelines__artifact-icon" />
+            )
+          }
+          status={data?.status}
           scaleNode
           {...rest}
         >
@@ -142,6 +151,7 @@ const IconTaskNodeInner: React.FC<IconTaskNodeInnerProps> = ({
         <IconTaskNode
           leadIcon={data?.artifactType === 'system.Metrics' ? <MonitoringIcon /> : <ListIcon />}
           selected
+          status={data?.status}
           element={element}
           {...rest}
         >
