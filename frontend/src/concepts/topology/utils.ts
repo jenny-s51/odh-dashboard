@@ -10,7 +10,7 @@ export const ICON_TASK_NODE_TYPE = 'ICON_TASK_NODE';
 export const NODE_PADDING_VERTICAL = 0;
 export const NODE_PADDING_HORIZONTAL = 15;
 
-export const ARTIFACT_NODE_WIDTH = 54;
+export const ARTIFACT_NODE_WIDTH = 56;
 export const ARTIFACT_NODE_HEIGHT = 44;
 
 export const createNode = (details: NodeConstructDetails): PipelineNodeModelExpanded => ({
