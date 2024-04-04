@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { observer } from 'mobx-react';
 import {
   DEFAULT_LAYER,
   DEFAULT_WHEN_OFFSET,
   DEFAULT_WHEN_SIZE,
   GraphElement,
   Layer,
+  observer,
   RunStatus,
   ScaleDetailsLevel,
   TaskNode,
@@ -45,7 +45,12 @@ const StandardTaskNode: React.FunctionComponent<StandardTaskNodeProps> = ({
           scaleNode={hover && detailsLevel !== ScaleDetailsLevel.high}
           status={data?.status}
           hideDetailsAtMedium
-          hiddenDetailsShownStatuses={[RunStatus.Succeeded, RunStatus.Cancelled, RunStatus.Failed, RunStatus.Running]}
+          hiddenDetailsShownStatuses={[
+            RunStatus.Succeeded,
+            RunStatus.Cancelled,
+            RunStatus.Failed,
+            RunStatus.Running,
+          ]}
           whenOffset={data?.whenStatus ? DEFAULT_WHEN_OFFSET : 0}
           whenSize={data?.whenStatus ? DEFAULT_WHEN_SIZE : 0}
           {...rest}

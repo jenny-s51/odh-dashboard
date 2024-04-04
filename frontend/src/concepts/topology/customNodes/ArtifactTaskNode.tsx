@@ -19,7 +19,6 @@ import { ListIcon, MonitoringIcon } from '@patternfly/react-icons';
 import { TaskNodeProps } from '@patternfly/react-topology/dist/esm/pipelines/components/nodes/TaskNode';
 import { css } from '@patternfly/react-styles';
 import { StandardTaskNodeData } from '~/concepts/topology/types';
-import '~/concepts/topology/css/custom-topology-components.css';
 
 const ICON_PADDING = 8;
 
@@ -32,12 +31,6 @@ const IconTaskNode: React.FC<IconTaskNodeProps> = observer(({ element, selected,
   const status = data?.status;
   const bounds = element.getBounds();
   const iconSize = bounds.height - ICON_PADDING * 2;
-  const leadIcon =
-    data?.artifactType === 'system.Metrics' ? (
-      <MonitoringIcon width={iconSize} height={iconSize} />
-    ) : (
-      <ListIcon width={iconSize} height={iconSize} />
-    );
 
   const runStatusModifier = status && getRunStatusModifier(status);
 
@@ -76,9 +69,17 @@ const IconTaskNode: React.FC<IconTaskNodeProps> = observer(({ element, selected,
       />
       <g
         transform={`translate(${(bounds.width - iconSize) / 2}, ${ICON_PADDING})`}
-        className="pf-topology-pipelines__artifact-icon"
+        color={
+          selected
+            ? 'var(--pf-v5-global--icon--Color--dark--light)'
+            : 'var(--pf-v5-global--icon--Color--dark)'
+        }
       >
-        {leadIcon}
+        {data?.artifactType === 'system.Metrics' ? (
+          <MonitoringIcon width={iconSize} height={iconSize} />
+        ) : (
+          <ListIcon width={iconSize} height={iconSize} />
+        )}
       </g>
     </g>
   );
@@ -88,15 +89,18 @@ type ArtifactTaskNodeInnerProps = WithSelectionProps & {
   element: Node<NodeModel, StandardTaskNodeData>;
 } & Omit<TaskNodeProps, 'element'> & { element: Node };
 
-const IconTaskNodeInner: React.FC<ArtifactTaskNodeInnerProps> = observer(
+const ArtifactTaskNodeInner: React.FC<ArtifactTaskNodeInnerProps> = observer(
   ({ element, selected, onSelect, ...rest }) => {
+    const bounds = element.getBounds();
     const [isHover, hoverRef] = useHover();
     const detailsLevel = element.getGraph().getDetailsLevel();
     const data = element.getData();
-
+    const scale = element.getGraph().getScale();
+    const iconSize = 24;
     const whenDecorator = data?.whenStatus ? (
       <WhenDecorator element={element} status={data.whenStatus} leftOffset={DEFAULT_WHEN_OFFSET} />
     ) : null;
+    const upScale = 1 / scale;
 
     return (
       <g
@@ -104,20 +108,41 @@ const IconTaskNodeInner: React.FC<ArtifactTaskNodeInnerProps> = observer(
         ref={hoverRef as LegacyRef<SVGGElement>}
       >
         {isHover || detailsLevel !== ScaleDetailsLevel.high ? (
-          <TaskNode
-            nameLabelClass="artifact-node-label"
-            hideDetailsAtMedium
-            truncateLength={30}
-            element={element}
-            hover
-            selected={selected}
-            onSelect={onSelect}
-            status={data?.status}
-            scaleNode={isHover}
-            {...rest}
-          >
-            {whenDecorator}
-          </TaskNode>
+          <g>
+            <TaskNode
+              nameLabelClass="artifact-node-label"
+              hideDetailsAtMedium
+              truncateLength={30}
+              element={element}
+              hover
+              selected={selected}
+              onSelect={onSelect}
+              status={data?.status}
+              scaleNode={isHover}
+              {...rest}
+            >
+              {whenDecorator}
+            </TaskNode>
+            {!isHover && detailsLevel !== ScaleDetailsLevel.high ? (
+              <g
+                transform={`translate(0, ${
+                  (bounds.height - iconSize * upScale) / 2
+                }) scale(${upScale})`}
+              >
+                <g transform="translate(4, 4)">
+                  <g
+                    color={
+                      selected
+                        ? 'var(--pf-v5-global--icon--Color--dark--light)'
+                        : 'var(--pf-v5-global--icon--Color--dark)'
+                    }
+                  >
+                    {data?.artifactType === 'system.Metrics' ? <MonitoringIcon /> : <ListIcon />}
+                  </g>
+                </g>
+              </g>
+            ) : null}
+          </g>
         ) : (
           <IconTaskNode selected={selected} onSelect={onSelect} element={element} />
         )}
@@ -127,7 +152,7 @@ const IconTaskNodeInner: React.FC<ArtifactTaskNodeInnerProps> = observer(
 );
 
 const ArtifactTaskNode: React.FC<TaskNodeProps> = ({ element, ...rest }) => (
-  <IconTaskNodeInner element={element as Node} {...rest} />
+  <ArtifactTaskNodeInner element={element as Node} {...rest} />
 );
 
 export default ArtifactTaskNode;

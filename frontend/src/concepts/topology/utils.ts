@@ -10,8 +10,8 @@ export const ICON_TASK_NODE_TYPE = 'ICON_TASK_NODE';
 export const NODE_PADDING_VERTICAL = 0;
 export const NODE_PADDING_HORIZONTAL = 15;
 
-export const ARTIFACT_NODE_WIDTH = 54;
-export const ARTIFACT_NODE_HEIGHT = 44;
+export const ARTIFACT_NODE_WIDTH = 44;
+export const ARTIFACT_NODE_HEIGHT = 34;
 
 export const createNode = (details: NodeConstructDetails): PipelineNodeModelExpanded => ({
   id: details.id,
@@ -36,4 +36,3 @@ export const createArtifactNode = (details: NodeConstructDetails): PipelineNodeM
   runAfterTasks: details.runAfter,
   data: { status: details.status ?? undefined, artifactType: details.artifactType },
 });
-
