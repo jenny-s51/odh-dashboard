@@ -38,7 +38,6 @@ const IconTaskNode: React.FC<IconTaskNodeProps> = observer(({ element, selected,
     ) : (
       <ListIcon width={iconSize} height={iconSize} />
     );
-  const bgRadius = bounds.height / 2;
 
   const runStatusModifier = status && getRunStatusModifier(status);
 
@@ -59,7 +58,6 @@ const IconTaskNode: React.FC<IconTaskNodeProps> = observer(({ element, selected,
 
   return (
     <g
-      transform={`translate(${(bounds.width - bounds.height) / 2}, 0)`}
       className={css(
         'pf-topology-pipelines__pill',
         runStatusModifier,
@@ -68,14 +66,16 @@ const IconTaskNode: React.FC<IconTaskNodeProps> = observer(({ element, selected,
       )}
       onClick={onSelect}
     >
-      <circle
+      <rect
         className="pf-topology-pipelines__pill-background"
-        cx={bgRadius}
-        cy={bgRadius}
-        r={bgRadius}
+        x={0}
+        y={0}
+        width={bounds.width}
+        height={bounds.height}
+        rx={bounds.height / 2}
       />
       <g
-        transform={`translate(${ICON_PADDING}, ${ICON_PADDING})`}
+        transform={`translate(${(bounds.width - iconSize) / 2}, ${ICON_PADDING})`}
         className="pf-topology-pipelines__artifact-icon"
       >
         {leadIcon}
