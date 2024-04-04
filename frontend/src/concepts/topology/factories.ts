@@ -11,7 +11,7 @@ import {
 } from '@patternfly/react-topology';
 import StandardTaskNode from '~/concepts/topology/customNodes/StandardTaskNode';
 import { ICON_TASK_NODE_TYPE } from './utils';
-import IconTaskNode from './customNodes/IconTaskNode';
+import ArtifactTaskNode from './customNodes/ArtifactTaskNode';
 import PipelineTaskGroup from './PipelineTaskGroup';
 import PipelineTaskEdge from './PipelineTaskEdge';
 
@@ -23,7 +23,7 @@ export const pipelineComponentFactory: ComponentFactory = (kind, type) => {
     case DEFAULT_TASK_NODE_TYPE:
       return withSelection()(StandardTaskNode);
     case ICON_TASK_NODE_TYPE:
-      return withSelection()(IconTaskNode);
+      return withSelection()(ArtifactTaskNode);
     case DEFAULT_SPACER_NODE_TYPE:
       return SpacerNode;
     case DEFAULT_EDGE_TYPE:
