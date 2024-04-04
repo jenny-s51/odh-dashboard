@@ -7,6 +7,7 @@ export type NodeConstructDetails = {
   artifactType?: string;
   runAfter?: string[];
   status?: RunStatus;
+  tasks?: string[];
 };
 
 export type StandardTaskNodeData = {
