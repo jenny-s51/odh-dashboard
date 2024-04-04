@@ -12,6 +12,7 @@ import {
 import StandardTaskNode from '~/concepts/topology/customNodes/StandardTaskNode';
 import { ICON_TASK_NODE_TYPE } from './utils';
 import IconTaskNode from './customNodes/IconTaskNode';
+import PipelineTaskGroup from './PipelineTaskGroup';
 import PipelineTaskEdge from './PipelineTaskEdge';
 
 export const pipelineComponentFactory: ComponentFactory = (kind, type) => {
@@ -31,3 +32,25 @@ export const pipelineComponentFactory: ComponentFactory = (kind, type) => {
       return undefined;
   }
 };
+
+export const pipelineGroupsComponentFactory: ComponentFactory = (kind, type) => {
+  if (kind === ModelKind.graph) {
+    return withPanZoom()(GraphComponent);
+  }
+  switch (type) {
+    case 'Execution':
+      return withSelection()(PipelineTaskGroup);
+    case 'Task':
+      return withSelection()(StandardTaskNode);
+    case ICON_TASK_NODE_TYPE:
+      return withSelection()(IconTaskNode);
+    case DEFAULT_SPACER_NODE_TYPE:
+      return SpacerNode;
+    case 'edge':
+      return PipelineTaskEdge;
+    default:
+      return undefined;
+  }
+};
+
+export default pipelineGroupsComponentFactory;
