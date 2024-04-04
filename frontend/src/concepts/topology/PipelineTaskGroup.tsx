@@ -17,8 +17,6 @@ import {
   TaskNodeSourceAnchor,
   TaskNodeTargetAnchor,
 } from '@patternfly/react-topology';
-import TaskGroupSourceAnchor from './TaskGroupSourceAnchor';
-import TaskGroupTargetAnchor from './TaskGroupTargetAnchor';
 
 type PipelineTaskGroupProps = {
   element: GraphElement;

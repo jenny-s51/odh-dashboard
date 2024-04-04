@@ -43,7 +43,7 @@ export const pipelineGroupsComponentFactory: ComponentFactory = (kind, type) => 
     case 'Task':
       return withSelection()(StandardTaskNode);
     case ICON_TASK_NODE_TYPE:
-      return withSelection()(IconTaskNode);
+      return withSelection()(ArtifactTaskNode);
     case DEFAULT_SPACER_NODE_TYPE:
       return SpacerNode;
     case 'edge':

@@ -72,7 +72,7 @@ const IconTaskNode: React.FC<IconTaskNodeProps> = observer(({ element, selected,
         color={
           selected
             ? 'var(--pf-v5-global--icon--Color--dark--light)'
-            : 'var(--pf-v5-global--icon--Color--dark)'
+            : 'var(--pf-v5-global--icon--Color--light)'
         }
       >
         {data?.artifactType === 'system.Metrics' ? (
@@ -134,7 +134,7 @@ const ArtifactTaskNodeInner: React.FC<ArtifactTaskNodeInnerProps> = observer(
                     color={
                       selected
                         ? 'var(--pf-v5-global--icon--Color--dark--light)'
-                        : 'var(--pf-v5-global--icon--Color--dark)'
+                        : 'var(--pf-v5-global--icon--Color--light)'
                     }
                   >
                     {data?.artifactType === 'system.Metrics' ? <MonitoringIcon /> : <ListIcon />}
