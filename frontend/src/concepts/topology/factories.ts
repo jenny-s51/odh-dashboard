@@ -8,29 +8,21 @@ import {
   SpacerNode,
   withPanZoom,
   withSelection,
-  TaskEdge as PFTaskEdge,
 } from '@patternfly/react-topology';
 import StandardTaskNode from '~/concepts/topology/customNodes/StandardTaskNode';
-import TaskEdge from './TaskEdge';
 import { ICON_TASK_NODE_TYPE } from './utils';
 import IconTaskNode from './customNodes/IconTaskNode';
 import PipelineTaskGroup from './PipelineTaskGroup';
 import PipelineTaskEdge from './PipelineTaskEdge';
-// Topology gap... their types have issues with Strict TS mode
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+
 export const pipelineComponentFactory: ComponentFactory = (kind, type) => {
   if (kind === ModelKind.graph) {
     return withPanZoom()(GraphComponent);
   }
   switch (type) {
     case DEFAULT_TASK_NODE_TYPE:
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       return withSelection()(StandardTaskNode);
     case ICON_TASK_NODE_TYPE:
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       return withSelection()(IconTaskNode);
     case DEFAULT_SPACER_NODE_TYPE:
       return SpacerNode;
@@ -41,7 +33,7 @@ export const pipelineComponentFactory: ComponentFactory = (kind, type) => {
   }
 };
 
-export const pipelineGroupsComponentFactory = (kind: ModelKind, type: string) => {
+export const pipelineGroupsComponentFactory: ComponentFactory = (kind, type) => {
   if (kind === ModelKind.graph) {
     return withPanZoom()(GraphComponent);
   }
@@ -51,8 +43,6 @@ export const pipelineGroupsComponentFactory = (kind: ModelKind, type: string) =>
     case 'Task':
       return withSelection()(StandardTaskNode);
     case ICON_TASK_NODE_TYPE:
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       return withSelection()(IconTaskNode);
     case DEFAULT_SPACER_NODE_TYPE:
       return SpacerNode;

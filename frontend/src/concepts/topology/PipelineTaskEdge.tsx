@@ -1,33 +1,30 @@
 import * as React from 'react';
-import { observer } from 'mobx-react';
 import {
   DEFAULT_SPACER_NODE_TYPE,
+  GraphElement,
   Edge,
   EdgeTerminalType,
+  observer,
   TaskEdge,
 } from '@patternfly/react-topology';
 
 interface PipelineTaskEdgeProps {
-  element: Edge;
-  className?: string;
-  nodeSeparation?: number;
+  element: GraphElement;
 }
 
-const PipelineTaskEdge: React.FunctionComponent<PipelineTaskEdgeProps> = ({
-  element,
-  className,
-  nodeSeparation,
-  ...props
-}) => (
-  <TaskEdge
-    element={element as Edge}
-    endTerminalType={
-      element.getTarget().getType() !== DEFAULT_SPACER_NODE_TYPE
-        ? EdgeTerminalType.directional
-        : undefined
-    }
-    {...props}
-  />
-);
+const PipelineTaskEdge: React.FC<PipelineTaskEdgeProps> = ({ element, ...props }) => {
+  const edge = element as Edge;
+  return (
+    <TaskEdge
+      element={edge}
+      endTerminalType={
+        edge.getTarget().getType() !== DEFAULT_SPACER_NODE_TYPE
+          ? EdgeTerminalType.directional
+          : undefined
+      }
+      {...props}
+    />
+  );
+};
 
 export default observer(PipelineTaskEdge);

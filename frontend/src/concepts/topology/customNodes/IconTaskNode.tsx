@@ -11,162 +11,123 @@ import {
   AnchorEnd,
   getRunStatusModifier,
   ScaleDetailsLevel,
-  useScaleNode,
-  getNodeScaleTranslation,
-  action,
-  isNode,
   useHover,
+  TaskNodeSourceAnchor,
+  TaskNodeTargetAnchor,
 } from '@patternfly/react-topology';
 import { ListIcon, MonitoringIcon } from '@patternfly/react-icons';
 import { TaskNodeProps } from '@patternfly/react-topology/dist/esm/pipelines/components/nodes/TaskNode';
 import { css } from '@patternfly/react-styles';
 import { StandardTaskNodeData } from '~/concepts/topology/types';
-import IconSourceAnchor from './IconSourceAnchor';
 import '~/concepts/topology/css/custom-topology-components.css';
 
-type IconTaskNodeInnerProps = WithSelectionProps & {
+const ICON_PADDING = 8;
+
+type IconTaskNodeProps = {
+  element: Node<NodeModel, StandardTaskNodeData>;
+} & WithSelectionProps;
+
+const IconTaskNode: React.FC<IconTaskNodeProps> = observer(({ element, selected, onSelect }) => {
+  const data = element.getData();
+  const status = data?.status;
+  const bounds = element.getBounds();
+  const iconSize = bounds.height - ICON_PADDING * 2;
+  const leadIcon =
+    data?.artifactType === 'system.Metrics' ? (
+      <MonitoringIcon width={iconSize} height={iconSize} />
+    ) : (
+      <ListIcon width={iconSize} height={iconSize} />
+    );
+  const bgRadius = bounds.height / 2;
+
+  const runStatusModifier = status && getRunStatusModifier(status);
+
+  useAnchor(
+    React.useCallback(
+      (node: Node) => new TaskNodeSourceAnchor(node, ScaleDetailsLevel.high, 0, true),
+      [],
+    ),
+    AnchorEnd.source,
+  );
+  useAnchor(
+    React.useCallback(
+      (node: Node) => new TaskNodeTargetAnchor(node, 0, ScaleDetailsLevel.high, 0, true),
+      [],
+    ),
+    AnchorEnd.target,
+  );
+
+  return (
+    <g
+      transform={`translate(${(bounds.width - bounds.height) / 2}, 0)`}
+      className={css(
+        'pf-topology-pipelines__pill',
+        runStatusModifier,
+        selected && 'pf-m-selected',
+        onSelect && 'pf-m-selectable',
+      )}
+      onClick={onSelect}
+    >
+      <circle
+        className="pf-topology-pipelines__pill-background"
+        cx={bgRadius}
+        cy={bgRadius}
+        r={bgRadius}
+      />
+      <g
+        transform={`translate(${ICON_PADDING}, ${ICON_PADDING})`}
+        className="pf-topology-pipelines__artifact-icon"
+      >
+        {leadIcon}
+      </g>
+    </g>
+  );
+});
+
+type ArtifactTaskNodeInnerProps = WithSelectionProps & {
   element: Node<NodeModel, StandardTaskNodeData>;
 } & Omit<TaskNodeProps, 'element'> & { element: Node };
 
-const IconTaskNode: React.FC<IconTaskNodeInnerProps> = observer(
-  ({ element, statusIconSize = 16, selected, status, onSelect, leadIcon, scaleNode, ...rest }) => {
-    const statusBackgroundRadius = statusIconSize / 2 + 4;
-    const scale = element.getGraph().getScale();
-    const { height } = element.getBounds();
-    const upScale = 1 / scale;
-
-    const runStatusModifier = status && getRunStatusModifier(status);
-    console.log('run status', runStatusModifier);
+const IconTaskNodeInner: React.FC<ArtifactTaskNodeInnerProps> = observer(
+  ({ element, selected, onSelect, ...rest }) => {
+    const [isHover, hoverRef] = useHover();
     const detailsLevel = element.getGraph().getDetailsLevel();
+    const data = element.getData();
 
-    // useAnchor(
-    //   React.useCallback(
-    //     (node: Node) => new IconSourceAnchor(node, statusIconSize),
-    //     [statusIconSize],
-    //   ),
-    //   AnchorEnd.source,
-    // );
+    const whenDecorator = data?.whenStatus ? (
+      <WhenDecorator element={element} status={data.whenStatus} leftOffset={DEFAULT_WHEN_OFFSET} />
+    ) : null;
 
     return (
       <g
-        className={css(
-          'pf-topology-pipelines__pill',
-          runStatusModifier,
-          selected && 'pf-m-selected',
-          onSelect && 'pf-m-selectable',
-        )}
-        onClick={onSelect}
-        transform={
-          detailsLevel !== ScaleDetailsLevel.high
-            ? `translate(0, ${
-                (height - statusBackgroundRadius * 2 * upScale) / 2
-              }) scale(${upScale})`
-            : undefined
-        }
-        // ref={taskRef}
+        className={css('pf-topology__pipelines__task-node')}
+        ref={hoverRef as LegacyRef<SVGGElement>}
       >
-        {detailsLevel !== ScaleDetailsLevel.high ? (
-          <circle
-            className="pf-topology-pipelines__pill-background"
-            cx={statusBackgroundRadius}
-            cy={statusBackgroundRadius}
-            r={statusBackgroundRadius}
-          />
+        {isHover || detailsLevel !== ScaleDetailsLevel.high ? (
+          <TaskNode
+            nameLabelClass="artifact-node-label"
+            hideDetailsAtMedium
+            truncateLength={30}
+            element={element}
+            hover
+            selected={selected}
+            onSelect={onSelect}
+            status={data?.status}
+            scaleNode={isHover}
+            {...rest}
+          >
+            {whenDecorator}
+          </TaskNode>
         ) : (
-          <rect
-            x={0}
-            y={0}
-            width={54}
-            height={44}
-            rx={44 / 2}
-            className="pf-topology-pipelines__pill-background"
-          />
+          <IconTaskNode selected={selected} onSelect={onSelect} element={element} />
         )}
-        <g
-          transform={
-            detailsLevel !== ScaleDetailsLevel.high ? `translate(4, 4)` : `translate(18, 14)`
-          }
-        >
-          <g className="pf-topology-pipelines__artifact-icon">{leadIcon}</g>
-        </g>
       </g>
     );
   },
 );
 
-const SCALE_UP_TIME = 200;
-
-const IconTaskNodeInner: React.FC<IconTaskNodeInnerProps> = ({
-  element,
-  scaleNode = false,
-  ...rest
-}) => {
-  const [isHover, hoverRef] = useHover();
-  const detailsLevel = element.getGraph().getDetailsLevel();
-  const data = element.getData();
-
-  React.useEffect(() => {
-    action(() => {
-      const sourceEdges = element.getSourceEdges();
-      sourceEdges.forEach((edge) => {
-        const data = edge.getData();
-        edge.setData({ ...(data || {}), indent: detailsLevel === ScaleDetailsLevel.high ? 40 : 0 });
-      });
-    })();
-  }, [detailsLevel, element]);
-
-  const scale = element.getGraph().getScale();
-  const nodeScale = useScaleNode(scaleNode, scale, SCALE_UP_TIME);
-  const { translateX, translateY } = getNodeScaleTranslation(element, nodeScale, scaleNode);
-
-  const whenDecorator = data?.whenStatus ? (
-    <WhenDecorator element={element} status={data.whenStatus} leftOffset={DEFAULT_WHEN_OFFSET} />
-  ) : null;
-
-  return (
-    <g
-      className={css('pf-topology__pipelines__task-node')}
-      ref={hoverRef as LegacyRef<SVGGElement>}
-    >
-      {isHover ? (
-        <TaskNode
-          nameLabelClass="artifact-node-label"
-          truncateLength={30}
-          element={element}
-          hover
-          leadIcon={
-            data?.artifactType === 'system.Metrics' ? (
-              <MonitoringIcon className="pf-topology-pipelines__monitoring-icon" />
-            ) : (
-              <ListIcon className="pf-topology-pipelines__artifact-icon" />
-            )
-          }
-          status={data?.status}
-          scaleNode
-          {...rest}
-        >
-          {whenDecorator}
-        </TaskNode>
-      ) : (
-        <IconTaskNode
-          leadIcon={data?.artifactType === 'system.Metrics' ? <MonitoringIcon /> : <ListIcon />}
-          selected
-          status={data?.status}
-          element={element}
-          {...rest}
-        >
-          {whenDecorator}
-        </IconTaskNode>
-      )}
-    </g>
-  );
-};
-
-const ArtifactTaskNode: React.FC<TaskNodeProps> = ({ element, ...rest }) => {
-  if (!isNode(element)) {
-    throw new Error('DemoTaskNode must be used only on Node elements');
-  }
-  return <IconTaskNodeInner element={element as Node} {...rest} />;
-};
+const ArtifactTaskNode: React.FC<TaskNodeProps> = ({ element, ...rest }) => (
+  <IconTaskNodeInner element={element as Node} {...rest} />
+);
 
 export default ArtifactTaskNode;
