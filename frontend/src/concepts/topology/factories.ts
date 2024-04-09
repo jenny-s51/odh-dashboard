@@ -55,5 +55,3 @@ export const pipelineGroupsComponentFactory = (kind: ModelKind, type: string) =>
       return undefined;
   }
 };
-
-export default pipelineGroupsComponentFactory;

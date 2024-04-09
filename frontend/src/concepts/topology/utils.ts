@@ -37,18 +37,22 @@ export const createArtifactNode = (details: NodeConstructDetails): PipelineNodeM
   data: { status: details.status ?? undefined, artifactType: details.artifactType },
 });
 
-export const createGroupNode = (details: NodeConstructDetails): PipelineNodeModelExpanded => ({
+export const createGroupNode = (
+  details: NodeConstructDetails,
+  children: string[],
+): PipelineNodeModelExpanded => ({
   id: details.id,
   label: details.id,
   type: 'Execution',
   group: true,
+  collapsed: true,
   width: NODE_WIDTH,
   height: NODE_HEIGHT,
   runAfterTasks: details.runAfter,
   style: {
-    padding: [NODE_PADDING_VERTICAL, NODE_PADDING_HORIZONTAL],
+    padding: [NODE_PADDING_VERTICAL + 24, NODE_PADDING_HORIZONTAL],
   },
-  children: details.tasks ?? undefined,
+  children,
   data: details.status
     ? {
         status: details.status,
