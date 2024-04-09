@@ -1,69 +1,46 @@
 import * as React from 'react';
-import { observer } from 'mobx-react';
 import {
-  AnchorEnd,
-  DefaultTaskGroup,
+  DEFAULT_EDGE_TYPE,
+  DefaultTaskGroup, EdgeCreationTypes,
   GraphElement,
-  isNode,
   LabelPosition,
-  Node,
-  useAnchor,
-  WithContextMenuProps,
   WithSelectionProps,
-  ShapeProps,
-  WithDragNodeProps,
-  EdgeCreationTypes,
 } from '@patternfly/react-topology';
-import TaskGroupSourceAnchor from './TaskGroupSourceAnchor';
-import TaskGroupTargetAnchor from './TaskGroupTargetAnchor';
+import { NODE_HEIGHT, NODE_WIDTH } from '~/concepts/topology/const';
 
 type PipelineTaskGroupProps = {
   element: GraphElement;
-  collapsible?: boolean;
-  collapsedWidth?: number;
-  collapsedHeight?: number;
-  onCollapseChange?: (group: Node, collapsed: boolean) => void;
-  getCollapsedShape?: (node: Node) => React.FunctionComponent<ShapeProps>;
-  collapsedShadowOffset?: number; // defaults to 10
-} & WithContextMenuProps &
-  WithDragNodeProps &
-  WithSelectionProps;
-
-export const DEFAULT_TASK_WIDTH = 180;
-export const DEFAULT_TASK_HEIGHT = 32;
+} & WithSelectionProps;
 
 const getEdgeCreationTypes = (): EdgeCreationTypes => ({
-  edgeType: 'edge',
-  spacerEdgeType: 'edge',
+  edgeType: DEFAULT_EDGE_TYPE,
+  spacerEdgeType: DEFAULT_EDGE_TYPE,
 });
+
+const onCollapseChange = (element: GraphElement): void => {
+  const controller = element.getController();
+  const model = controller.toModel();
+  console.log(model.nodes);
+  console.log(model.edges);
+};
 
 const PipelineTaskGroup: React.FunctionComponent<PipelineTaskGroupProps> = ({
   element,
-  ...rest
-}) => {
-  useAnchor(
-    React.useCallback((node: Node) => new TaskGroupSourceAnchor(node), []),
-    AnchorEnd.source,
-  );
-  useAnchor(
-    React.useCallback((node: Node) => new TaskGroupTargetAnchor(node), []),
-    AnchorEnd.target,
-  );
-  if (!isNode(element)) {
-    return null;
-  }
-  return (
-    <DefaultTaskGroup
-      labelPosition={LabelPosition.top}
-      collapsible
-      collapsedWidth={DEFAULT_TASK_WIDTH}
-      collapsedHeight={DEFAULT_TASK_HEIGHT}
-      element={element as Node}
-      recreateLayoutOnCollapseChange
-      getEdgeCreationTypes={getEdgeCreationTypes}
-      {...rest}
-    />
-  );
-};
+  selected,
+  onSelect,
+}) => (
+  <DefaultTaskGroup
+    element={element}
+    selected={selected}
+    onSelect={onSelect}
+    labelPosition={LabelPosition.top}
+    collapsible
+    collapsedHeight={NODE_HEIGHT}
+    collapsedWidth={NODE_WIDTH}
+    recreateLayoutOnCollapseChange
+    getEdgeCreationTypes={getEdgeCreationTypes}
+    onCollapseChange={() => onCollapseChange(element)}
+  />
+);
 
-export default observer(PipelineTaskGroup);
+export default PipelineTaskGroup;
