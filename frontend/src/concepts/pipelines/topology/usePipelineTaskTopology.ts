@@ -179,12 +179,14 @@ export const usePipelineTaskTopology = (
       // Extract IDs and create new entries
       nestedNodes.forEach((node) => {
         const { id } = node;
-
-        // TODO: render group data in drawer
         newTaskMapEntries[id] = {
           type: 'groupTask',
           name: id,
+          steps: executor ? [executor.container] : undefined,
+          inputs: parseInputOutput(component.inputDefinitions),
+          outputs: parseInputOutput(component.outputDefinitions),
           status,
+          volumeMounts: parseVolumeMounts(spec.platform_spec, executorLabel),
         };
       });
     } else {
@@ -193,7 +195,6 @@ export const usePipelineTaskTopology = (
           id: taskId,
           label: taskName,
           runAfter,
-          tasks: tasks.map((i) => i.id),
           status: translateStatusForNode(status?.state),
         }),
       );
