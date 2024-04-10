@@ -40,6 +40,8 @@ const PipelineTaskGroup: React.FunctionComponent<PipelineTaskGroupProps> = ({
     recreateLayoutOnCollapseChange
     getEdgeCreationTypes={getEdgeCreationTypes}
     onCollapseChange={() => onCollapseChange(element)}
+    // TODO: support in PF Topology
+    // status={status}
   />
 );
 
