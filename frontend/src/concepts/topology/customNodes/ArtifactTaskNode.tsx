@@ -15,6 +15,7 @@ import {
   TaskNodeSourceAnchor,
   TaskNodeTargetAnchor,
   GraphElement,
+  RunStatus,
 } from '@patternfly/react-topology';
 import { ListIcon, MonitoringIcon } from '@patternfly/react-icons';
 import { TaskNodeProps } from '@patternfly/react-topology/dist/esm/pipelines/components/nodes/TaskNode';
