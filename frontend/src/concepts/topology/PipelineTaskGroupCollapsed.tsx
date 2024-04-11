@@ -12,6 +12,11 @@ import {
   WithDragNodeProps,
   WithSelectionProps,
   Node,
+  ScaleDetailsLevel,
+  useHover,
+  Layer,
+  DEFAULT_LAYER,
+  TOP_LAYER,
 } from '@patternfly/react-topology';
 
 type PipelineTaskGroupCollapsedProps = {
@@ -55,14 +60,25 @@ const PipelineTaskGroupCollapsed: React.FunctionComponent<PipelineTaskGroupColla
   onCollapseChange,
   ...rest
 }) => {
+  const [hover, hoverRef] = useHover();
+  const detailsLevel = element.getGraph().getDetailsLevel();
+
   return (
-    <TaskNode
-      element={element}
-      actionIcon={collapsible ? <ExpandIcon /> : undefined}
-      // onActionIconClick={() => onCollapseChange(element, false)}
-      shadowCount={2}
-      {...rest}
-    />
+    <Layer id={detailsLevel !== ScaleDetailsLevel.high && hover ? TOP_LAYER : DEFAULT_LAYER}>
+      <g ref={hoverRef as React.LegacyRef<SVGGElement>}>
+        <TaskNode
+          element={element}
+          actionIcon={collapsible ? <ExpandIcon /> : undefined}
+          onActionIconClick={() => onCollapseChange!(element, false)}
+          shadowCount={2}
+          hiddenDetailsShownStatuses={[RunStatus.Succeeded]}
+          scaleNode={hover && detailsLevel !== ScaleDetailsLevel.high}
+          hideDetailsAtMedium
+          showStatusState
+          {...rest}
+        />
+      </g>
+    </Layer>
   );
 };
 

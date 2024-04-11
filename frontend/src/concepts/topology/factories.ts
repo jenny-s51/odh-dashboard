@@ -13,7 +13,6 @@ import {
 import StandardTaskNode from '~/concepts/topology/customNodes/StandardTaskNode';
 import { ICON_TASK_NODE_TYPE } from './utils';
 import ArtifactTaskNode from './customNodes/ArtifactTaskNode';
-import PipelineTaskGroup from './PipelineTaskGroup';
 import PipelineTaskEdge from './PipelineTaskEdge';
 import PipelineDefaultTaskGroup from './PipelineDefaultTaskGroup';
 import { EXECUTION_TASK_NODE_TYPE } from './const';
