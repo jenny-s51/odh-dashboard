@@ -17,8 +17,9 @@ import {
   Layer,
   DEFAULT_LAYER,
   TOP_LAYER,
+  NodeModel,
 } from '@patternfly/react-topology';
-import { Icon, Popover } from '@patternfly/react-core';;
+import { Icon, Popover } from '@patternfly/react-core';
 import { getNodeStatusIcon } from './utils';
 
 type PipelineTaskGroupCollapsedProps = {
@@ -66,8 +67,7 @@ const PipelineTaskGroupCollapsed: React.FunctionComponent<PipelineTaskGroupColla
   const myRef = React.useRef();
   const detailsLevel = element.getGraph().getDetailsLevel();
 
-  const PopoverTasksList = ({ items }) => {
-    const getPopoverTasksList = () => {
+    const getPopoverTasksList = (items: Node<NodeModel, any>[]) => {
       return items.map((item: Node) => (
         <div key={item.getId()}>
           <Icon status={getNodeStatusIcon(item.getData()?.status).status} isInline>
@@ -78,11 +78,6 @@ const PipelineTaskGroupCollapsed: React.FunctionComponent<PipelineTaskGroupColla
       ));
     };
 
-    return getPopoverTasksList();
-  };
-
-  const popoverBodyContent = () => <PopoverTasksList items={element.getAllNodeChildren()} />;
-
   return (
     <Layer id={detailsLevel !== ScaleDetailsLevel.high && hover ? TOP_LAYER : DEFAULT_LAYER}>
       <g ref={hoverRef as React.LegacyRef<SVGGElement>}>
@@ -91,7 +86,7 @@ const PipelineTaskGroupCollapsed: React.FunctionComponent<PipelineTaskGroupColla
           triggerAction="hover"
           aria-label="Hoverable popover"
           headerContent={element.getLabel()}
-          bodyContent={popoverBodyContent}
+          bodyContent={getPopoverTasksList(element.getAllNodeChildren())}
         >
           <g ref={myRef as unknown as React.LegacyRef<SVGGElement>}>
             <TaskNode
