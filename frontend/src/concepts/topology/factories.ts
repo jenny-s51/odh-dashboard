@@ -8,7 +8,6 @@ import {
   SpacerNode,
   withPanZoom,
   withSelection,
-  TaskEdge as PFTaskEdge,
 } from '@patternfly/react-topology';
 import StandardTaskNode from '~/concepts/topology/customNodes/StandardTaskNode';
 import { ICON_TASK_NODE_TYPE } from './utils';

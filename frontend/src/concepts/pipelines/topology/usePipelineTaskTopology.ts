@@ -162,7 +162,6 @@ export const usePipelineTaskTopology = (
       );
     }
 
-
     // This task's rendering information
     if (isGroupNode && groupTasks) {
       const [nestedNodes, children] = getNestedNodes(groupTasks, components, runDetails);
@@ -184,8 +183,8 @@ export const usePipelineTaskTopology = (
           type: 'groupTask',
           name: id,
           steps: executor ? [executor.container] : undefined,
-          inputs: parseInputOutput(component?.inputDefinitions),
-          outputs: parseInputOutput(component?.outputDefinitions),
+          inputs: parseInputOutput(component.inputDefinitions),
+          outputs: parseInputOutput(component.outputDefinitions),
           status,
           volumeMounts: parseVolumeMounts(spec.platform_spec, executorLabel),
         };

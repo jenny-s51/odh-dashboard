@@ -1,5 +1,4 @@
 import { PipelineNodeModel, RunStatus, WhenStatus } from '@patternfly/react-topology';
-import React from 'react';
 
 export type NodeConstructDetails = {
   id: string;
