@@ -159,6 +159,9 @@ export const usePipelineTaskTopology = (
       );
     }
 
+    console.log('newTaskMapEntries', newTaskMapEntries);
+    console.log('nodes usepipelinetasktpoplogy', nodes)
+
     // This task's rendering information
     if (isGroupNode && groupTasks) {
       const [nestedNodes, children] = getNestedNodes(groupTasks, components, runDetails);

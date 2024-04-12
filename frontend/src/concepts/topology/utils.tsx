@@ -2,6 +2,15 @@ import { DEFAULT_TASK_NODE_TYPE } from '@patternfly/react-topology';
 import { genRandomChars } from '~/utilities/string';
 import { NODE_HEIGHT, NODE_WIDTH } from './const';
 import { NodeConstructDetails, PipelineNodeModelExpanded } from './types';
+import {
+  NotStartedIcon,
+  SyncAltIcon,
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+  BanIcon,
+} from '@patternfly/react-icons';
+import { RuntimeStateKF, runtimeStateLabels } from '../pipelines/kfTypes';
+import React from 'react';
 
 export const createNodeId = (prefix = 'node'): string => `${prefix}-${genRandomChars()}`;
 
@@ -60,3 +69,42 @@ export const createGroupNode = (
       }
     : undefined,
 });
+
+export const getNodeStatusIcon = (status) => {
+  let icon: React.ReactNode;
+  let details: string | undefined;
+
+  switch (status) {
+    case RuntimeStateKF.PENDING:
+    case RuntimeStateKF.RUNTIME_STATE_UNSPECIFIED:
+    case undefined:
+      icon = <NotStartedIcon />;
+      break;
+    case RuntimeStateKF.RUNNING:
+      icon = <SyncAltIcon />;
+      break;
+    case RuntimeStateKF.SKIPPED:
+      icon = <CheckCircleIcon />;
+      break;
+    case 'Succeeded':
+      icon = <CheckCircleIcon />;
+      status = 'success';
+      break;
+    case RuntimeStateKF.FAILED:
+      icon = <ExclamationCircleIcon />;
+      status = 'danger';
+      break;
+    case RuntimeStateKF.CANCELING:
+      icon = <BanIcon />;
+      break;
+    case RuntimeStateKF.CANCELED:
+      icon = <BanIcon />;
+      break;
+    case RuntimeStateKF.PAUSED:
+      icon = <BanIcon />;
+    default:
+      icon = null;
+  }
+
+  return { icon, status, details };
+};
