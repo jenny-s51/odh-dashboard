@@ -1,6 +1,12 @@
-import { PipelineRunKFv2, PipelineSpecVariable, TaskKF } from '~/concepts/pipelines/kfTypes';
+import {
+  PipelineComponentsKF,
+  PipelineRunKFv2,
+  PipelineSpecVariable,
+  RunDetailsKF,
+  TaskKF,
+} from '~/concepts/pipelines/kfTypes';
 import { createNode } from '~/concepts/topology';
-import { NodeConstructDetails, PipelineNodeModelExpanded } from '~/concepts/topology/types';
+import { PipelineNodeModelExpanded } from '~/concepts/topology/types';
 import { createArtifactNode, createGroupNode } from '~/concepts/topology/utils';
 import {
   composeArtifactType,
@@ -14,6 +20,51 @@ import {
 import { KubeFlowTaskTopology } from './pipelineTaskTypes';
 
 const EMPTY_STATE: KubeFlowTaskTopology = { taskMap: {}, nodes: [] };
+
+const getNestedNodes = (
+  items: Record<string, TaskKF>,
+  components: PipelineComponentsKF,
+  runDetails?: RunDetailsKF,
+): [nestedNodes: PipelineNodeModelExpanded[], children: string[]] => {
+  const nodes: PipelineNodeModelExpanded[] = [];
+  const children: string[] = [];
+
+  Object.entries(items).forEach(([name, details]) => {
+    const componentRef = details.componentRef.name;
+    const status = parseRuntimeInfo(name, runDetails);
+    const runAfter: string[] = details.dependentTasks ?? [];
+    const hasSubTask =
+      Object.keys(components).find((task) => task === componentRef) &&
+      components[componentRef]?.dag;
+    const subTasks = components[componentRef]?.dag?.tasks;
+
+    if (hasSubTask && subTasks) {
+      const [nestedNodes, nestedChildren] = getNestedNodes(subTasks, components);
+      const itemNode = createGroupNode(
+        {
+          id: name,
+          label: name,
+          runAfter,
+          status: translateStatusForNode(status?.state),
+        },
+        nestedChildren,
+      );
+      nodes.push(itemNode, ...nestedNodes);
+    } else {
+      nodes.push(
+        createNode({
+          id: name,
+          label: name,
+          runAfter,
+          status: translateStatusForNode(status?.state),
+        }),
+      );
+    }
+    children.push(name);
+  });
+
+  return [nodes, children];
+};
 
 export const usePipelineTaskTopology = (
   spec?: PipelineSpecVariable,
@@ -110,73 +161,17 @@ export const usePipelineTaskTopology = (
 
     // This task's rendering information
     if (isGroupNode && groupTasks) {
-      const createNestedTasks = (items: Record<string, TaskKF>) => {
-        // Create new models
-
-        const allSubTasks: NodeConstructDetails[] = [];
-
-        Object.entries(items).forEach(([name, details]) => {
-          // Create a new object for each item with additional parameters
-          const newTask: NodeConstructDetails = {
-            id: name,
-            label: name,
-            runAfter,
-          };
-          allSubTasks.push(newTask);
-
-          const componentRef = details.componentRef.name;
-          const hasSubTask =
-            Object.keys(components).find((task) => task === componentRef) &&
-            components[componentRef]?.dag;
-
-          if (hasSubTask) {
-            const subTasks = createNestedTasks(components[componentRef]?.dag?.tasks!);
-
-            subTasks.forEach((item) =>
-              nodes.push(
-                createNode({
-                  ...item,
-                  status: translateStatusForNode(status?.state),
-                }),
-              ),
-            );
-            nodes.push(
-              createGroupNode({
-                id: name,
-                label: name,
-                runAfter,
-                tasks: subTasks.map((i) => i.id),
-                status: translateStatusForNode(status?.state),
-              }),
-            );
-            return subTasks;
-          }
-
-          return allSubTasks;
-        });
-        return allSubTasks;
-      };
-
-      const tasks = createNestedTasks(groupTasks);
-
-      tasks.forEach((item) =>
-        nodes.push(
-          createNode({
-            ...item,
-            status: translateStatusForNode(status?.state),
-          }),
-        ),
-      );
-
-      nodes.push(
-        createGroupNode({
+      const [nestedNodes, children] = getNestedNodes(groupTasks, components, runDetails);
+      const itemNode = createGroupNode(
+        {
           id: taskId,
           label: taskName,
           runAfter,
-          tasks: tasks.map((i) => i.id),
           status: translateStatusForNode(status?.state),
-        }),
+        },
+        children,
       );
+      nodes.push(itemNode, ...nestedNodes);
     } else {
       nodes.push(
         createNode({
