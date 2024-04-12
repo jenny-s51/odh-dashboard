@@ -1,7 +1,4 @@
 import { DEFAULT_TASK_NODE_TYPE } from '@patternfly/react-topology';
-import { genRandomChars } from '~/utilities/string';
-import { NODE_HEIGHT, NODE_WIDTH } from './const';
-import { NodeConstructDetails, PipelineNodeModelExpanded } from './types';
 import {
   NotStartedIcon,
   SyncAltIcon,
@@ -9,8 +6,13 @@ import {
   ExclamationCircleIcon,
   BanIcon,
 } from '@patternfly/react-icons';
-import { RuntimeStateKF } from '../pipelines/kfTypes';
 import React from 'react';
+import { Icon } from '@patternfly/react-core';
+import { genRandomChars } from '~/utilities/string';
+import { RuntimeStateKF } from '~/concepts/pipelines/kfTypes';
+import { RunStatusDetails } from '~/concepts/pipelines/content/utils';
+import { NODE_HEIGHT, NODE_WIDTH } from './const';
+import { NodeConstructDetails, PipelineNodeModelExpanded } from './types';
 
 export const createNodeId = (prefix = 'node'): string => `${prefix}-${genRandomChars()}`;
 
@@ -70,10 +72,11 @@ export const createGroupNode = (
     : undefined,
 });
 
-export const getNodeStatusIcon = (status: RuntimeStateKF | string): any => {
+export const getNodeStatusIcon = (runStatus: RuntimeStateKF | string): RunStatusDetails => {
   let icon: React.ReactNode;
+  let status: React.ComponentProps<typeof Icon>['status'];
 
-  switch (status) {
+  switch (runStatus) {
     case RuntimeStateKF.PENDING:
     case RuntimeStateKF.RUNTIME_STATE_UNSPECIFIED:
     case undefined:
@@ -101,6 +104,7 @@ export const getNodeStatusIcon = (status: RuntimeStateKF | string): any => {
       break;
     case RuntimeStateKF.PAUSED:
       icon = <BanIcon />;
+      break;
     default:
       icon = null;
   }

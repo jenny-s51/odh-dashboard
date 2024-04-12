@@ -8,13 +8,12 @@ import {
   SpacerNode,
   withPanZoom,
   withSelection,
-  TaskEdge as PFTaskEdge,
 } from '@patternfly/react-topology';
 import StandardTaskNode from '~/concepts/topology/customNodes/StandardTaskNode';
 import { ICON_TASK_NODE_TYPE } from './utils';
 import ArtifactTaskNode from './customNodes/ArtifactTaskNode';
 import PipelineTaskEdge from './PipelineTaskEdge';
-import PipelineDefaultTaskGroup from "./PipelineDefaultTaskGroup";
+import PipelineDefaultTaskGroup from './PipelineDefaultTaskGroup';
 
 export const pipelineComponentFactory: ComponentFactory = (kind, type) => {
   if (kind === ModelKind.graph) {
@@ -34,7 +33,7 @@ export const pipelineComponentFactory: ComponentFactory = (kind, type) => {
   }
 };
 
-export const pipelineGroupsComponentFactory = (kind: ModelKind, type: string) => {
+export const pipelineGroupsComponentFactory: ComponentFactory = (kind, type) => {
   if (kind === ModelKind.graph) {
     return withPanZoom()(GraphComponent);
   }

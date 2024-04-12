@@ -7,8 +7,8 @@ import {
   PipelineDagreGroupsLayout,
   Visualization,
 } from '@patternfly/react-topology';
+import pipelineElementFactory from '@patternfly/react-topology/dist/esm/pipelines/elements/pipelineElementFactory';
 import { pipelineComponentFactory, pipelineGroupsComponentFactory } from './factories';
-import pipelineElementFactory from './pipelineElementFactory';
 import { PIPELINE_LAYOUT, PIPELINE_NODE_SEPARATION_VERTICAL } from './const';
 
 const useTopologyController = (graphId: string): Visualization | null => {

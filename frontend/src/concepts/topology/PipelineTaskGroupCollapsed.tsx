@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { observer } from 'mobx-react';
 import ExpandIcon from '@patternfly/react-icons/dist/esm/icons/expand-alt-icon';
 import {
   RunStatus,
@@ -14,6 +13,7 @@ import {
   DEFAULT_LAYER,
   TOP_LAYER,
   NodeModel,
+  observer,
 } from '@patternfly/react-topology';
 import { Icon, Popover } from '@patternfly/react-core';
 import { getNodeStatusIcon } from './utils';
@@ -44,8 +44,8 @@ const PipelineTaskGroupCollapsed: React.FunctionComponent<PipelineTaskGroupColla
   const myRef = React.useRef();
   const detailsLevel = element.getGraph().getDetailsLevel();
 
-  const getPopoverTasksList = (items: Node<NodeModel, any>[]) => {
-    return items.map((item: Node) => (
+  const getPopoverTasksList = (items: Node<NodeModel>[]) =>
+    items.map((item: Node) => (
       <div key={item.getId()}>
         <Icon status={getNodeStatusIcon(item.getData()?.status).status} isInline>
           {getNodeStatusIcon(item.getData()?.status).icon}
@@ -53,7 +53,6 @@ const PipelineTaskGroupCollapsed: React.FunctionComponent<PipelineTaskGroupColla
         {item.getId()}
       </div>
     ));
-  };
 
   return (
     <Layer id={detailsLevel !== ScaleDetailsLevel.high && hover ? TOP_LAYER : DEFAULT_LAYER}>

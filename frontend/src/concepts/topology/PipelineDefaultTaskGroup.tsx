@@ -50,16 +50,7 @@ type PipelinesDefaultGroupInnerProps = Omit<PipelinesDefaultGroupProps, 'element
 } & WithSelectionProps;
 
 const DefaultTaskGroupInner: React.FunctionComponent<PipelinesDefaultGroupInnerProps> = observer(
-  ({
-    className,
-    element,
-    onCollapseChange,
-    recreateLayoutOnCollapseChange,
-    getEdgeCreationTypes,
-    selected,
-    onSelect,
-    ...rest
-  }) => {
+  ({ className, element, onCollapseChange, getEdgeCreationTypes, selected, onSelect, ...rest }) => {
     const childCount = element.getAllNodeChildren().length;
     const data = element.getData();
 

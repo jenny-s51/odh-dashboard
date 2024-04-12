@@ -21,7 +21,7 @@ import { relativeTime } from '~/utilities/time';
 
 export type RunStatusDetails = {
   icon: React.ReactNode;
-  label: PipelineRunKFv2['state'] | string;
+  label?: PipelineRunKFv2['state'] | string;
   status?: React.ComponentProps<typeof Icon>['status'];
   details?: string;
   createdAt?: string;
