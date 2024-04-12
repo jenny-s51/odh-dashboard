@@ -18,6 +18,8 @@ import {
   DEFAULT_LAYER,
   TOP_LAYER,
 } from '@patternfly/react-topology';
+import { Icon, Popover } from '@patternfly/react-core';;
+import { getNodeStatusIcon } from './utils';
 
 type PipelineTaskGroupCollapsedProps = {
   children?: React.ReactNode;
@@ -61,22 +63,50 @@ const PipelineTaskGroupCollapsed: React.FunctionComponent<PipelineTaskGroupColla
   ...rest
 }) => {
   const [hover, hoverRef] = useHover();
+  const myRef = React.useRef();
   const detailsLevel = element.getGraph().getDetailsLevel();
+
+  const PopoverTasksList = ({ items }) => {
+    const getPopoverTasksList = () => {
+      return items.map((item: Node) => (
+        <div key={item.getId()}>
+          <Icon status={getNodeStatusIcon(item.getData()?.status).status} isInline>
+            {getNodeStatusIcon(item.getData()?.status).icon}
+          </Icon>
+          {item.getId()}
+        </div>
+      ));
+    };
+
+    return getPopoverTasksList();
+  };
+
+  const popoverBodyContent = () => <PopoverTasksList items={element.getAllNodeChildren()} />;
 
   return (
     <Layer id={detailsLevel !== ScaleDetailsLevel.high && hover ? TOP_LAYER : DEFAULT_LAYER}>
       <g ref={hoverRef as React.LegacyRef<SVGGElement>}>
-        <TaskNode
-          element={element}
-          actionIcon={collapsible ? <ExpandIcon /> : undefined}
-          onActionIconClick={() => onCollapseChange!(element, false)}
-          shadowCount={2}
-          hiddenDetailsShownStatuses={[RunStatus.Succeeded]}
-          scaleNode={hover && detailsLevel !== ScaleDetailsLevel.high}
-          hideDetailsAtMedium
-          showStatusState
-          {...rest}
-        />
+        <Popover
+          triggerRef={myRef}
+          triggerAction="hover"
+          aria-label="Hoverable popover"
+          headerContent={element.getLabel()}
+          bodyContent={popoverBodyContent}
+        >
+          <g ref={myRef as unknown as React.LegacyRef<SVGGElement>}>
+            <TaskNode
+              element={element}
+              actionIcon={collapsible ? <ExpandIcon /> : undefined}
+              onActionIconClick={() => onCollapseChange!(element, false)}
+              shadowCount={2}
+              hiddenDetailsShownStatuses={[RunStatus.Succeeded]}
+              scaleNode={hover && detailsLevel !== ScaleDetailsLevel.high}
+              hideDetailsAtMedium
+              showStatusState
+              {...rest}
+            />
+          </g>
+        </Popover>
       </g>
     </Layer>
   );
