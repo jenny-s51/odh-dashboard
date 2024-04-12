@@ -9,7 +9,7 @@ import {
   ExclamationCircleIcon,
   BanIcon,
 } from '@patternfly/react-icons';
-import { RuntimeStateKF, runtimeStateLabels } from '../pipelines/kfTypes';
+import { RuntimeStateKF } from '../pipelines/kfTypes';
 import React from 'react';
 
 export const createNodeId = (prefix = 'node'): string => `${prefix}-${genRandomChars()}`;
@@ -70,9 +70,8 @@ export const createGroupNode = (
     : undefined,
 });
 
-export const getNodeStatusIcon = (status) => {
+export const getNodeStatusIcon = (status: RuntimeStateKF | string): any => {
   let icon: React.ReactNode;
-  let details: string | undefined;
 
   switch (status) {
     case RuntimeStateKF.PENDING:
@@ -106,5 +105,5 @@ export const getNodeStatusIcon = (status) => {
       icon = null;
   }
 
-  return { icon, status, details };
+  return { icon, status };
 };

@@ -159,8 +159,6 @@ export const usePipelineTaskTopology = (
       );
     }
 
-    console.log('newTaskMapEntries', newTaskMapEntries);
-    console.log('nodes usepipelinetasktpoplogy', nodes)
 
     // This task's rendering information
     if (isGroupNode && groupTasks) {
@@ -183,8 +181,8 @@ export const usePipelineTaskTopology = (
           type: 'groupTask',
           name: id,
           steps: executor ? [executor.container] : undefined,
-          inputs: parseInputOutput(component.inputDefinitions),
-          outputs: parseInputOutput(component.outputDefinitions),
+          inputs: parseInputOutput(component?.inputDefinitions),
+          outputs: parseInputOutput(component?.outputDefinitions),
           status,
           volumeMounts: parseVolumeMounts(spec.platform_spec, executorLabel),
         };
