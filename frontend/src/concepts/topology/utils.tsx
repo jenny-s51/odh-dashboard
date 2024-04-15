@@ -13,6 +13,7 @@ import { RuntimeStateKF } from '~/concepts/pipelines/kfTypes';
 import { RunStatusDetails } from '~/concepts/pipelines/content/utils';
 import { NODE_HEIGHT, NODE_WIDTH } from './const';
 import { NodeConstructDetails, PipelineNodeModelExpanded } from './types';
+import { runtimeStateLabels } from "../pipelines/kfTypes";
 
 export const createNodeId = (prefix = 'node'): string => `${prefix}-${genRandomChars()}`;
 
@@ -75,39 +76,49 @@ export const createGroupNode = (
 export const getNodeStatusIcon = (runStatus: RuntimeStateKF | string): RunStatusDetails => {
   let icon: React.ReactNode;
   let status: React.ComponentProps<typeof Icon>['status'];
+  let label: string;
 
   switch (runStatus) {
     case RuntimeStateKF.PENDING:
     case RuntimeStateKF.RUNTIME_STATE_UNSPECIFIED:
     case undefined:
       icon = <NotStartedIcon />;
+      label = runtimeStateLabels[RuntimeStateKF.PENDING];
       break;
     case RuntimeStateKF.RUNNING:
       icon = <SyncAltIcon />;
+      label = runtimeStateLabels[RuntimeStateKF.RUNNING];
       break;
     case RuntimeStateKF.SKIPPED:
       icon = <CheckCircleIcon />;
+      label = runtimeStateLabels[RuntimeStateKF.SKIPPED];
       break;
-    case 'Succeeded':
+    case RuntimeStateKF.SUCCEEDED:
       icon = <CheckCircleIcon />;
       status = 'success';
+      label = runtimeStateLabels[RuntimeStateKF.SUCCEEDED];
       break;
     case RuntimeStateKF.FAILED:
       icon = <ExclamationCircleIcon />;
       status = 'danger';
+      label = runtimeStateLabels[RuntimeStateKF.FAILED];
       break;
     case RuntimeStateKF.CANCELING:
       icon = <BanIcon />;
+      label = runtimeStateLabels[RuntimeStateKF.CANCELING];
       break;
     case RuntimeStateKF.CANCELED:
       icon = <BanIcon />;
+      label = runtimeStateLabels[RuntimeStateKF.CANCELED];
       break;
     case RuntimeStateKF.PAUSED:
       icon = <BanIcon />;
+      label = runtimeStateLabels[RuntimeStateKF.PAUSED];
       break;
     default:
       icon = null;
+      label = '';
   }
 
-  return { icon, status };
+  return { label, icon, status };
 };
