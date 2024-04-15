@@ -179,7 +179,48 @@ const initIntercepts = () => {
   );
 };
 
-describe('Pipeline topology', () => {
+describe('Pipeline layout', () => {
+
+  describe('Layout behavior', () => {
+    beforeEach(() => {
+      initIntercepts();
+      pipelineRunDetails.visit(projectId, mockRun.run_id);
+    });
+
+    it.skip('should expand/collapse nested group layouts', () => {
+      // Click on the expand/collapse button of a nested group layout
+      cy.get('.nested-group-layout .expand-collapse-button').click();
+
+      // Assert that the nested group layout expands or collapses as expected
+      cy.get('.nested-group-layout .nodes').should('be.visible');
+    });
+
+    it.skip('should render nested subgraph layouts', () => {
+      // Check that nested subgraph layouts are rendered correctly
+      cy.get('.nested-layout').should('exist');
+    });
+
+    it('should show full artifact node on hover', () => {
+
+      // Check that artifact node exists
+      // Hover over a node that only renders icons
+      cy.get('.icon-node').trigger('mouseover');
+
+      // Assert that the full node content is visible
+      cy.get('.icon-node .full-content').should('be.visible');
+    });
+
+    it.skip('should open drawer when node is clicked', () => {
+      // Click on a node
+      cy.get('.node').first().click();
+
+      // Assert that the drawer is opened
+      cy.get('.drawer').should('be.visible');
+    });
+
+    // ...
+  });
+
   describe('Pipeline details', () => {
     describe('Navigation', () => {
       beforeEach(() => {
