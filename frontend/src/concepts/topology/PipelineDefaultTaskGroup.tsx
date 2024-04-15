@@ -12,6 +12,7 @@ import {
   observer,
   Node,
   GraphElement,
+  action,
 } from '@patternfly/react-topology';
 import PipelineTaskGroupCollapsed from './PipelineTaskGroupCollapsed';
 import { NODE_HEIGHT, NODE_WIDTH } from './const';
@@ -54,7 +55,7 @@ const DefaultTaskGroupInner: React.FunctionComponent<PipelinesDefaultGroupInnerP
     const childCount = element.getAllNodeChildren().length;
     const data = element.getData();
 
-    const handleCollapse = (group: Node, collapsed: boolean): void => {
+    const handleCollapse = action((group: Node, collapsed: boolean): void => {
       if (collapsed && rest.collapsedWidth !== undefined && rest.collapsedHeight !== undefined) {
         group.setDimensions(new Dimensions(rest.collapsedWidth, rest.collapsedHeight));
       }
@@ -88,9 +89,7 @@ const DefaultTaskGroupInner: React.FunctionComponent<PipelinesDefaultGroupInnerP
         controller.fromModel({ nodes, edges }, true);
         controller.getGraph().layout();
       }
-
-      onCollapseChange && onCollapseChange(group, collapsed);
-    };
+    });
 
     if (element.isCollapsed()) {
       return (
@@ -120,7 +119,6 @@ const DefaultTaskGroupInner: React.FunctionComponent<PipelinesDefaultGroupInnerP
         onCollapseChange={handleCollapse}
         selected={selected}
         onSelect={onSelect}
-        hideDetailsAtMedium
         {...rest}
       />
     );

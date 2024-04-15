@@ -9,11 +9,10 @@ import {
 import React from 'react';
 import { Icon } from '@patternfly/react-core';
 import { genRandomChars } from '~/utilities/string';
-import { RuntimeStateKF } from '~/concepts/pipelines/kfTypes';
+import { RuntimeStateKF, runtimeStateLabels } from '~/concepts/pipelines/kfTypes';
 import { RunStatusDetails } from '~/concepts/pipelines/content/utils';
 import { NODE_HEIGHT, NODE_WIDTH } from './const';
 import { NodeConstructDetails, PipelineNodeModelExpanded } from './types';
-import { runtimeStateLabels } from "../pipelines/kfTypes";
 
 export const createNodeId = (prefix = 'node'): string => `${prefix}-${genRandomChars()}`;
 
