@@ -13,7 +13,6 @@ import { RuntimeStateKF, runtimeStateLabels } from '~/concepts/pipelines/kfTypes
 import { RunStatusDetails } from '~/concepts/pipelines/content/utils';
 import { EXECUTION_TASK_NODE_TYPE, NODE_HEIGHT, NODE_WIDTH } from './const';
 import { NodeConstructDetails, PipelineNodeModelExpanded } from './types';
-import { runtimeStateLabels } from "../pipelines/kfTypes";
 
 export const createNodeId = (prefix = 'node'): string => `${prefix}-${genRandomChars()}`;
 
