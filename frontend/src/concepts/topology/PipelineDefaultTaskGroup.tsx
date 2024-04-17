@@ -8,14 +8,29 @@ import {
   observer,
   Node,
   GraphElement,
+  RunStatus,
+  useAnchor,
+  TaskGroupSourceAnchor,
+  AnchorEnd,
+  TaskGroupTargetAnchor,
+  DEFAULT_LAYER,
+  Layer,
+  ScaleDetailsLevel,
+  TOP_LAYER,
+  NodeModel,
+  useHover,
 } from '@patternfly/react-topology';
-import PipelineTaskGroupCollapsed from './PipelineTaskGroupCollapsed';
 import { NODE_HEIGHT, NODE_WIDTH } from './const';
-
+import { Icon, Popover } from '@patternfly/react-core';
+import { getNodeStatusIcon } from './utils';
 
 type PipelinesDefaultGroupProps = {
   children?: React.ReactNode;
   element: GraphElement;
+  showStatusState?: boolean;
+  status?: RunStatus;
+  hiddenDetailsShownStatuses?: RunStatus[];
+  hideDetailsAtMedium?: boolean;
   onCollapseChange?: (group: Node, collapsed: boolean) => void;
 } & WithSelectionProps;
 
@@ -26,34 +41,56 @@ type PipelinesDefaultGroupInnerProps = Omit<PipelinesDefaultGroupProps, 'element
 
 const DefaultTaskGroupInner: React.FunctionComponent<PipelinesDefaultGroupInnerProps> = observer(
   ({ element, onCollapseChange, selected, onSelect, ...rest }) => {
+    const [hover, hoverRef] = useHover();
+    const popoverRef = React.useRef();
+    const detailsLevel = element.getGraph().getDetailsLevel();
 
-    // TODO: remove when https://github.com/patternfly/react-topology/issues/171 merged
-    if (element.isCollapsed()) {
-      return (
-        <PipelineTaskGroupCollapsed
-          element={element}
-          onCollapseChange={onCollapseChange}
-          selected={selected}
-          onSelect={onSelect}
-          collapsible
-          collapsedHeight={NODE_HEIGHT}
-          collapsedWidth={NODE_WIDTH}
-          {...rest}
-        />
-      );
-    }
+    const getPopoverTasksList = (items: Node<NodeModel>[]) =>
+      items.map((item: Node) => (
+        <div key={item.getId()}>
+          <Icon status={getNodeStatusIcon(item.getData()?.status).status} isInline>
+            {getNodeStatusIcon(item.getData()?.status).icon}
+          </Icon>
+          {item.getId()}
+        </div>
+      ));
+
     return (
-      <DefaultTaskGroup
-        labelPosition={LabelPosition.top}
-        element={element}
-        collapsible
-        onCollapseChange={onCollapseChange}
-        selected={selected}
-        onSelect={onSelect}
-        collapsedHeight={NODE_HEIGHT}
-        collapsedWidth={NODE_WIDTH}
-        {...rest}
-      />
+      <Layer id={detailsLevel !== ScaleDetailsLevel.high && hover ? TOP_LAYER : DEFAULT_LAYER}>
+        <g ref={hoverRef as React.LegacyRef<SVGGElement>}>
+          <Popover
+            triggerRef={popoverRef}
+            triggerAction="hover"
+            aria-label="Hoverable popover"
+            headerContent={element.getLabel()}
+            bodyContent={getPopoverTasksList(element.getAllNodeChildren())}
+          >
+            <g ref={popoverRef as unknown as React.LegacyRef<SVGGElement>}>
+              <DefaultTaskGroup
+                labelPosition={LabelPosition.top}
+                element={element}
+                collapsible
+                recreateLayoutOnCollapseChange
+                onCollapseChange={onCollapseChange}
+                selected={selected}
+                onSelect={onSelect}
+                hideDetailsAtMedium
+                showStatusState
+                status={element.getData().status}
+                hiddenDetailsShownStatuses={[
+                  RunStatus.Succeeded,
+                  RunStatus.Pending,
+                  RunStatus.Failed,
+                  RunStatus.Cancelled,
+                ]}
+                collapsedHeight={NODE_HEIGHT}
+                collapsedWidth={NODE_WIDTH}
+                {...rest}
+              />
+            </g>
+          </Popover>
+        </g>
+      </Layer>
     );
   },
 );
