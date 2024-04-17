@@ -3,3 +3,5 @@ export const PIPELINE_NODE_SEPARATION_VERTICAL = 100;
 
 export const NODE_WIDTH = 130;
 export const NODE_HEIGHT = 35;
+
+export const EXECUTION_TASK_NODE_TYPE = 'EXECUTION_TASK_NODE';

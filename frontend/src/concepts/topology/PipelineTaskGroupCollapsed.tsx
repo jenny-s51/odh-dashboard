@@ -14,23 +14,18 @@ import {
   TOP_LAYER,
   NodeModel,
   observer,
+  Dimensions,
+  action,
+  getEdgesFromNodes,
+  getSpacerNodes,
 } from '@patternfly/react-topology';
 import { Icon, Popover } from '@patternfly/react-core';
 import { getNodeStatusIcon } from './utils';
 
 type PipelineTaskGroupCollapsedProps = {
   children?: React.ReactNode;
-  className?: string;
   element: Node;
-  hover?: boolean;
-  label?: string; // Defaults to element.getLabel()
-  status?: RunStatus;
-  showStatusState?: boolean;
-  scaleNode?: boolean;
   hideDetailsAtMedium?: boolean;
-  hiddenDetailsShownStatuses?: RunStatus[];
-  labelPosition?: LabelPosition; // Defaults to bottom
-  badge?: string;
 } & CollapsibleGroupProps &
   WithSelectionProps;
 
@@ -38,11 +33,15 @@ const PipelineTaskGroupCollapsed: React.FunctionComponent<PipelineTaskGroupColla
   element,
   collapsible,
   onCollapseChange,
+  hideDetailsAtMedium,
   ...rest
 }) => {
   const [hover, hoverRef] = useHover();
   const myRef = React.useRef();
   const detailsLevel = element.getGraph().getDetailsLevel();
+
+  const childCount = element.getAllNodeChildren().length;
+
 
   const getPopoverTasksList = (items: Node<NodeModel>[]) =>
     items.map((item: Node) => (
@@ -53,6 +52,34 @@ const PipelineTaskGroupCollapsed: React.FunctionComponent<PipelineTaskGroupColla
         {item.getId()}
       </div>
     ));
+
+    const handleCollapse = action((group: Node, collapsed: boolean): void => {
+      if (collapsed && rest.collapsedWidth !== undefined && rest.collapsedHeight !== undefined) {
+        group.setDimensions(new Dimensions(rest.collapsedWidth, rest.collapsedHeight));
+      }
+      group.setCollapsed(collapsed);
+
+      const controller = group.hasController() && group.getController();
+      if (controller) {
+        const model = controller.toModel();
+
+        const pipelineNodes = model
+          .nodes!.filter((n) => n.type)
+          .map((n) => ({
+            ...n,
+            visible: true,
+          }));
+        const spacerNodes = getSpacerNodes(
+          pipelineNodes,
+        );
+        const nodes = [...pipelineNodes, ...spacerNodes];
+        const edges = getEdgesFromNodes(
+          pipelineNodes,
+        );
+        controller.fromModel({ nodes, edges }, true);
+        controller.getGraph().layout();
+      }
+    });
 
   return (
     <Layer id={detailsLevel !== ScaleDetailsLevel.high && hover ? TOP_LAYER : DEFAULT_LAYER}>
@@ -67,13 +94,15 @@ const PipelineTaskGroupCollapsed: React.FunctionComponent<PipelineTaskGroupColla
           <g ref={myRef as unknown as React.LegacyRef<SVGGElement>}>
             <TaskNode
               element={element}
+              hideDetailsAtMedium
               actionIcon={collapsible ? <ExpandIcon /> : undefined}
-              onActionIconClick={() => onCollapseChange!(element, false)}
+              onActionIconClick={() => handleCollapse(element, false)}
               shadowCount={2}
               hiddenDetailsShownStatuses={[RunStatus.Succeeded]}
               scaleNode={hover && detailsLevel !== ScaleDetailsLevel.high}
-              hideDetailsAtMedium
               showStatusState
+              badge={`${childCount}`}
+              status={element.getData().status}
               {...rest}
             />
           </g>

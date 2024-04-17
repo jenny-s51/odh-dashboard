@@ -14,6 +14,7 @@ import { ICON_TASK_NODE_TYPE } from './utils';
 import ArtifactTaskNode from './customNodes/ArtifactTaskNode';
 import PipelineTaskEdge from './PipelineTaskEdge';
 import PipelineDefaultTaskGroup from './PipelineDefaultTaskGroup';
+import { EXECUTION_TASK_NODE_TYPE } from "./const";
 
 export const pipelineComponentFactory: ComponentFactory = (kind, type) => {
   if (kind === ModelKind.graph) {
@@ -38,9 +39,9 @@ export const pipelineGroupsComponentFactory: ComponentFactory = (kind, type) => 
     return withPanZoom()(GraphComponent);
   }
   switch (type) {
-    case 'Execution':
+    case EXECUTION_TASK_NODE_TYPE:
       return withSelection()(PipelineDefaultTaskGroup);
-    case 'Task':
+    case DEFAULT_TASK_NODE_TYPE:
       return withSelection()(StandardTaskNode);
     case ICON_TASK_NODE_TYPE:
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -48,7 +49,7 @@ export const pipelineGroupsComponentFactory: ComponentFactory = (kind, type) => 
       return withSelection()(ArtifactTaskNode);
     case DEFAULT_SPACER_NODE_TYPE:
       return SpacerNode;
-    case 'edge':
+    case DEFAULT_EDGE_TYPE:
       return PipelineTaskEdge;
     default:
       return undefined;

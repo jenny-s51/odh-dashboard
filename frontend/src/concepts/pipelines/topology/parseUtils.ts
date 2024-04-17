@@ -8,6 +8,7 @@ import {
   RunDetailsKF,
   RuntimeStateKF,
   TaskDetailKF,
+  TaskKF,
 } from '~/concepts/pipelines/kfTypes';
 import { VolumeMount } from '~/types';
 import { PipelineTaskInputOutput, PipelineTaskRunStatus } from './pipelineTaskTypes';
@@ -96,6 +97,40 @@ export const parseInputOutput = (
         artifacts: Object.entries(artifacts).map(([paramLabel, { artifactType }]) => ({
           label: paramLabel,
           type: composeArtifactType(artifactType),
+          // TODO: support value
+        })),
+      };
+    }
+  }
+
+  return data;
+};
+
+export const parseSubTaskInputOutput = (definition: TaskKF['inputs']) => {
+  let data;
+  if (definition) {
+    const { artifacts, parameters } = definition;
+    data = {};
+
+    if (parameters) {
+      data = {
+        ...data,
+        params: Object.entries(parameters).map(
+          ([paramLabel, { componentInputParameter }]) => ({
+            label: paramLabel,
+            type: typeof(componentInputParameter),
+            // TODO: support value
+          }),
+        ),
+      };
+    }
+
+    if (artifacts) {
+      data = {
+        ...data,
+        artifacts: Object.entries(artifacts).map(([paramLabel, { taskOutputArtifact }]) => ({
+          label: paramLabel,
+          type: typeof(taskOutputArtifact?.producerTask),
           // TODO: support value
         })),
       };

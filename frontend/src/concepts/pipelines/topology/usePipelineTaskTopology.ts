@@ -136,6 +136,11 @@ export const usePipelineTaskTopology = (
       });
     }
 
+    console.log(
+      'hello component', component
+    );
+
+    console.log('thisTaskid', taskId)
     // This task
     newTaskMapEntries[taskId] = {
       type: isGroupNode ? 'groupTask' : 'task',
@@ -176,12 +181,14 @@ export const usePipelineTaskTopology = (
       // Extract IDs and create new entries
       nestedNodes.forEach((node) => {
         const { id } = node;
+
         newTaskMapEntries[id] = {
           type: 'groupTask',
           name: id,
           steps: executor ? [executor.container] : undefined,
-          inputs: parseInputOutput(component.inputDefinitions),
-          outputs: parseInputOutput(component.outputDefinitions),
+          // TODO: render data
+          // inputs: parseInputOutput(component.dag.tasks[id]?.inputs),
+          // outputs: parseInputOutput(component.dag.tasks[id]?.inputs),
           status,
           volumeMounts: parseVolumeMounts(spec.platform_spec, executorLabel),
         };

@@ -11,7 +11,7 @@ import { Icon } from '@patternfly/react-core';
 import { genRandomChars } from '~/utilities/string';
 import { RuntimeStateKF, runtimeStateLabels } from '~/concepts/pipelines/kfTypes';
 import { RunStatusDetails } from '~/concepts/pipelines/content/utils';
-import { NODE_HEIGHT, NODE_WIDTH } from './const';
+import { EXECUTION_TASK_NODE_TYPE, NODE_HEIGHT, NODE_WIDTH } from './const';
 import { NodeConstructDetails, PipelineNodeModelExpanded } from './types';
 
 export const createNodeId = (prefix = 'node'): string => `${prefix}-${genRandomChars()}`;
@@ -54,7 +54,7 @@ export const createGroupNode = (
 ): PipelineNodeModelExpanded => ({
   id: details.id,
   label: details.id,
-  type: 'Execution',
+  type: EXECUTION_TASK_NODE_TYPE,
   group: true,
   collapsed: true,
   width: NODE_WIDTH,
