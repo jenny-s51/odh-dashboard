@@ -136,11 +136,9 @@ export const usePipelineTaskTopology = (
       });
     }
 
-    console.log(
-      'hello component', component
-    );
+    console.log('hello component', component);
 
-    console.log('thisTaskid', taskId)
+    console.log('thisTaskid', taskId);
     // This task
     newTaskMapEntries[taskId] = {
       type: isGroupNode ? 'groupTask' : 'task',

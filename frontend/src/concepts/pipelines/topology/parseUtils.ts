@@ -106,40 +106,6 @@ export const parseInputOutput = (
   return data;
 };
 
-export const parseSubTaskInputOutput = (definition: TaskKF['inputs']) => {
-  let data;
-  if (definition) {
-    const { artifacts, parameters } = definition;
-    data = {};
-
-    if (parameters) {
-      data = {
-        ...data,
-        params: Object.entries(parameters).map(
-          ([paramLabel, { componentInputParameter }]) => ({
-            label: paramLabel,
-            type: typeof(componentInputParameter),
-            // TODO: support value
-          }),
-        ),
-      };
-    }
-
-    if (artifacts) {
-      data = {
-        ...data,
-        artifacts: Object.entries(artifacts).map(([paramLabel, { taskOutputArtifact }]) => ({
-          label: paramLabel,
-          type: typeof(taskOutputArtifact?.producerTask),
-          // TODO: support value
-        })),
-      };
-    }
-  }
-
-  return data;
-};
-
 export const lowestProgress = (details: TaskDetailKF[]): PipelineTaskRunStatus['state'] => {
   const statusWeight = (status?: RuntimeStateKF) => {
     switch (status) {
