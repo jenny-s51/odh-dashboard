@@ -14,7 +14,7 @@ import { ICON_TASK_NODE_TYPE } from './utils';
 import ArtifactTaskNode from './customNodes/ArtifactTaskNode';
 import PipelineTaskEdge from './PipelineTaskEdge';
 import PipelineDefaultTaskGroup from './PipelineDefaultTaskGroup';
-import { EXECUTION_TASK_NODE_TYPE } from "./const";
+import { EXECUTION_TASK_NODE_TYPE } from './const';
 
 export const pipelineComponentFactory: ComponentFactory = (kind, type) => {
   if (kind === ModelKind.graph) {

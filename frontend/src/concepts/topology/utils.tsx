@@ -78,39 +78,39 @@ export const getNodeStatusIcon = (runStatus: RuntimeStateKF | string): RunStatus
   let label: string;
 
   switch (runStatus) {
-    case RuntimeStateKF.PENDING:
-    case RuntimeStateKF.RUNTIME_STATE_UNSPECIFIED:
+    case runtimeStateLabels[RuntimeStateKF.PENDING]:
+    case runtimeStateLabels[RuntimeStateKF.RUNTIME_STATE_UNSPECIFIED]:
     case undefined:
       icon = <NotStartedIcon />;
       label = runtimeStateLabels[RuntimeStateKF.PENDING];
       break;
-    case RuntimeStateKF.RUNNING:
+    case runtimeStateLabels[RuntimeStateKF.RUNNING]:
       icon = <SyncAltIcon />;
       label = runtimeStateLabels[RuntimeStateKF.RUNNING];
       break;
-    case RuntimeStateKF.SKIPPED:
+    case runtimeStateLabels[RuntimeStateKF.SKIPPED]:
       icon = <CheckCircleIcon />;
       label = runtimeStateLabels[RuntimeStateKF.SKIPPED];
       break;
-    case RuntimeStateKF.SUCCEEDED:
+    case runtimeStateLabels[RuntimeStateKF.SUCCEEDED]:
       icon = <CheckCircleIcon />;
       status = 'success';
       label = runtimeStateLabels[RuntimeStateKF.SUCCEEDED];
       break;
-    case RuntimeStateKF.FAILED:
+    case runtimeStateLabels[RuntimeStateKF.FAILED]:
       icon = <ExclamationCircleIcon />;
       status = 'danger';
       label = runtimeStateLabels[RuntimeStateKF.FAILED];
       break;
-    case RuntimeStateKF.CANCELING:
+    case runtimeStateLabels[RuntimeStateKF.CANCELING]:
       icon = <BanIcon />;
       label = runtimeStateLabels[RuntimeStateKF.CANCELING];
       break;
-    case RuntimeStateKF.CANCELED:
+    case runtimeStateLabels[RuntimeStateKF.CANCELED]:
       icon = <BanIcon />;
       label = runtimeStateLabels[RuntimeStateKF.CANCELED];
       break;
-    case RuntimeStateKF.PAUSED:
+    case runtimeStateLabels[RuntimeStateKF.PAUSED]:
       icon = <BanIcon />;
       label = runtimeStateLabels[RuntimeStateKF.PAUSED];
       break;
