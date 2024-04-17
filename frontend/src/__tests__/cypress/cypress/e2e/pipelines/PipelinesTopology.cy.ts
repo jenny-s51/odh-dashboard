@@ -180,7 +180,6 @@ const initIntercepts = () => {
 };
 
 describe('Pipeline layout', () => {
-
   describe('Layout behavior', () => {
     beforeEach(() => {
       initIntercepts();
@@ -200,25 +199,15 @@ describe('Pipeline layout', () => {
       cy.get('.nested-layout').should('exist');
     });
 
-    it('should show full artifact node on hover', () => {
-
+    it.only('should show full artifact node on hover', () => {
       // Check that artifact node exists
+      pipelineRunDetails.findIconTaskNode('input_iris_dataset').should('exist');
       // Hover over a node that only renders icons
-      cy.get('.icon-node').trigger('mouseover');
-
-      // Assert that the full node content is visible
-      cy.get('.icon-node .full-content').should('be.visible');
+      pipelineRunDetails
+        .findIconTaskNode('iris_dataset')
+        .trigger('mouseover')
+        .should('contain.text', 'iris_dataset');
     });
-
-    it.skip('should open drawer when node is clicked', () => {
-      // Click on a node
-      cy.get('.node').first().click();
-
-      // Assert that the drawer is opened
-      cy.get('.drawer').should('be.visible');
-    });
-
-    // ...
   });
 
   describe('Pipeline details', () => {

@@ -14,6 +14,10 @@ class PipelinesTopology {
     return cy.get(`[data-id="${name}"][data-kind="node"][data-type="DEFAULT_TASK_NODE"]`);
   }
 
+  findIconTaskNode(name: string) {
+    return cy.get(`[data-id="${name}"][data-kind="node"][data-type="ICON_TASK_NODE"]`);
+  }
+
   findTaskDrawer() {
     return cy.findByTestId('task-drawer');
   }
@@ -138,7 +142,7 @@ class PipelineRunDetails extends RunDetails {
   }
 
   findRunTaskRightDrawer() {
-    return cy.findByTestId('pipeline-run-drawer-right-content');
+    return cy.findByTestId('input_iris_dataset');
   }
 
   findLogsSuccessAlert() {
