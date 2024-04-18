@@ -7,6 +7,7 @@ import {
 import { createNode } from '~/concepts/topology';
 import { PipelineNodeModelExpanded } from '~/concepts/topology/types';
 import { createArtifactNode, createGroupNode } from '~/concepts/topology/utils';
+import { Execution } from '~/third_party/mlmd';
 import {
   composeArtifactType,
   parseComponentsForArtifactRelationship,
@@ -18,7 +19,6 @@ import {
   translateStatusForNode,
 } from './parseUtils';
 import { KubeFlowTaskTopology } from './pipelineTaskTypes';
-import { Execution } from "~/third_party/mlmd";
 
 const EMPTY_STATE: KubeFlowTaskTopology = { taskMap: {}, nodes: [] };
 
@@ -101,8 +101,8 @@ export const usePipelineTaskTopology = (
     const executor = executorLabel ? executors[executorLabel] : undefined;
 
     const status = executions
-        ? parseRuntimeInfoFromExecutions(taskId, executions)
-        : parseRuntimeInfoFromRunDetails(taskId, runDetails);
+      ? parseRuntimeInfoFromExecutions(taskId, executions)
+      : parseRuntimeInfoFromRunDetails(taskId, runDetails);
 
     const newTaskMapEntries: KubeFlowTaskTopology['taskMap'] = {};
     const nodes: PipelineNodeModelExpanded[] = [];

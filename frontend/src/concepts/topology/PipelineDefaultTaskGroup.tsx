@@ -16,8 +16,8 @@ import {
   NodeModel,
   useHover,
 } from '@patternfly/react-topology';
-import { NODE_HEIGHT, NODE_WIDTH } from './const';
 import { Icon, Popover } from '@patternfly/react-core';
+import { NODE_HEIGHT, NODE_WIDTH } from './const';
 import { getNodeStatusIcon } from './utils';
 
 type PipelinesDefaultGroupProps = {
