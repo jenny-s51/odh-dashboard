@@ -16,6 +16,8 @@ const PipelineTaskDetails: React.FC<TaskDetailsProps> = ({ task }) => {
     groupAlert = <Alert isInline variant="info" title="Content may be missing" />;
   }
 
+  console.log('what is task', task);
+
   if (!task.inputs && !task.outputs && !task.steps) {
     return (
       <Stack hasGutter>

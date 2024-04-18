@@ -54,6 +54,7 @@ const PipelineDetails: PipelineCoreDetailsPageComponent = ({ breadcrumbPath }) =
   const { taskMap, nodes } = usePipelineTaskTopology(pipelineVersion?.pipeline_spec);
   const isLoaded = isPipelineVersionLoaded && isPipelineLoaded && !!pipelineVersion?.pipeline_spec;
 
+
   if (pipelineVersionLoadError || pipelineLoadError) {
     const title = 'Pipeline version not found';
 
@@ -73,6 +74,8 @@ const PipelineDetails: PipelineCoreDetailsPageComponent = ({ breadcrumbPath }) =
       </ApplicationsPage>
     );
   }
+
+  console.log('taskMap', taskMap);
 
   return (
     <>

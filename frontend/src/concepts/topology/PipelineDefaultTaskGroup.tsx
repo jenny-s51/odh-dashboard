@@ -72,7 +72,7 @@ const DefaultTaskGroupInner: React.FunctionComponent<PipelinesDefaultGroupInnerP
                 onSelect={onSelect}
                 hideDetailsAtMedium
                 showStatusState
-                status={element.getData().status}
+                status={element.getData()?.status}
                 hiddenDetailsShownStatuses={[
                   RunStatus.Succeeded,
                   RunStatus.Pending,

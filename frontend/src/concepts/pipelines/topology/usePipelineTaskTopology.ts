@@ -1,7 +1,11 @@
-import { PipelineSpecVariable, RunDetailsKF, TaskKF, PipelineComponentsKF } from '~/concepts/pipelines/kfTypes';
+import {
+  PipelineComponentsKF,
+  PipelineSpecVariable,
+  RunDetailsKF,
+  TaskKF,
+} from '~/concepts/pipelines/kfTypes';
 import { createNode } from '~/concepts/topology';
 import { PipelineNodeModelExpanded } from '~/concepts/topology/types';
-import { Execution } from '~/third_party/mlmd';
 import { createArtifactNode, createGroupNode } from '~/concepts/topology/utils';
 import {
   composeArtifactType,
@@ -14,6 +18,7 @@ import {
   translateStatusForNode,
 } from './parseUtils';
 import { KubeFlowTaskTopology } from './pipelineTaskTypes';
+import { Execution } from "~/third_party/mlmd";
 
 const EMPTY_STATE: KubeFlowTaskTopology = { taskMap: {}, nodes: [] };
 
@@ -95,7 +100,9 @@ export const usePipelineTaskTopology = (
     const executorLabel = component?.executorLabel;
     const executor = executorLabel ? executors[executorLabel] : undefined;
 
-      const status = executions
+    console.log('what are components', components);
+
+    const status = executions
         ? parseRuntimeInfoFromExecutions(taskId, executions)
         : parseRuntimeInfoFromRunDetails(taskId, runDetails);
 
@@ -134,6 +141,7 @@ export const usePipelineTaskTopology = (
       });
     }
 
+    console.log('what is component', component);
     // This task
     newTaskMapEntries[taskId] = {
       type: isGroupNode ? 'groupTask' : 'task',
