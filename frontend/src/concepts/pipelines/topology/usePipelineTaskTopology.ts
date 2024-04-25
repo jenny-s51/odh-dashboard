@@ -1,5 +1,6 @@
 import {
   PipelineComponentsKF,
+  PipelineExecutorsKF,
   PipelineSpecVariable,
   RunDetailsKF,
   TaskKF,
@@ -18,13 +19,15 @@ import {
   parseVolumeMounts,
   translateStatusForNode,
 } from './parseUtils';
-import { KubeFlowTaskTopology } from './pipelineTaskTypes';
+import { PipelineTask } from './pipelineTaskTypes';
 
-const EMPTY_STATE: KubeFlowTaskTopology = { taskMap: {}, nodes: [] };
+const EMPTY_STATE: PipelineNodeModelExpanded[] = [];
 
 const getNestedNodes = (
+  spec: PipelineSpecVariable,
   items: Record<string, TaskKF>,
   components: PipelineComponentsKF,
+  executors: PipelineExecutorsKF,
   runDetails?: RunDetailsKF,
 ): [nestedNodes: PipelineNodeModelExpanded[], children: string[]] => {
   const nodes: PipelineNodeModelExpanded[] = [];
@@ -32,33 +35,41 @@ const getNestedNodes = (
 
   Object.entries(items).forEach(([name, details]) => {
     const componentRef = details.componentRef.name;
+    const component = components[componentRef];
     const status = parseRuntimeInfoFromRunDetails(name, runDetails);
     const runAfter: string[] = details.dependentTasks ?? [];
     const hasSubTask =
       Object.keys(components).find((task) => task === componentRef) &&
       components[componentRef]?.dag;
     const subTasks = components[componentRef]?.dag?.tasks;
+    const executorLabel = component?.executorLabel;
+    const executor = executorLabel ? executors[executorLabel] : undefined;
+
+    const pipelineTask: PipelineTask = {
+      type: 'groupTask',
+      name,
+      steps: executor ? [executor.container] : undefined,
+      inputs: parseInputOutput(component?.inputDefinitions),
+      outputs: parseInputOutput(component?.outputDefinitions),
+      status,
+      volumeMounts: parseVolumeMounts(spec.platform_spec, executorLabel),
+    };
 
     if (hasSubTask && subTasks) {
-      const [nestedNodes, nestedChildren] = getNestedNodes(subTasks, components);
+      const [nestedNodes, nestedChildren] = getNestedNodes(spec, subTasks, components, executors);
+
       const itemNode = createGroupNode(
-        {
-          id: name,
-          label: name,
-          runAfter,
-          status: translateStatusForNode(status?.state),
-        },
+        name,
+        name,
+        pipelineTask,
+        runAfter,
+        translateStatusForNode(status?.state),
         nestedChildren,
       );
       nodes.push(itemNode, ...nestedNodes);
     } else {
       nodes.push(
-        createNode({
-          id: name,
-          label: name,
-          runAfter,
-          status: translateStatusForNode(status?.state),
-        }),
+        createNode(name, name, pipelineTask, runAfter, translateStatusForNode(status?.state)),
       );
     }
     children.push(name);
@@ -71,7 +82,7 @@ export const usePipelineTaskTopology = (
   spec?: PipelineSpecVariable,
   runDetails?: RunDetailsKF,
   executions?: Execution[] | null,
-): KubeFlowTaskTopology => {
+): PipelineNodeModelExpanded[] => {
   if (!spec) {
     return EMPTY_STATE;
   }
@@ -88,7 +99,7 @@ export const usePipelineTaskTopology = (
   const componentArtifactMap = parseComponentsForArtifactRelationship(components);
   const taskArtifactMap = parseTasksForArtifactRelationship(tasks);
 
-  return Object.entries(tasks).reduce<KubeFlowTaskTopology>((acc, [taskId, taskValue]) => {
+  return Object.entries(tasks).reduce<PipelineNodeModelExpanded[]>((acc, [taskId, taskValue]) => {
     const taskName = taskValue.taskInfo.name;
 
     const componentRef = taskValue.componentRef.name;
@@ -104,7 +115,6 @@ export const usePipelineTaskTopology = (
       ? parseRuntimeInfoFromExecutions(taskId, executions)
       : parseRuntimeInfoFromRunDetails(taskId, runDetails);
 
-    const newTaskMapEntries: KubeFlowTaskTopology['taskMap'] = {};
     const nodes: PipelineNodeModelExpanded[] = [];
     const runAfter: string[] = taskValue.dependentTasks ?? [];
 
@@ -119,36 +129,27 @@ export const usePipelineTaskTopology = (
         // if no node needs it as an input, we don't really need a well known id
         const id = artifactId ?? artifactKey;
 
-        nodes.push(
-          createArtifactNode({
-            id,
-            label,
-            artifactType: data.schemaTitle,
-            runAfter: [taskId],
-            status: translateStatusForNode(status?.state),
-          }),
-        );
-
-        newTaskMapEntries[id] = {
+        const pipelineTask: PipelineTask = {
           type: 'artifact',
           name: label,
           inputs: {
             artifacts: [{ label: id, type: composeArtifactType(data) }],
           },
         };
+
+        nodes.push(
+          createArtifactNode(
+            id,
+            label,
+            pipelineTask,
+            [taskId],
+            translateStatusForNode(status?.state),
+            data.schemaTitle,
+          ),
+        );
       });
     }
 
-    // This task
-    newTaskMapEntries[taskId] = {
-      type: isGroupNode ? 'groupTask' : 'task',
-      name: taskName,
-      steps: executor ? [executor.container] : undefined,
-      inputs: parseInputOutput(component?.inputDefinitions),
-      outputs: parseInputOutput(component?.outputDefinitions),
-      status,
-      volumeMounts: parseVolumeMounts(spec.platform_spec, executorLabel),
-    };
     if (taskValue.dependentTasks) {
       // This task's runAfters may need artifact relationships -- find those artifactIds
       runAfter.push(
@@ -162,52 +163,40 @@ export const usePipelineTaskTopology = (
       );
     }
 
+    const pipelineTask: PipelineTask = {
+      type: isGroupNode ? 'groupTask' : 'task',
+      name: taskName,
+      steps: executor ? [executor.container] : undefined,
+      inputs: parseInputOutput(component?.inputDefinitions),
+      outputs: parseInputOutput(component?.outputDefinitions),
+      status,
+      volumeMounts: parseVolumeMounts(spec.platform_spec, executorLabel),
+    };
+
     // This task's rendering information
     if (isGroupNode && groupTasks) {
-      const [nestedNodes, children] = getNestedNodes(groupTasks, components, runDetails);
+      const [nestedNodes, children] = getNestedNodes(
+        spec,
+        groupTasks,
+        components,
+        executors,
+        runDetails,
+      );
       const itemNode = createGroupNode(
-        {
-          id: taskId,
-          label: taskName,
-          runAfter,
-          status: translateStatusForNode(status?.state),
-        },
+        taskId,
+        taskName,
+        pipelineTask,
+        runAfter,
+        translateStatusForNode(status?.state),
         children,
       );
       nodes.push(itemNode, ...nestedNodes);
-
-      // Extract IDs and create new entries
-      nestedNodes.forEach((node) => {
-        const { id } = node;
-
-        newTaskMapEntries[id] = {
-          type: 'groupTask',
-          name: id,
-          steps: executor ? [executor.container] : undefined,
-          // TODO: render/parse sidebar data
-          // inputs: parseInputOutput(component.dag.tasks[id]?.inputs),
-          // outputs: parseInputOutput(component.dag.tasks[id]?.inputs),
-          status,
-          volumeMounts: parseVolumeMounts(spec.platform_spec, executorLabel),
-        };
-      });
     } else {
       nodes.push(
-        createNode({
-          id: taskId,
-          label: taskName,
-          runAfter,
-          status: translateStatusForNode(status?.state),
-        }),
+        createNode(taskId, taskName, pipelineTask, runAfter, translateStatusForNode(status?.state)),
       );
     }
 
-    return {
-      taskMap: {
-        ...acc.taskMap,
-        ...newTaskMapEntries,
-      },
-      nodes: [...acc.nodes, ...nodes],
-    };
-  }, EMPTY_STATE);
+    return [...acc, ...nodes];
+  }, []);
 };

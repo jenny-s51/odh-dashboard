@@ -29,11 +29,10 @@ type IconTaskNodeProps = {
 
 const IconTaskNode: React.FC<IconTaskNodeProps> = observer(({ element, selected, onSelect }) => {
   const data = element.getData();
-  const status = data?.status;
   const bounds = element.getBounds();
   const iconSize = bounds.height - ICON_PADDING * 2;
 
-  const runStatusModifier = status && getRunStatusModifier(status);
+  const runStatusModifier = data?.runStatus && getRunStatusModifier(data.runStatus);
 
   useAnchor(
     React.useCallback(
@@ -98,8 +97,12 @@ const ArtifactTaskNodeInner: React.FC<ArtifactTaskNodeInnerProps> = observer(
     const data = element.getData();
     const scale = element.getGraph().getScale();
     const iconSize = 24;
-    const whenDecorator = data?.whenStatus ? (
-      <WhenDecorator element={element} status={data.whenStatus} leftOffset={DEFAULT_WHEN_OFFSET} />
+    const whenDecorator = data?.pipelineTask.whenStatus ? (
+      <WhenDecorator
+        element={element}
+        status={data.pipelineTask.whenStatus}
+        leftOffset={DEFAULT_WHEN_OFFSET}
+      />
     ) : null;
     const upScale = 1 / scale;
 
@@ -119,7 +122,7 @@ const ArtifactTaskNodeInner: React.FC<ArtifactTaskNodeInnerProps> = observer(
               selected={selected}
               onSelect={onSelect}
               hiddenDetailsShownStatuses={[]}
-              status={data?.status}
+              status={data?.runStatus}
               scaleNode={isHover}
               {...rest}
             >

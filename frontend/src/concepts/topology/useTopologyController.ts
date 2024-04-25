@@ -3,13 +3,16 @@ import {
   Graph,
   GRAPH_LAYOUT_END_EVENT,
   Layout,
-  NODE_SEPARATION_HORIZONTAL,
   PipelineDagreGroupsLayout,
   Visualization,
 } from '@patternfly/react-topology';
 import pipelineElementFactory from '@patternfly/react-topology/dist/esm/pipelines/elements/pipelineElementFactory';
 import { pipelineComponentFactory } from './factories';
-import { PIPELINE_LAYOUT, PIPELINE_NODE_SEPARATION_VERTICAL } from './const';
+import {
+  PIPELINE_LAYOUT,
+  PIPELINE_NODE_SEPARATION_HORIZONTAL,
+  PIPELINE_NODE_SEPARATION_VERTICAL,
+} from './const';
 
 const useTopologyController = (graphId: string): Visualization | null => {
   const [controller, setController] = React.useState<Visualization | null>(null);
@@ -22,8 +25,8 @@ const useTopologyController = (graphId: string): Visualization | null => {
     visualizationController.registerLayoutFactory(
       (type: string, graph: Graph): Layout | undefined =>
         new PipelineDagreGroupsLayout(graph, {
-          nodesep: PIPELINE_NODE_SEPARATION_VERTICAL,
-          ranksep: NODE_SEPARATION_HORIZONTAL,
+          nodesep: PIPELINE_NODE_SEPARATION_HORIZONTAL,
+          ranksep: PIPELINE_NODE_SEPARATION_VERTICAL,
           ignoreGroups: true,
           rankdir: 'TB',
         }),
