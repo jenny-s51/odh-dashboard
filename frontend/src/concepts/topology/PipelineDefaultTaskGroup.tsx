@@ -42,7 +42,7 @@ const DefaultTaskGroupInner: React.FunctionComponent<PipelinesDefaultGroupInnerP
           <StackItem key={item.getId()}>
             <Flex gap={{ default: 'gapXs' }}>
               <FlexItem>
-                <NodeStatusIcon runStatus={item.getData()?.status} />
+                <NodeStatusIcon runStatus={item.getData()?.runStatus} />
               </FlexItem>
               <FlexItem>{item.getLabel()}</FlexItem>
             </Flex>
