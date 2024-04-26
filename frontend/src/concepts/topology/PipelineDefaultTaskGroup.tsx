@@ -42,7 +42,7 @@ const DefaultTaskGroupInner: React.FunctionComponent<PipelinesDefaultGroupInnerP
           <StackItem key={item.getId()}>
             <Flex gap={{ default: 'gapXs' }}>
               <FlexItem>
-                <NodeStatusIcon runStatus={item.getData()?.status} />
+                <NodeStatusIcon runStatus={item.getData()?.runStatus} />
               </FlexItem>
               <FlexItem>{item.getLabel()}</FlexItem>
             </Flex>
@@ -73,6 +73,8 @@ const DefaultTaskGroupInner: React.FunctionComponent<PipelinesDefaultGroupInnerP
         collapsedWidth={NODE_WIDTH}
       />
     );
+
+    console.log("get all node children", element.getAllNodeChildren());
 
     return (
       <Layer id={detailsLevel !== ScaleDetailsLevel.high && hover ? TOP_LAYER : DEFAULT_LAYER}>
