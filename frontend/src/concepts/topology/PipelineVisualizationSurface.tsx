@@ -42,6 +42,17 @@ const PipelineVisualizationSurface: React.FC<PipelineVisualizationSurfaceProps> 
 
     const spacerNodes = getSpacerNodes(updateNodes);
 
+    // find the parent of each spacer node
+    spacerNodes.forEach((spacerNode) => {
+      const nodeIds = spacerNode.id.split('|');
+      if (nodeIds[0]) {
+        const parent = updateNodes.find((n) => n.children?.includes(nodeIds[0]));
+        if (parent) {
+          parent.children?.push(spacerNode.id);
+        }
+      }
+    });
+
     // Dagre likes the root nodes to be first in the order
     const renderNodes = [...spacerNodes, ...updateNodes].sort(
       (a, b) => (a.runAfterTasks?.length ?? 0) - (b.runAfterTasks?.length ?? 0),

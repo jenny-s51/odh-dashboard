@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import {
-  LabelPosition,
   WithSelectionProps,
   isNode,
   DefaultTaskGroup,
@@ -22,6 +21,8 @@ import { PipelineNodeModelExpanded, StandardTaskNodeData } from '~/concepts/topo
 import NodeStatusIcon from '~/concepts/topology/NodeStatusIcon';
 import { NODE_HEIGHT, NODE_WIDTH } from './const';
 
+const MAX_TIP_ITEMS = 6;
+
 type PipelinesDefaultGroupProps = {
   element: GraphElement<PipelineNodeModelExpanded>;
 } & WithSelectionProps;
@@ -36,20 +37,15 @@ const DefaultTaskGroupInner: React.FunctionComponent<PipelinesDefaultGroupInnerP
     const popoverRef = React.useRef<SVGGElement>(null);
     const detailsLevel = element.getGraph().getDetailsLevel();
 
-    const MAX_TIP_ITEMS = 6;
-
     const getPopoverTasksList = (items: Node<NodeModel>[]) => (
       <Stack hasGutter>
         {items.slice(0, MAX_TIP_ITEMS).map((item: Node) => (
           <StackItem key={item.getId()}>
-            <Flex gap={{ default: 'gapXs' }}>
-              {item.getData()?.runStatus && (
-                <FlexItem style={{ flex: '0' }}>
-                  <NodeStatusIcon runStatus={item.getData()?.runStatus} />
-                </FlexItem>
-              )}
-              {!item.getData()?.runStatus && <div style={{ width: '20px' }}>&nbsp;</div>}
-              <FlexItem style={{ flex: '1' }}>{item.getLabel()}</FlexItem>
+            <Flex gap={{ default: 'gapXs' }} alignItems={{ default: 'alignItemsCenter' }}>
+              <FlexItem style={{ flex: '0', width: 26 }}>
+                <NodeStatusIcon runStatus={item.getData()?.runStatus} />
+              </FlexItem>
+              <FlexItem style={{ flex: '1', marginLeft: 4 }}>{item.getLabel()}</FlexItem>
             </Flex>
           </StackItem>
         ))}
@@ -61,7 +57,6 @@ const DefaultTaskGroupInner: React.FunctionComponent<PipelinesDefaultGroupInnerP
 
     const groupNode = (
       <DefaultTaskGroup
-        labelPosition={LabelPosition.top}
         element={element}
         collapsible
         recreateLayoutOnCollapseChange
