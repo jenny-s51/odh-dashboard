@@ -15,6 +15,7 @@ import {
   PipelineRunKFv2,
   PipelineVersionKFv2,
   RuntimeStateKF,
+  StorageStateKF,
   runtimeStateLabels,
 } from '~/concepts/pipelines/kfTypes';
 import { relativeTime } from '~/utilities/time';
@@ -30,7 +31,11 @@ export type RunStatusDetails = {
 const UNKNOWN_ICON = <QuestionCircleIcon />;
 const UNKNOWN_STATUS = 'warning';
 
+export const getStorageState = (run?: PipelineRunKFv2 | null): StorageStateKF | undefined => run?.storage_state;
+
 export const computeRunStatus = (run?: PipelineRunKFv2 | null): RunStatusDetails => {
+
+  console.log("what is run", run);
   if (!run) {
     return { icon: UNKNOWN_ICON, status: UNKNOWN_STATUS, label: '-' };
   }
