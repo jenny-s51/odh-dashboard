@@ -1,6 +1,13 @@
 import React from 'react';
 
-import { Tabs, Tab, TabTitleText, TabContentBody, TabContent } from '@patternfly/react-core';
+import {
+  Tabs,
+  Tab,
+  TabTitleText,
+  TabContentBody,
+  TabContent,
+  PageSection,
+} from '@patternfly/react-core';
 
 import PipelineDetailsYAML from '~/concepts/pipelines/content/pipelinesDetails/PipelineDetailsYAML';
 import {
@@ -32,7 +39,12 @@ export const PipelineRunDetailsTabs: React.FC<PipelineRunDetailsTabsProps> = ({
   const isJob = run && isPipelineRunJob(run);
 
   return (
-    <>
+    <PageSection
+      isFilled
+      padding={{ default: 'noPadding' }}
+      style={{ flexBasis: 0, overflowY: 'hidden' }}
+      variant="light"
+    >
       <Tabs
         activeKey={activeKey}
         onSelect={(_, eventKey) => setActiveKey(eventKey)}
@@ -45,7 +57,6 @@ export const PipelineRunDetailsTabs: React.FC<PipelineRunDetailsTabsProps> = ({
           aria-label="Run graph tab"
           data-testid="pipeline-run-tab-graph"
         />
-
         <Tab
           eventKey={DetailsTabKey.Details}
           title={<TabTitleText>Details</TabTitleText>}
@@ -56,7 +67,6 @@ export const PipelineRunDetailsTabs: React.FC<PipelineRunDetailsTabsProps> = ({
             <PipelineRunTabDetails workflowName={run?.display_name} run={run} />
           </TabContentBody>
         </Tab>
-
         {!isJob && pipelineSpec && (
           <Tab
             eventKey={DetailsTabKey.Spec}
@@ -68,26 +78,25 @@ export const PipelineRunDetailsTabs: React.FC<PipelineRunDetailsTabsProps> = ({
         )}
       </Tabs>
 
-      <div style={{ flex: 1 }} hidden={activeKey !== DetailsTabKey.Graph}>
-        <TabContent
-          id={DetailsTabKey.Graph}
-          eventKey={DetailsTabKey.Graph}
-          className="pf-v5-u-h-100"
-        >
-          <TabContentBody className="pf-v5-u-h-100">{graphContent}</TabContentBody>
-        </TabContent>
-      </div>
-
+      <TabContent
+        id={DetailsTabKey.Graph}
+        eventKey={DetailsTabKey.Graph}
+        className="pf-v5-u-h-100"
+        hidden={activeKey !== DetailsTabKey.Graph}
+      >
+        <TabContentBody className="pf-v5-u-h-100">{graphContent}</TabContentBody>
+      </TabContent>
       <TabContent
         id={DetailsTabKey.Spec}
         eventKey={DetailsTabKey.Spec}
         hidden={activeKey !== DetailsTabKey.Spec}
+        className="pf-v5-u-h-100"
         style={{ flex: 1 }}
       >
         <TabContentBody className="pf-v5-u-h-100" hasPadding>
           <PipelineDetailsYAML filename={run?.display_name} content={pipelineSpec} />
         </TabContentBody>
       </TabContent>
-    </>
+    </PageSection>
   );
 };
