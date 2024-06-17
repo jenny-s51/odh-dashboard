@@ -76,75 +76,72 @@ const PipelineRunJobDetails: PipelineCoreDetailsPageComponent = ({
     );
   }
 
+  const panelContent = selectedId ? (
+    <SelectedTaskDrawerContent
+      task={selectedNode?.data.pipelineTask}
+      onClose={() => setSelectedId(null)}
+    />
+  ) : null;
+
   return (
     <>
-      <Drawer isExpanded={!!selectedNode}>
-        <DrawerContent
-          panelContent={
-            <SelectedTaskDrawerContent
-              task={selectedNode?.data.pipelineTask}
-              onClose={() => setSelectedId(null)}
+      <ApplicationsPage
+        title={job?.display_name}
+        description={job ? <MarkdownView conciseDisplay markdown={job.description} /> : ''}
+        loaded={loaded}
+        loadError={error}
+        breadcrumb={
+          <Breadcrumb>
+            {breadcrumbPath(PipelineRunType.SCHEDULED)}
+            <BreadcrumbItem isActive style={{ maxWidth: 300 }}>
+              {version ? (
+                <Link
+                  to={routePipelineVersionRunsNamespace(
+                    namespace,
+                    version.pipeline_id,
+                    version.pipeline_version_id,
+                    PipelineRunType.SCHEDULED,
+                  )}
+                >
+                  {version.display_name}
+                </Link>
+              ) : (
+                'Loading...'
+              )}
+            </BreadcrumbItem>
+            <BreadcrumbItem isActive>{job?.display_name ?? 'Loading...'}</BreadcrumbItem>
+          </Breadcrumb>
+        }
+        headerAction={
+          loaded && (
+            <PipelineRunJobDetailsActions
+              job={job ?? undefined}
+              onDelete={() => setDeleting(true)}
+            />
+          )
+        }
+        empty={false}
+      >
+        <PipelineRunDetailsTabs
+          run={job}
+          pipelineSpec={version?.pipeline_spec}
+          graphContent={
+            <PipelineTopology
+              nodes={nodes}
+              sidePanel={panelContent}
+              selectedIds={selectedId ? [selectedId] : []}
+              onSelectionChange={(ids) => {
+                const firstId = ids[0];
+                if (ids.length === 0) {
+                  setSelectedId(null);
+                } else if (getFirstNode(firstId)) {
+                  setSelectedId(firstId);
+                }
+              }}
             />
           }
-        >
-          <ApplicationsPage
-            title={job?.display_name}
-            description={job ? <MarkdownView conciseDisplay markdown={job.description} /> : ''}
-            loaded={loaded}
-            loadError={error}
-            breadcrumb={
-              <Breadcrumb>
-                {breadcrumbPath(PipelineRunType.SCHEDULED)}
-                <BreadcrumbItem isActive style={{ maxWidth: 300 }}>
-                  {version ? (
-                    <Link
-                      to={routePipelineVersionRunsNamespace(
-                        namespace,
-                        version.pipeline_id,
-                        version.pipeline_version_id,
-                        PipelineRunType.SCHEDULED,
-                      )}
-                    >
-                      {version.display_name}
-                    </Link>
-                  ) : (
-                    'Loading...'
-                  )}
-                </BreadcrumbItem>
-                <BreadcrumbItem isActive>{job?.display_name ?? 'Loading...'}</BreadcrumbItem>
-              </Breadcrumb>
-            }
-            headerAction={
-              loaded && (
-                <PipelineRunJobDetailsActions
-                  job={job ?? undefined}
-                  onDelete={() => setDeleting(true)}
-                />
-              )
-            }
-            empty={false}
-          >
-            <PipelineRunDetailsTabs
-              run={job}
-              pipelineSpec={version?.pipeline_spec}
-              graphContent={
-                <PipelineTopology
-                  nodes={nodes}
-                  selectedIds={selectedId ? [selectedId] : []}
-                  onSelectionChange={(ids) => {
-                    const firstId = ids[0];
-                    if (ids.length === 0) {
-                      setSelectedId(null);
-                    } else if (getFirstNode(firstId)) {
-                      setSelectedId(firstId);
-                    }
-                  }}
-                />
-              }
-            />
-          </ApplicationsPage>
-        </DrawerContent>
-      </Drawer>
+        />
+      </ApplicationsPage>
 
       <DeletePipelineRunsModal
         type={PipelineRunType.SCHEDULED}

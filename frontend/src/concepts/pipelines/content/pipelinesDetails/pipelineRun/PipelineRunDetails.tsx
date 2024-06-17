@@ -96,94 +96,88 @@ const PipelineRunDetails: PipelineCoreDetailsPageComponent = ({ breadcrumbPath, 
   const runType =
     run?.storage_state === StorageStateKF.ARCHIVED ? PipelineRunType.ARCHIVED : undefined;
 
+  const panelContent = selectedId ? (
+    <PipelineRunDrawerRightContent
+      task={selectedNode?.data.pipelineTask}
+      upstreamTaskName={selectedNode?.runAfterTasks?.[0]}
+      onClose={() => setSelectedId(null)}
+      executions={executions}
+    />
+  ) : null;
+
   return (
     <>
-      <Drawer isExpanded={!!selectedNode}>
-        <DrawerContent
-          panelContent={
-            <PipelineRunDrawerRightContent
-              task={selectedNode?.data.pipelineTask}
-              upstreamTaskName={selectedNode?.runAfterTasks?.[0]}
-              onClose={() => setSelectedId(null)}
-              executions={executions}
+      <ApplicationsPage
+        title={
+          run ? <PipelineDetailsTitle run={run} statusIcon pipelineRunLabel /> : 'Error loading run'
+        }
+        subtext={
+          run && (
+            <PipelineJobReferenceName
+              runName={run.display_name}
+              recurringRunId={run.recurring_run_id}
+            />
+          )
+        }
+        description={
+          run?.description ? <MarkdownView conciseDisplay markdown={run.description} /> : ''
+        }
+        loaded={loaded}
+        loadError={error}
+        breadcrumb={
+          <Breadcrumb>
+            {breadcrumbPath(runType)}
+            <BreadcrumbItem isActive style={{ maxWidth: 300 }}>
+              {version ? (
+                <Link
+                  to={routePipelineVersionRunsNamespace(
+                    namespace,
+                    version.pipeline_id,
+                    version.pipeline_version_id,
+                    runType,
+                  )}
+                >
+                  <Truncate content={version.display_name} />
+                </Link>
+              ) : (
+                'Loading...'
+              )}
+            </BreadcrumbItem>
+            <BreadcrumbItem isActive style={{ maxWidth: 300 }}>
+              <Truncate content={run?.display_name ?? 'Loading...'} />
+            </BreadcrumbItem>
+          </Breadcrumb>
+        }
+        headerAction={
+          <PipelineRunDetailsActions
+            run={run}
+            onDelete={() => setDeleting(true)}
+            onArchive={() => setArchiving(true)}
+          />
+        }
+        empty={false}
+      >
+        <PipelineRunDetailsTabs
+          run={run}
+          pipelineSpec={version?.pipeline_spec}
+          graphContent={
+            <PipelineTopology
+              nodes={nodes}
+              sidePanel={panelContent}
+              selectedIds={selectedId ? [selectedId] : []}
+              onSelectionChange={(ids) => {
+                const firstId = ids[0];
+                if (ids.length === 0) {
+                  setSelectedId(null);
+                } else if (nodes.find((node) => node.id === firstId)) {
+                  setSelectedId(firstId);
+                }
+              }}
             />
           }
-        >
-          <ApplicationsPage
-            title={
-              run ? (
-                <PipelineDetailsTitle run={run} statusIcon pipelineRunLabel />
-              ) : (
-                'Error loading run'
-              )
-            }
-            subtext={
-              run && (
-                <PipelineJobReferenceName
-                  runName={run.display_name}
-                  recurringRunId={run.recurring_run_id}
-                />
-              )
-            }
-            description={
-              run?.description ? <MarkdownView conciseDisplay markdown={run.description} /> : ''
-            }
-            loaded={loaded}
-            loadError={error}
-            breadcrumb={
-              <Breadcrumb>
-                {breadcrumbPath(runType)}
-                <BreadcrumbItem isActive style={{ maxWidth: 300 }}>
-                  {version ? (
-                    <Link
-                      to={routePipelineVersionRunsNamespace(
-                        namespace,
-                        version.pipeline_id,
-                        version.pipeline_version_id,
-                        runType,
-                      )}
-                    >
-                      <Truncate content={version.display_name} />
-                    </Link>
-                  ) : (
-                    'Loading...'
-                  )}
-                </BreadcrumbItem>
-                <BreadcrumbItem isActive style={{ maxWidth: 300 }}>
-                  <Truncate content={run?.display_name ?? 'Loading...'} />
-                </BreadcrumbItem>
-              </Breadcrumb>
-            }
-            headerAction={
-              <PipelineRunDetailsActions
-                run={run}
-                onDelete={() => setDeleting(true)}
-                onArchive={() => setArchiving(true)}
-              />
-            }
-            empty={false}
-          >
-            <PipelineRunDetailsTabs
-              run={run}
-              pipelineSpec={version?.pipeline_spec}
-              graphContent={
-                <PipelineTopology
-                  nodes={nodes}
-                  selectedIds={selectedId ? [selectedId] : []}
-                  onSelectionChange={(ids) => {
-                    const firstId = ids[0];
-                    if (ids.length === 0) {
-                      setSelectedId(null);
-                    } else if (nodes.find((node) => node.id === firstId)) {
-                      setSelectedId(firstId);
-                    }
-                  }}
-                />
-              }
-            />
-          </ApplicationsPage>
-        </DrawerContent>
-      </Drawer>
+        />
+      </ApplicationsPage>
+
       <DeletePipelineRunsModal
         type={PipelineRunType.ARCHIVED}
         toDeleteResources={deleting && run ? [run] : []}

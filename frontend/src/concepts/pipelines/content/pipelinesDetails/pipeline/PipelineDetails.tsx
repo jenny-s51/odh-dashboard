@@ -82,18 +82,17 @@ const PipelineDetails: PipelineCoreDetailsPageComponent = ({ breadcrumbPath }) =
     );
   }
 
+  const panelContent = selectedNode ? (
+    <div>Hello world</div>
+  ) : null;
+    // <SelectedTaskDrawerContent
+    //   task={selectedNode?.data.pipelineTask}
+    //   onClose={() => setSelectedId(null)}
+    // />) : null;
+
+
   return (
     <>
-      <Drawer isExpanded={!!selectedNode}>
-        <DrawerContent
-          panelContent={
-            <SelectedTaskDrawerContent
-              task={selectedNode?.data.pipelineTask}
-              onClose={() => setSelectedId(null)}
-            />
-          }
-        >
-          <DrawerContentBody style={{ display: 'flex', flexDirection: 'column' }}>
             <ApplicationsPage
               breadcrumb={
                 <Breadcrumb>
@@ -201,6 +200,7 @@ const PipelineDetails: PipelineCoreDetailsPageComponent = ({ breadcrumbPath }) =
                   ) : (
                     <PipelineTopology
                       nodes={nodes}
+                      sidePanel={panelContent}
                       selectedIds={selectedId ? [selectedId] : []}
                       onSelectionChange={(ids) => {
                         const firstId = ids[0];
@@ -232,9 +232,6 @@ const PipelineDetails: PipelineCoreDetailsPageComponent = ({ breadcrumbPath }) =
                 </TabContent>
               </div>
             </ApplicationsPage>
-          </DrawerContentBody>
-        </DrawerContent>
-      </Drawer>
       {pipeline && (
         <DeletePipelinesModal
           isOpen={isDeletionOpen}
