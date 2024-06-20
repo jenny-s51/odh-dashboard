@@ -2,8 +2,6 @@ import * as React from 'react';
 import {
   Breadcrumb,
   BreadcrumbItem,
-  Drawer,
-  DrawerContent,
   EmptyState,
   EmptyStateIcon,
   EmptyStateVariant,
@@ -51,8 +49,6 @@ const PipelineRunJobDetails: PipelineCoreDetailsPageComponent = ({
     [selectedId, nodes],
   );
 
-  const getFirstNode = (firstId: string) => nodes.find((n) => n.id === firstId)?.data?.pipelineTask;
-
   const loaded = versionLoaded && jobLoaded;
   const error = versionError || jobError;
 
@@ -76,9 +72,9 @@ const PipelineRunJobDetails: PipelineCoreDetailsPageComponent = ({
     );
   }
 
-  const panelContent = selectedId ? (
+  const panelContent = selectedNode ? (
     <SelectedTaskDrawerContent
-      task={selectedNode?.data.pipelineTask}
+      task={selectedNode.data.pipelineTask}
       onClose={() => setSelectedId(null)}
     />
   ) : null;
@@ -128,21 +124,15 @@ const PipelineRunJobDetails: PipelineCoreDetailsPageComponent = ({
           graphContent={
             <PipelineTopology
               nodes={nodes}
-              sidePanel={panelContent}
               selectedIds={selectedId ? [selectedId] : []}
               onSelectionChange={(ids) => {
-                const firstId = ids[0];
-                if (ids.length === 0) {
-                  setSelectedId(null);
-                } else if (getFirstNode(firstId)) {
-                  setSelectedId(firstId);
-                }
+                setSelectedId(ids.length ? ids[0] : null);
               }}
+              sidePanel={panelContent}
             />
           }
         />
       </ApplicationsPage>
-
       <DeletePipelineRunsModal
         type={PipelineRunType.SCHEDULED}
         toDeleteResources={deleting && job ? [job] : []}

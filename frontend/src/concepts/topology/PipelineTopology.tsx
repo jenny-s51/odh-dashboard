@@ -53,7 +53,7 @@ const PipelineTopology: React.FC<PipelineTopologyProps> = ({
 
   return (
     <VisualizationProvider controller={controller}>
-      <PipelineVisualizationSurface sidePanel={sidePanel} nodes={nodes} selectedIds={selectedIds} />
+      <PipelineVisualizationSurface nodes={nodes} selectedIds={selectedIds} sidePanel={sidePanel} />
     </VisualizationProvider>
   );
 };

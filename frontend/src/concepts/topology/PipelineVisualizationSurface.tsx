@@ -22,7 +22,6 @@ import {
 } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { NODE_HEIGHT, NODE_WIDTH } from './const';
-import SelectedTaskDrawerContent from '../pipelines/content/pipelinesDetails/pipeline/SelectedTaskDrawerContent';
 
 type PipelineVisualizationSurfaceProps = {
   nodes: PipelineNodeModel[];
@@ -42,12 +41,11 @@ const PipelineVisualizationSurface: React.FC<PipelineVisualizationSurfaceProps> 
     let resizeTimeout: NodeJS.Timeout | null;
 
     if (selectedIds?.[0]) {
-      const selectedNode = controller?.getNodeById(selectedIds[0]);
+      const selectedNode = controller.getNodeById(selectedIds[0]);
       if (selectedNode) {
         // Use a timeout in order to allow the side panel to be shown and window size recomputed
         resizeTimeout = setTimeout(() => {
-          console.log(`======= Pan Node into view for: `,  selectedNode.getLabel());
-          controller?.getGraph().panIntoView(selectedNode, { offset: 20, minimumVisible: 100 });
+          controller.getGraph().panIntoView(selectedNode, { offset: 20, minimumVisible: 100 });
           resizeTimeout = null;
         }, 500);
       }
@@ -153,14 +151,6 @@ const PipelineVisualizationSurface: React.FC<PipelineVisualizationSurfaceProps> 
     );
   }
 
-  const topologySideBar = (
-    <TopologySideBar className="topology-example-sidebar" show={selectedIds?.length! > 0}>
-      {sidePanel}
-    </TopologySideBar>
-  );
-
-  console.log(sidePanel);
-
   return (
     <TopologyView
       controlBar={
@@ -192,8 +182,9 @@ const PipelineVisualizationSurface: React.FC<PipelineVisualizationSurfaceProps> 
           })}
         />
       }
-      sideBarOpen={!!selectedIds?.[0]}
-      sideBar={topologySideBar}
+      sideBarOpen={!!sidePanel}
+      sideBarResizable
+      sideBar={<TopologySideBar resizable>{sidePanel}</TopologySideBar>}
     >
       <VisualizationSurface state={{ selectedIds }} />
     </TopologyView>

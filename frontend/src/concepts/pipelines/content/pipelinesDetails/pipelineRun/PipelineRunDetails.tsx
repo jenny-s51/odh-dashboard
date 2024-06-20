@@ -2,8 +2,6 @@ import * as React from 'react';
 import {
   Breadcrumb,
   BreadcrumbItem,
-  Drawer,
-  DrawerContent,
   EmptyState,
   EmptyStateIcon,
   EmptyStateVariant,
@@ -96,10 +94,10 @@ const PipelineRunDetails: PipelineCoreDetailsPageComponent = ({ breadcrumbPath, 
   const runType =
     run?.storage_state === StorageStateKF.ARCHIVED ? PipelineRunType.ARCHIVED : undefined;
 
-  const panelContent = selectedId ? (
+  const panelContent = selectedNode ? (
     <PipelineRunDrawerRightContent
-      task={selectedNode?.data.pipelineTask}
-      upstreamTaskName={selectedNode?.runAfterTasks?.[0]}
+      task={selectedNode.data.pipelineTask}
+      upstreamTaskName={selectedNode.runAfterTasks?.[0]}
       onClose={() => setSelectedId(null)}
       executions={executions}
     />
@@ -163,21 +161,15 @@ const PipelineRunDetails: PipelineCoreDetailsPageComponent = ({ breadcrumbPath, 
           graphContent={
             <PipelineTopology
               nodes={nodes}
-              sidePanel={panelContent}
               selectedIds={selectedId ? [selectedId] : []}
               onSelectionChange={(ids) => {
-                const firstId = ids[0];
-                if (ids.length === 0) {
-                  setSelectedId(null);
-                } else if (nodes.find((node) => node.id === firstId)) {
-                  setSelectedId(firstId);
-                }
+                setSelectedId(ids.length ? ids[0] : null);
               }}
+              sidePanel={panelContent}
             />
           }
         />
       </ApplicationsPage>
-
       <DeletePipelineRunsModal
         type={PipelineRunType.ARCHIVED}
         toDeleteResources={deleting && run ? [run] : []}
