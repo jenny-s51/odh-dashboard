@@ -21,7 +21,9 @@ import {
   EmptyStateHeader,
 } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
+import { css } from '@patternfly/react-styles';
 import { NODE_HEIGHT, NODE_WIDTH } from './const';
+import './PipelineVisualizationSurface.scss';
 
 type PipelineVisualizationSurfaceProps = {
   nodes: PipelineNodeModel[];
@@ -159,6 +161,7 @@ const PipelineVisualizationSurface: React.FC<PipelineVisualizationSurfaceProps> 
 
   return (
     <TopologyView
+      className={css('pipeline-visualization', !!selectedNode && 'm-is-open')}
       controlBar={
         <TopologyControlBar
           controlButtons={createTopologyControlButtons({
