@@ -251,7 +251,7 @@ describe('MR Permissions', () => {
       groupTable.findTableHeaderButton('Date added').should(be.sortDescending);
     });
 
-    it('Add group', () => {
+    xit('Add group', () => {
       initIntercepts({ isEmpty: false });
       cy.interceptK8s(
         'POST',
@@ -296,7 +296,7 @@ describe('MR Permissions', () => {
       });
     });
 
-    it('Edit group', () => {
+    xit('Edit group', () => {
       initIntercepts({ isEmpty: false });
       cy.interceptK8s(
         'POST',
