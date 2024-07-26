@@ -10,7 +10,6 @@ import {
   Stack,
   StackItem,
   Content,
-  Content,
 } from '@patternfly/react-core';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { QuickStartContextValues } from '@patternfly/quickstarts';
@@ -178,9 +177,12 @@ const OdhDocCard: React.FC<OdhDocCardProps> = ({
         <Content>
           {odhDoc.spec.displayName}
           {/* Override the bold font in the title, make the subtitle lighter */}
-          <Text component="small" style={{ fontWeight: 'var(--pf-v5-global--FontWeight--normal)' }}>
+          <Content
+            component="small"
+            style={{ fontWeight: 'var(--pf-v5-global--FontWeight--normal)' }}
+          >
             by {odhDoc.spec.appDisplayName}
-          </Text>
+          </Content>
         </Content>
       </CardTitle>
       <CardBody>

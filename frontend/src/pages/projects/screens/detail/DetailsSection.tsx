@@ -10,7 +10,6 @@ import {
   Stack,
   StackItem,
   Content,
-  Content,
   Title,
 } from '@patternfly/react-core';
 import { ProjectObjectType } from '~/concepts/design/utils';
@@ -110,9 +109,7 @@ const DetailsSection: React.FC<DetailsSectionProps> = ({
                     {popover ? <FlexItem>{popover}</FlexItem> : null}
                   </Flex>
                 </FlexItem>
-                <FlexItem>
-                  <Content>{description && <Text component="p">{description}</Text>}</Content>
-                </FlexItem>
+                <FlexItem>{description && <Content component="p">{description}</Content>}</FlexItem>
               </Flex>
               <Flex direction={{ default: 'column', md: 'row' }}>
                 {actions && (

@@ -25,13 +25,13 @@ const TelemetrySettings: React.FC<TelemetrySettingsProps> = ({
       footer={
         <Content component={ContentVariants.small}>
           For more information see the{' '}
-          <Text
+          <Content
             component={ContentVariants.a}
             href="https://access.redhat.com/documentation/en-us/red_hat_openshift_data_science/1/html/managing_users_and_user_resources/usage-data-collection#usage-data-collection-notice-for-openshift-data-science"
             target="_blank"
           >
             documentation
-          </Text>
+          </Content>
           .
         </Content>
       }

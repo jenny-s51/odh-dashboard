@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PageSection, Content, Content, ContentVariants } from '@patternfly/react-core';
+import { PageSection, Content, ContentVariants } from '@patternfly/react-core';
 import { useNavigate } from 'react-router-dom';
 import CollapsibleSection from '~/concepts/design/CollapsibleSection';
 import { SectionType, sectionTypeBorderColor } from '~/concepts/design/utils';
@@ -55,11 +55,9 @@ export const useEnableTeamSection = (): React.ReactNode => {
         imgSrc={notebookImagesImage}
         sectionType={SectionType.setup}
         description={
-          <Content>
-            <Text component="small">
-              These are instances of your development and experimentation environment. They
-              typically contain IDEs, such as JupyterLab, RStudio, and Visual Studio Code.
-            </Text>
+          <Content component="small">
+            These are instances of your development and experimentation environment. They typically
+            contain IDEs, such as JupyterLab, RStudio, and Visual Studio Code.
           </Content>
         }
       />,
@@ -76,11 +74,9 @@ export const useEnableTeamSection = (): React.ReactNode => {
         imgSrc={servingRuntimesImage}
         sectionType={SectionType.setup}
         description={
-          <Content>
-            <Text component="small">
-              A model-serving runtime adds support for a specified set of model frameworks. You can
-              use a default serving runtime, or add and enable a custom serving runtime.
-            </Text>
+          <Content component="small">
+            A model-serving runtime adds support for a specified set of model frameworks. You can
+            use a default serving runtime, or add and enable a custom serving runtime.
           </Content>
         }
       />,
@@ -97,11 +93,9 @@ export const useEnableTeamSection = (): React.ReactNode => {
         imgSrc={clusterSettingsImage}
         sectionType={SectionType.setup}
         description={
-          <Content>
-            <Text component="small">
-              You can change the default size of the cluster’s persistent volume claim (PVC)
-              ensuring that the storage requested matches your common storage workflow.
-            </Text>
+          <Content component="small">
+            You can change the default size of the cluster’s persistent volume claim (PVC) ensuring
+            that the storage requested matches your common storage workflow.
           </Content>
         }
       />,
@@ -118,12 +112,11 @@ export const useEnableTeamSection = (): React.ReactNode => {
         imgSrc={userImage}
         sectionType={SectionType.setup}
         description={
-          <Content>
-            <Text component="small">
-              If you plan to restrict access to your instance by defining specialized user groups,
-              you must grant users permission access by adding user accounts to the Red Hat
-              OpenShift AI user groups, administrator groups, or both.
-            </Text>
+          // eslint-disable-next-line no-restricted-syntax
+          <Content component="small">
+            If you plan to restrict access to your instance by defining specialized user groups, you
+            must grant users permission access by adding user accounts to the Red Hat OpenShift AI
+            user groups, administrator groups, or both.
           </Content>
         }
       />,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Content, Content } from '@patternfly/react-core';
+import { Content } from '@patternfly/react-core';
 import { ProjectObjectType, SectionType, typedObjectImage } from '~/concepts/design/utils';
 import InfoGalleryItem from '~/concepts/design/InfoGalleryItem';
 import { SupportedArea } from '~/concepts/areas';
@@ -21,22 +21,20 @@ const CreateAndTrainGallery: React.FC<{ onClose: () => void }> = ({ onClose }) =
         imgSrc={typedObjectImage(ProjectObjectType.notebook)}
         sectionType={SectionType.training}
         description={
-          <Content>
-            <Text component="small">
-              A workbench is an instance of your development and experimentation environment.
-              Specify your preferred IDE for model development and training, such as Jupyter
-              Notebook; connect to data sources; add persistent storage for data retention;{' '}
-              {pipelinesAvailable ? (
-                <span data-testid="create-and-train-pipelines-trailer">
-                  assign accelerators to optimize performance; and create pipelines to automate
-                  machine learning workflows.
-                </span>
-              ) : (
-                <span data-testid="create-and-train-no-pipelines-trailer">
-                  and assign accelerators to optimize performance.
-                </span>
-              )}
-            </Text>
+          <Content component="small">
+            A workbench is an instance of your development and experimentation environment. Specify
+            your preferred IDE for model development and training, such as Jupyter Notebook; connect
+            to data sources; add persistent storage for data retention;{' '}
+            {pipelinesAvailable ? (
+              <span data-testid="create-and-train-pipelines-trailer">
+                assign accelerators to optimize performance; and create pipelines to automate
+                machine learning workflows.
+              </span>
+            ) : (
+              <span data-testid="create-and-train-no-pipelines-trailer">
+                and assign accelerators to optimize performance.
+              </span>
+            )}
           </Content>
         }
         isOpen
@@ -53,11 +51,9 @@ const CreateAndTrainGallery: React.FC<{ onClose: () => void }> = ({ onClose }) =
         imgSrc={typedObjectImage(ProjectObjectType.pipeline)}
         sectionType={SectionType.training}
         description={
-          <Content>
-            <Text component="small">
-              Pipelines streamline and automate your machine learning workflows, enabling you to
-              manage and reproduce complex tasks.
-            </Text>
+          <Content component="small">
+            Pipelines streamline and automate your machine learning workflows, enabling you to
+            manage and reproduce complex tasks.
           </Content>
         }
         isOpen
@@ -69,11 +65,9 @@ const CreateAndTrainGallery: React.FC<{ onClose: () => void }> = ({ onClose }) =
         imgSrc={typedObjectImage(ProjectObjectType.pipelineRun)}
         sectionType={SectionType.training}
         description={
-          <Content>
-            <Text component="small">
-              A run represents a single execution of all steps in a pipeline until it is complete,
-              or until a failure occurs.
-            </Text>
+          <Content component="small">
+            A run represents a single execution of all steps in a pipeline until it is complete, or
+            until a failure occurs.
           </Content>
         }
         isOpen

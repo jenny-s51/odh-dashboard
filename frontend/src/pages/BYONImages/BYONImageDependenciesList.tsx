@@ -4,7 +4,6 @@ import {
   DescriptionListGroup,
   DescriptionListTerm,
   Content,
-  Content,
 } from '@patternfly/react-core';
 
 type BYONImageDependenciesListProps = {
@@ -26,9 +25,9 @@ const BYONImageDependenciesList: React.FC<BYONImageDependenciesListProps> = ({
       <DescriptionListDescription>
         <Content>
           {dependencies.map((dep, i) => (
-            <Text style={{ marginBottom: 0 }} key={i} component="small">
+            <Content style={{ marginBottom: 0 }} key={i} component="small">
               {dep}
-            </Text>
+            </Content>
           ))}
         </Content>
       </DescriptionListDescription>

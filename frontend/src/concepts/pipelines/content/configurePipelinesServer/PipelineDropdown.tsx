@@ -7,7 +7,6 @@ import {
   Dropdown,
   MenuItemAction,
   MenuList,
-  Content,
   MenuToggle,
 } from '@patternfly/react-core';
 import React from 'react';
@@ -126,9 +125,9 @@ export const PipelineDropdown = ({
                         {existingDataConnection(dataItem)?.map(
                           (field) =>
                             field.value && (
-                              <Text key={field.key}>
+                              <Content key={field.key}>
                                 <b>{getLabelName(field.key)}</b> : {field.value}
-                              </Text>
+                              </Content>
                             ),
                         )}
                       </Content>

@@ -10,7 +10,6 @@ import {
   DrawerCloseButton,
   Tooltip,
   Content,
-  Content,
   ActionList,
   ActionListItem,
   Divider,
@@ -68,11 +67,11 @@ const GetStartedPanel: React.FC<GetStartedPanelProps> = ({ selectedApp, onClose,
     >
       <DrawerHead>
         <Content>
-          <Text component="h2" style={{ marginBottom: 0 }}>
+          <Content component="h2" style={{ marginBottom: 0 }}>
             {selectedApp.spec.displayName}
-          </Text>
+          </Content>
           {selectedApp.spec.provider ? (
-            <Text component="small">by {selectedApp.spec.provider}</Text>
+            <Content component="small">by {selectedApp.spec.provider}</Content>
           ) : null}
         </Content>
         <DrawerActions>

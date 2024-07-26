@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Flex, FlexItem, Content, Content } from '@patternfly/react-core';
+import { Button, Flex, FlexItem, Content } from '@patternfly/react-core';
 import { PipelineKFv2 } from '~/concepts/pipelines/kfTypes';
 import { ProjectKind } from '~/k8sTypes';
 import { ProjectSectionID } from '~/pages/projects/screens/detail/types';
@@ -34,10 +34,8 @@ const PipelineCardItems: React.FC<PipelineCardItemsProps> = ({
       ))}
       <Flex key="count" gap={{ default: 'gapMd' }}>
         <FlexItem>
-          <Content>
-            <Text component="small">
-              {listItems.length} of {totalCount} pipelines
-            </Text>
+          <Content component="small">
+            {listItems.length} of {totalCount} pipelines
           </Content>
         </FlexItem>
         <FlexItem>

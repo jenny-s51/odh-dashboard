@@ -14,13 +14,13 @@ type UnauthorizedErrorProps = {
   error: Error;
   testId?: string;
 };
-const UnknownError: React.FC<UnauthorizedErrorProps> = ({ titleText, error, testId }) => (
-  <PageSection
-    hasBodyWrapper={false}
-    isFilled
-    variant={PageSectionVariants.default}
-    data-testid={testId}
-  >
+const UnknownError: React.FC<UnauthorizedErrorProps> = ({
+  variant = PageSectionVariants.default,
+  titleText,
+  error,
+  testId,
+}) => (
+  <PageSection hasBodyWrapper={false} isFilled variant={variant} data-testid={testId}>
     <EmptyState
       headingLevel="h5"
       icon={ErrorCircleOIcon}

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Content,
-  Content,
   ContentVariants,
   Timestamp,
   TimestampTooltipVariant,
@@ -29,13 +28,13 @@ const AcceleratorProfilesTableRow: React.FC<AcceleratorProfilesTableRowType> = (
     <Tr>
       <Td dataLabel="Name">
         <Content>
-          <Text>
+          <Content>
             <Truncate content={acceleratorProfile.spec.displayName} />
-          </Text>
+          </Content>
           {acceleratorProfile.spec.description && (
-            <Text data-testid="description" component={ContentVariants.small}>
+            <Content data-testid="description" component={ContentVariants.small}>
               <Truncate content={acceleratorProfile.spec.description} />
-            </Text>
+            </Content>
           )}
         </Content>
       </Td>

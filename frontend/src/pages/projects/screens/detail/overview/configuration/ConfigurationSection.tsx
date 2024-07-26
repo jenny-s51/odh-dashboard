@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Content, Content } from '@patternfly/react-core';
+import { Content } from '@patternfly/react-core';
 import { useAccessReview } from '~/api';
 import { AccessReviewResourceAttributes } from '~/k8sTypes';
 import { SupportedArea, useIsAreaAvailable } from '~/concepts/areas';
@@ -55,11 +55,9 @@ const ConfigurationSection: React.FC = () => {
           imgSrc={typedObjectImage(ProjectObjectType.clusterStorage)}
           title="Cluster storage"
           description={
-            <Content>
-              <Text component="small">
-                To save your project data, you can add cluster storage and optionally connect the
-                storage to a workbench.
-              </Text>
+            <Content component="small">
+              To save your project data, you can add cluster storage and optionally connect the
+              storage to a workbench.
             </Content>
           }
           isOpen={open}
@@ -74,12 +72,10 @@ const ConfigurationSection: React.FC = () => {
           imgSrc={typedObjectImage(ProjectObjectType.dataConnection)}
           title="Data connections"
           description={
-            <Content>
-              <Text component="small">
-                You can add data connections to workbenches to connect your project to data inputs
-                and object storage buckets. You can also use data connections to specify the
-                location of your models during deployment.
-              </Text>
+            <Content component="small">
+              You can add data connections to workbenches to connect your project to data inputs and
+              object storage buckets. You can also use data connections to specify the location of
+              your models during deployment.
             </Content>
           }
           isOpen={open}
@@ -95,8 +91,8 @@ const ConfigurationSection: React.FC = () => {
             title="Permissions"
             imgSrc={typedObjectImage(ProjectObjectType.group)}
             description={
-              <Content>
-                <Text component="small">Add users and groups to share access to your project.</Text>
+              <Content component="small">
+                Add users and groups to share access to your project.
               </Content>
             }
             isOpen={open}

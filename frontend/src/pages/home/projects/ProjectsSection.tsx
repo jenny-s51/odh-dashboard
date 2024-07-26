@@ -10,7 +10,6 @@ import {
   Stack,
   StackItem,
   Content,
-  Content,
 } from '@patternfly/react-core';
 import { useNavigate } from 'react-router-dom';
 import useDimensions from 'react-cool-dimensions';
@@ -108,12 +107,10 @@ const ProjectsSection: React.FC = () => {
           <Flex gap={{ default: 'gapMd' }} alignItems={{ default: 'alignItemsCenter' }}>
             <FlexItem>
               {shownProjects.length ? (
-                <Content>
-                  <Text component="small">
-                    {shownProjects.length < projects.length
-                      ? `${shownProjects.length} of ${projects.length} projects`
-                      : 'Showing all projects'}
-                  </Text>
+                <Content component="small">
+                  {shownProjects.length < projects.length
+                    ? `${shownProjects.length} of ${projects.length} projects`
+                    : 'Showing all projects'}
                 </Content>
               ) : null}
             </FlexItem>

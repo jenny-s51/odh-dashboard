@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Flex, FlexItem, Content, Content, ContentVariants } from '@patternfly/react-core';
+import { Button, Flex, FlexItem, Content, ContentVariants } from '@patternfly/react-core';
 import { AngleDownIcon, AngleRightIcon } from '@patternfly/react-icons';
 
 interface CollapsibleSectionProps {
@@ -56,10 +56,8 @@ const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({
           />
         </FlexItem>
         <FlexItem>
-          <Content>
-            <Text id={titleId} component={titleVariant}>
-              {title}
-            </Text>
+          <Content id={titleId} component={titleVariant}>
+            {title}
           </Content>
         </FlexItem>
       </Flex>

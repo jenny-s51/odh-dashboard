@@ -1,13 +1,5 @@
 import * as React from 'react';
-import {
-  Button,
-  CardBody,
-  CardFooter,
-  Flex,
-  FlexItem,
-  Content,
-  Content,
-} from '@patternfly/react-core';
+import { Button, CardBody, CardFooter, Flex, FlexItem, Content } from '@patternfly/react-core';
 
 type MetricsCardProps = {
   title: string;
@@ -49,9 +41,7 @@ const MetricsContents: React.FC<MetricsCardProps> = ({
                       {stats.count}
                     </Button>
                   ) : (
-                    <Content>
-                      <Text component="p">{stats.count}</Text>
-                    </Content>
+                    <Content component="p">{stats.count}</Content>
                   )}
                   <div>
                     <div id={`${baseId}-statText`}>{stats.text}</div>

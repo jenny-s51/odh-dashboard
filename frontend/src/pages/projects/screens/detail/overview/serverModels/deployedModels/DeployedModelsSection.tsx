@@ -13,7 +13,6 @@ import {
   Label,
   Spinner,
   Content,
-  Content,
 } from '@patternfly/react-core';
 import { useNavigate } from 'react-router-dom';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
@@ -115,23 +114,19 @@ const DeployedModelsSection: React.FC<DeployedModelsSectionProps> = ({ isMultiPl
           headerInfo={<Label>Multi-model serving enabled</Label>}
         >
           <CardBody>
-            <Content>
-              <Text component="small">
-                Multiple models can be deployed from a single model server. Manage model servers and
-                and deploy models from the{' '}
-                <Button component="a" isInline variant="link" onClick={navToModels}>
-                  Models
-                </Button>{' '}
-                tab.
-              </Text>
+            <Content component="small">
+              Multiple models can be deployed from a single model server. Manage model servers and
+              and deploy models from the{' '}
+              <Button component="a" isInline variant="link" onClick={navToModels}>
+                Models
+              </Button>{' '}
+              tab.
             </Content>
           </CardBody>
           <CardFooter>
             <Flex gap={{ default: 'gapLg' }}>
               <FlexItem>
-                <Content>
-                  <Text component="small">No deployed models</Text>
-                </Content>
+                <Content component="small">No deployed models</Content>
               </FlexItem>
               <FlexItem>
                 <Button component="a" isInline variant="link" onClick={navToModels}>
@@ -164,12 +159,10 @@ const DeployedModelsSection: React.FC<DeployedModelsSectionProps> = ({ isMultiPl
                 {platformError.message}
               </Alert>
             ) : (
-              <Content>
-                <Text component="small">
-                  {isMultiPlatform
-                    ? 'Before deploying a model, you must first add a model server.'
-                    : 'Each model is deployed on its own model server.'}
-                </Text>
+              <Content component="small">
+                {isMultiPlatform
+                  ? 'Before deploying a model, you must first add a model server.'
+                  : 'Each model is deployed on its own model server.'}
               </Content>
             )}
           </CardBody>

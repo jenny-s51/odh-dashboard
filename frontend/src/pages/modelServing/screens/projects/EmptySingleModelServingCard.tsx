@@ -6,7 +6,6 @@ import {
   CardFooter,
   CardTitle,
   Content,
-  Content,
   ContentVariants,
 } from '@patternfly/react-core';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
@@ -60,9 +59,7 @@ const EmptySingleModelServingCard: React.FC = () => {
         data-testid="single-serving-platform-card"
       >
         <CardTitle>
-          <Content>
-            <Text component={ContentVariants.h2}>Single-model serving platform</Text>
-          </Content>
+          <Content component={ContentVariants.h2}>Single-model serving platform</Content>
         </CardTitle>
         <CardBody>
           Each model is deployed on its own model server. Choose this option when you want to deploy

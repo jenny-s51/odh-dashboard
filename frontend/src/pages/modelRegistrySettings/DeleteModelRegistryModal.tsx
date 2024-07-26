@@ -1,5 +1,5 @@
 import React from 'react';
-import { Content, Content, TextInput, Stack, StackItem } from '@patternfly/react-core';
+import { Content, TextInput, Stack, StackItem } from '@patternfly/react-core';
 import { Modal } from '@patternfly/react-core/deprecated';
 import { ModelRegistryKind } from '~/k8sTypes';
 import DashboardModalFooter from '~/concepts/dashboard/DashboardModalFooter';

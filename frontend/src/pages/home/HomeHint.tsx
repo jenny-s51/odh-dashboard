@@ -8,7 +8,6 @@ import {
   FlexItem,
   PageSection,
   Content,
-  Content,
 } from '@patternfly/react-core';
 import { TimesIcon } from '@patternfly/react-icons';
 import { useNavigate } from 'react-router-dom';
@@ -38,9 +37,7 @@ const HomeHint: React.FC = () => {
             justifyContent={{ default: 'justifyContentSpaceBetween' }}
           >
             <FlexItem>
-              <Content>
-                <Text component="h2">Looking for the previous landing page?</Text>
-              </Content>
+              <Content component="h2">Looking for the previous landing page?</Content>
             </FlexItem>
             <FlexItem>
               <Button
@@ -67,22 +64,20 @@ const HomeHint: React.FC = () => {
               style={{ height: 42, maxWidth: 'unset' }}
             />
             <FlexItem>
-              <Content>
-                <Text component="p" data-testid="hint-body-text">
-                  {ODH_PRODUCT_NAME} has a new landing page. You can access applications that are
-                  enabled for your organization, such as Jupyter, from the{' '}
-                  <Button
-                    data-testid="home-page-hint-navigate"
-                    variant="link"
-                    isInline
-                    component="a"
-                    style={{ fontSize: 'var(--pf-v5-global--FontSize--md)' }}
-                    onClick={() => navigate('/enabled')}
-                  >
-                    Enabled applications
-                  </Button>{' '}
-                  page.
-                </Text>
+              <Content component="p" data-testid="hint-body-text">
+                {ODH_PRODUCT_NAME} has a new landing page. You can access applications that are
+                enabled for your organization, such as Jupyter, from the{' '}
+                <Button
+                  data-testid="home-page-hint-navigate"
+                  variant="link"
+                  isInline
+                  component="a"
+                  style={{ fontSize: 'var(--pf-v5-global--FontSize--md)' }}
+                  onClick={() => navigate('/enabled')}
+                >
+                  Enabled applications
+                </Button>{' '}
+                page.
               </Content>
             </FlexItem>
           </Flex>

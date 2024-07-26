@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Content, Content } from '@patternfly/react-core';
+import { Content } from '@patternfly/react-core';
 import { ProjectObjectType, SectionType, typedObjectImage } from '~/concepts/design/utils';
 import InfoGalleryItem from '~/concepts/design/InfoGalleryItem';
 import useServingPlatformStatuses from '~/pages/modelServing/useServingPlatformStatuses';
@@ -20,13 +20,11 @@ const DeployAndMonitorGallery: React.FC<{ onClose: () => void }> = ({ onClose })
         imgSrc={typedObjectImage(ProjectObjectType.modelServer)}
         sectionType={SectionType.serving}
         description={
-          <Content>
-            <Text component="small">
-              Use model servers to deploy models for testing and implementing in intelligent
-              applications. Configuring a model server includes specifying the number of replicas
-              being deployed, the server size, the token authentication, the serving runtime, and
-              how the project that the model server belongs to is accessed.
-            </Text>
+          <Content component="small">
+            Use model servers to deploy models for testing and implementing in intelligent
+            applications. Configuring a model server includes specifying the number of replicas
+            being deployed, the server size, the token authentication, the serving runtime, and how
+            the project that the model server belongs to is accessed.
           </Content>
         }
         isOpen
@@ -42,11 +40,9 @@ const DeployAndMonitorGallery: React.FC<{ onClose: () => void }> = ({ onClose })
       imgSrc={typedObjectImage(ProjectObjectType.deployingModels)}
       sectionType={SectionType.serving}
       description={
-        <Content>
-          <Text component="small">
-            Deploy models to test them and integrate them into applications. Deploying a model makes
-            it accessible via an API, enabling you to return predictions based on data inputs.
-          </Text>
+        <Content component="small">
+          Deploy models to test them and integrate them into applications. Deploying a model makes
+          it accessible via an API, enabling you to return predictions based on data inputs.
         </Content>
       }
       isOpen

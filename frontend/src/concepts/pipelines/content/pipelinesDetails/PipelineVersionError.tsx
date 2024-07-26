@@ -20,6 +20,7 @@ const PipelineVersionError: React.FC<PipelineVersionErrorProps> = ({
       titleText={title}
       variant={EmptyStateVariant.lg}
       isFullHeight
+      data-testid={testId}
     >
       <EmptyStateBody>{description}</EmptyStateBody>
     </EmptyState>

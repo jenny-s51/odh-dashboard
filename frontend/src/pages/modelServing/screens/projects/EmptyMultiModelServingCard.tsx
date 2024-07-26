@@ -6,7 +6,6 @@ import {
   CardFooter,
   CardTitle,
   Content,
-  Content,
   ContentVariants,
 } from '@patternfly/react-core';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
@@ -57,9 +56,7 @@ const EmptyMultiModelServingCard: React.FC = () => {
         data-testid="multi-serving-platform-card"
       >
         <CardTitle>
-          <Content>
-            <Text component={ContentVariants.h2}>Multi-model serving platform</Text>
-          </Content>
+          <Content component={ContentVariants.h2}>Multi-model serving platform</Content>
         </CardTitle>
         <CardBody>
           Multiple models can be deployed on one shared model server. Choose this option when you

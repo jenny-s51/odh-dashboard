@@ -6,7 +6,6 @@ import {
   Icon,
   Popover,
   Content,
-  Content,
   ContentVariants,
 } from '@patternfly/react-core';
 import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
@@ -35,9 +34,7 @@ const ProjectsSectionHeader: React.FC<ProjectsSectionHeaderProps> = ({
           <HeaderIcon type={ProjectObjectType.project} sectionType={SectionType.organize} />
         </FlexItem>
         <FlexItem>
-          <Content>
-            <Text component={ContentVariants.h1}>Data Science Projects</Text>
-          </Content>
+          <Content component={ContentVariants.h1}>Data Science Projects</Content>
         </FlexItem>
         {showCreate && !allowCreate ? (
           <FlexItem>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Bullseye, CardBody, CardProps, Stack, Content, Content } from '@patternfly/react-core';
+import { Bullseye, CardBody, CardProps, Stack, Content } from '@patternfly/react-core';
 import TypeBorderedCard from '~/concepts/design/TypeBorderedCard';
 import { SectionType } from '~/concepts/design/utils';
 
@@ -38,10 +38,8 @@ const AIFlowCard: React.FC<AIFlowCardProps> = ({
       <Stack hasGutter>
         <Bullseye>{image}</Bullseye>
         <Bullseye>
-          <Content>
-            <Text component="p" style={{ textAlign: 'center' }}>
-              {title}
-            </Text>
+          <Content component="p" style={{ textAlign: 'center' }}>
+            {title}
           </Content>
         </Bullseye>
       </Stack>

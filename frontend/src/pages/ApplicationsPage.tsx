@@ -3,7 +3,6 @@ import { ExclamationCircleIcon, QuestionCircleIcon } from '@patternfly/react-ico
 import {
   PageSection,
   Content,
-  Content,
   EmptyState,
   EmptyStateVariant,
   Spinner,

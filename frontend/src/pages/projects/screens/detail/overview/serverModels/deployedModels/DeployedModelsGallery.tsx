@@ -8,7 +8,6 @@ import {
   FlexItem,
   Gallery,
   Content,
-  Content,
 } from '@patternfly/react-core';
 import { useNavigate } from 'react-router-dom';
 import { SearchIcon } from '@patternfly/react-icons';
@@ -134,10 +133,8 @@ const DeployedModelsGallery: React.FC<DeployedModelsGalleryProps> = ({
       </Gallery>
       <Flex gap={{ default: 'gapMd' }}>
         <FlexItem>
-          <Content>
-            <Text component="small">
-              {shownServices.length} of {filteredServices.length} models
-            </Text>
+          <Content component="small">
+            {shownServices.length} of {filteredServices.length} models
           </Content>
         </FlexItem>
         <FlexItem>

@@ -6,7 +6,6 @@ import {
   FlexItem,
   Label,
   Content,
-  Content,
   ToggleGroup,
   ToggleGroupItem,
 } from '@patternfly/react-core';
@@ -40,10 +39,8 @@ const DeployedModelsCard: React.FC<DeployedModelsCardProps> = ({
         <Flex gap={{ default: 'gapSm' }} alignItems={{ default: 'alignItemsCenter' }}>
           <HeaderIcon type={ProjectObjectType.deployedModels} size={36} />
           <FlexItem>
-            <Content>
-              <Text component="h3">
-                <b>Deployed models</b>
-              </Text>
+            <Content component="h3">
+              <b>Deployed models</b>
             </Content>
           </FlexItem>
           <FlexItem>

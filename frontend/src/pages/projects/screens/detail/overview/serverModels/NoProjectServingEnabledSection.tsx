@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CardBody, FlexItem, Content, Content } from '@patternfly/react-core';
+import { CardBody, FlexItem, Content } from '@patternfly/react-core';
 import { ProjectObjectType, SectionType } from '~/concepts/design/utils';
 import OverviewCard from '~/pages/projects/screens/detail/overview/components/OverviewCard';
 import CollapsibleSection from '~/concepts/design/CollapsibleSection';
@@ -13,11 +13,9 @@ const NoProjectServingEnabledSection: React.FC = () => (
         title="No model serving platform selected"
       >
         <CardBody>
-          <Content>
-            <Text component="small">
-              To enable model serving, an administrator must first select a model serving platform
-              in the cluster settings
-            </Text>
+          <Content component="small">
+            To enable model serving, an administrator must first select a model serving platform in
+            the cluster settings
           </Content>
         </CardBody>
       </OverviewCard>

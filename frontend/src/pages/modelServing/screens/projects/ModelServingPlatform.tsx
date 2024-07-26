@@ -11,7 +11,6 @@ import {
   Stack,
   StackItem,
   Content,
-  Content,
 } from '@patternfly/react-core';
 import { ProjectSectionID } from '~/pages/projects/screens/detail/types';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
@@ -184,9 +183,7 @@ const ModelServingPlatform: React.FC = () => {
                 <Stack hasGutter>
                   <StackItem>
                     <Content>
-                      <Text>
-                        Select the model serving type to be used when deploying from this project.
-                      </Text>
+                      Select the model serving type to be used when deploying from this project.
                     </Content>
                   </StackItem>
                   <StackItem>
