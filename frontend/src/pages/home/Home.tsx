@@ -23,7 +23,7 @@ const Home: React.FC = () => {
   const enableTeamSection = useEnableTeamSection();
 
   return (
-    <Page data-testid="home-page">
+    <div data-testid="home-page">
       <HomeHint />
       {!projectsAvailable && !aiFlows && !resourcesSection && !enableTeamSection ? (
         <PageSection
@@ -48,7 +48,7 @@ const Home: React.FC = () => {
           {enableTeamSection}
         </>
       )}
-    </Page>
+    </div>
   );
 };
 
