@@ -57,11 +57,9 @@ export const ArtifactUriLink: React.FC<ArtifactUriLinkProps> = ({ uri, type }) =
               size,
             )} GiB in size but we do not fetch files over 100MB. To view the full file, please download it from your S3 bucket.`}
           >
-            <Button variant="plain" isInline data-testid="storage-file-oversized-warning">
-              <Icon status="warning">
+            <Button icon={<Icon status="warning">
                 <ExclamationTriangleIcon />
-              </Icon>
-            </Button>
+              </Icon>} variant="plain" isInline data-testid="storage-file-oversized-warning"></Button>
           </Popover>
         </FlexItem>
       )}

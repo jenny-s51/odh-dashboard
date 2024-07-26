@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Alert, Form, Modal, Stack, StackItem } from '@patternfly/react-core';
+import {
+	Alert,
+	Form,
+	Stack,
+	StackItem
+} from '@patternfly/react-core';
+import {
+	Modal
+} from '@patternfly/react-core/deprecated';
 import './ConfigurePipelinesServerModal.scss';
 import { usePipelinesAPI } from '~/concepts/pipelines/context';
 import { createPipelinesCR, deleteSecret } from '~/api';

@@ -7,8 +7,8 @@ import {
   Flex,
   FlexItem,
   PageSection,
-  Text,
-  TextContent,
+  Content,
+  Content,
 } from '@patternfly/react-core';
 import { TimesIcon } from '@patternfly/react-icons';
 import { useNavigate } from 'react-router-dom';
@@ -30,7 +30,7 @@ const HomeHint: React.FC = () => {
   }
 
   return (
-    <PageSection>
+    <PageSection hasBodyWrapper={false}>
       <Card data-testid="home-page-hint" style={{ borderRadius: 16 }}>
         <CardHeader>
           <Flex
@@ -38,20 +38,18 @@ const HomeHint: React.FC = () => {
             justifyContent={{ default: 'justifyContentSpaceBetween' }}
           >
             <FlexItem>
-              <TextContent>
+              <Content>
                 <Text component="h2">Looking for the previous landing page?</Text>
-              </TextContent>
+              </Content>
             </FlexItem>
             <FlexItem>
-              <Button
+              <Button icon={<TimesIcon />}
                 data-testid="home-page-hint-close"
                 aria-label="close landing page hint"
                 isInline
                 variant="plain"
                 onClick={() => setHintHidden(true)}
-              >
-                <TimesIcon />
-              </Button>
+              ></Button>
             </FlexItem>
           </Flex>
         </CardHeader>
@@ -68,7 +66,7 @@ const HomeHint: React.FC = () => {
               style={{ height: 42, maxWidth: 'unset' }}
             />
             <FlexItem>
-              <TextContent>
+              <Content>
                 <Text component="p" data-testid="hint-body-text">
                   {ODH_PRODUCT_NAME} has a new landing page. You can access applications that are
                   enabled for your organization, such as Jupyter, from the{' '}
@@ -84,7 +82,7 @@ const HomeHint: React.FC = () => {
                   </Button>{' '}
                   page.
                 </Text>
-              </TextContent>
+              </Content>
             </FlexItem>
           </Flex>
         </CardBody>

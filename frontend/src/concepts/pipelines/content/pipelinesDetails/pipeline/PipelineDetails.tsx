@@ -157,11 +157,11 @@ const PipelineDetails: PipelineCoreDetailsPageComponent = ({ breadcrumbPath }) =
           )
         }
       >
-        <PageSection
+        <PageSection hasBodyWrapper={false}
           isFilled
           padding={{ default: 'noPadding' }}
           style={{ flexBasis: 0, overflowY: 'hidden' }}
-          variant="light"
+          
         >
           <Flex
             direction={{ default: 'column' }}

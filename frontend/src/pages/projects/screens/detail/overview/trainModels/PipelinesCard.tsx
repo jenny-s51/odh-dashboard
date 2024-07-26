@@ -10,8 +10,8 @@ import {
   EmptyStateIcon,
   Spinner,
   Stack,
-  Text,
-  TextContent,
+  Content,
+  Content,
 } from '@patternfly/react-core';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
 import { CreatePipelineServerButton, usePipelinesAPI } from '~/concepts/pipelines/context';
@@ -48,14 +48,14 @@ const PipelinesCard: React.FC = () => {
         <>
           <CardBody>
             <Stack hasGutter>
-              <TextContent>
+              <Content>
                 <Text component="small">
                   Pipelines are platforms for building and deploying portable and scalable
                   machine-learning (ML) workflows. You can import a pipeline or create one in a
                   workbench. Before you can work with pipelines, you must first configure a pipeline
                   server in your project.
                 </Text>
-              </TextContent>
+              </Content>
               {notebooksLoaded && !notebooksError && notebooks.length > 0 ? (
                 <Alert
                   isInline

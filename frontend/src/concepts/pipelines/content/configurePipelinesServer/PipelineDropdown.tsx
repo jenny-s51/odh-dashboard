@@ -1,13 +1,13 @@
 import {
   Menu,
-  Text,
+  Content,
   MenuContent,
   MenuGroup,
   MenuItem,
   Dropdown,
   MenuItemAction,
   MenuList,
-  TextContent,
+  Content,
   MenuToggle,
 } from '@patternfly/react-core';
 import React from 'react';
@@ -122,7 +122,7 @@ export const PipelineDropdown = ({
                   }
                   description={
                     showPassword[index] ? (
-                      <TextContent className={css(styles.menuItemDescription)}>
+                      <Content className={css(styles.menuItemDescription)}>
                         {existingDataConnection(dataItem)?.map(
                           (field) =>
                             field.value && (
@@ -131,7 +131,7 @@ export const PipelineDropdown = ({
                               </Text>
                             ),
                         )}
-                      </TextContent>
+                      </Content>
                     ) : (
                       '•••••••••••••••••'
                     )

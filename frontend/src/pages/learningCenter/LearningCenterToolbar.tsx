@@ -245,7 +245,7 @@ const LearningCenterToolbar: React.FC<LearningCenterToolbarProps> = ({
         ) : null}
         <ToolbarItem
           className="odh-learning-paths__toolbar__count"
-          align={{ default: 'alignRight' }}
+          align={{ default: "alignEnd" }}
         >
           {`${count}${count !== totalCount ? ` of ${totalCount}` : ''} items`}
         </ToolbarItem>

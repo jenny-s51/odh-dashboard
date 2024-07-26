@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, TextContent } from '@patternfly/react-core';
+import { Content, Content } from '@patternfly/react-core';
 import { ProjectObjectType, SectionType, typedObjectImage } from '~/concepts/design/utils';
 import InfoGalleryItem from '~/concepts/design/InfoGalleryItem';
 import { SupportedArea } from '~/concepts/areas';
@@ -21,7 +21,7 @@ const CreateAndTrainGallery: React.FC<{ onClose: () => void }> = ({ onClose }) =
         imgSrc={typedObjectImage(ProjectObjectType.notebook)}
         sectionType={SectionType.training}
         description={
-          <TextContent>
+          <Content>
             <Text component="small">
               A workbench is an instance of your development and experimentation environment.
               Specify your preferred IDE for model development and training, such as Jupyter
@@ -37,7 +37,7 @@ const CreateAndTrainGallery: React.FC<{ onClose: () => void }> = ({ onClose }) =
                 </span>
               )}
             </Text>
-          </TextContent>
+          </Content>
         }
         isOpen
       />,
@@ -53,12 +53,12 @@ const CreateAndTrainGallery: React.FC<{ onClose: () => void }> = ({ onClose }) =
         imgSrc={typedObjectImage(ProjectObjectType.pipeline)}
         sectionType={SectionType.training}
         description={
-          <TextContent>
+          <Content>
             <Text component="small">
               Pipelines streamline and automate your machine learning workflows, enabling you to
               manage and reproduce complex tasks.
             </Text>
-          </TextContent>
+          </Content>
         }
         isOpen
       />,
@@ -69,12 +69,12 @@ const CreateAndTrainGallery: React.FC<{ onClose: () => void }> = ({ onClose }) =
         imgSrc={typedObjectImage(ProjectObjectType.pipelineRun)}
         sectionType={SectionType.training}
         description={
-          <TextContent>
+          <Content>
             <Text component="small">
               A run represents a single execution of all steps in a pipeline until it is complete,
               or until a failure occurs.
             </Text>
-          </TextContent>
+          </Content>
         }
         isOpen
       />,

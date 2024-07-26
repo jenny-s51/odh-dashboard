@@ -7,8 +7,8 @@ import {
   EmptyStateHeader,
   EmptyStateIcon,
   Spinner,
-  Text,
-  TextContent,
+  Content,
+  Content,
 } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
@@ -145,13 +145,13 @@ const PipelinesCardMetrics: React.FC = () => {
       ) : (
         <>
           <CardBody>
-            <TextContent>
+            <Content>
               <Text component="small">
                 Pipelines are platforms for building and deploying portable and scalable
                 machine-learning (ML) workflows. You can import a pipeline or create one in a
                 workbench.
               </Text>
-            </TextContent>
+            </Content>
           </CardBody>
           <CardFooter>
             <ImportPipelineButton variant="link" isInline />

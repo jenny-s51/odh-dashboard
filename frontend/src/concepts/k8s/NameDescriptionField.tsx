@@ -86,7 +86,7 @@ const NameDescriptionField: React.FC<NameDescriptionFieldProps> = ({
         <StackItem>
           <FormGroup
             label="Resource name"
-            labelIcon={
+            labelHelp={
               <Tooltip
                 position="right"
                 content={

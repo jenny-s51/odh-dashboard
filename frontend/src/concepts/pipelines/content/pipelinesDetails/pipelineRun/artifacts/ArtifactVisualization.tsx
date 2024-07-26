@@ -5,7 +5,6 @@ import {
   Bullseye,
   EmptyState,
   EmptyStateBody,
-  EmptyStateHeader,
   EmptyStateVariant,
   Flex,
   Spinner,
@@ -140,11 +139,10 @@ export const ArtifactVisualization: React.FC<ArtifactVisualizationProps> = ({ ar
             ]}
             enablePagination="compact"
             emptyTableView={
-              <EmptyState
+              <EmptyState  headingLevel="h4"   titleText="No scalar metrics"
                 variant={EmptyStateVariant.sm}
                 data-testid="artifact-scalar-metrics-empty-state"
               >
-                <EmptyStateHeader titleText="No scalar metrics" headingLevel="h4" />
                 <EmptyStateBody>No scalar metrics found.</EmptyStateBody>
               </EmptyState>
             }
@@ -195,11 +193,7 @@ export const ArtifactVisualization: React.FC<ArtifactVisualizationProps> = ({ ar
   }
 
   return (
-    <EmptyState variant={EmptyStateVariant.xs}>
-      <EmptyStateHeader
-        titleText="There are no metric artifacts available in this step."
-        headingLevel="h4"
-      />
-    </EmptyState>
+    <EmptyState  headingLevel="h4"   titleText="There are no metric artifacts available in this step." variant={EmptyStateVariant.xs}>
+      </EmptyState>
   );
 };

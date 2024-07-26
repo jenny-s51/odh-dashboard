@@ -3,7 +3,7 @@ import {
   FormSection,
   Title,
   FormGroup,
-  Text,
+  Content,
   TextInput,
   InputGroup,
   Tooltip,
@@ -52,9 +52,9 @@ export const ObjectStorageSection = ({
       title={
         <>
           <Title headingLevel="h2">Object storage connection</Title>
-          <Text component="p" className="form-subtitle-text">
+          <Content component="p" className="form-subtitle-text">
             To store pipeline artifacts. Must be S3 compatible
-          </Text>
+          </Content>
         </>
       }
     >

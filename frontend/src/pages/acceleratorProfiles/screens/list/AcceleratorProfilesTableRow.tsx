@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {
-  Text,
-  TextContent,
-  TextVariants,
+  Content,
+  Content,
+  ContentVariants,
   Timestamp,
   TimestampTooltipVariant,
   Truncate,
@@ -28,16 +28,16 @@ const AcceleratorProfilesTableRow: React.FC<AcceleratorProfilesTableRowType> = (
   return (
     <Tr>
       <Td dataLabel="Name">
-        <TextContent>
+        <Content>
           <Text>
             <Truncate content={acceleratorProfile.spec.displayName} />
           </Text>
           {acceleratorProfile.spec.description && (
-            <Text data-testid="description" component={TextVariants.small}>
+            <Text data-testid="description" component={ContentVariants.small}>
               <Truncate content={acceleratorProfile.spec.description} />
             </Text>
           )}
-        </TextContent>
+        </Content>
       </Td>
       <Td dataLabel="Identifier">{acceleratorProfile.spec.identifier}</Td>
       <Td dataLabel="Enable">

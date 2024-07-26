@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, TextContent } from '@patternfly/react-core';
+import { Content, Content } from '@patternfly/react-core';
 import { ProjectObjectType, SectionType, typedObjectImage } from '~/concepts/design/utils';
 import InfoGalleryItem from '~/concepts/design/InfoGalleryItem';
 import { SupportedArea } from '~/concepts/areas';
@@ -53,7 +53,7 @@ const ProjectsGallery: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       imgSrc={typedObjectImage(ProjectObjectType.project)}
       sectionType={SectionType.organize}
       description={
-        <TextContent>
+        <Content>
           <Text component="small">
             Data science projects allow you and your team to organize and collaborate on resources
             within separate namespaces.
@@ -62,7 +62,7 @@ const ProjectsGallery: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             Within a project, you can create multiple workbenches, each with their own IDE, data
             connections, and cluster storage. {getProjectDescriptionAdditionalText()}
           </Text>
-        </TextContent>
+        </Content>
       }
       isOpen
     />,
@@ -73,12 +73,12 @@ const ProjectsGallery: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       imgSrc={typedObjectImage(ProjectObjectType.dataConnection)}
       sectionType={SectionType.organize}
       description={
-        <TextContent>
+        <Content>
           <Text component="small">
             You can add data connections to link your project and its workbenches to data sources,
             and to object storage buckets which save data and models that you want to deploy.
           </Text>
-        </TextContent>
+        </Content>
       }
       isOpen
     />,
@@ -89,11 +89,11 @@ const ProjectsGallery: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       imgSrc={typedObjectImage(ProjectObjectType.clusterStorage)}
       sectionType={SectionType.organize}
       description={
-        <TextContent>
+        <Content>
           <Text component="small">
             Add cluster storage to a workbench for saving your project’s data to your cluster.
           </Text>
-        </TextContent>
+        </Content>
       }
       isOpen
     />,

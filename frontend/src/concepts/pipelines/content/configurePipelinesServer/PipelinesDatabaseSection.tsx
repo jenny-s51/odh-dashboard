@@ -4,7 +4,7 @@ import {
   FormGroup,
   ExpandableSection,
   Radio,
-  Text,
+  Content,
 } from '@patternfly/react-core';
 import React from 'react';
 import DatabaseConnectionField from './DatabaseConnectionField';
@@ -27,10 +27,10 @@ export const PipelinesDatabaseSection = ({
       title={
         <>
           <Title headingLevel="h2">Database</Title>
-          <Text component="p" className="form-subtitle-text">
+          <Content component="p" className="form-subtitle-text">
             This is where your pipeline data is stored. Use the default database to store data on
             your cluster, or connect to an external database.
-          </Text>
+          </Content>
         </>
       }
     >

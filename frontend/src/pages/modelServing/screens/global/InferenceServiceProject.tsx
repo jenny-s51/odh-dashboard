@@ -18,7 +18,7 @@ const InferenceServiceProject: React.FC<InferenceServiceProjectProps> = ({ infer
   if (loadError) {
     return (
       <HelperText>
-        <HelperTextItem variant="warning" hasIcon>
+        <HelperTextItem variant="warning" >
           Failed to get project for this deployed model. {loadError.message}
         </HelperTextItem>
       </HelperText>

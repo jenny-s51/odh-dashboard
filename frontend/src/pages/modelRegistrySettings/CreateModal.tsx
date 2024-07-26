@@ -1,16 +1,18 @@
 import * as React from 'react';
 import {
-  Button,
-  Form,
-  FormGroup,
-  FormSection,
-  HelperText,
-  HelperTextItem,
-  Modal,
-  Text,
-  TextInput,
-  Title,
+	Button,
+	Form,
+	FormGroup,
+	FormSection,
+	HelperText,
+	HelperTextItem,
+	Content,
+	TextInput,
+	Title
 } from '@patternfly/react-core';
+import {
+	Modal
+} from '@patternfly/react-core/deprecated';
 import PasswordInput from '~/components/PasswordInput';
 import DashboardModalFooter from '~/concepts/dashboard/DashboardModalFooter';
 import { ModelRegistryKind } from '~/k8sTypes';
@@ -163,9 +165,9 @@ const CreateModal: React.FC<CreateModalProps> = ({ isOpen, onClose, refresh }) =
           title={
             <>
               <Title headingLevel="h2">Database</Title>
-              <Text component="p" className="form-subtitle-text">
+              <Content component="p" className="form-subtitle-text">
                 This is where model data is stored. You need to connect to an external database.
-              </Text>
+              </Content>
             </>
           }
         >

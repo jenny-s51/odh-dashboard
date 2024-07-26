@@ -7,8 +7,8 @@ import {
   FlexItem,
   Stack,
   StackItem,
-  Text,
-  TextContent,
+  Content,
+  Content,
 } from '@patternfly/react-core';
 import { ArrowRightIcon } from '@patternfly/react-icons';
 import getStartedImage from '~/images/AI_ML-illustration-Blog-thumbnail.svg';
@@ -32,14 +32,14 @@ const EmptyProjectsCard: React.FC<EmptyProjectsCardProps> = ({ allowCreate, onCr
         <FlexItem>
           <Stack hasGutter>
             <StackItem>
-              <TextContent>
+              <Content>
                 <Text component="h1">Start by creating your project</Text>
                 <Text component="p">
                   From workbenches to model servers, your data science project can be organized and
                   customized to meet your needs.
                   {!allowCreate ? ' To request a project, contact your administrator.' : null}
                 </Text>
-              </TextContent>
+              </Content>
             </StackItem>
             {allowCreate ? (
               <StackItem>

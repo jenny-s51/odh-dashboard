@@ -3,8 +3,8 @@ import {
   DescriptionListDescription,
   DescriptionListGroup,
   DescriptionListTerm,
-  Text,
-  TextContent,
+  Content,
+  Content,
 } from '@patternfly/react-core';
 
 type BYONImageDependenciesListProps = {
@@ -24,13 +24,13 @@ const BYONImageDependenciesList: React.FC<BYONImageDependenciesListProps> = ({
     <DescriptionListGroup>
       <DescriptionListTerm>{term}</DescriptionListTerm>
       <DescriptionListDescription>
-        <TextContent>
+        <Content>
           {dependencies.map((dep, i) => (
             <Text style={{ marginBottom: 0 }} key={i} component="small">
               {dep}
             </Text>
           ))}
-        </TextContent>
+        </Content>
       </DescriptionListDescription>
     </DescriptionListGroup>
   );

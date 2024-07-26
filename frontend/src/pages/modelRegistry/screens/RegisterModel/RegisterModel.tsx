@@ -18,7 +18,7 @@ import {
   SplitItem,
   Stack,
   StackItem,
-  Text,
+  Content,
   TextArea,
   TextInput,
   Title,
@@ -125,9 +125,9 @@ const RegisterModel: React.FC = () => {
               title={
                 <>
                   <Title headingLevel="h2">Model info</Title>
-                  <Text component="p" className="form-subtitle-text">
+                  <Content component="p" className="form-subtitle-text">
                     Configure the model info you want to create.
-                  </Text>
+                  </Content>
                 </>
               }
             >
@@ -155,9 +155,9 @@ const RegisterModel: React.FC = () => {
               title={
                 <>
                   <Title headingLevel="h2">Version info</Title>
-                  <Text component="p" className="form-subtitle-text">
+                  <Content component="p" className="form-subtitle-text">
                     Configure the version info for the run that you want to register.
-                  </Text>
+                  </Content>
                 </>
               }
             >
@@ -195,10 +195,10 @@ const RegisterModel: React.FC = () => {
               title={
                 <>
                   <Title headingLevel="h2">Model location</Title>
-                  <Text component="p" className="form-subtitle-text">
+                  <Content component="p" className="form-subtitle-text">
                     Specify the model location by providing either the object storage details or the
                     URI.
-                  </Text>
+                  </Content>
                 </>
               }
             >

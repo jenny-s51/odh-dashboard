@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text } from '@patternfly/react-core';
+import { Content } from '@patternfly/react-core';
 import { K8sResourceCommon } from '@openshift/dynamic-plugin-sdk-utils';
 import MarkdownView from '~/components/MarkdownView';
 import ResourceNameTooltip from '~/components/ResourceNameTooltip';
@@ -26,7 +26,7 @@ const TableRowTitleDescription: React.FC<TableRowTitleDescriptionProps> = ({
     descriptionNode = descriptionAsMarkdown ? (
       <MarkdownView conciseDisplay markdown={description} />
     ) : (
-      <Text style={{ color: '--pf-v5-global--Color--200' }}>{description}</Text>
+      <Content component="p" style={{ color: '--pf-v5-global--Color--200' }}>{description}</Content>
     );
   }
 
