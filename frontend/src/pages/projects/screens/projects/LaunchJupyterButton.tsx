@@ -7,7 +7,7 @@ type LaunchJupyterButtonProps = {
   variant: ButtonVariant;
 };
 
-const LaunchJupyterButton: React.FC<LaunchJupyterButtonProps> = ({ variant }) => {
+const LaunchJupyterButton: React.FC<LaunchJupyterButtonProps> = () => {
   const navigate = useNavigate();
   const isJupyterEnabled = useCheckJupyterEnabled();
 
@@ -18,7 +18,7 @@ const LaunchJupyterButton: React.FC<LaunchJupyterButtonProps> = ({ variant }) =>
   return (
     <Button
       href="/notebookController"
-      variant={variant}
+      variant={ButtonVariant.primary}
       onClick={(e) => {
         e.preventDefault();
         navigate('/notebookController');

@@ -17,12 +17,11 @@ type UnauthorizedErrorProps = {
   testId?: string;
 };
 const UnknownError: React.FC<UnauthorizedErrorProps> = ({
-  variant = PageSectionVariants.default,
   titleText,
   error,
   testId,
 }) => (
-  <PageSection isFilled variant={variant} data-testid={testId}>
+  <PageSection isFilled variant={PageSectionVariants.default} data-testid={testId}>
     <EmptyState variant={EmptyStateVariant.lg}>
       <EmptyStateHeader
         titleText={titleText}
