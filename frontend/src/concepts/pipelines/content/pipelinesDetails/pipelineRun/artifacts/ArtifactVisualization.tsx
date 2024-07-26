@@ -86,7 +86,7 @@ export const ArtifactVisualization: React.FC<ArtifactVisualizationProps> = ({ ar
       const confusionMatrixValue = confusionMatrix.getStructValue()?.toJavaScript().struct;
 
       return isConfusionMatrix(confusionMatrixValue) ? (
-        <Stack className="pf-v5-u-pt-lg pf-v5-u-pb-lg" hasGutter>
+        <Stack className="pf-v6-u-pt-lg pf-v6-u-pb-lg" hasGutter>
           <Title headingLevel="h3">Confusion matrix metrics</Title>
 
           <Flex justifyContent={{ default: 'justifyContentCenter' }}>
@@ -101,7 +101,7 @@ export const ArtifactVisualization: React.FC<ArtifactVisualizationProps> = ({ ar
 
       return Array.isArray(confidenceMetricsList) &&
         confidenceMetricsList.every(isConfidenceMetric) ? (
-        <Stack className="pf-v5-u-pt-lg pf-v5-u-pb-lg">
+        <Stack className="pf-v6-u-pt-lg pf-v6-u-pb-lg">
           <Title headingLevel="h3">ROC curve</Title>
 
           <Flex justifyContent={{ default: 'justifyContentCenter' }}>
@@ -119,7 +119,7 @@ export const ArtifactVisualization: React.FC<ArtifactVisualizationProps> = ({ ar
     const artifactProperties = getArtifactProperties(artifact);
 
     return (
-      <Stack className="pf-v5-u-pt-lg pf-v5-u-pb-lg">
+      <Stack className="pf-v6-u-pt-lg pf-v6-u-pb-lg">
         <Title headingLevel="h3">Scalar metrics</Title>
 
         <StackItem>
@@ -173,7 +173,7 @@ export const ArtifactVisualization: React.FC<ArtifactVisualizationProps> = ({ ar
     }
     if (downloadedArtifact) {
       return (
-        <Stack className="pf-v5-u-pt-lg pf-v5-u-pb-lg" hasGutter>
+        <Stack className="pf-v6-u-pt-lg pf-v6-u-pb-lg" hasGutter>
           {downloadedArtifactSize && downloadedArtifactSize > MAX_STORAGE_OBJECT_SIZE && (
             <StackItem>
               <Alert isInline variant="warning" title="Oversized file">

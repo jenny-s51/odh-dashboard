@@ -67,14 +67,14 @@ const DeployedModelCard: React.FC<DeployedModelCardProps> = ({
         <CardBody>
           <Content>
             <Content component="dl" style={{ display: 'block' }}>
-              <Content component="dt" style={{ marginBottom: 'var(--pf-v5-global--spacer--xs)' }}>
+              <Content component="dt" style={{ marginBottom: 'var(--pf-v6-global--spacer--xs)' }}>
                 Serving runtime
               </Content>
               <Content
                 component="dd"
                 style={{
-                  fontSize: 'var(--pf-v5-global--FontSize--sm)',
-                  color: !servingRuntime ? 'var(--pf-v5-global--Color--200)' : undefined,
+                  fontSize: 'var(--pf-v6-global--FontSize--sm)',
+                  color: !servingRuntime ? 'var(--pf-v6-global--Color--200)' : undefined,
                 }}
               >
                 <InferenceServiceServingRuntime servingRuntime={servingRuntime} />
