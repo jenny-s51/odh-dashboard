@@ -17,7 +17,11 @@ const RegisteredModelOwner: React.FC<RegisteredModelOwnerProps> = ({ registeredM
   // Currently, the author of the first model version is being used as the owner.
   const registeredModelOwner = modelVersions.items[0]?.author;
 
-  return <Content component="p" data-testid="registered-model-owner">{registeredModelOwner || '-'}</Content>;
+  return (
+    <Content component="p" data-testid="registered-model-owner">
+      {registeredModelOwner || '-'}
+    </Content>
+  );
 };
 
 export default RegisteredModelOwner;

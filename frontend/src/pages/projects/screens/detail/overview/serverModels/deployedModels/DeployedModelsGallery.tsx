@@ -104,7 +104,7 @@ const DeployedModelsGallery: React.FC<DeployedModelsGalleryProps> = ({
 
   if (filteredServices.length === 0 && deployedModels.length > 0) {
     return (
-      <EmptyState   icon={SearchIcon}  titleText="No results found" variant="sm">
+      <EmptyState icon={SearchIcon} titleText="No results found" variant="sm">
         <EmptyStateBody>Clear the filter or apply a different one.</EmptyStateBody>
         <EmptyStateFooter>
           <Button isInline variant="link" onClick={onClearFilters}>

@@ -139,7 +139,9 @@ export const ArtifactVisualization: React.FC<ArtifactVisualizationProps> = ({ ar
             ]}
             enablePagination="compact"
             emptyTableView={
-              <EmptyState  headingLevel="h4"   titleText="No scalar metrics"
+              <EmptyState
+                headingLevel="h4"
+                titleText="No scalar metrics"
                 variant={EmptyStateVariant.sm}
                 data-testid="artifact-scalar-metrics-empty-state"
               >
@@ -193,7 +195,10 @@ export const ArtifactVisualization: React.FC<ArtifactVisualizationProps> = ({ ar
   }
 
   return (
-    <EmptyState  headingLevel="h4"   titleText="There are no metric artifacts available in this step." variant={EmptyStateVariant.xs}>
-      </EmptyState>
+    <EmptyState
+      headingLevel="h4"
+      titleText="There are no metric artifacts available in this step."
+      variant={EmptyStateVariant.xs}
+    />
   );
 };

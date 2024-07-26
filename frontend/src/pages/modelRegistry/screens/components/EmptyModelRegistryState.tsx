@@ -29,7 +29,12 @@ const EmptyModelRegistryState: React.FC<EmptyModelRegistryStateType> = ({
   primaryActionOnClick,
   secondaryActionOnClick,
 }) => (
-  <EmptyState   icon={PlusCircleIcon}  titleText={title} variant={EmptyStateVariant.sm} data-testid={testid}>
+  <EmptyState
+    icon={PlusCircleIcon}
+    titleText={title}
+    variant={EmptyStateVariant.sm}
+    data-testid={testid}
+  >
     <EmptyStateBody>{description}</EmptyStateBody>
     <EmptyStateFooter>
       <EmptyStateActions>

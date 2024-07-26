@@ -78,7 +78,11 @@ const DeployedModelsSection: React.FC<DeployedModelsSectionProps> = ({ isMultiPl
 
   const renderError = (message?: string): React.ReactElement => (
     <Bullseye>
-      <EmptyState  headingLevel="h2" icon={ExclamationCircleIcon}  titleText="Problem loading deployed models">
+      <EmptyState
+        headingLevel="h2"
+        icon={ExclamationCircleIcon}
+        titleText="Problem loading deployed models"
+      >
         <EmptyStateBody>{message}</EmptyStateBody>
       </EmptyState>
     </Bullseye>

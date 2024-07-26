@@ -54,7 +54,7 @@ const ApplicationsPage: React.FC<ApplicationsPageProps> = ({
   noHeader,
 }) => {
   const renderHeader = () => (
-    <PageSection hasBodyWrapper={false} >
+    <PageSection hasBodyWrapper={false}>
       <Stack hasGutter>
         <StackItem>
           <Flex
@@ -82,7 +82,13 @@ const ApplicationsPage: React.FC<ApplicationsPageProps> = ({
     if (loadError) {
       return (
         <PageSection hasBodyWrapper={false} isFilled>
-          <EmptyState  headingLevel="h1" icon={ExclamationCircleIcon}  titleText={errorMessage !== undefined ? errorMessage : 'Error loading components'} variant={EmptyStateVariant.lg} data-id="error-empty-state">
+          <EmptyState
+            headingLevel="h1"
+            icon={ExclamationCircleIcon}
+            titleText={errorMessage !== undefined ? errorMessage : 'Error loading components'}
+            variant={EmptyStateVariant.lg}
+            data-id="error-empty-state"
+          >
             <EmptyStateBody>{loadError.message}</EmptyStateBody>
           </EmptyState>
         </PageSection>
@@ -93,9 +99,14 @@ const ApplicationsPage: React.FC<ApplicationsPageProps> = ({
       return (
         loadingContent || (
           <PageSection hasBodyWrapper={false} isFilled>
-            <EmptyState  headingLevel="h1"   titleText="Loading" variant={EmptyStateVariant.lg} data-id="loading-empty-state">
+            <EmptyState
+              headingLevel="h1"
+              titleText="Loading"
+              variant={EmptyStateVariant.lg}
+              data-id="loading-empty-state"
+            >
               <Spinner size="xl" />
-              </EmptyState>
+            </EmptyState>
           </PageSection>
         )
       );
@@ -104,8 +115,13 @@ const ApplicationsPage: React.FC<ApplicationsPageProps> = ({
     if (empty) {
       return !emptyStatePage ? (
         <PageSection hasBodyWrapper={false} isFilled>
-          <EmptyState  headingLevel="h1" icon={QuestionCircleIcon}  titleText={emptyMessage !== undefined ? emptyMessage : 'No Components Found'} variant={EmptyStateVariant.lg} data-id="empty-empty-state">
-            </EmptyState>
+          <EmptyState
+            headingLevel="h1"
+            icon={QuestionCircleIcon}
+            titleText={emptyMessage !== undefined ? emptyMessage : 'No Components Found'}
+            variant={EmptyStateVariant.lg}
+            data-id="empty-empty-state"
+          />
         </PageSection>
       ) : (
         emptyStatePage
@@ -114,8 +130,8 @@ const ApplicationsPage: React.FC<ApplicationsPageProps> = ({
 
     if (provideChildrenPadding) {
       return (
-        <PageSection hasBodyWrapper={false}
-          
+        <PageSection
+          hasBodyWrapper={false}
           isFilled
           style={removeChildrenTopPadding ? { paddingTop: 0 } : undefined}
         >

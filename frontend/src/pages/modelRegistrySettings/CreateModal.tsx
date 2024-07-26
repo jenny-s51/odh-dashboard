@@ -1,18 +1,16 @@
 import * as React from 'react';
 import {
-	Button,
-	Form,
-	FormGroup,
-	FormSection,
-	HelperText,
-	HelperTextItem,
-	Content,
-	TextInput,
-	Title
+  Button,
+  Form,
+  FormGroup,
+  FormSection,
+  HelperText,
+  HelperTextItem,
+  Content,
+  TextInput,
+  Title,
 } from '@patternfly/react-core';
-import {
-	Modal
-} from '@patternfly/react-core/deprecated';
+import { Modal } from '@patternfly/react-core/deprecated';
 import PasswordInput from '~/components/PasswordInput';
 import DashboardModalFooter from '~/concepts/dashboard/DashboardModalFooter';
 import { ModelRegistryKind } from '~/k8sTypes';
