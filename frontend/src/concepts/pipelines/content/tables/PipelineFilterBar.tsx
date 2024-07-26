@@ -94,7 +94,7 @@ export function FilterToolbar<T extends string>({
         <ToolbarFilter
           categoryName="Filters"
           data-testid={`${testId}-text-field`}
-          variant="search-filter"
+          variant="label"
           labels={keys
             .map<ToolbarLabel | null>((filterKey) => {
               const optionValue = filterOptions[filterKey];

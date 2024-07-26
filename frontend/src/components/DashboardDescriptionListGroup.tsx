@@ -97,7 +97,7 @@ const DashboardDescriptionListGroup: React.FC<DashboardDescriptionListGroupProps
       ) : (
         <DescriptionListTerm>{title}</DescriptionListTerm>
       )}
-      <DescriptionListDescription className={isEmpty && !isEditing ? text.disabledColor_100 : ''}>
+      <DescriptionListDescription className={isEmpty && !isEditing ? text.textColorDisabledOnMd : ''}>
         {isEditing ? contentWhenEditing : isEmpty ? contentWhenEmpty : children}
       </DescriptionListDescription>
     </DescriptionListGroup>

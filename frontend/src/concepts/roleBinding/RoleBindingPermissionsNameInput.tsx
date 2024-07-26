@@ -49,8 +49,12 @@ const RoleBindingPermissionsNameInput: React.FC<RoleBindingPermissionsNameInputP
         if (typeof selection === 'string') {
           onChange(selection);
         }
+        // TODO: Remove this
+        if (!selection) {
+          onClear();
+        }
       }}
-      onClearSelection={onClear}
+      // onClearSelection={onClear}
       // TODO: Allow creation when https://github.com/patternfly/patternfly-react/pull/10802 is released
       // isCreatable
       placeholder={placeholderText}
