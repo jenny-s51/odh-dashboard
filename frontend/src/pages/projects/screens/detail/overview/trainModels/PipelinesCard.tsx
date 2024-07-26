@@ -6,11 +6,8 @@ import {
   CardFooter,
   EmptyState,
   EmptyStateBody,
-  EmptyStateHeader,
-  EmptyStateIcon,
   Spinner,
   Stack,
-  Content,
   Content,
 } from '@patternfly/react-core';
 import { ProjectDetailsContext } from '~/pages/projects/ProjectDetailsContext';
@@ -34,11 +31,7 @@ const PipelinesCard: React.FC = () => {
   const renderContent = () => {
     if (pipelinesServer.initializing) {
       return (
-        <EmptyState variant="xs">
-          <EmptyStateHeader
-            icon={<EmptyStateIcon icon={() => <Spinner size="lg" />} />}
-            headingLevel="h3"
-          />
+        <EmptyState variant="xs" headingLevel="h3" titleText="" icon={() => <Spinner size="lg" />}>
           <EmptyStateBody>Loading...</EmptyStateBody>
         </EmptyState>
       );
@@ -48,13 +41,11 @@ const PipelinesCard: React.FC = () => {
         <>
           <CardBody>
             <Stack hasGutter>
-              <Content>
-                <Text component="small">
-                  Pipelines are platforms for building and deploying portable and scalable
-                  machine-learning (ML) workflows. You can import a pipeline or create one in a
-                  workbench. Before you can work with pipelines, you must first configure a pipeline
-                  server in your project.
-                </Text>
+              <Content component="small">
+                Pipelines are platforms for building and deploying portable and scalable
+                machine-learning (ML) workflows. You can import a pipeline or create one in a
+                workbench. Before you can work with pipelines, you must first configure a pipeline
+                server in your project.
               </Content>
               {notebooksLoaded && !notebooksError && notebooks.length > 0 ? (
                 <Alert

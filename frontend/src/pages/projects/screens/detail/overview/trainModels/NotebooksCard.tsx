@@ -6,12 +6,9 @@ import {
   CardBody,
   EmptyState,
   EmptyStateBody,
-  EmptyStateHeader,
-  EmptyStateIcon,
   Flex,
   FlexItem,
   Spinner,
-  Content,
   Content,
 } from '@patternfly/react-core';
 import { ArrowRightIcon, ExclamationCircleIcon } from '@patternfly/react-icons';
@@ -48,11 +45,7 @@ const NotebooksCard: React.FC = () => {
 
   if (!loaded) {
     return (
-      <EmptyState variant="xs">
-        <EmptyStateHeader
-          icon={<EmptyStateIcon icon={() => <Spinner size="lg" />} />}
-          headingLevel="h3"
-        />
+      <EmptyState variant="xs" headingLevel="h3" titleText="" icon={() => <Spinner size="lg" />}>
         <EmptyStateBody>Loading...</EmptyStateBody>
       </EmptyState>
     );
@@ -60,23 +53,20 @@ const NotebooksCard: React.FC = () => {
 
   if (error) {
     return (
-      <EmptyState variant="xs">
-        <EmptyStateHeader
-          icon={
-            <EmptyStateIcon
-              icon={() => (
-                <ExclamationCircleIcon
-                  style={{
-                    color: 'var(--pf-v5-global--danger-color--100)',
-                    width: '32px',
-                    height: '32px',
-                  }}
-                />
-              )}
-            />
-          }
-          headingLevel="h3"
-        />
+      <EmptyState
+        variant="xs"
+        headingLevel="h3"
+        titleText=""
+        icon={() => (
+          <ExclamationCircleIcon
+            style={{
+              color: 'var(--pf-v5-global--danger-color--100)',
+              width: '32px',
+              height: '32px',
+            }}
+          />
+        )}
+      >
         <EmptyStateBody>{error.message}</EmptyStateBody>
       </EmptyState>
     );
@@ -103,12 +93,10 @@ const NotebooksCard: React.FC = () => {
             </FlexItem>
             <FlexItem flex={{ default: 'flex_1' }}>
               <Flex gap={{ default: 'gapMd' }}>
-                <Content>
-                  <Text component="small">
-                    A workbench is an isolated area where you can work with models in your preferred
-                    IDE, such as a Jupyter notebook. You can add accelerators and data connections,
-                    create pipelines, and configure cluster storage in your workbench.
-                  </Text>
+                <Content component="small">
+                  A workbench is an isolated area where you can work with models in your preferred
+                  IDE, such as a Jupyter notebook. You can add accelerators and data connections,
+                  create pipelines, and configure cluster storage in your workbench.
                 </Content>
                 <Button
                   variant={ButtonVariant.primary}

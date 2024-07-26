@@ -4,10 +4,10 @@ import {
   CardBody,
   CardHeader,
   CardTitle,
+  Content,
   EmptyState,
-  EmptyStateIcon,
+  EmptyStateBody,
   Spinner,
-  Title,
   Toolbar,
   ToolbarContent,
   getResizeObserver,
@@ -234,22 +234,12 @@ const MetricsChart: React.FC<MetricsChartProps> = ({
               ))}
             </Chart>
           ) : (
-            <EmptyState>
-              {isAllLoaded ? (
-                <>
-                  <EmptyStateIcon icon={CubesIcon} />
-                  <Title headingLevel="h4" size="lg" data-testid="metrics-chart-no-data">
-                    {error ? error.message : 'No available data'}
-                  </Title>
-                </>
-              ) : (
-                <>
-                  <EmptyStateIcon icon={Spinner} />
-                  <Title headingLevel="h4" size="lg">
-                    Loading
-                  </Title>
-                </>
-              )}
+            <EmptyState headingLevel="h4" titleText="" icon={isAllLoaded ? CubesIcon : Spinner}>
+              <EmptyStateBody>
+                <Content component="h3">
+                  {isAllLoaded ? error?.message ?? 'No available data' : 'Loading'}
+                </Content>
+              </EmptyStateBody>
             </EmptyState>
           )}
         </div>
