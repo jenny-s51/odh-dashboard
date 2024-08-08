@@ -208,3 +208,24 @@
   padding-right: 8px;
   padding-left: 8px;
 }
+/*
+ .pf-v6-c-pagination {
+  --pf-v6-c-pagination__total-items--Display: block;
+} */
+
+ .pf-v6-c-pagination__total-items b {
+  font-weight: normal;
+}
+
+ .pf-v6-c-pagination__page-menu {
+  order: -1;
+}
+
+ .pf-v6-c-pagination__page-menu .pf-v6-c-menu-toggle {
+  --pf-v6-c-menu-toggle--expanded--BackgroundColor: var(--pf-v6-c-menu-toggle--m-plain--expanded--BackgroundColor);
+  text-transform: none;
+}
+
+ /* .pf-v6-c-pagination__page-menu::before {
+  content: "Rows per page:";
+} */
