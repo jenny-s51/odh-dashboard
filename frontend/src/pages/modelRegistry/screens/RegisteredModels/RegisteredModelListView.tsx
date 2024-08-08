@@ -15,6 +15,8 @@ import {
 import { asEnumMember } from '~/utilities/utils';
 import RegisteredModelTable from './RegisteredModelTable';
 import RegisteredModelsTableToolbar from './RegisteredModelsTableToolbar';
+import './MUI-theme.css';
+import './overrides-from-figma.css';
 
 type RegisteredModelListViewProps = {
   registeredModels: RegisteredModel[];

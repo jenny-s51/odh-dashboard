@@ -1,0 +1,210 @@
+@import url("overrides-from-figma.css");
+
+:root {
+  --mui-palette-primary-light: #42a5f5;
+  --mui-palette-secondary-light: #ba68c8;
+  --mui-palette-error-light: #ef5350;
+  --mui-palette-warning-light: #ff9800;
+  --mui-palette-info-light: #03a9f4;
+  --mui-palette-success-light: #4caf50;
+
+  --mui-palette-primary-main: #1976d2;
+  --mui-palette-secondary-main: #9c27b0;
+  --mui-palette-error-main: #d32f2f;
+  --mui-palette-warning-main: #ed6c02;
+  --mui-palette-info-main: #0288d1;
+  --mui-palette-success-main: #2e7d32;
+
+  --mui-palette-primary-dark: #1565c0;
+  --mui-palette-secondary-dark: #7b1fa2;
+  --mui-palette-error-dark: #c62828;
+  --mui-palette-warning-dark: #e65100;
+  --mui-palette-info-dark: #01579b;
+  --mui-palette-success-dark: #1b5e20;
+
+  --mui-alert-warning-text: #663c00;
+  --mui-alert-warning-font-weight: 400;
+
+  --mui-button-font-weight: 500;
+
+  --pf-t--global--border--width--box--status--default: 1px;
+  --pf-t--global--border--radius--pill: 4px;
+  --pf-t--global--border--radius--medium: 4px;
+}
+
+ .pf-v6-c-alert {
+  --pf-v6-c-alert--m-warning__title--Color: var(--pf-t--global--text--color--status--warning--default);
+  --pf-v6-c-alert__icon--MarginInlineEnd: 12px;
+  --pf-v6-c-alert__title--FontWeight: var(--mui-alert-warning-font-weight);
+  --pf-v6-c-alert__icon--MarginInlineEnd: 12px;
+  --pf-v6-c-alert__icon--MarginBlockStart: 7px;
+  --pf-v6-c-alert__icon--FontSize: 22px;
+  --pf-v6-c-alert--BoxShadow: none;
+  --pf-v6-c-alert--PaddingBlockStart: 6px;
+  --pf-v6-c-alert--PaddingBlockEnd: 6px;
+  --pf-v6-c-alert--PaddingInlineStart: 16px;
+  --pf-v6-c-alert--PaddingInlineStart: 16px;
+}
+
+ .pf-v6-c-alert__title {
+  padding-block: 8px;
+}
+
+ .pf-v6-c-alert__icon {
+  margin-block-end: 7px;
+}
+
+ .pf-v6-c-button {
+  --pf-v6-c-button--FontWeight: var(--mui-button-font-weight);
+  --pf-v6-c-button--PaddingBlockStart: 6px;
+  --pf-v6-c-button--PaddingBlockEnd: 6px;
+  --pf-v6-c-button--PaddingInlineStart: 16px;
+  --pf-v6-c-button--PaddingInlineEnd: 16px;
+  --pf-v6-c-button--LineHeight: 1.75;
+
+  text-transform: uppercase;
+  letter-spacing: 0.02857em;
+}
+
+ .pf-v6-c-menu {
+  --pf-v6-c-menu--BoxShadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+  --pf-v6-c-menu--BorderRadius: 4px;
+  --pf-v6-c-menu--PaddingBlockStart: 8px;
+  --pf-v6-c-menu--PaddingBlockEnd: 8px;
+  --pf-v6-c-menu--PaddingInlineStart: 8px;
+  --pf-v6-c-menu--PaddingInlineEnd: 8px;
+  --pf-v6-c-menu__item--PaddingBlockStart: 6px;
+  --pf-v6-c-menu__item--PaddingBlockEnd: 6px;
+  --pf-v6-c-menu__item--PaddingInlineStart: 16px;
+  --pf-v6-c-menu__item--PaddingInlineEnd: 16px;
+  --pf-v6-c-menu__item--FontSize: 1rem;
+}
+
+ .pf-v6-c-menu-toggle {
+  --pf-v6-c-menu-toggle__controls--MinWidth: 0;
+  --pf-v6-c-menu-toggle--expanded--BackgroundColor: var(--mui-palette-primary-main);
+  --pf-v6-c-menu-toggle--LineHeight: 1.75;
+  --pf-v6-c-menu-toggle--PaddingBlockStart: 6px;
+  --pf-v6-c-menu-toggle--PaddingBlockEnd: 6px;
+  --pf-v6-c-menu-toggle--PaddingInlineStart: 16px;
+  --pf-v6-c-menu-toggle--PaddingInlineEnd: 16px;
+  --pf-v6-c-menu-toggle--ColumnGap: 0;
+
+  text-transform: uppercase;
+  font-weight: var(--mui-button-font-weight);
+  letter-spacing: 0.02857em;
+}
+
+ .pf-v6-c-menu-toggle__toggle-icon {
+  margin-right: -4px;
+  margin-left: 8px;
+  font-size: 20px;
+}
+
+ .pf-v6-c-table {
+  --pf-v6-c-table__sort--m-selected__button--Color: #000000de;
+  --pf-v6-c-table__button--BackgroundColor: none;
+  --pf-v6-c-table__button--hover--BackgroundColor: none;
+  --pf-v6-c-table__sort-indicator--Color: #666;
+  --pf-v6-c-table__sort__button--hover__sort-indicator--Color: #00000050;
+  --pf-v6-c-table__sort__button--hover__text--Color: #00000099;
+  --pf-v6-c-table--cell--Color: rgba(0, 0, 0, 0.87);
+  --pf-v6-c-table__button--Color: var(--pf-v6-c-table--cell--Color);
+  --pf-v6-c-table__button--PaddingBlockStart: 0;
+  --pf-v6-c-table__button--PaddingBlockEnd: 0;
+  --pf-v6-c-table__button--PaddingInlineStart: 0;
+  --pf-v6-c-table__button--PaddingInlineEnd: 0;
+  --pf-v6-c-table--cell--PaddingInlineStart: 16px;
+  --pf-v6-c-table--cell--PaddingInlineEnd: 16px;
+  --pf-v6-c-table--cell--PaddingBlockStart: 16px;
+  --pf-v6-c-table--cell--PaddingBlockEnd: 16px;
+  --pf-v6-c-table--cell--first-last-child--PaddingInline: 0px;
+  --pf-v6-c-table__thead--cell--FontWeight: 500;
+  --pf-v6-c-table__thead--cell--FontSize: 14px;
+  --pf-v6-c-table__tr--BorderBlockEndColor: rgba(224, 224, 224, 1);
+  --pf-v6-c-table__sort-indicator--MarginInlineStart: 4px;
+
+  letter-spacing: 0.01071em;
+}
+
+ .pf-v6-c-table .pf-m-align-right {
+  text-align: right;
+}
+
+ .pf-v6-c-table__sort-indicator {
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transform-origin: center center;
+}
+
+/* CSS workaround to use MUI icon for sort icon */
+ .pf-v6-c-table__sort-indicator::before {
+  display: block;
+  width: 1em;
+  height: 1em;
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' focusable='false' aria-hidden='true' viewBox='0 0 24 24' data-testid='ArrowDownwardIcon'%3E%3Cpath d='M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+/* Hide PF's default icon for the CSS workaround to use MUI's icon */
+ .pf-v6-c-table__sort-indicator svg {
+  display: none;
+}
+
+ .pf-v6-c-table__button:is(:hover, :focus) .pf-v6-c-table__sort-indicator,
+ .pf-v6-c-table__sort.pf-m-selected .pf-v6-c-table__sort-indicator {
+  opacity: 0.6;
+}
+
+ .pf-v6-c-table__sort[aria-sort="ascending"] .pf-v6-c-table__sort-indicator {
+  transform: rotate(180deg);
+}
+
+ .pf-v6-c-tab-content {
+  --pf-v6-c-tab-content__body--m-padding--PaddingBlockEnd: var(--pf-t--global--spacer--lg);
+  --pf-v6-c-tab-content__body--m-padding--PaddingBlockStart: var(--pf-t--global--spacer--lg);
+  --pf-v6-c-tab-content__body--m-padding--PaddingInlineEnd: var(--pf-t--global--spacer--lg);
+  --pf-v6-c-tab-content__body--m-padding--PaddingInlineStart: var(--pf-t--global--spacer--lg);
+}
+
+ .pf-v6-c-tabs {
+  --pf-v6-c-tabs__link--hover--BackgroundColor: transparent;
+  --pf-v6-c-tabs__item--PaddingBlockStart: 0;
+  --pf-v6-c-tabs__item--PaddingBlockEnd: 0;
+  --pf-v6-c-tabs__item--PaddingInlineStart: 0;
+  --pf-v6-c-tabs__item--PaddingInlineEnd: 0;
+  --pf-v6-c-tabs__link--PaddingBlockStart: 12px;
+  --pf-v6-c-tabs__link--PaddingBlockEnd: 12px;
+  --pf-v6-c-tabs__link--PaddingInlineStart: 16px;
+  --pf-v6-c-tabs__link--PaddingInlineEnd: 16px;
+  --pf-v6-c-tabs__item--m-current__link--Color: var(--pf-t--global--text--color--brand--default);
+  --pf-v6-c-tabs__item--m-current__link--after--BorderWidth: 2px;
+  --pf-v6-c-tabs__link--FontSize: 0.875rem;
+}
+
+ .pf-v6-c-tabs__link {
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+}
+
+ .pf-v6-c-tab-content {
+  --pf-v6-c-tab-content__body--m-padding--PaddingBlockEnd: var(--pf-t--global--spacer--lg);
+  --pf-v6-c-tab-content__body--m-padding--PaddingBlockStart: var(--pf-t--global--spacer--lg);
+  --pf-v6-c-tab-content__body--m-padding--PaddingInlineEnd: var(--pf-t--global--spacer--lg);
+  --pf-v6-c-tab-content__body--m-padding--PaddingInlineStart: var(--pf-t--global--spacer--lg);
+}
+
+ .pf-v6-c-label {
+  --pf-v6-c-label--BorderRadius: 16px;
+  --pf-v6-c-label--FontSize: 0.8125rem;
+  --pf-v6-c-label--PaddingInlineStart: 0;
+  --pf-v6-c-label--PaddingInlineEnd: 0;
+  height: 24px;
+}
+
+ .pf-v6-c-label__text {
+  padding-right: 8px;
+  padding-left: 8px;
+}
