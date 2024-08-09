@@ -15,9 +15,9 @@ import {
 import { asEnumMember } from '~/utilities/utils';
 import RegisteredModelTable from './RegisteredModelTable';
 import RegisteredModelsTableToolbar from './RegisteredModelsTableToolbar';
-import './MUI-theme.css';
-import './overrides-from-figma.css';
+// import { getTheme } from "./MUI-theme";
 
+import {muiTheme} from './MUI-theme';
 type RegisteredModelListViewProps = {
   registeredModels: RegisteredModel[];
   refresh: () => void;
@@ -33,6 +33,9 @@ const RegisteredModelListView: React.FC<RegisteredModelListViewProps> = ({
   const [search, setSearch] = React.useState('');
 
   const searchTypes = React.useMemo(() => [SearchType.KEYWORD], []); // TODO Add owner once RHOAIENG-7566 is completed.
+
+  muiTheme();
+
 
   if (unfilteredRegisteredModels.length === 0) {
     return (
