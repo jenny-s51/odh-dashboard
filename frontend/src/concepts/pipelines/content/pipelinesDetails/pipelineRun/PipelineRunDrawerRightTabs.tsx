@@ -52,7 +52,8 @@ const PipelineRunDrawerRightTabs: React.FC<PipelineRunDrawerRightTabsProps> = ({
     [PipelineRunNodeTab.LOGS]: {
       title: 'Logs',
       isDisabled: !task.status?.podName,
-      content: <LogsTab task={task} />,
+      // content: <LogsTab task={task} />,
+      content: <></>
     },
   };
 

@@ -52,6 +52,8 @@
     "cypress:format": "prettier --write src/__tests__/**/*.snap.json"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
     "@monaco-editor/react": "^4.6.0",
     "@openshift/dynamic-plugin-sdk": "^4.0.0",
     "@openshift/dynamic-plugin-sdk-utils": "^4.0.1",
@@ -97,6 +99,9 @@
     "@babel/core": "^7.21.0",
     "@cypress/code-coverage": "^3.12.34",
     "@jsdevtools/coverage-istanbul-loader": "^3.0.5",
+    "@mui/material": "^5.16.4",
+    "@mui/icons-material": "^5.16.5",
+    "@mui/types": "^7.2.15",
     "@testing-library/cypress": "^10.0.1",
     "@testing-library/dom": "^9.3.4",
     "@testing-library/jest-dom": "^6.3.0",
