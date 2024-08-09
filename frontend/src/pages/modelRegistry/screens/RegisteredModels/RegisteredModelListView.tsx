@@ -16,6 +16,7 @@ import { asEnumMember } from '~/utilities/utils';
 import RegisteredModelTable from './RegisteredModelTable';
 import RegisteredModelsTableToolbar from './RegisteredModelsTableToolbar';
 // import { getTheme } from "./MUI-theme";
+import './MUI-theme.css'
 
 import {muiTheme} from './MUI-theme';
 type RegisteredModelListViewProps = {
