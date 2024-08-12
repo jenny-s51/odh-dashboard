@@ -26,10 +26,6 @@
   --mui-alert-warning-font-weight: 400;
 
   --mui-button-font-weight: 500;
-
-  --pf-t--global--border--width--box--status--default: 1px;
-  --pf-t--global--border--radius--pill: 4px;
-  --pf-t--global--border--radius--medium: 4px;
 }
 
 
@@ -97,28 +93,6 @@
   transform: rotate(180deg);
 }
 
- .pf-v6-c-tab-content {
-  --pf-v6-c-tab-content__body--m-padding--PaddingBlockEnd: var(--pf-t--global--spacer--lg);
-  --pf-v6-c-tab-content__body--m-padding--PaddingBlockStart: var(--pf-t--global--spacer--lg);
-  --pf-v6-c-tab-content__body--m-padding--PaddingInlineEnd: var(--pf-t--global--spacer--lg);
-  --pf-v6-c-tab-content__body--m-padding--PaddingInlineStart: var(--pf-t--global--spacer--lg);
-}
-
- .pf-v6-c-tabs {
-  --pf-v6-c-tabs__link--hover--BackgroundColor: transparent;
-  --pf-v6-c-tabs__item--PaddingBlockStart: 0;
-  --pf-v6-c-tabs__item--PaddingBlockEnd: 0;
-  --pf-v6-c-tabs__item--PaddingInlineStart: 0;
-  --pf-v6-c-tabs__item--PaddingInlineEnd: 0;
-  --pf-v6-c-tabs__link--PaddingBlockStart: 12px;
-  --pf-v6-c-tabs__link--PaddingBlockEnd: 12px;
-  --pf-v6-c-tabs__link--PaddingInlineStart: 16px;
-  --pf-v6-c-tabs__link--PaddingInlineEnd: 16px;
-  --pf-v6-c-tabs__item--m-current__link--Color: var(--pf-t--global--text--color--brand--default);
-  --pf-v6-c-tabs__item--m-current__link--after--BorderWidth: 2px;
-  --pf-v6-c-tabs__link--FontSize: 0.875rem;
-}
-
  .pf-v6-c-tabs__link {
   text-transform: uppercase;
   font-weight: 500;
@@ -126,18 +100,7 @@
   letter-spacing: 0.02857em;
 }
 
- .pf-v6-c-tab-content {
-  --pf-v6-c-tab-content__body--m-padding--PaddingBlockEnd: var(--pf-t--global--spacer--lg);
-  --pf-v6-c-tab-content__body--m-padding--PaddingBlockStart: var(--pf-t--global--spacer--lg);
-  --pf-v6-c-tab-content__body--m-padding--PaddingInlineEnd: var(--pf-t--global--spacer--lg);
-  --pf-v6-c-tab-content__body--m-padding--PaddingInlineStart: var(--pf-t--global--spacer--lg);
-}
-
  .pf-v6-c-label {
-  --pf-v6-c-label--BorderRadius: 16px;
-  --pf-v6-c-label--FontSize: 0.8125rem;
-  --pf-v6-c-label--PaddingInlineStart: 0;
-  --pf-v6-c-label--PaddingInlineEnd: 0;
   height: 24px;
 }
 
@@ -159,7 +122,6 @@
 }
 
  .pf-v6-c-pagination__page-menu .pf-v6-c-menu-toggle {
-  --pf-v6-c-menu-toggle--expanded--BackgroundColor: var(--pf-v6-c-menu-toggle--m-plain--expanded--BackgroundColor);
   text-transform: none;
 }
 
