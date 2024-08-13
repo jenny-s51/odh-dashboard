@@ -26,6 +26,10 @@
   --mui-alert-warning-font-weight: 400;
 
   --mui-button-font-weight: 500;
+
+  --pf-t--global--border--width--box--status--default: 1px;
+  --pf-t--global--border--radius--pill: 4px;
+  --pf-t--global--border--radius--medium: 4px;
 }
 
 
