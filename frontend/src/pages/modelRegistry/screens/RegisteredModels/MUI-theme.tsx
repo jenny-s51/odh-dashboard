@@ -12,7 +12,11 @@ export const muiTheme = () => {
     // console.log (theme.palette.action.active);
 
     console.log(theme);
-    console.log('spacing', theme.spacing(6));
+    console.log('paddig block start should be 6', theme.unstable_sxConfig);
+    console.log('paddig block start should be 6', theme.unstable_sxConfig.paddingBlockEnd);
+    console.log('paddig inline start should be 16', theme.unstable_sxConfig.paddingInlineStart);
+    console.log('paddig inline end ', theme?.unstable_sxConfig?.paddingInlineEnd)
+
     console.log('columnGap', theme.unstable_sxConfig.columnGap);
     return theme;
     // console.log (window.theme);
@@ -44,8 +48,8 @@ export const muiTheme = () => {
   // Global vars
   html.style.setProperty('--pf-t--color--blue--500', theme.palette.primary.main);
   html.style.setProperty('--pf-t--global--border--width--box--status--default', '1px');
-  html.style.setProperty('--pf-t--global--border--radius--pill', '4px');
-  html.style.setProperty('--pf-t--global--border--radius--medium', '4px');
+  html.style.setProperty('--pf-t--global--border--radius--pill', `${theme.shape.borderRadius}`);
+  html.style.setProperty('--pf-t--global--border--radius--medium', `${theme.shape.borderRadius}`);
 
   // Alert
   alerts.forEach((alert) => {
@@ -58,7 +62,7 @@ export const muiTheme = () => {
       alert.style.setProperty('--pf-v6-c-alert--PaddingBlockStart', '6px');
       alert.style.setProperty('--pf-v6-c-alert--PaddingBlockEnd', '6px');
       alert.style.setProperty('--pf-v6-c-alert--PaddingInlineStart', '16px');
-      alert.style.setProperty('--pf-v6-c-alert--PaddingInlineStart', '16px');
+      alert.style.setProperty('--pf-v6-c-alert--PaddingInlineEnd', '16px');
       alert.style.setProperty('--pf-v6-c-alert--BoxShadow', 'none');
     } else {
       console.error('An element is not an HTMLElement.');

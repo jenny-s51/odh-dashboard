@@ -4,6 +4,7 @@ import {
   Masthead,
   MastheadBrand,
   MastheadContent,
+  MastheadLogo,
   MastheadMain,
   MastheadToggle,
   PageToggleButton,
@@ -26,20 +27,26 @@ const Header: React.FC<HeaderProps> = ({ onNotificationsClick }) => {
   const { isAllowed } = useUser();
   return (
     <Masthead role="banner" aria-label="page masthead">
-      {isAllowed && (
-        <MastheadToggle>
-          <PageToggleButton id="page-nav-toggle" variant="plain" aria-label="Dashboard navigation">
-            <BarsIcon />
-          </PageToggleButton>
-        </MastheadToggle>
-      )}
       <MastheadMain>
-        <MastheadBrand component={MastheadBranchComponent}>
-          <Brand
-            className="odh-dashboard__brand"
-            src={`${window.location.origin}/images/${ODH_LOGO}`}
-            alt={`${ODH_PRODUCT_NAME} Logo`}
-          />
+        {isAllowed && (
+          <MastheadToggle>
+            <PageToggleButton
+              id="page-nav-toggle"
+              variant="plain"
+              aria-label="Dashboard navigation"
+            >
+              <BarsIcon />
+            </PageToggleButton>
+          </MastheadToggle>
+        )}
+        <MastheadBrand>
+          <MastheadLogo component={MastheadBranchComponent}>
+            <Brand
+              className="odh-dashboard__brand"
+              src={`${window.location.origin}/images/${ODH_LOGO}`}
+              alt={`${ODH_PRODUCT_NAME} Logo`}
+            />
+          </MastheadLogo>
         </MastheadBrand>
       </MastheadMain>
       <MastheadContent>
