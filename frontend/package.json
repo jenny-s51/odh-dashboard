@@ -200,6 +200,11 @@
     "@patternfly/react-topology": {
       "react": "^18.2.0"
     },
+    "@patternfly/quickstarts": "^5.4.0-prerelease.4",
+    "@patternfly/react-core": "^5.4.0-prerelease.31",
+    "@patternfly/react-table": "^5.4.0-prerelease.34",
+    "@patternfly/react-icons": "^5.4.0-prerelease.10",
+    "@patternfly/react-styles": "^5.4.0-prerelease.11",
     "ws": "^8.17.1"
   }
 }
