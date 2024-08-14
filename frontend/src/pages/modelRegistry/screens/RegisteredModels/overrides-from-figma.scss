@@ -1,4 +1,4 @@
-
+.mui-theme {
   /* pallette */
   &:where(:root) {
     --pf-t--color--amber--100: #ffecb3;
@@ -1280,3 +1280,4 @@
     --pf-t--global--text--color--status--warning--default: var(--pf-t--global--color--status--warning--default);
     --pf-t--global--text--color--status--warning--hover: var(--pf-t--global--color--status--warning--hover);
   }
+}

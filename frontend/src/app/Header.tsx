@@ -8,6 +8,7 @@ import {
   MastheadMain,
   MastheadToggle,
   PageToggleButton,
+  Switch,
 } from '@patternfly/react-core';
 import { BarsIcon } from '@patternfly/react-icons';
 import { Link } from 'react-router-dom';
@@ -18,6 +19,12 @@ import HeaderTools from './HeaderTools';
 type HeaderProps = {
   onNotificationsClick: () => void;
 };
+
+declare global {
+  interface Window {
+    isSwitched?: boolean;
+  }
+}
 
 const MastheadBranchComponent: React.FC<React.ComponentProps<typeof Link>> = (props) => (
   <Link {...props} to="/" />

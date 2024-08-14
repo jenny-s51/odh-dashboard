@@ -15,7 +15,7 @@ import {
 import { asEnumMember } from '~/utilities/utils';
 import RegisteredModelTable from './RegisteredModelTable';
 import RegisteredModelsTableToolbar from './RegisteredModelsTableToolbar';
-import './MUI-theme.css'
+import './MUI-theme.scss'
 
 type RegisteredModelListViewProps = {
   registeredModels: RegisteredModel[];
@@ -62,7 +62,7 @@ const RegisteredModelListView: React.FC<RegisteredModelListViewProps> = ({
   };
 
   const toggleGroupItems = (
-    <ToolbarGroup variant="filter-group">
+    <ToolbarGroup variant="filter-group" alignItems="center">
       <ToolbarFilter
         labels={search === '' ? [] : [search]}
         deleteLabel={() => setSearch('')}

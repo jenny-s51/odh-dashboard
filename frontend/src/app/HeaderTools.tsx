@@ -12,6 +12,7 @@ import {
   DropdownItem,
   Dropdown,
   DropdownList,
+  Switch,
 } from '@patternfly/react-core';
 import { ExternalLinkAltIcon, QuestionCircleIcon } from '@patternfly/react-icons';
 import { COMMUNITY_LINK, DOC_LINK, SUPPORT_LINK, DEV_MODE, EXT_CLUSTER } from '~/utilities/const';
@@ -37,6 +38,17 @@ const HeaderTools: React.FC<HeaderToolsProps> = ({ onNotificationsClick }) => {
   const isImpersonating: boolean = useAppSelector((state) => state.isImpersonating || false);
   const { dashboardConfig } = useAppContext();
   const notification = useNotification();
+
+  const [isChecked, setIsChecked] = React.useState<boolean>(true);
+
+  React.useEffect(() => {
+    window.isSwitched = !isChecked;
+  }, [window.isSwitched]);
+
+  const handleChange = (_event: React.FormEvent<HTMLInputElement>, checked: boolean) => {
+    setIsChecked(!checked);
+    document.documentElement.classList.toggle('mui-theme');
+  };
 
   const newNotifications = React.useMemo(
     () => notifications.filter((currentNotification) => !currentNotification.read).length,
@@ -134,6 +146,15 @@ const HeaderTools: React.FC<HeaderToolsProps> = ({ onNotificationsClick }) => {
   return (
     <Toolbar isFullHeight>
       <ToolbarContent>
+        <ToolbarItem>
+        <Switch
+          id="simple-switch"
+          label="Toggle MUI Theme"
+          isChecked={!isChecked}
+          onChange={handleChange}
+          ouiaId="BasicSwitch"
+        />
+        </ToolbarItem>
         <ToolbarGroup variant="action-group-plain" align={{ default: 'alignEnd' }}>
           {!dashboardConfig.spec.dashboardConfig.disableAppLauncher ? (
             <ToolbarItem data-testid="application-launcher">

@@ -1,6 +1,6 @@
-@import url("overrides-from-figma.css");
+@import url("overrides-from-figma.scss");
 
-:root {
+.mui-theme:root {
   --mui-palette-primary-light: #42a5f5;
   --mui-palette-secondary-light: #ba68c8;
   --mui-palette-error-light: #ef5350;
@@ -32,7 +32,7 @@
   --pf-t--global--border--radius--medium: 4px;
 }
 
- .pf-v6-c-alert {
+.mui-theme .pf-v6-c-alert {
   --pf-v6-c-alert--m-warning__title--Color: var(--pf-t--global--text--color--status--warning--default);
   --pf-v6-c-alert__icon--MarginInlineEnd: 12px;
   --pf-v6-c-alert__title--FontWeight: var(--mui-alert-warning-font-weight);
@@ -46,15 +46,15 @@
   --pf-v6-c-alert--PaddingInlineStart: 16px;
 }
 
- .pf-v6-c-alert__title {
+.mui-theme .pf-v6-c-alert__title {
   padding-block: 8px;
 }
 
- .pf-v6-c-alert__icon {
+.mui-theme .pf-v6-c-alert__icon {
   margin-block-end: 7px;
 }
 
- .pf-v6-c-button {
+.mui-theme .pf-v6-c-button {
   --pf-v6-c-button--FontWeight: var(--mui-button-font-weight);
   --pf-v6-c-button--PaddingBlockStart: 6px;
   --pf-v6-c-button--PaddingBlockEnd: 6px;
@@ -66,7 +66,7 @@
   letter-spacing: 0.02857em;
 }
 
- .pf-v6-c-menu {
+.mui-theme .pf-v6-c-menu {
   --pf-v6-c-menu--BoxShadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
   --pf-v6-c-menu--BorderRadius: 4px;
   --pf-v6-c-menu--PaddingBlockStart: 8px;
@@ -80,28 +80,33 @@
   --pf-v6-c-menu__item--FontSize: 1rem;
 }
 
- .pf-v6-c-menu-toggle {
+.mui-theme .pf-v6-c-menu-toggle {
   --pf-v6-c-menu-toggle__controls--MinWidth: 0;
-  --pf-v6-c-menu-toggle--expanded--BackgroundColor: var(--mui-palette-primary-main);
+  --pf-v6-c-menu-toggle--expanded--BackgroundColor: none;
   --pf-v6-c-menu-toggle--LineHeight: 1.75;
   --pf-v6-c-menu-toggle--PaddingBlockStart: 6px;
   --pf-v6-c-menu-toggle--PaddingBlockEnd: 6px;
   --pf-v6-c-menu-toggle--PaddingInlineStart: 16px;
   --pf-v6-c-menu-toggle--PaddingInlineEnd: 16px;
   --pf-v6-c-menu-toggle--ColumnGap: 0;
+  --pf-v6-c-menu-toggle--expanded--Color: black;
 
   text-transform: uppercase;
   font-weight: var(--mui-button-font-weight);
   letter-spacing: 0.02857em;
 }
 
- .pf-v6-c-menu-toggle__toggle-icon {
+.mui-theme .pf-v6-c-menu-toggle__toggle-icon {
+  --pf-v6-c-menu-toggle__toggle-icon--expanded--Color: var(--pf-t--global--icon--color--300);
+}
+
+.mui-theme .pf-v6-c-menu-toggle__toggle-icon {
   margin-right: -4px;
   margin-left: 8px;
   font-size: 20px;
 }
 
- .pf-v6-c-table {
+.mui-theme .pf-v6-c-table {
   --pf-v6-c-table__sort--m-selected__button--Color: #000000de;
   --pf-v6-c-table__button--BackgroundColor: none;
   --pf-v6-c-table__button--hover--BackgroundColor: none;
@@ -127,11 +132,11 @@
   letter-spacing: 0.01071em;
 }
 
- .pf-v6-c-table .pf-m-align-right {
+.mui-theme .pf-v6-c-table .pf-m-align-right {
   text-align: right;
 }
 
- .pf-v6-c-table__sort-indicator {
+.mui-theme .pf-v6-c-table__sort-indicator {
   font-size: 18px;
   opacity: 0;
   transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
@@ -139,7 +144,7 @@
 }
 
 /* CSS workaround to use MUI icon for sort icon */
- .pf-v6-c-table__sort-indicator::before {
+.mui-theme .pf-v6-c-table__sort-indicator::before {
   display: block;
   width: 1em;
   height: 1em;
@@ -147,27 +152,27 @@
 }
 
 /* Hide PF's default icon for the CSS workaround to use MUI's icon */
- .pf-v6-c-table__sort-indicator svg {
+.mui-theme .pf-v6-c-table__sort-indicator svg {
   display: none;
 }
 
- .pf-v6-c-table__button:is(:hover, :focus) .pf-v6-c-table__sort-indicator,
- .pf-v6-c-table__sort.pf-m-selected .pf-v6-c-table__sort-indicator {
+.mui-theme .pf-v6-c-table__button:is(:hover, :focus) .pf-v6-c-table__sort-indicator,
+.mui-theme .pf-v6-c-table__sort.pf-m-selected .pf-v6-c-table__sort-indicator {
   opacity: 0.6;
 }
 
- .pf-v6-c-table__sort[aria-sort="ascending"] .pf-v6-c-table__sort-indicator {
+.mui-theme .pf-v6-c-table__sort[aria-sort="ascending"] .pf-v6-c-table__sort-indicator {
   transform: rotate(180deg);
 }
 
- .pf-v6-c-tab-content {
+.mui-theme .pf-v6-c-tab-content {
   --pf-v6-c-tab-content__body--m-padding--PaddingBlockEnd: var(--pf-t--global--spacer--lg);
   --pf-v6-c-tab-content__body--m-padding--PaddingBlockStart: var(--pf-t--global--spacer--lg);
   --pf-v6-c-tab-content__body--m-padding--PaddingInlineEnd: var(--pf-t--global--spacer--lg);
   --pf-v6-c-tab-content__body--m-padding--PaddingInlineStart: var(--pf-t--global--spacer--lg);
 }
 
- .pf-v6-c-tabs {
+.mui-theme .pf-v6-c-tabs {
   --pf-v6-c-tabs__link--hover--BackgroundColor: transparent;
   --pf-v6-c-tabs__item--PaddingBlockStart: 0;
   --pf-v6-c-tabs__item--PaddingBlockEnd: 0;
@@ -182,21 +187,21 @@
   --pf-v6-c-tabs__link--FontSize: 0.875rem;
 }
 
- .pf-v6-c-tabs__link {
+.mui-theme .pf-v6-c-tabs__link {
   text-transform: uppercase;
   font-weight: 500;
   line-height: 1.75;
   letter-spacing: 0.02857em;
 }
 
- .pf-v6-c-tab-content {
+.mui-theme .pf-v6-c-tab-content {
   --pf-v6-c-tab-content__body--m-padding--PaddingBlockEnd: var(--pf-t--global--spacer--lg);
   --pf-v6-c-tab-content__body--m-padding--PaddingBlockStart: var(--pf-t--global--spacer--lg);
   --pf-v6-c-tab-content__body--m-padding--PaddingInlineEnd: var(--pf-t--global--spacer--lg);
   --pf-v6-c-tab-content__body--m-padding--PaddingInlineStart: var(--pf-t--global--spacer--lg);
 }
 
- .pf-v6-c-label {
+.mui-theme .pf-v6-c-label {
   --pf-v6-c-label--BorderRadius: 16px;
   --pf-v6-c-label--FontSize: 0.8125rem;
   --pf-v6-c-label--PaddingInlineStart: 0;
@@ -204,28 +209,28 @@
   height: 24px;
 }
 
- .pf-v6-c-label__text {
+.mui-theme .pf-v6-c-label__text {
   padding-right: 8px;
   padding-left: 8px;
 }
-/*
- .pf-v6-c-pagination {
-  --pf-v6-c-pagination__total-items--Display: block;
-} */
 
- .pf-v6-c-pagination__total-items b {
+.mui-theme .pf-v6-c-pagination {
+  --pf-v6-c-pagination__total-items--Display: block;
+}
+
+.mui-theme .pf-v6-c-pagination__total-items b {
   font-weight: normal;
 }
 
- .pf-v6-c-pagination__page-menu {
+.mui-theme .pf-v6-c-pagination__page-menu {
   order: -1;
 }
 
- .pf-v6-c-pagination__page-menu .pf-v6-c-menu-toggle {
+.mui-theme .pf-v6-c-pagination__page-menu .pf-v6-c-menu-toggle {
   --pf-v6-c-menu-toggle--expanded--BackgroundColor: var(--pf-v6-c-menu-toggle--m-plain--expanded--BackgroundColor);
   text-transform: none;
 }
 
- /* .pf-v6-c-pagination__page-menu::before {
+.mui-theme .pf-v6-c-pagination__page-menu::before {
   content: "Rows per page:";
-} */
+}
