@@ -83,6 +83,7 @@
 .mui-theme .pf-v6-c-menu-toggle {
   --pf-v6-c-menu-toggle__controls--MinWidth: 0;
   --pf-v6-c-menu-toggle--expanded--BackgroundColor: none;
+  --pf-v6-c-menu-toggle--expanded--BorderColor: none;
   --pf-v6-c-menu-toggle--LineHeight: 1.75;
   --pf-v6-c-menu-toggle--PaddingBlockStart: 6px;
   --pf-v6-c-menu-toggle--PaddingBlockEnd: 6px;
@@ -90,7 +91,16 @@
   --pf-v6-c-menu-toggle--PaddingInlineEnd: 16px;
   --pf-v6-c-menu-toggle--ColumnGap: 0;
   --pf-v6-c-menu-toggle--expanded--Color: black;
+  --pf-v6-c-menu-toggle--hover--BorderColor: none;
+  --pf-v6-c-menu-toggle--BorderColor: none;
+  --pf-v6-c-menu-toggle--hover--BackgroundColor: var(--pf-t--global--background--color--action--plain--hover);
 
+  text-transform: uppercase;
+  font-weight: var(--mui-button-font-weight);
+  letter-spacing: 0.02857em;
+}
+
+.mui-theme .pf-v6-c-menu-toggle__button {
   text-transform: uppercase;
   font-weight: var(--mui-button-font-weight);
   letter-spacing: 0.02857em;
