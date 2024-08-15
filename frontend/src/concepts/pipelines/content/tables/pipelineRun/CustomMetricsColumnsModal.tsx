@@ -32,7 +32,7 @@ export const CustomMetricsColumnsModal: React.FC<CustomMetricsColumnsModalProps>
   const metricsColumnsLocalStorageKey = getMetricsColumnsLocalStorageKey(experimentId ?? '');
   const selectedColumnNames = Object.values(columns).reduce((acc: string[], column) => {
     if (column.props.checked) {
-      acc.push(column.id);
+      acc.push(column.id as string);
     }
     return acc;
   }, []);
@@ -66,7 +66,7 @@ export const CustomMetricsColumnsModal: React.FC<CustomMetricsColumnsModalProps>
 
                 if (searchText) {
                   newColumns = defaultColumns.filter((column) =>
-                    column.id.toLowerCase().includes(searchText.toLowerCase()),
+                    (column.id as string).toLowerCase().includes(searchText.toLowerCase()),
                   );
                 }
 
@@ -110,7 +110,7 @@ export const CustomMetricsColumnsModal: React.FC<CustomMetricsColumnsModalProps>
 
             const columnCheckbox = (
               <Checkbox
-                id={id}
+                id={id as string}
                 isChecked={checked}
                 isDisabled={isDisabled}
                 onChange={(_, isChecked) =>
