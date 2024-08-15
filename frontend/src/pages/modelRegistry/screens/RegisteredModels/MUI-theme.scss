@@ -81,6 +81,7 @@
 }
 
 .mui-theme .pf-v6-c-menu-toggle {
+  --pf-v6-c-menu-toggle__toggle-icon--MinHeight: auto;
   --pf-v6-c-menu-toggle__controls--MinWidth: 0;
   --pf-v6-c-menu-toggle--expanded--BackgroundColor: none;
   --pf-v6-c-menu-toggle--expanded--BorderColor: none;
@@ -94,6 +95,8 @@
   --pf-v6-c-menu-toggle--hover--BorderColor: none;
   --pf-v6-c-menu-toggle--BorderColor: none;
   --pf-v6-c-menu-toggle--hover--BackgroundColor: var(--pf-t--global--background--color--action--plain--hover);
+  --pf-v6-c-menu-toggle--m-split-button--m-action--m-primary--expanded--child--BackgroundColor: var(--pf-t--global--color--brand--default);
+  --pf-v6-c-menu-toggle--m-split-button--m-action--m-primary--child--BorderInlineStartColor: var(--mui-palette-primary-dark);
 
   text-transform: uppercase;
   font-weight: var(--mui-button-font-weight);
@@ -104,16 +107,46 @@
   text-transform: uppercase;
   font-weight: var(--mui-button-font-weight);
   letter-spacing: 0.02857em;
+  align-self: stretch;
+}
+
+.mui-theme .pf-v6-c-menu-toggle.pf-m-primary.pf-m-split-button {
+  --pf-v6-c-menu-toggle--expanded--Color: var(--pf-t--global--text--color--on-brand--clicked);
+}
+
+.mui-theme .pf-v6-c-menu-toggle.pf-m-primary.pf-m-split-button .pf-v6-c-menu-toggle__button[aria-expanded="true"] {
+  --pf-v6-c-menu-toggle--m-split-button--m-action--m-primary--child--BackgroundColor: var(--mui-palette-primary-dark);
+}
+
+.mui-theme .pf-v6-c-menu-toggle__button:has(.pf-v6-c-menu-toggle__toggle-icon) {
+  --pf-v6-c-menu-toggle--PaddingBlockStart: 4px;
+  --pf-v6-c-menu-toggle--PaddingBlockEnd: 4px;
+  --pf-v6-c-menu-toggle--PaddingInlineStart: 10px;
+  --pf-v6-c-menu-toggle--PaddingInlineEnd: 10px;
+}
+
+.mui-theme .pf-v6-c-menu-toggle__button .pf-v6-c-menu-toggle__toggle-icon {
+  width: 1em;
+  height: 1em;
+  font-size: 20px;
+}
+
+.mui-theme .pf-v6-c-menu-toggle__button .pf-v6-c-menu-toggle__toggle-icon .pf-v6-svg {
+  vertical-align: revert;
 }
 
 .mui-theme .pf-v6-c-menu-toggle__toggle-icon {
   --pf-v6-c-menu-toggle__toggle-icon--expanded--Color: var(--pf-t--global--icon--color--300);
+  font-size: 20px;
 }
 
-.mui-theme .pf-v6-c-menu-toggle__toggle-icon {
+.mui-theme .pf-v6-c-menu-toggle:not(.pf-m-split-button) .pf-v6-c-menu-toggle__toggle-icon {
   margin-right: -4px;
   margin-left: 8px;
-  font-size: 20px;
+}
+
+.mui-theme .pf-v6-c-menu-toggle__icon {
+  display: block;
 }
 
 .mui-theme .pf-v6-c-table {
