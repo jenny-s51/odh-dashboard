@@ -1,31 +1,17 @@
 @import url("overrides-from-figma.scss");
 
 .mui-theme:root {
-  --mui-palette-primary-light: #42a5f5;
-  --mui-palette-secondary-light: #ba68c8;
-  --mui-palette-error-light: #ef5350;
-  --mui-palette-warning-light: #ff9800;
-  --mui-palette-info-light: #03a9f4;
-  --mui-palette-success-light: #4caf50;
-
-  --mui-palette-primary-main: #1976d2;
-  --mui-palette-secondary-main: #9c27b0;
-  --mui-palette-error-main: #d32f2f;
-  --mui-palette-warning-main: #ed6c02;
-  --mui-palette-info-main: #0288d1;
-  --mui-palette-success-main: #2e7d32;
-
-  --mui-palette-primary-dark: #1565c0;
-  --mui-palette-secondary-dark: #7b1fa2;
-  --mui-palette-error-dark: #c62828;
-  --mui-palette-warning-dark: #e65100;
-  --mui-palette-info-dark: #01579b;
-  --mui-palette-success-dark: #1b5e20;
 
   --mui-alert-warning-text: #663c00;
   --mui-alert-warning-font-weight: 400;
 
   --mui-button-font-weight: 500;
+
+
+  --mui-spacing-4px: calc(0.5 * var(--mui-spacing));
+  --mui-spacing-8px: calc(0.5 * var(--mui-spacing));
+  --mui-spacing-16px: calc(2 * var(--mui-spacing));
+
 
   --pf-t--global--border--width--box--status--default: 1px;
   --pf-t--global--border--radius--pill: 4px;
@@ -47,7 +33,7 @@
 }
 
 .mui-theme .pf-v6-c-alert__title {
-  padding-block: 8px;
+  padding-block: var(--mui-spacing);
 }
 
 .mui-theme .pf-v6-c-alert__icon {
@@ -67,12 +53,12 @@
 }
 
 .mui-theme .pf-v6-c-menu {
-  --pf-v6-c-menu--BoxShadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-  --pf-v6-c-menu--BorderRadius: 4px;
-  --pf-v6-c-menu--PaddingBlockStart: 8px;
-  --pf-v6-c-menu--PaddingBlockEnd: 8px;
-  --pf-v6-c-menu--PaddingInlineStart: 8px;
-  --pf-v6-c-menu--PaddingInlineEnd: 8px;
+  --pf-v6-c-menu--BoxShadow: var(--mui-shadows-8);
+  --pf-v6-c-menu--BorderRadius: var(--mui-shape-borderRadius);
+  --pf-v6-c-menu--PaddingBlockStart: var(--mui-spacing);
+  --pf-v6-c-menu--PaddingBlockEnd: var(--mui-spacing);
+  --pf-v6-c-menu--PaddingInlineStart: var(--mui-spacing);
+  --pf-v6-c-menu--PaddingInlineEnd: var(--mui-spacing);
   --pf-v6-c-menu__item--PaddingBlockStart: 6px;
   --pf-v6-c-menu__item--PaddingBlockEnd: 6px;
   --pf-v6-c-menu__item--PaddingInlineStart: 16px;
@@ -119,8 +105,8 @@
 }
 
 .mui-theme .pf-v6-c-menu-toggle__button:has(.pf-v6-c-menu-toggle__toggle-icon) {
-  --pf-v6-c-menu-toggle--PaddingBlockStart: 4px;
-  --pf-v6-c-menu-toggle--PaddingBlockEnd: 4px;
+  --pf-v6-c-menu-toggle--PaddingBlockStart: var(--mui-spacing-4);
+  --pf-v6-c-menu-toggle--PaddingBlockEnd: var(--mui-spacing-4);
   --pf-v6-c-menu-toggle--PaddingInlineStart: 10px;
   --pf-v6-c-menu-toggle--PaddingInlineEnd: 10px;
 }
@@ -142,7 +128,7 @@
 
 .mui-theme .pf-v6-c-menu-toggle:not(.pf-m-split-button) .pf-v6-c-menu-toggle__toggle-icon {
   margin-right: -4px;
-  margin-left: 8px;
+  margin-left: var(--mui-spacing);
 }
 
 .mui-theme .pf-v6-c-menu-toggle__icon {
@@ -253,8 +239,8 @@
 }
 
 .mui-theme .pf-v6-c-label__text {
-  padding-right: 8px;
-  padding-left: 8px;
+  padding-right: var(--mui-spacing);
+  padding-left: var(--mui-spacing);
 }
 
 .mui-theme .pf-v6-c-pagination {
