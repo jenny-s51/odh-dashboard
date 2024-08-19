@@ -8,6 +8,7 @@ import SDKInitialize from './SDKInitialize';
 import { BrowserStorageContextProvider } from './components/browserStorage/BrowserStorageContext';
 import ErrorBoundary from './components/error/ErrorBoundary';
 import { ReduxContext } from './redux/context';
+import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles';
 
 /**
 /**
@@ -25,7 +26,9 @@ root.render(
           <Router>
             <SDKInitialize>
               <BrowserStorageContextProvider>
-                <App />
+                <CssVarsProvider>
+                  <App />
+                </CssVarsProvider>
               </BrowserStorageContextProvider>
             </SDKInitialize>
           </Router>
