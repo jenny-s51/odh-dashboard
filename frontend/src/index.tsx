@@ -8,7 +8,7 @@ import SDKInitialize from './SDKInitialize';
 import { BrowserStorageContextProvider } from './components/browserStorage/BrowserStorageContext';
 import ErrorBoundary from './components/error/ErrorBoundary';
 import { ReduxContext } from './redux/context';
-import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 /**
 /**
@@ -18,6 +18,8 @@ import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/s
 // We have to use '!' here for 'document.getElementById('root')' to avoid type errors
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const root = createRoot(document.getElementById('root')!);
+
+const theme = createTheme({ cssVariables: true });
 root.render(
   <React.StrictMode>
     <ErrorBoundary>
@@ -26,9 +28,9 @@ root.render(
           <Router>
             <SDKInitialize>
               <BrowserStorageContextProvider>
-                <CssVarsProvider>
+                <ThemeProvider theme={theme}>
                   <App />
-                </CssVarsProvider>
+                </ThemeProvider>
               </BrowserStorageContextProvider>
             </SDKInitialize>
           </Router>
