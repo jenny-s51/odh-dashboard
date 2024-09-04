@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Bullseye,
   EmptyState,
-  Page,
   PageSection,
   PageSectionVariants,
 } from '@patternfly/react-core';

@@ -15,8 +15,8 @@ import {
 import { asEnumMember } from '~/utilities/utils';
 import RegisteredModelTable from './RegisteredModelTable';
 import RegisteredModelsTableToolbar from './RegisteredModelsTableToolbar';
-import './MUI-theme.scss'
-import { createTheme } from "@mui/material/styles";
+import './MUI-theme.scss';
+import { createTheme } from '@mui/material/styles';
 
 type RegisteredModelListViewProps = {
   registeredModels: RegisteredModel[];
@@ -35,8 +35,8 @@ const RegisteredModelListView: React.FC<RegisteredModelListViewProps> = ({
   const searchTypes = React.useMemo(() => [SearchType.KEYWORD], []); // TODO Add owner once RHOAIENG-7566 is completed.
 
   const theme = createTheme({ cssVariables: true });
-  console.log("what is theme vars", theme);
-  console.log("spacing", theme.spacing(2));
+  console.log('what is theme vars', theme);
+  console.log('spacing', theme.spacing(2));
   if (unfilteredRegisteredModels.length === 0) {
     return (
       <EmptyModelRegistryState

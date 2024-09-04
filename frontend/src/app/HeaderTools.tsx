@@ -147,13 +147,13 @@ const HeaderTools: React.FC<HeaderToolsProps> = ({ onNotificationsClick }) => {
     <Toolbar isFullHeight>
       <ToolbarContent>
         <ToolbarItem>
-        <Switch
-          id="simple-switch"
-          label="Toggle MUI Theme"
-          isChecked={!isChecked}
-          onChange={handleChange}
-          ouiaId="BasicSwitch"
-        />
+          <Switch
+            id="simple-switch"
+            label="Toggle MUI Theme"
+            isChecked={!isChecked}
+            onChange={handleChange}
+            ouiaId="BasicSwitch"
+          />
         </ToolbarItem>
         <ToolbarGroup variant="action-group-plain" align={{ default: 'alignEnd' }}>
           {!dashboardConfig.spec.dashboardConfig.disableAppLauncher ? (
