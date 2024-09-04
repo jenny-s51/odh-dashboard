@@ -48,6 +48,21 @@
   --mui-menu-toggle--PaddingInlineStart: 10px;
   --mui-menu-toggle--PaddingInlineEnd: 10px;
 
+    // Tabs
+    --mui-tabs__link--hover--BackgroundColor: transparent;
+    --mui-tabs__item--PaddingBlockStart: 0;
+    --mui-tabs__item--PaddingBlockEnd: 0;
+    --mui-tabs__item--PaddingInlineStart: 0;
+    --mui-tabs__item--PaddingInlineEnd: 0;
+    --mui-tabs__link--PaddingBlockStart: 12px;
+    --mui-tabs__link--PaddingBlockEnd: 12px;
+    --mui-tabs__link--PaddingInlineStart: 16px;
+    --mui-tabs__link--PaddingInlineEnd: 16px;
+    --mui-tabs__item--m-current__link--Color: var(--pf-t--global--text--color--brand--default);
+    --mui-tabs__item--m-current__link--after--BorderWidth: 2px;
+    --mui-tabs__link--FontSize: 0.875rem;
+
+
   --mui-text-transform: uppercase;
 
 
@@ -247,22 +262,22 @@
 }
 
 .mui-theme .pf-v6-c-tabs {
-  --pf-v6-c-tabs__link--hover--BackgroundColor: transparent;
-  --pf-v6-c-tabs__item--PaddingBlockStart: 0;
-  --pf-v6-c-tabs__item--PaddingBlockEnd: 0;
-  --pf-v6-c-tabs__item--PaddingInlineStart: 0;
-  --pf-v6-c-tabs__item--PaddingInlineEnd: 0;
-  --pf-v6-c-tabs__link--PaddingBlockStart: 12px;
-  --pf-v6-c-tabs__link--PaddingBlockEnd: 12px;
-  --pf-v6-c-tabs__link--PaddingInlineStart: 16px;
-  --pf-v6-c-tabs__link--PaddingInlineEnd: 16px;
+  --pf-v6-c-tabs__link--hover--BackgroundColor: var(--mui-tabs__link--hover--BackgroundColor);
+  --pf-v6-c-tabs__item--PaddingBlockStart: var(--mui-tabs__item--PaddingBlockStart);
+  --pf-v6-c-tabs__item--PaddingBlockEnd: var(--mui-tabs__item--PaddingBlockEnd);
+  --pf-v6-c-tabs__item--PaddingInlineStart: var(--mui-tabs__link--PaddingInlineStart);
+  --pf-v6-c-tabs__item--PaddingInlineEnd: var(--mui-tabs__item--PaddingInlineEnd);
+  --pf-v6-c-tabs__link--PaddingBlockStart: var(--mui-tabs__link--PaddingBlockStart);
+  --pf-v6-c-tabs__link--PaddingBlockEnd: var(--mui-tabs__link--PaddingBlockEnd);
+  --pf-v6-c-tabs__link--PaddingInlineStart: var(--mui-tabs__link--PaddingInlineStart);
+  --pf-v6-c-tabs__link--PaddingInlineEnd: var(--mui-tabs__link--PaddingInlineEnd);
   --pf-v6-c-tabs__item--m-current__link--Color: var(--pf-t--global--text--color--brand--default);
-  --pf-v6-c-tabs__item--m-current__link--after--BorderWidth: 2px;
+  --pf-v6-c-tabs__item--m-current__link--after--BorderWidth: var(--mui-tabs__item--m-current__link--after--BorderWidth);
   --pf-v6-c-tabs__link--FontSize: 0.875rem;
 }
 
 .mui-theme .pf-v6-c-tabs__link {
-  text-transform: uppercase;
+  text-transform: var(--mui-text-transform);
   font-weight: 500;
   line-height: 1.75;
   letter-spacing: 0.02857em;
