@@ -2,7 +2,6 @@ import * as React from 'react';
 import { DrawerPanelBody, Tab, TabContent, Tabs } from '@patternfly/react-core';
 import SelectedNodeDetailsTab from '~/concepts/pipelines/content/pipelinesDetails/pipelineRun/SelectedNodeDetailsTab';
 import SelectedNodeInputOutputTab from '~/concepts/pipelines/content/pipelinesDetails/pipelineRun/SelectedNodeInputOutputTab';
-import LogsTab from '~/concepts/pipelines/content/pipelinesDetails/pipelineRun/runLogs/LogsTab';
 import './PipelineRunDrawer.scss';
 import { PipelineTask } from '~/concepts/pipelines/topology';
 import { Execution } from '~/third_party/mlmd';
@@ -53,7 +52,7 @@ const PipelineRunDrawerRightTabs: React.FC<PipelineRunDrawerRightTabsProps> = ({
       title: 'Logs',
       isDisabled: !task.status?.podName,
       // content: <LogsTab task={task} />,
-      content: <></>
+      content: <></>,
     },
   };
 

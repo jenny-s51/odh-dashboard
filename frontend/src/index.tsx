@@ -2,13 +2,13 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { sdkStore, store } from './redux/store/store';
 import App from './app/App';
 import SDKInitialize from './SDKInitialize';
 import { BrowserStorageContextProvider } from './components/browserStorage/BrowserStorageContext';
 import ErrorBoundary from './components/error/ErrorBoundary';
 import { ReduxContext } from './redux/context';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 /**
 /**
