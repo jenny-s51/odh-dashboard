@@ -43,7 +43,7 @@ const HeaderTools: React.FC<HeaderToolsProps> = ({ onNotificationsClick }) => {
 
   React.useEffect(() => {
     window.isSwitched = !isChecked;
-  }, [window.isSwitched]);
+  }, [window.isSwitched, isChecked]);
 
   const handleChange = (_event: React.FormEvent<HTMLInputElement>, checked: boolean) => {
     setIsChecked(!checked);
