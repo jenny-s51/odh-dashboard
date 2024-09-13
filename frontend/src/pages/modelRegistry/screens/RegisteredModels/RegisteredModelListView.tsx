@@ -34,7 +34,6 @@ const RegisteredModelListView: React.FC<RegisteredModelListViewProps> = ({
 
   const searchTypes = React.useMemo(() => [SearchType.KEYWORD], []); // TODO Add owner once RHOAIENG-7566 is completed.
 
-  const theme = createTheme({ cssVariables: true });
   if (unfilteredRegisteredModels.length === 0) {
     return (
       <EmptyModelRegistryState
