@@ -2,7 +2,6 @@ import * as React from 'react';
 import { SearchInput, ToolbarFilter, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
 import { FilterIcon } from '@patternfly/react-icons';
 import { useNavigate } from 'react-router';
-import { createTheme } from '@mui/material/styles';
 import { SearchType } from '~/concepts/dashboard/DashboardSearchField';
 import { RegisteredModel } from '~/concepts/modelRegistry/types';
 import SimpleDropdownSelect from '~/components/SimpleDropdownSelect';
