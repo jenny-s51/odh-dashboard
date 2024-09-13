@@ -2,6 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { sdkStore, store } from './redux/store/store';
 import App from './app/App';
 import SDKInitialize from './SDKInitialize';
@@ -17,6 +18,8 @@ import { ReduxContext } from './redux/context';
 // We have to use '!' here for 'document.getElementById('root')' to avoid type errors
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const root = createRoot(document.getElementById('root')!);
+
+const theme = createTheme({ cssVariables: true });
 root.render(
   <React.StrictMode>
     <ErrorBoundary>
@@ -25,7 +28,9 @@ root.render(
           <Router>
             <SDKInitialize>
               <BrowserStorageContextProvider>
-                <App />
+                <ThemeProvider theme={theme}>
+                  <App />
+                </ThemeProvider>
               </BrowserStorageContextProvider>
             </SDKInitialize>
           </Router>

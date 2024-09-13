@@ -43,7 +43,7 @@ const HeaderTools: React.FC<HeaderToolsProps> = ({ onNotificationsClick }) => {
 
   React.useEffect(() => {
     window.isSwitched = !isChecked;
-  }, [window.isSwitched]);
+  }, [isChecked]);
 
   const handleChange = (_event: React.FormEvent<HTMLInputElement>, checked: boolean) => {
     setIsChecked(!checked);
@@ -147,13 +147,13 @@ const HeaderTools: React.FC<HeaderToolsProps> = ({ onNotificationsClick }) => {
     <Toolbar isFullHeight>
       <ToolbarContent>
         <ToolbarItem>
-        <Switch
-          id="simple-switch"
-          label="Toggle MUI Theme"
-          isChecked={!isChecked}
-          onChange={handleChange}
-          ouiaId="BasicSwitch"
-        />
+          <Switch
+            id="simple-switch"
+            label="Toggle MUI Theme"
+            isChecked={!isChecked}
+            onChange={handleChange}
+            ouiaId="BasicSwitch"
+          />
         </ToolbarItem>
         <ToolbarGroup variant="action-group-plain" align={{ default: 'alignEnd' }}>
           {!dashboardConfig.spec.dashboardConfig.disableAppLauncher ? (

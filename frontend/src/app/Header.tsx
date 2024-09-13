@@ -8,7 +8,6 @@ import {
   MastheadMain,
   MastheadToggle,
   PageToggleButton,
-  Switch,
 } from '@patternfly/react-core';
 import { BarsIcon } from '@patternfly/react-icons';
 import { Link } from 'react-router-dom';
