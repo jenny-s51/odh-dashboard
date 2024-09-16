@@ -193,13 +193,13 @@ const useSettingsNav = (): NavDataGroup[] => {
 };
 
 export const useBuildNavData = (): NavDataItem[] => [
-  ...useHomeNav(),
-  ...useApplicationsNav(),
-  ...useDSProjectsNav(),
-  ...useDSPipelinesNav(),
-  ...useDistributedWorkloadsNav(),
-  ...useModelServingNav(),
+  // ...useHomeNav(),
+  // ...useApplicationsNav(),
+  // ...useDSProjectsNav(),
+  // ...useDSPipelinesNav(),
+  // ...useDistributedWorkloadsNav(),
+  // ...useModelServingNav(),
   ...useModelRegistrySectionNav(),
-  ...useResourcesNav(),
-  ...useSettingsNav(),
+  // ...useResourcesNav(),
+  // ...useSettingsNav(),
 ];

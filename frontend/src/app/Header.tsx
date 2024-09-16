@@ -9,6 +9,7 @@ import {
   MastheadToggle,
   PageToggleButton,
   Switch,
+  Flex, Title
 } from '@patternfly/react-core';
 import { BarsIcon } from '@patternfly/react-icons';
 import { Link } from 'react-router-dom';
@@ -46,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({ onNotificationsClick }) => {
             </PageToggleButton>
           </MastheadToggle>
         )}
-        <MastheadBrand>
+        {/* <MastheadBrand>
           <MastheadLogo component={MastheadBranchComponent}>
             <Brand
               className="odh-dashboard__brand"
@@ -54,6 +55,13 @@ const Header: React.FC<HeaderProps> = ({ onNotificationsClick }) => {
               alt={`${ODH_PRODUCT_NAME} Logo`}
             />
           </MastheadLogo>
+        </MastheadBrand> */}
+        <MastheadBrand>
+          <Brand
+            className="kubeflow_brand"
+            src={`${window.location.origin}/images/kubeflow-logo.svg`}
+            alt="Kubeflow Logo"
+          />
         </MastheadBrand>
       </MastheadMain>
       <MastheadContent>
