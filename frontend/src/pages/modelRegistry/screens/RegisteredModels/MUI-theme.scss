@@ -48,6 +48,39 @@
   --mui-menu-toggle--PaddingInlineStart: 10px;
   --mui-menu-toggle--PaddingInlineEnd: 10px;
 
+
+  // Table
+  --mui-table__button--BackgroundColor: none;
+  --mui-table__button--hover--BackgroundColor: none;
+  --mui-table__button--Color: var(--pf-v6-c-table--cell--Color);
+  --mui-table__button--PaddingBlockStart: 0;
+  --mui-table__button--PaddingBlockEnd: 0;
+  --mui-table__button--PaddingInlineStart: 0;
+  --mui-table__button--PaddingInlineEnd: 0;
+  --mui-table--cell--PaddingInlineStart: 16px;
+  --mui-table--cell--PaddingInlineEnd: 16px;
+  --mui-table--cell--PaddingBlockStart: 16px;
+  --mui-table--cell--PaddingBlockEnd: 16px;
+  --mui-table--cell--first-last-child--PaddingInline: 0px;
+  --mui-table__thead--cell--FontSize: 14px;
+  --mui-table__sort-indicator--MarginInlineStart: 4px;
+
+  letter-spacing: 0.01071em;
+
+  // Tabs
+  --mui-tabs__link--hover--BackgroundColor: transparent;
+  --mui-tabs__item--PaddingBlockStart: 0;
+  --mui-tabs__item--PaddingBlockEnd: 0;
+  --mui-tabs__item--PaddingInlineStart: 0;
+  --mui-tabs__item--PaddingInlineEnd: 0;
+  --mui-tabs__link--PaddingBlockStart: 12px;
+  --mui-tabs__link--PaddingBlockEnd: 12px;
+  --mui-tabs__link--PaddingInlineStart: 16px;
+  --mui-tabs__link--PaddingInlineEnd: 16px;
+  --mui-tabs__item--m-current__link--Color: var(--pf-t--global--text--color--brand--default);
+  --mui-tabs__item--m-current__link--after--BorderWidth: 2px;
+  --mui-tabs__link--FontSize: 0.875rem;
+
   --mui-text-transform: uppercase;
 
 
@@ -181,27 +214,25 @@
 }
 
 .mui-theme .pf-v6-c-table {
-  --pf-v6-c-table__sort--m-selected__button--Color: #000000de;
-  --pf-v6-c-table__button--BackgroundColor: none;
-  --pf-v6-c-table__button--hover--BackgroundColor: none;
-  --pf-v6-c-table__sort-indicator--Color: #666;
-  --pf-v6-c-table__sort__button--hover__sort-indicator--Color: #00000050;
-  --pf-v6-c-table__sort__button--hover__text--Color: #00000099;
-  --pf-v6-c-table--cell--Color: rgba(0, 0, 0, 0.87);
+  --pf-v6-c-table__sort--m-selected__button--Color: var(--mui-palette-text-primary);
+  --pf-v6-c-table__sort-indicator--Color: var(--mui-palette-text-secondary);
+  --pf-v6-c-table__sort__button--hover__sort-indicator--Color: var(--mui-palette-text-secondary);
+  --pf-v6-c-table__sort__button--hover__text--Color: var(--mui-palette-text-secondary);
+  --pf-v6-c-table--cell--Color: var(--mui-palette-text-primary);
   --pf-v6-c-table__button--Color: var(--pf-v6-c-table--cell--Color);
-  --pf-v6-c-table__button--PaddingBlockStart: 0;
-  --pf-v6-c-table__button--PaddingBlockEnd: 0;
-  --pf-v6-c-table__button--PaddingInlineStart: 0;
-  --pf-v6-c-table__button--PaddingInlineEnd: 0;
-  --pf-v6-c-table--cell--PaddingInlineStart: 16px;
-  --pf-v6-c-table--cell--PaddingInlineEnd: 16px;
-  --pf-v6-c-table--cell--PaddingBlockStart: 16px;
-  --pf-v6-c-table--cell--PaddingBlockEnd: 16px;
-  --pf-v6-c-table--cell--first-last-child--PaddingInline: 0px;
-  --pf-v6-c-table__thead--cell--FontWeight: 500;
-  --pf-v6-c-table__thead--cell--FontSize: 14px;
-  --pf-v6-c-table__tr--BorderBlockEndColor: rgba(224, 224, 224, 1);
-  --pf-v6-c-table__sort-indicator--MarginInlineStart: 4px;
+  --pf-v6-c-table__button--PaddingBlockStart: var(--mui-table__button--PaddingBlockStart);
+  --pf-v6-c-table__button--PaddingBlockEnd: var(--mui-table__button--PaddingBlockEnd);
+  --pf-v6-c-table__button--PaddingInlineStart: var(--mui-table__button--PaddingInlineStart);
+  --pf-v6-c-table__button--PaddingInlineEnd: var(--mui-table__button--PaddingInlineEnd);
+  --pf-v6-c-table--cell--PaddingInlineStart: var(--mui-table--cell--PaddingInlineStart);
+  --pf-v6-c-table--cell--PaddingInlineEnd: var(--mui-table--cell--PaddingInlineEnd);
+  --pf-v6-c-table--cell--PaddingBlockStart: var(--mui-table--cell--PaddingBlockStart);
+  --pf-v6-c-table--cell--PaddingBlockEnd: var(--mui-table--cell--PaddingBlockEnd);
+  --pf-v6-c-table--cell--first-last-child--PaddingInline: var(--mui-table--cell--first-last-child--PaddingInline);
+  --pf-v6-c-table__thead--cell--FontWeight: var(--mui-button-font-weight);
+  --pf-v6-c-table__thead--cell--FontSize: var(--mui-table__thead--cell--FontSize);
+  --pf-v6-c-table__tr--BorderBlockEndColor: var(--mui-palette-grey-300);
+  --pf-v6-c-table__sort-indicator--MarginInlineStart: var(--mui-table__sort-indicator--MarginInlineStart);
 
   letter-spacing: 0.01071em;
 }
