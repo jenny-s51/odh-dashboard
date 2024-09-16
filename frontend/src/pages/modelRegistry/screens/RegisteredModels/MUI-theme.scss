@@ -130,6 +130,36 @@
   letter-spacing: 0.02857em;
 }
 
+.mui-theme .pf-v6-c-form__group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.mui-theme .pf-v6-c-form__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 14px;
+  color: #757575; /* MUI label color */
+  pointer-events: none;
+  transition: all 0.2s ease;
+  transform-origin: left top;
+  transform: translateY(-50%) translateX(12px);
+  background-color: white; /* Ensure label background matches input */
+  padding: 0 4px; /* Space between label text and border */
+}
+
+.mui-theme .form-input {
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 4px; /* Rounded corners */
+  padding: 12px 12px 12px 12px; /* Adjust padding to fit label */
+  font-size: 16px; /* Font size for input text */
+  width: 100%; /* Full width of parent */
+  box-sizing: border-box; /* Include padding and border in element’s total width and height */
+  transition: border-color 0.2s ease;
+}
+
+
 .mui-theme .pf-v6-c-menu {
   --pf-v6-c-menu--BoxShadow: var(--mui-shadows-8);
   --pf-v6-c-menu--BorderRadius: var(--mui-shape-borderRadius);
