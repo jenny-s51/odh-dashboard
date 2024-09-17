@@ -96,6 +96,10 @@
   --pf-t--global--color--nonstatus--blue--default: var(--mui-palette-primary-main);
   --pf-t--global--text--color--inverse: var(--mui-palette-common-white);
 
+  --pf-t--global--font--family--100: Roboto, Helvetica, Arial, sans-serif;
+  --pf-t--global--font--family--200: Roboto, Helvetica, Arial, sans-serif;
+  --pf-t--global--font--family--300: Roboto, Courier, monospace;
+
 }
 
 .mui-theme .pf-v6-c-alert {
@@ -135,8 +139,6 @@
   margin-bottom: 20px;
 }
 
-
-
 .mui-theme .pf-v6-c-form__label {
   position: absolute;
   top: 40%;
@@ -160,19 +162,58 @@
   line-height: 1.5; /* Ensure consistency in line height */
 }
 
-.mui-theme .pf-v6-c-form-control:hover {
-  --pf-v6-c-form-control--after--BorderColor: var(--mui-palette-common-black);
+/* Adjust the label when the textarea is a child of .form__group-control */
+.mui-theme .pf-v6-c-form__group-control textarea {
+  position: relative; /* Make sure textarea is positioned relative */
+  padding-top: 24px; /* Space for the label */
+  box-sizing: border-box; /* Include padding in element’s width */
 }
 
-mui-theme .pf-v6-c-form__group .pf-v6-c-form-control:focus + .pf-v6-c-form__label,
+.mui-theme .pf-v6-c-form-control>:is(input,select,textarea):focus {
+  --pf-v6-c-form-control--OutlineOffset: none;
+  outline: none;
+}
+
+.mui-theme .pf-v6-c-form__group-control textarea ~ .pf-v6-c-form__label {
+  top: 10%; /* Adjust based on the height of the textarea */
+  transform: translateY(-50%) scale(0.75);
+}
+.mui-theme .pf-v6-c-form-control:hover {
+  --pf-v6-c-form-control--hover--after--BorderColor: var(--mui-palette-common-black);
+}
+
+mui-theme .pf-v6-c-form__group .pf-v6-c-form-control:focus-within + .pf-v6-c-form__label,
 .pf-v6-c-form__group .pf-v6-c-form-control:not(:placeholder-shown) + .pf-v6-c-form__label {
   color: var(--mui-palette-primary-light); /* MUI blue for focused/active label */
 }
 
-.pf-v6-c-form__group .pf-v6-c-form-control:focus,
-.pf-v6-c-form__group .pf-v6-c-form-control:active
+.pf-v6-c-form__group .pf-v6-c-form-control:focus-within
  {
-  border: 2px solid var(--mui-palette-primary-light); /* Blue border when focused */
+  --pf-v6-c-form-control--after--BorderWidth: 2px;
+  --pf-v6-c-form-control--after--BorderColor: var(--mui-palette-primary-light);
+}
+
+/* Styles for disabled state */
+.mui-theme .pf-v6-c-form-control.pf-m-disabled input {
+    background-color: #f5f5f5; /* Light grey background */
+    color: #a0a0a0; /* Grey text color */
+    cursor: not-allowed; /* Indicate disabled state */
+    border: none; /* Remove default border */
+    border-bottom: 1px dotted #dcdcdc; /* Dotted bottom border */
+    padding: 12px 0; /* Adjust padding to fit dotted border */
+}
+
+/* Adjust label positioning for disabled state */
+.mui-theme .pf-v6-c-form-control.pf-m-disabled input ~ .pf-v6-c-form__label {
+    top: 12px; /* Adjust label position for disabled state */
+    transform: translateY(0) scale(0.75); /* Static label on top */
+    color: #bdbdbd; /* Light grey color for disabled label */
+}
+
+/* Adjust padding-top for textarea to make room for label */
+.form__group-control textarea {
+    padding-top: 24px; /* Space for the label */
+    box-sizing: border-box; /* Include padding in element’s width */
 }
 
 
@@ -257,6 +298,10 @@ mui-theme .pf-v6-c-form__group .pf-v6-c-form-control:focus + .pf-v6-c-form__labe
 
 .mui-theme .pf-v6-c-menu-toggle__icon {
   display: block;
+}
+
+.mui-theme .pf-v6-radio {
+  --pf-v6-c-radio--AccentColor: var(--mui-palette-primary-light);
 }
 
 .mui-theme .pf-v6-c-table {
