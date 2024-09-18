@@ -181,17 +181,17 @@
 
 mui-theme .pf-v6-c-form__group .pf-v6-c-form-control:focus-within + .pf-v6-c-form__label,
 .pf-v6-c-form__group .pf-v6-c-form-control:not(:placeholder-shown) + .pf-v6-c-form__label {
-  color: var(--mui-palette-primary-light);
+  color: var(--mui-palette-primary-main);
 }
 
 .mui-theme .pf-v6-c-form__group:focus-within .pf-v6-c-form-control
  {
   --pf-v6-c-form-control--after--BorderWidth: 2px;
-  --pf-v6-c-form-control--after--BorderColor: var(--mui-palette-primary-light);
+  --pf-v6-c-form-control--after--BorderColor: var(--mui-palette-primary-main);
 }
 
 .mui-theme .pf-v6-c-form__group:focus-within .pf-v6-c-form__label {
-  color: var(--mui-palette-primary-light); /* Change color of the label when the input is focused */
+  color: var(--mui-palette-primary-main); /* Change color of the label when the input is focused */
 }
 
 /* disabled state */
@@ -302,7 +302,7 @@ mui-theme .pf-v6-c-form__group .pf-v6-c-form-control:focus-within + .pf-v6-c-for
 }
 
 .mui-theme .pf-v6-radio {
-  --pf-v6-c-radio--AccentColor: var(--mui-palette-primary-light);
+  --pf-v6-c-radio--AccentColor: var(--mui-palette-primary-main);
 }
 
 .mui-theme .pf-v6-c-table {
