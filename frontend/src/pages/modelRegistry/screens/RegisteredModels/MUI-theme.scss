@@ -166,8 +166,8 @@
 }
 
 .mui-theme .pf-v6-c-form__group-control textarea {
-  position: relative; 
-  box-sizing: border-box; 
+  position: relative;
+  box-sizing: border-box;
 }
 
 .mui-theme .pf-v6-c-form-control>:is(input,select,textarea):focus {
@@ -179,7 +179,60 @@
   --pf-v6-c-form-control--hover--after--BorderColor: var(--mui-palette-common-black);
 }
 
-mui-theme .pf-v6-c-form__group .pf-v6-c-form-control:focus-within + .pf-v6-c-form__label,
+.mui-theme .form-fieldset-wrapper {
+  position: relative;
+}
+
+.mui-theme .form-fieldset-wrapper:focus-within .form-fieldset {
+  border-color: var(--mui-palette-primary-main);
+  border-width: 2px;
+}
+
+.mui-theme .form-fieldset {
+  text-align: left;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  top: -5px;
+  left: 0;
+  margin: 0;
+  padding: 0 8px;
+  pointer-events: none;
+  border-radius: inherit;
+  border-style: solid;
+  border-width: 1px;
+  overflow: hidden;
+  min-width: 0%;
+  border-color: rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+}
+
+.mui-theme .form-fieldset-legend {
+  float: unset;
+  width: auto;
+  overflow: hidden;
+  display: block;
+  padding: 0;
+  height: 11px;
+  font-size: 0.75em;
+  visibility: hidden;
+  max-width: 0.01px;
+  -webkit-transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+  transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+  white-space: nowrap;
+  max-width: 100%;
+  -webkit-transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
+  transition: max-width 100ms cubic-bezier(0.0, 0, 0.2, 1) 50ms;
+}
+
+.mui-theme .form-fieldset-wrapper .pf-v6-c-form-control {
+  &::before,
+  &::after {
+    content: revert;
+  }
+}
+
+.mui-theme .pf-v6-c-form__group .pf-v6-c-form-control:focus-within + .pf-v6-c-form__label,
 .pf-v6-c-form__group .pf-v6-c-form-control:not(:placeholder-shown) + .pf-v6-c-form__label {
   color: var(--mui-palette-primary-main);
 }
@@ -194,29 +247,6 @@ mui-theme .pf-v6-c-form__group .pf-v6-c-form-control:focus-within + .pf-v6-c-for
   color: var(--mui-palette-primary-main); /* Change color of the label when the input is focused */
 }
 
-/* disabled state */
-.mui-theme .pf-v6-c-form-control.pf-m-disabled input {
-    background-color: #f5f5f5; /* Light grey background */
-    color: #a0a0a0; /* Grey text color */
-    cursor: not-allowed; /* Indicate disabled state */
-    border: none; /* Remove default border */
-    border-bottom: 1px dotted #dcdcdc; /* Dotted bottom border */
-    padding: 25px 12px 8px;
-}
-
-/* Label positioning for disabled state */
-.mui-theme .pf-v6-c-form-control.pf-m-disabled input ~ .pf-v6-c-form__label {
-    top: 12px; /* Adjust label position for disabled state */
-    transform: translateY(0) scale(0.75); /* Static label on top */
-    color: #bdbdbd; /* Light grey color for disabled label */
-}
-
-/* Adjust label, does not work */
-.mui-theme .pf-v6-c-form__group-control .pf-v6-c-form-control.pf-m-disabled .pf-v6-c-form__label {
-  background-color: #f0f0f0; /* Match the label background to disabled input */
-  top: 12px; /* Adjust label position if needed */
-  transform: translateY(0) scale(0.75); /* Static label on top */
-}
 
 .mui-theme .pf-v6-c-menu {
   --pf-v6-c-menu--BoxShadow: var(--mui-shadows-8);
