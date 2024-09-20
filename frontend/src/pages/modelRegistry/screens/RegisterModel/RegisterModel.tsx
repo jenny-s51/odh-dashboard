@@ -54,7 +54,7 @@ const RegisterModel: React.FC = () => {
   const [isChecked, setIsChecked] = React.useState<boolean>(true);
 
   React.useEffect(() => {
-    console.log(window.isSwitched)
+    console.log(window.isSwitched);
     setIsChecked(window?.isSwitched!);
   }, [isChecked]);
 
@@ -94,7 +94,7 @@ const RegisterModel: React.FC = () => {
     });
   };
 
-  const mrTextInput = (
+  const modelRegistryInput = (
     <TextInput
       isDisabled
       isRequired
@@ -107,14 +107,99 @@ const RegisterModel: React.FC = () => {
 
   const modelNameInput = (
     <TextInput
-    isRequired
-    type="text"
-    id="model-name"
-    name="model-name"
-    value={modelName}
-    onChange={(_e, value) => setData('modelName', value)}
-  />
-  )
+      isRequired
+      type="text"
+      id="model-name"
+      name="model-name"
+      value={modelName}
+      onChange={(_e, value) => setData('modelName', value)}
+    />
+  );
+
+  const modelDescriptionInput = (
+    <TextArea
+      type="text"
+      id="model-description"
+      name="model-description"
+      value={modelDescription}
+      onChange={(_e, value) => setData('modelDescription', value)}
+    />
+  );
+
+  const versionNameInput = (
+    <TextInput
+      isRequired
+      type="text"
+      id="version-name"
+      name="version-name"
+      value={versionName}
+      onChange={(_e, value) => setData('versionName', value)}
+    />
+  );
+
+  const versionDescriptionInput = (
+    <TextArea
+      type="text"
+      id="version-description"
+      name="version-description"
+      value={versionDescription}
+      onChange={(_e, value) => setData('versionDescription', value)}
+    />
+  );
+
+  const sourceModelFormatInput = (
+    <TextInput
+      type="text"
+      placeholder="Example, tensorflow"
+      id="source-model-format"
+      name="source-model-format"
+      value={sourceModelFormat}
+      onChange={(_e, value) => setData('sourceModelFormat', value)}
+    />
+  );
+
+  const endpointInput = (
+    <TextInput
+      isRequired
+      type="text"
+      id="location-endpoint"
+      name="location-endpoint"
+      value={modelLocationEndpoint}
+      onChange={(_e, value) => setData('modelLocationEndpoint', value)}
+    />
+  );
+
+  const bucketInput = (
+    <TextInput
+      isRequired
+      type="text"
+      id="location-bucket"
+      name="location-bucket"
+      value={modelLocationBucket}
+      onChange={(_e, value) => setData('modelLocationBucket', value)}
+    />
+  );
+
+  const regionInput = (
+    <TextInput
+      type="text"
+      id="location-region"
+      name="location-region"
+      value={modelLocationRegion}
+      onChange={(_e, value) => setData('modelLocationRegion', value)}
+    />
+  );
+
+  const pathInput = (
+    <TextInput
+      isRequired
+      type="text"
+      id="location-path"
+      name="location-path"
+      value={modelLocationPath}
+      onChange={(_e, value) => setData('modelLocationPath', value)}
+    />
+  );
 
   return (
     <ApplicationsPage
@@ -139,16 +224,18 @@ const RegisterModel: React.FC = () => {
         <Stack hasGutter>
           <StackItem>
             <FormGroup label="Model registry" isRequired fieldId="mr-name">
-              {isChecked ?
-              (<div className="form-fieldset-wrapper">
-                {mrTextInput}
-                <fieldset aria-hidden="true" className="form-fieldset">
-                  <legend className="form-fieldset-legend">
-                    <span>Model Registry</span>
-                  </legend>
-                </fieldset>
-              </div>)
-              : mrTextInput }
+              {isChecked ? (
+                <div className="form-fieldset-wrapper">
+                  {modelRegistryInput}
+                  <fieldset aria-hidden="true" className="form-fieldset">
+                    <legend className="form-fieldset-legend">
+                      <span>Model Registry</span>
+                    </legend>
+                  </fieldset>
+                </div>
+              ) : (
+                modelRegistryInput
+              )}
             </FormGroup>
           </StackItem>
           <StackItem>
@@ -165,29 +252,30 @@ const RegisterModel: React.FC = () => {
               <FormGroup label="Model name" isRequired fieldId="model-name">
                 {isChecked ? (
                   <div className="form-fieldset-wrapper">
-                  {modelNameInput}
-                  <fieldset aria-hidden="true" className="form-fieldset">
-                    <legend className="form-fieldset-legend">
-                      <span>Model Name</span>
-                    </legend>
-                  </fieldset>
-                </div>) : modelNameInput}
+                    {modelNameInput}
+                    <fieldset aria-hidden="true" className="form-fieldset">
+                      <legend className="form-fieldset-legend">
+                        <span>Model Name</span>
+                      </legend>
+                    </fieldset>
+                  </div>
+                ) : (
+                  modelNameInput
+                )}
               </FormGroup>
               <FormGroup label="Model description" fieldId="model-description">
-                <div className="form-fieldset-wrapper">
-                  <TextArea
-                    type="text"
-                    id="model-description"
-                    name="model-description"
-                    value={modelDescription}
-                    onChange={(_e, value) => setData('modelDescription', value)}
-                  />
-                  <fieldset aria-hidden="true" className="form-fieldset">
-                    <legend className="form-fieldset-legend">
-                      <span>Model Description</span>
-                    </legend>
-                  </fieldset>
-                </div>
+                {isChecked ? (
+                  <div className="form-fieldset-wrapper">
+                    {modelDescriptionInput}
+                    <fieldset aria-hidden="true" className="form-fieldset">
+                      <legend className="form-fieldset-legend">
+                        <span>Model Description</span>
+                      </legend>
+                    </fieldset>
+                  </div>
+                ) : (
+                  modelDescriptionInput
+                )}
               </FormGroup>
             </FormSection>
             <FormSection
@@ -201,54 +289,46 @@ const RegisterModel: React.FC = () => {
               }
             >
               <FormGroup label="Version name" isRequired fieldId="version-name">
-                <div className="form-fieldset-wrapper">
-                  <TextInput
-                    isRequired
-                    type="text"
-                    id="version-name"
-                    name="version-name"
-                    value={versionName}
-                    onChange={(_e, value) => setData('versionName', value)}
-                  />
-                  <fieldset aria-hidden="true" className="form-fieldset">
-                    <legend className="form-fieldset-legend">
-                      <span>Version Name</span>
-                    </legend>
-                  </fieldset>
-                </div>
+                {isChecked ? (
+                  <div className="form-fieldset-wrapper">
+                    {versionNameInput}
+                    <fieldset aria-hidden="true" className="form-fieldset">
+                      <legend className="form-fieldset-legend">
+                        <span>Version Name</span>
+                      </legend>
+                    </fieldset>
+                  </div>
+                ) : (
+                  versionNameInput
+                )}
               </FormGroup>
               <FormGroup label="Version description" fieldId="version-description">
-                <div className="form-fieldset-wrapper">
-                  <TextArea
-                    type="text"
-                    id="version-description"
-                    name="version-description"
-                    value={versionDescription}
-                    onChange={(_e, value) => setData('versionDescription', value)}
-                  />
-                  <fieldset aria-hidden="true" className="form-fieldset">
-                    <legend className="form-fieldset-legend">
-                      <span>Version Description</span>
-                    </legend>
-                  </fieldset>
-                </div>
+                {isChecked ? (
+                  <div className="form-fieldset-wrapper">
+                    {versionDescriptionInput}
+                    <fieldset aria-hidden="true" className="form-fieldset">
+                      <legend className="form-fieldset-legend">
+                        <span>Version Description</span>
+                      </legend>
+                    </fieldset>
+                  </div>
+                ) : (
+                  versionDescriptionInput
+                )}
               </FormGroup>
               <FormGroup label="Source model format" fieldId="source-model-format">
-                <div className="form-fieldset-wrapper">
-                  <TextInput
-                    type="text"
-                    placeholder="Example, tensorflow"
-                    id="source-model-format"
-                    name="source-model-format"
-                    value={sourceModelFormat}
-                    onChange={(_e, value) => setData('sourceModelFormat', value)}
-                  />
-                  <fieldset aria-hidden="true" className="form-fieldset">
-                    <legend className="form-fieldset-legend">
-                      <span>Source Model Format</span>
-                    </legend>
-                  </fieldset>
-                </div>
+                {isChecked ? (
+                  <div className="form-fieldset-wrapper">
+                    {sourceModelFormatInput}
+                    <fieldset aria-hidden="true" className="form-fieldset">
+                      <legend className="form-fieldset-legend">
+                        <span>Source Model Format</span>
+                      </legend>
+                    </fieldset>
+                  </div>
+                ) : (
+                  sourceModelFormatInput
+                )}
               </FormGroup>
             </FormSection>
             <FormSection
@@ -274,73 +354,70 @@ const RegisterModel: React.FC = () => {
               {modelLocationType === ModelLocationType.ObjectStorage && (
                 <>
                   <FormGroup label="Endpoint" isRequired fieldId="location-endpoint">
-                    <div className="form-fieldset-wrapper">
-                      <TextInput
-                        isRequired
-                        type="text"
-                        id="location-endpoint"
-                        name="location-endpoint"
-                        value={modelLocationEndpoint}
-                        onChange={(_e, value) => setData('modelLocationEndpoint', value)}
-                      />
-                      <fieldset aria-hidden="true" className="form-fieldset">
-                        <legend className="form-fieldset-legend">
-                          <span>Endpoint</span>
-                        </legend>
-                      </fieldset>
-                    </div>
+                    {isChecked ? (
+                      <div className="form-fieldset-wrapper">
+                        {endpointInput}
+                        <fieldset aria-hidden="true" className="form-fieldset">
+                          <legend className="form-fieldset-legend">
+                            <span>Endpoint</span>
+                          </legend>
+                        </fieldset>
+                      </div>
+                    ) : (
+                      endpointInput
+                    )}
                   </FormGroup>
                   <FormGroup label="Bucket" isRequired fieldId="location-bucket">
-                    <div className="form-fieldset-wrapper">
-                      <TextInput
-                        isRequired
-                        type="text"
-                        id="location-bucket"
-                        name="location-bucket"
-                        value={modelLocationBucket}
-                        onChange={(_e, value) => setData('modelLocationBucket', value)}
-                      />
-                      <fieldset aria-hidden="true" className="form-fieldset">
-                        <legend className="form-fieldset-legend">
-                          <span>Bucket</span>
-                        </legend>
-                      </fieldset>
-                    </div>
+                    {isChecked ? (
+                      <div className="form-fieldset-wrapper">
+                        {bucketInput}
+                        <fieldset aria-hidden="true" className="form-fieldset">
+                          <legend className="form-fieldset-legend">
+                            <span>Bucket</span>
+                          </legend>
+                        </fieldset>
+                      </div>
+                    ) : (
+                      bucketInput
+                    )}
                   </FormGroup>
                   <FormGroup label="Region" fieldId="location-region">
-                    <div className="form-fieldset-wrapper">
-                      <TextInput
-                        type="text"
-                        id="location-region"
-                        name="location-region"
-                        value={modelLocationRegion}
-                        onChange={(_e, value) => setData('modelLocationRegion', value)}
-                      />
-                      <fieldset aria-hidden="true" className="form-fieldset">
-                        <legend className="form-fieldset-legend">
-                          <span>Region</span>
-                        </legend>
-                      </fieldset>
-                    </div>
+                    {isChecked ? (
+                      <div className="form-fieldset-wrapper">
+                        {regionInput}
+                        <fieldset aria-hidden="true" className="form-fieldset">
+                          <legend className="form-fieldset-legend">
+                            <span>Region</span>
+                          </legend>
+                        </fieldset>
+                      </div>
+                    ) : (
+                      regionInput
+                    )}
                   </FormGroup>
                   <FormGroup label="Path" isRequired fieldId="location-path">
-                    <Split hasGutter>
-                      <SplitItem>
-                        <InputGroupText isPlain>/</InputGroupText>
-                      </SplitItem>
-                      <SplitItem isFilled>
-                        <InputGroupItem>
-                          <TextInput
-                            isRequired
-                            type="text"
-                            id="location-path"
-                            name="location-path"
-                            value={modelLocationPath}
-                            onChange={(_e, value) => setData('modelLocationPath', value)}
-                          />
-                        </InputGroupItem>
-                      </SplitItem>
-                    </Split>
+                    {isChecked ? (
+                      <Split hasGutter>
+                        <SplitItem>
+                          <InputGroupText isPlain>/</InputGroupText>
+                        </SplitItem>
+                        <SplitItem isFilled>
+                          <InputGroupItem>
+                            <div className="form-fieldset-wrapper">
+                              {pathInput}
+                              <fieldset aria-hidden="true" className="form-fieldset">
+                                <legend className="form-fieldset-legend">
+                                  <span>Path</span>
+                                </legend>
+                              </fieldset>
+                            </div>{' '}
+                            : {pathInput}
+                          </InputGroupItem>
+                        </SplitItem>
+                      </Split>
+                    ) : (
+                      pathInput
+                    )}
                     <HelperText>
                       <HelperTextItem>
                         Enter a path to a model or folder. This path cannot point to a root folder.
