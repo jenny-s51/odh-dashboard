@@ -153,12 +153,17 @@
   z-index: 1;
 }
 
-.mui-theme .pf-v6-c-form-control {
-  font-size: 16px;
-  width: 100%;
-  box-sizing: border-box;
-  transition: border-color 0.2s ease;
-  line-height: 1.5;
+// .mui-theme .pf-v6-c-form-control {
+//   font-size: 16px;
+//   width: 100%;
+//   box-sizing: border-box;
+//   transition: border-color 0.2s ease;
+//   line-height: 1.5;
+// }
+
+.mui-theme .pf-v6-c-form-control.pf-m-disabled {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.23);
 }
 
 .mui-theme .pf-v6-c-form-control input {
@@ -181,6 +186,7 @@
 
 .mui-theme .form-fieldset-wrapper {
   position: relative;
+  width: 100%;
 }
 
 .mui-theme .form-fieldset-wrapper:focus-within .form-fieldset {

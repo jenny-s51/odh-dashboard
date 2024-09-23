@@ -21,6 +21,7 @@ import {
   TextArea,
   TextInput,
   Title,
+  InputGroup,
 } from '@patternfly/react-core';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -51,12 +52,7 @@ const RegisterModel: React.FC = () => {
   const [loading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<Error | undefined>(undefined);
 
-  const [isChecked, setIsChecked] = React.useState<boolean>(true);
 
-  React.useEffect(() => {
-    console.log(window.isSwitched);
-    setIsChecked(window?.isSwitched!);
-  }, [isChecked]);
 
   enum ModelLocationType {
     ObjectStorage = 'Object storage',
@@ -224,18 +220,14 @@ const RegisterModel: React.FC = () => {
         <Stack hasGutter>
           <StackItem>
             <FormGroup label="Model registry" isRequired fieldId="mr-name">
-              {isChecked ? (
-                <div className="form-fieldset-wrapper">
-                  {modelRegistryInput}
-                  <fieldset aria-hidden="true" className="form-fieldset">
-                    <legend className="form-fieldset-legend">
-                      <span>Model Registry</span>
-                    </legend>
-                  </fieldset>
-                </div>
-              ) : (
-                modelRegistryInput
-              )}
+              <div className="mui-theme form-fieldset-wrapper">
+                {modelRegistryInput}
+                <fieldset aria-hidden="true" className="form-fieldset">
+                  <legend className="form-fieldset-legend">
+                    <span>Model Registry</span>
+                  </legend>
+                </fieldset>
+              </div>
             </FormGroup>
           </StackItem>
           <StackItem>
@@ -250,32 +242,24 @@ const RegisterModel: React.FC = () => {
               }
             >
               <FormGroup label="Model name" isRequired fieldId="model-name">
-                {isChecked ? (
-                  <div className="form-fieldset-wrapper">
-                    {modelNameInput}
-                    <fieldset aria-hidden="true" className="form-fieldset">
-                      <legend className="form-fieldset-legend">
-                        <span>Model Name</span>
-                      </legend>
-                    </fieldset>
-                  </div>
-                ) : (
-                  modelNameInput
-                )}
+                <div className="mui-theme form-fieldset-wrapper">
+                  {modelNameInput}
+                  <fieldset aria-hidden="true" className="form-fieldset">
+                    <legend className="form-fieldset-legend">
+                      <span>Model Name</span>
+                    </legend>
+                  </fieldset>
+                </div>
               </FormGroup>
               <FormGroup label="Model description" fieldId="model-description">
-                {isChecked ? (
-                  <div className="form-fieldset-wrapper">
-                    {modelDescriptionInput}
-                    <fieldset aria-hidden="true" className="form-fieldset">
-                      <legend className="form-fieldset-legend">
-                        <span>Model Description</span>
-                      </legend>
-                    </fieldset>
-                  </div>
-                ) : (
-                  modelDescriptionInput
-                )}
+                <div className="mui-theme mui-theme form-fieldset-wrapper">
+                  {modelDescriptionInput}
+                  <fieldset aria-hidden="true" className="form-fieldset">
+                    <legend className="form-fieldset-legend">
+                      <span>Model Description</span>
+                    </legend>
+                  </fieldset>
+                </div>
               </FormGroup>
             </FormSection>
             <FormSection
@@ -289,46 +273,34 @@ const RegisterModel: React.FC = () => {
               }
             >
               <FormGroup label="Version name" isRequired fieldId="version-name">
-                {isChecked ? (
-                  <div className="form-fieldset-wrapper">
-                    {versionNameInput}
-                    <fieldset aria-hidden="true" className="form-fieldset">
-                      <legend className="form-fieldset-legend">
-                        <span>Version Name</span>
-                      </legend>
-                    </fieldset>
-                  </div>
-                ) : (
-                  versionNameInput
-                )}
+                <div className="mui-theme form-fieldset-wrapper">
+                  {versionNameInput}
+                  <fieldset aria-hidden="true" className="form-fieldset">
+                    <legend className="form-fieldset-legend">
+                      <span>Version Name</span>
+                    </legend>
+                  </fieldset>
+                </div>
               </FormGroup>
               <FormGroup label="Version description" fieldId="version-description">
-                {isChecked ? (
-                  <div className="form-fieldset-wrapper">
-                    {versionDescriptionInput}
-                    <fieldset aria-hidden="true" className="form-fieldset">
-                      <legend className="form-fieldset-legend">
-                        <span>Version Description</span>
-                      </legend>
-                    </fieldset>
-                  </div>
-                ) : (
-                  versionDescriptionInput
-                )}
+                <div className="mui-theme form-fieldset-wrapper">
+                  {versionDescriptionInput}
+                  <fieldset aria-hidden="true" className="form-fieldset">
+                    <legend className="form-fieldset-legend">
+                      <span>Version Description</span>
+                    </legend>
+                  </fieldset>
+                </div>
               </FormGroup>
               <FormGroup label="Source model format" fieldId="source-model-format">
-                {isChecked ? (
-                  <div className="form-fieldset-wrapper">
-                    {sourceModelFormatInput}
-                    <fieldset aria-hidden="true" className="form-fieldset">
-                      <legend className="form-fieldset-legend">
-                        <span>Source Model Format</span>
-                      </legend>
-                    </fieldset>
-                  </div>
-                ) : (
-                  sourceModelFormatInput
-                )}
+                <div className="mui-theme form-fieldset-wrapper">
+                  {sourceModelFormatInput}
+                  <fieldset aria-hidden="true" className="form-fieldset">
+                    <legend className="form-fieldset-legend">
+                      <span>Source Model Format</span>
+                    </legend>
+                  </fieldset>
+                </div>
               </FormGroup>
             </FormSection>
             <FormSection
@@ -354,70 +326,50 @@ const RegisterModel: React.FC = () => {
               {modelLocationType === ModelLocationType.ObjectStorage && (
                 <>
                   <FormGroup label="Endpoint" isRequired fieldId="location-endpoint">
-                    {isChecked ? (
-                      <div className="form-fieldset-wrapper">
-                        {endpointInput}
-                        <fieldset aria-hidden="true" className="form-fieldset">
-                          <legend className="form-fieldset-legend">
-                            <span>Endpoint</span>
-                          </legend>
-                        </fieldset>
-                      </div>
-                    ) : (
-                      endpointInput
-                    )}
+                    <div className="mui-theme form-fieldset-wrapper">
+                      {endpointInput}
+                      <fieldset aria-hidden="true" className="form-fieldset">
+                        <legend className="form-fieldset-legend">
+                          <span>Endpoint</span>
+                        </legend>
+                      </fieldset>
+                    </div>
                   </FormGroup>
                   <FormGroup label="Bucket" isRequired fieldId="location-bucket">
-                    {isChecked ? (
-                      <div className="form-fieldset-wrapper">
-                        {bucketInput}
-                        <fieldset aria-hidden="true" className="form-fieldset">
-                          <legend className="form-fieldset-legend">
-                            <span>Bucket</span>
-                          </legend>
-                        </fieldset>
-                      </div>
-                    ) : (
-                      bucketInput
-                    )}
+                    <div className="mui-theme form-fieldset-wrapper">
+                      {bucketInput}
+                      <fieldset aria-hidden="true" className="form-fieldset">
+                        <legend className="form-fieldset-legend">
+                          <span>Bucket</span>
+                        </legend>
+                      </fieldset>
+                    </div>
                   </FormGroup>
                   <FormGroup label="Region" fieldId="location-region">
-                    {isChecked ? (
-                      <div className="form-fieldset-wrapper">
-                        {regionInput}
-                        <fieldset aria-hidden="true" className="form-fieldset">
-                          <legend className="form-fieldset-legend">
-                            <span>Region</span>
-                          </legend>
-                        </fieldset>
-                      </div>
-                    ) : (
-                      regionInput
-                    )}
+                    <div className="mui-theme form-fieldset-wrapper">
+                      {regionInput}
+                      <fieldset aria-hidden="true" className="form-fieldset">
+                        <legend className="form-fieldset-legend">
+                          <span>Region</span>
+                        </legend>
+                      </fieldset>
+                    </div>
                   </FormGroup>
                   <FormGroup label="Path" isRequired fieldId="location-path">
-                    {isChecked ? (
-                      <Split hasGutter>
-                        <SplitItem>
-                          <InputGroupText isPlain>/</InputGroupText>
-                        </SplitItem>
-                        <SplitItem isFilled>
-                          <InputGroupItem>
-                            <div className="form-fieldset-wrapper">
-                              {pathInput}
-                              <fieldset aria-hidden="true" className="form-fieldset">
-                                <legend className="form-fieldset-legend">
-                                  <span>Path</span>
-                                </legend>
-                              </fieldset>
-                            </div>{' '}
-                            : {pathInput}
-                          </InputGroupItem>
-                        </SplitItem>
-                      </Split>
-                    ) : (
-                      pathInput
-                    )}
+                    <InputGroup>
+                      <InputGroupText isPlain>/</InputGroupText>
+                      <InputGroupItem isFill>
+                        <div className="mui-theme form-fieldset-wrapper">
+                          {pathInput}
+                          <fieldset aria-hidden="true" className="form-fieldset">
+                            <legend className="form-fieldset-legend">
+                              <span>Path</span>
+                            </legend>
+                          </fieldset>
+                        </div>
+                      </InputGroupItem>
+                    </InputGroup>
+
                     <HelperText>
                       <HelperTextItem>
                         Enter a path to a model or folder. This path cannot point to a root folder.
@@ -438,7 +390,7 @@ const RegisterModel: React.FC = () => {
               {modelLocationType === ModelLocationType.URI && (
                 <>
                   <FormGroup label="URI" isRequired fieldId="location-uri">
-                    <div className="form-fieldset-wrapper">
+                    <div className="mui-theme form-fieldset-wrapper">
                       <TextInput
                         isRequired
                         type="text"
