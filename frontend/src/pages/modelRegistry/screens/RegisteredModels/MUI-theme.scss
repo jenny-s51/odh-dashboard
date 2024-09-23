@@ -253,7 +253,6 @@
   color: var(--mui-palette-primary-main); /* Change color of the label when the input is focused */
 }
 
-
 .mui-theme .pf-v6-c-menu {
   --pf-v6-c-menu--BoxShadow: var(--mui-shadows-8);
   --pf-v6-c-menu--BorderRadius: var(--mui-shape-borderRadius);
@@ -338,7 +337,59 @@
 }
 
 .mui-theme .pf-v6-radio {
-  --pf-v6-c-radio--AccentColor: var(--mui-palette-primary-main);
+  accent-color: var(--mui-palette-primary-main);
+}
+
+.mui-theme .pf-v6-c-radio {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.mui-theme .pf-v6-c-radio__input {
+  display: none; /* Hide default radio button */
+}
+
+.mui-theme .pf-v6-c-radio__label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  --pf-v6-c-radio__label--FontSize: 16px;
+  user-select: none;
+}
+
+/* Custom radio circle */
+.mui-theme .pf-v6-c-radio__label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--mui-palette-primary-main); /* Primary color */
+  border-radius: 50%;
+  background: var(--mui-palette-common-white); /* Background color */
+  transition: background 0.3s, border-color 0.3s;
+}
+
+/* When radio is checked */
+.mui-theme .pf-v6-c-radio__input:checked + .pf-v6-c-radio__label::before {
+  background: var(--mui-palette-common-white);
+  border-color: var(--mui-palette-primary-main);
+}
+
+/* Inner dot for checked state */
+.mui-theme .pf-v6-c-radio__input:checked + .pf-v6-c-radio__label::after {
+  content: '';
+  position: absolute;
+  left: 5px; /* Center the dot */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px; /* Size of inner dot */
+  height: 10px;
+  border-radius: 50%;
+  background: var(--mui-palette-primary-main); /* Dot color */
 }
 
 .mui-theme .pf-v6-c-table {
