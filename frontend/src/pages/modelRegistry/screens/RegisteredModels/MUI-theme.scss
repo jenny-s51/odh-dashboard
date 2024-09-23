@@ -96,6 +96,10 @@
   --pf-t--global--color--nonstatus--blue--default: var(--mui-palette-primary-main);
   --pf-t--global--text--color--inverse: var(--mui-palette-common-white);
 
+  --pf-t--global--font--family--100: Roboto, Helvetica, Arial, sans-serif;
+  --pf-t--global--font--family--200: Roboto, Helvetica, Arial, sans-serif;
+  --pf-t--global--font--family--300: Roboto, Courier, monospace;
+
 }
 
 .mui-theme .pf-v6-c-alert {
@@ -130,34 +134,6 @@
   letter-spacing: 0.02857em;
 }
 
-.mui-theme .pf-v6-c-form__group {
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.mui-theme .pf-v6-c-form__label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 14px;
-  color: #757575; /* MUI label color */
-  pointer-events: none;
-  transition: all 0.2s ease;
-  transform-origin: left top;
-  transform: translateY(-50%) translateX(12px);
-  background-color: white; /* Ensure label background matches input */
-  padding: 0 4px; /* Space between label text and border */
-}
-
-.mui-theme .form-input {
-  border: 1px solid #ccc; /* Border color */
-  border-radius: 4px; /* Rounded corners */
-  padding: 12px 12px 12px 12px; /* Adjust padding to fit label */
-  font-size: 16px; /* Font size for input text */
-  width: 100%; /* Full width of parent */
-  box-sizing: border-box; /* Include padding and border in element’s total width and height */
-  transition: border-color 0.2s ease;
-}
 
 
 .mui-theme .pf-v6-c-menu {
@@ -241,6 +217,62 @@
 
 .mui-theme .pf-v6-c-menu-toggle__icon {
   display: block;
+}
+
+.mui-theme .pf-v6-radio {
+  accent-color: var(--mui-palette-primary-main);
+}
+
+.mui-theme .pf-v6-c-radio {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.mui-theme .pf-v6-c-radio__input {
+  display: none; /* Hide default radio button */
+}
+
+.mui-theme .pf-v6-c-radio__label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  --pf-v6-c-radio__label--FontSize: 16px;
+  user-select: none;
+}
+
+/* Custom radio circle */
+.mui-theme .pf-v6-c-radio__label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--mui-palette-primary-main); /* Primary color */
+  border-radius: 50%;
+  background: var(--mui-palette-common-white); /* Background color */
+  transition: background 0.3s, border-color 0.3s;
+}
+
+/* When radio is checked */
+.mui-theme .pf-v6-c-radio__input:checked + .pf-v6-c-radio__label::before {
+  background: var(--mui-palette-common-white);
+  border-color: var(--mui-palette-primary-main);
+}
+
+/* Inner dot for checked state */
+.mui-theme .pf-v6-c-radio__input:checked + .pf-v6-c-radio__label::after {
+  content: '';
+  position: absolute;
+  left: 5px; /* Center the dot */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px; /* Size of inner dot */
+  height: 10px;
+  border-radius: 50%;
+  background: var(--mui-palette-primary-main); /* Dot color */
 }
 
 .mui-theme .pf-v6-c-table {
