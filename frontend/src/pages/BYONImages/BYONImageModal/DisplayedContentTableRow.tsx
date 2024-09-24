@@ -4,6 +4,7 @@ import { ActionList, ActionListItem, Button, TextInput } from '@patternfly/react
 import { CheckIcon, MinusCircleIcon, PencilAltIcon, TimesIcon } from '@patternfly/react-icons';
 import { BYONImagePackage } from '~/types';
 import { DisplayedContentTab } from './ManageBYONImageModal';
+import EditIcon from '@mui/icons-material/Edit';
 
 type DisplayedContentTableRowProps = {
   tabKey: DisplayedContentTab;
@@ -111,7 +112,7 @@ const DisplayedContentTableRow: React.FC<DisplayedContentTableRowProps> = ({
               <>
                 <ActionListItem>
                   <Button
-                    icon={<PencilAltIcon />}
+                    icon={<EditIcon />}
                     aria-label="Edit displayed content"
                     isDisabled={isEditing}
                     variant="plain"

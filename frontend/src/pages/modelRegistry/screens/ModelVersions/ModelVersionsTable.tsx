@@ -22,7 +22,7 @@ const ModelVersionsTable: React.FC<ModelVersionsTableProps> = ({
     data={modelVersions}
     columns={mvColumns}
     toolbarContent={toolbarContent}
-    enablePagination
+    enablePagination="compact"
     emptyTableView={<DashboardEmptyTableView onClearFilters={clearFilters} />}
     rowRenderer={(mv) => (
       <ModelVersionsTableRow key={mv.name} modelVersion={mv} refresh={refresh} />
