@@ -103,6 +103,21 @@
   letter-spacing: 0.02857em;
 }
 
+.mui-theme .pf-v6-c-description-list__text:focus-within .pf-v6-c-form-control
+ {
+  --pf-v6-c-form-control--after--BorderWidth: 2px;
+  --pf-v6-c-form-control--after--BorderColor: var(--mui-palette-primary-main);
+}
+
+.pf-v6-c-form-control > :is(input,select,textarea):focus {
+  outline-offset: 0;
+}
+
+.pf-v6-c-menu-toggle.pf-m-primary:is(:hover,:focus) {
+  --pf-v6-c-menu-toggle--BackgroundColor: rgb(23, 105, 170);
+  --pf-v6-c-menu-toggle--expanded--BackgroundColor: var(--mui-palette-primary-main);
+}
+
 .mui-theme .pf-v6-c-menu-toggle__button {
   text-transform: uppercase;
   font-weight: var(--mui-button-font-weight);
@@ -272,6 +287,8 @@
 .mui-theme .pf-v6-c-pagination__page-menu .pf-v6-c-menu-toggle {
   --pf-v6-c-menu-toggle--expanded--BackgroundColor: var(--pf-v6-c-menu-toggle--m-plain--expanded--BackgroundColor);
   text-transform: none;
+  --pf-v6-c-menu-toggle--hover--BackgroundColor: none;
+  --pf-v6-c-menu-toggle--expanded--BackgroundColor: none;
 }
 
 .mui-theme .pf-v6-c-pagination__page-menu::before {
