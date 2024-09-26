@@ -374,15 +374,15 @@ const RegisterModel: React.FC = () => {
                       </FormGroup>
                     </InputGroupItem>
                     <InputGroupItem isFill>
-                    <FormHelperText>
-                          <HelperText>
-                            <HelperTextItem>
-                              Enter a path to a model or folder. This path cannot point to a root
-                              folder.
-                            </HelperTextItem>
-                          </HelperText>
-                        </FormHelperText>
-                        </InputGroupItem>
+                      <FormHelperText>
+                        <HelperText>
+                          <HelperTextItem>
+                            Enter a path to a model or folder. This path cannot point to a root
+                            folder.
+                          </HelperTextItem>
+                        </HelperText>
+                      </FormHelperText>
+                    </InputGroupItem>
                   </InputGroup>
                 </>
               )}
