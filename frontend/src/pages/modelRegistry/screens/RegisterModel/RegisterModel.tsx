@@ -22,6 +22,7 @@ import {
   TextInput,
   Title,
   InputGroup,
+  FormHelperText,
 } from '@patternfly/react-core';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -51,8 +52,6 @@ const RegisterModel: React.FC = () => {
   ] = useRegisterModelData(mrName);
   const [loading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<Error | undefined>(undefined);
-
-
 
   enum ModelLocationType {
     ObjectStorage = 'Object storage',
@@ -219,7 +218,12 @@ const RegisterModel: React.FC = () => {
       <Form>
         <Stack hasGutter>
           <StackItem>
-            <FormGroup label="Model registry" isRequired fieldId="mr-name">
+            <FormGroup
+              className="mui-theme form-group-disabled"
+              label="Model registry"
+              isRequired
+              fieldId="mr-name"
+            >
               <div className="mui-theme form-fieldset-wrapper">
                 {modelRegistryInput}
                 <fieldset aria-hidden="true" className="form-fieldset">
@@ -355,10 +359,10 @@ const RegisterModel: React.FC = () => {
                       </fieldset>
                     </div>
                   </FormGroup>
-                  <FormGroup label="Path" isRequired fieldId="location-path">
-                    <InputGroup>
-                      <InputGroupText isPlain>/</InputGroupText>
-                      <InputGroupItem isFill>
+                  <InputGroup>
+                    <InputGroupText isPlain>/</InputGroupText>
+                    <InputGroupItem isFill>
+                      <FormGroup label="Path" isRequired fieldId="location-path">
                         <div className="mui-theme form-fieldset-wrapper">
                           {pathInput}
                           <fieldset aria-hidden="true" className="form-fieldset">
@@ -367,15 +371,19 @@ const RegisterModel: React.FC = () => {
                             </legend>
                           </fieldset>
                         </div>
-                      </InputGroupItem>
-                    </InputGroup>
-
-                    <HelperText>
-                      <HelperTextItem>
-                        Enter a path to a model or folder. This path cannot point to a root folder.
-                      </HelperTextItem>
-                    </HelperText>
-                  </FormGroup>
+                      </FormGroup>
+                    </InputGroupItem>
+                    <InputGroupItem isFill>
+                    <FormHelperText>
+                          <HelperText>
+                            <HelperTextItem>
+                              Enter a path to a model or folder. This path cannot point to a root
+                              folder.
+                            </HelperTextItem>
+                          </HelperText>
+                        </FormHelperText>
+                        </InputGroupItem>
+                  </InputGroup>
                 </>
               )}
               <Radio

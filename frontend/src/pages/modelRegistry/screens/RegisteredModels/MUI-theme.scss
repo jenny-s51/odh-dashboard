@@ -138,12 +138,17 @@
   position: relative;
 }
 
+.mui-theme .pf-v6-c-form__group.form-group-disabled .pf-v6-c-form__label {
+  color: rgba(0, 0, 0, 0.38);
+}
+
 .mui-theme .pf-v6-c-form__label {
   position: absolute;
   top: 35%;
   left: 12px;
   font-size: 14px;
-  color: #757575; /* MUI label color */
+  color: #757575;
+  /* MUI label color */
   pointer-events: none;
   transition: all 0.2s ease;
   transform-origin: left center;
@@ -151,6 +156,8 @@
   background-color: white;
   padding: 0 4px;
   z-index: 1;
+  --pf-v6-c-form__label-required--Color: currentColor;
+
 }
 
 // .mui-theme .pf-v6-c-form-control {
@@ -164,6 +171,7 @@
 .mui-theme .pf-v6-c-form-control.pf-m-disabled {
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.23);
+  --pf-v6-c-form-control--m-disabled--Color: rgba(0, 0, 0, 0.38);
 }
 
 .mui-theme .pf-v6-c-form-control input {
@@ -175,7 +183,9 @@
   box-sizing: border-box;
 }
 
-.mui-theme .pf-v6-c-form-control>:is(input,select,textarea):focus {
+
+
+.mui-theme .pf-v6-c-form-control>:is(input, select, textarea):focus {
   --pf-v6-c-form-control--OutlineOffset: none;
   outline: none;
 }
@@ -232,25 +242,26 @@
 }
 
 .mui-theme .form-fieldset-wrapper .pf-v6-c-form-control {
+
   &::before,
   &::after {
     content: revert;
   }
 }
 
-.mui-theme .pf-v6-c-form__group .pf-v6-c-form-control:focus-within + .pf-v6-c-form__label,
-.pf-v6-c-form__group .pf-v6-c-form-control:not(:placeholder-shown) + .pf-v6-c-form__label {
+.mui-theme .pf-v6-c-form__group .pf-v6-c-form-control:focus-within+.pf-v6-c-form__label,
+.pf-v6-c-form__group .pf-v6-c-form-control:not(:placeholder-shown)+.pf-v6-c-form__label {
   color: var(--mui-palette-primary-main);
 }
 
-.mui-theme .pf-v6-c-form__group:focus-within .pf-v6-c-form-control
- {
+.mui-theme .pf-v6-c-form__group:focus-within .pf-v6-c-form-control {
   --pf-v6-c-form-control--after--BorderWidth: 2px;
   --pf-v6-c-form-control--after--BorderColor: var(--mui-palette-primary-main);
 }
 
 .mui-theme .pf-v6-c-form__group:focus-within .pf-v6-c-form__label {
-  color: var(--mui-palette-primary-main); /* Change color of the label when the input is focused */
+  color: var(--mui-palette-primary-main);
+  /* Change color of the label when the input is focused */
 }
 
 .mui-theme .pf-v6-c-menu {
@@ -347,7 +358,8 @@
 }
 
 .mui-theme .pf-v6-c-radio__input {
-  display: none; /* Hide default radio button */
+  display: none;
+  /* Hide default radio button */
 }
 
 .mui-theme .pf-v6-c-radio__label {
@@ -367,29 +379,34 @@
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
-  border: 2px solid var(--mui-palette-primary-main); /* Primary color */
+  border: 2px solid var(--mui-palette-primary-main);
+  /* Primary color */
   border-radius: 50%;
-  background: var(--mui-palette-common-white); /* Background color */
+  background: var(--mui-palette-common-white);
+  /* Background color */
   transition: background 0.3s, border-color 0.3s;
 }
 
 /* When radio is checked */
-.mui-theme .pf-v6-c-radio__input:checked + .pf-v6-c-radio__label::before {
+.mui-theme .pf-v6-c-radio__input:checked+.pf-v6-c-radio__label::before {
   background: var(--mui-palette-common-white);
   border-color: var(--mui-palette-primary-main);
 }
 
 /* Inner dot for checked state */
-.mui-theme .pf-v6-c-radio__input:checked + .pf-v6-c-radio__label::after {
+.mui-theme .pf-v6-c-radio__input:checked+.pf-v6-c-radio__label::after {
   content: '';
   position: absolute;
-  left: 5px; /* Center the dot */
+  left: 5px;
+  /* Center the dot */
   top: 50%;
   transform: translateY(-50%);
-  width: 10px; /* Size of inner dot */
+  width: 10px;
+  /* Size of inner dot */
   height: 10px;
   border-radius: 50%;
-  background: var(--mui-palette-primary-main); /* Dot color */
+  background: var(--mui-palette-primary-main);
+  /* Dot color */
 }
 
 .mui-theme .pf-v6-c-table {
