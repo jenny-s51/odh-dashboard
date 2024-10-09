@@ -22,8 +22,8 @@ export const CPU_UNITS: UnitOption[] = [
   { name: 'Milicores', unit: 'm', weight: 1 },
 ];
 export const MEMORY_UNITS_FOR_SELECTION: UnitOption[] = [
-  { name: 'Gi', unit: 'Gi', weight: 1024 },
-  { name: 'Mi', unit: 'Mi', weight: 1 },
+  { name: 'GiB', unit: 'GiB', weight: 1024 },
+  { name: 'MiB', unit: 'MiB', weight: 1 },
 ];
 export const MEMORY_UNITS_FOR_PARSING: UnitOption[] = [
   { name: 'EB', unit: 'E', weight: 1000 ** 6 },
