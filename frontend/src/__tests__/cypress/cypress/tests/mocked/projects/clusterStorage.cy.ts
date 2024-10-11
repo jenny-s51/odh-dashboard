@@ -386,7 +386,7 @@ describe('ClusterStorage', () => {
     clusterStorageRow.findKebabAction('Edit storage').click();
     updateClusterStorageModal.findNameInput().should('have.value', 'Test Storage');
     updateClusterStorageModal.findPVSizeInput().should('have.value', '5');
-    updateClusterStorageModal.shouldHavePVSizeSelectValue('Gi');
+    updateClusterStorageModal.shouldHavePVSizeSelectValue('GiB');
     updateClusterStorageModal.findPersistentStorageWarning().should('exist');
     updateClusterStorageModal.findSubmitButton().should('be.enabled');
     updateClusterStorageModal.findNameInput().fill('test-updated');
