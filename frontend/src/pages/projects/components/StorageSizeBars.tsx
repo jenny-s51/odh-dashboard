@@ -27,13 +27,13 @@ const StorageSizeBar: React.FC<StorageSizeBarProps> = ({ pvc }) => {
     return (
       <div>
         <Tooltip content="No active storage information at this time, check back later">
-          <Text component="small">Max {maxValue}</Text>
+          <Text component="small">{`Max ${maxValue}` + 'B'}</Text>
         </Tooltip>
       </div>
     );
   }
 
-  const inUseValue = `${bytesAsRoundedGiB(inUseInBytes)}Gi`;
+  const inUseValue = `${bytesAsRoundedGiB(inUseInBytes)}GiB`;
   const percentage = ((parseFloat(inUseValue) / parseFloat(maxValue)) * 100).toFixed(2);
   const percentageLabel = error ? '' : `Storage is ${percentage}% full`;
 
@@ -75,7 +75,7 @@ const StorageSizeBar: React.FC<StorageSizeBarProps> = ({ pvc }) => {
       </SplitItem>
       <SplitItem>
         <Bullseye>
-          <Text component="small">{maxValue}</Text>
+          <Text component="small">{maxValue + 'B'}</Text>
         </Bullseye>
       </SplitItem>
     </Split>
