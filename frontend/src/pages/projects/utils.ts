@@ -7,10 +7,8 @@ export const getNotebookStatusPriority = (notebookState: NotebookState): number 
 
 export const getPvcTotalSize = (pvc: PersistentVolumeClaimKind): string => {
   const storage = pvc.status?.capacity?.storage || pvc.spec.resources.requests.storage;
-  return /(Gi|Mi)$/.test(storage) ? storage + "B" : storage;
-}
-
-// see how it ends, if "Mi" => "MiB"
+  return /(Gi|Mi)$/.test(storage) ? `${storage}B` : storage;
+};
 
 export const getCustomNotebookSize = (
   existingNotebook: NotebookKind | undefined,
