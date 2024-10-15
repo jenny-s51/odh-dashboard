@@ -27,7 +27,7 @@ const StorageSizeBar: React.FC<StorageSizeBarProps> = ({ pvc }) => {
     return (
       <div>
         <Tooltip content="No active storage information at this time, check back later">
-          <Text component="small">{`Max ${maxValue}`}</Text>
+          <Text component="small">Max {maxValue}</Text>
         </Tooltip>
       </div>
     );
