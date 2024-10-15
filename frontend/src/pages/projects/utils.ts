@@ -5,8 +5,12 @@ import { NotebookState } from './notebook/types';
 export const getNotebookStatusPriority = (notebookState: NotebookState): number =>
   notebookState.isRunning ? 1 : notebookState.isStarting ? 2 : 3;
 
-export const getPvcTotalSize = (pvc: PersistentVolumeClaimKind): string =>
-  pvc.status?.capacity?.storage || pvc.spec.resources.requests.storage;
+export const getPvcTotalSize = (pvc: PersistentVolumeClaimKind): string => {
+  const storage = pvc.status?.capacity?.storage || pvc.spec.resources.requests.storage;
+  return /(Gi|Mi)$/.test(storage) ? storage + "B" : storage;
+}
+
+// see how it ends, if "Mi" => "MiB"
 
 export const getCustomNotebookSize = (
   existingNotebook: NotebookKind | undefined,
