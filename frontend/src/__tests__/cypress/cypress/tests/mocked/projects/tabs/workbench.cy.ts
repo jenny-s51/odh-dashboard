@@ -517,7 +517,7 @@ describe('Workbench page', () => {
     workbenchPage.findNotebookTableHeaderButton('Status').should(be.sortDescending);
   });
 
-  it.only('Validate the notebook status when workbench is stopped and starting', () => {
+  it('Validate the notebook status when workbench is stopped and starting', () => {
     initIntercepts({});
     workbenchPage.visit('test-project');
     const notebookRow = workbenchPage.getNotebookRow('Test Notebook');
