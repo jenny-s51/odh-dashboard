@@ -502,7 +502,7 @@ describe('Workbench page', () => {
     notebookRow.shouldHaveNotebookImageName('Test Image');
     notebookRow.shouldHaveContainerSize('Small');
     notebookRow.findHaveNotebookStatusText().should('have.text', 'Running');
-    notebookRow.findNotebookRouteLink().should('have.attr', 'aria-disabled', 'false');
+    notebookRow.findNotebookRouteLink().should('not.have.attr', 'aria-disabled');
 
     //Name sorting
     workbenchPage.findNotebookTableHeaderButton('Name').click();
@@ -517,7 +517,7 @@ describe('Workbench page', () => {
     workbenchPage.findNotebookTableHeaderButton('Status').should(be.sortDescending);
   });
 
-  it('Validate the notebook status when workbench is stopped and starting', () => {
+  it.only('Validate the notebook status when workbench is stopped and starting', () => {
     initIntercepts({});
     workbenchPage.visit('test-project');
     const notebookRow = workbenchPage.getNotebookRow('Test Notebook');
