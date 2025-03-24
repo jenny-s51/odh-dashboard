@@ -59,7 +59,7 @@ describe('Custom serving runtimes', () => {
     servingRuntimes.getRowById('template-4').shouldHaveAPIProtocol(ServingRuntimeAPIProtocol.REST);
   });
 
-  it.only('should add a new single model serving runtime', () => {
+  it('should add a new single model serving runtime', () => {
     cy.interceptOdh(
       'POST /api/servingRuntimes/',
       { query: { dryRun: 'All' } },
@@ -138,7 +138,7 @@ describe('Custom serving runtimes', () => {
     servingRuntimes.getRowById('template-new').shouldBeSingleModel(true);
   });
 
-  it.only('should add a new multi model serving runtime', () => {
+  it('should add a new multi model serving runtime', () => {
     cy.interceptOdh(
       'POST /api/servingRuntimes/',
       { query: { dryRun: 'All' } },
