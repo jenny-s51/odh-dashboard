@@ -120,9 +120,7 @@ class ServingRuntimes {
   }
 
   uploadYaml(filePath: string) {
-    this.getDashboardCodeEditor()
-      .findUpload()
-      .selectFile([filePath], { force: true });
+    this.getDashboardCodeEditor().findUpload().selectFile([filePath], { force: true });
   }
 
   getDashboardCodeEditor() {
