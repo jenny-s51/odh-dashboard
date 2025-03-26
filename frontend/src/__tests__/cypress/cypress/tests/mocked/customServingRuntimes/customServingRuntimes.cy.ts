@@ -89,7 +89,7 @@ describe('Custom serving runtimes', () => {
     servingRuntimes.selectAPIProtocol(ServingRuntimeAPIProtocol.REST);
     servingRuntimes.findStartFromScratchButton().click();
     servingRuntimes.uploadYaml(addfilePath);
-    // servingRuntimes.getDashboardCodeEditor().findInput().should('not.be.empty');
+    servingRuntimes.getDashboardCodeEditor().findInput().should('not.be.empty');
 
     servingRuntimes.findSubmitButton().should('be.enabled');
     servingRuntimes.findSubmitButton().click();
@@ -163,7 +163,6 @@ describe('Custom serving runtimes', () => {
     servingRuntimes.findSelectAPIProtocolButton().should('not.be.enabled');
     servingRuntimes.findSelectAPIProtocolButton().should('include.text', 'REST');
     servingRuntimes.findStartFromScratchButton().click();
-    // TODO: Fix error. Needs https://issues.redhat.com/browse/RHOAIENG-22174.
     servingRuntimes.uploadYaml(addfilePath);
     servingRuntimes.findSubmitButton().should('be.enabled');
     servingRuntimes.findSubmitButton().click();
