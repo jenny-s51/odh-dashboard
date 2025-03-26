@@ -8,9 +8,4 @@ export class DashboardCodeEditor extends Contextual<HTMLElement> {
   findUpload(): Cypress.Chainable<JQuery<HTMLElement>> {
     return this.find().find('input[type="file"]');
   }
-
-
-  findUploadFilesButton(): Cypress.Chainable<JQuery<HTMLElement>> {
-    return cy.get('button[aria-label="Upload code"]');
-  }
 }

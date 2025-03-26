@@ -121,8 +121,7 @@ class ServingRuntimes {
 
   uploadYaml(filePath: string) {
     this.getDashboardCodeEditor()
-      .findUploadFilesButton()
-      .click()
+      .findUpload()
       .selectFile([filePath], { force: true });
   }
 
