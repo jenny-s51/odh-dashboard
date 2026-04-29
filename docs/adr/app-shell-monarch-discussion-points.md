@@ -1,16 +1,174 @@
-# Monarch Team Discussion: App Shell & Platform Abstraction
+# Monarch Team Alignment: App Shell & Platform Abstraction
 
-> **Purpose**: Discussion points for alignment with the Monarch team before proceeding with
-> the app shell / platform abstraction work for xKS (non-OpenShift) deployments.
+> **Goal**: Share the proposed architecture for xKS (non-OpenShift) deployments and get
+> Monarch's sign-off before building.
 >
-> **Context**: Red Hat needs an "Inference UI" that runs on vanilla Kubernetes (CoreWeave, AKS,
-> EKS, GKE). The recommended approach keeps everything in the odh-dashboard monorepo with new
-> `platform-*` packages. The Monarch team's `mod-arch-library` is the foundational infrastructure
-> every federated package depends on.
->
-> **Related**: [RHOAIENG-27201](https://redhat.atlassian.net/browse/RHOAIENG-27201),
-> [RHAISTRAT-1172](https://redhat.atlassian.net/browse/RHAISTRAT-1172),
-> [GitLab architecture analysis](https://gitlab.cee.redhat.com/astonebe/rhoai-architecture-observations/-/tree/main/rhoai/inference-ui)
+> **Background**: Red Hat needs an Inference UI that runs on vanilla Kubernetes (CoreWeave,
+> AKS, EKS, GKE). We did a deep architecture analysis
+> ([GitLab repo](https://gitlab.cee.redhat.com/astonebe/rhoai-architecture-observations/-/tree/main/rhoai/inference-ui),
+> [RHOAIENG-27201](https://redhat.atlassian.net/browse/RHOAIENG-27201),
+> [RHAISTRAT-1172](https://redhat.atlassian.net/browse/RHAISTRAT-1172)) and audited how
+> mod-arch-library fits in. Here's our proposed plan.
+
+---
+
+## Key Observation: mod-arch Is Already Opinionated
+
+mod-arch-core already has product-specific behavior baked in. These are not bugs — they're
+the natural result of mod-arch being the library that knows how to run a modular React app
+across Red Hat's deployment targets:
+
+| Behavior | Location | What it does |
+|----------|----------|--------------|
+| Kubeflow script loading | `mod-arch-core/utilities/utils.ts:34-47` | `DeploymentMode.Kubeflow` triggers loading `/dashboard_lib.bundle.js` and initializes `window.centraldashboard` |
+| Namespace short-circuit | `mod-arch-core/hooks/useNamespaces.ts:25-27` | Returns `[]` in Kubeflow mode (unless `mandatoryNamespace` is set, which overrides all modes) |
+| Hardcoded logout path | `mod-arch-core/utilities/appUtils.ts:1-3` | `logout()` always calls `fetch('/oauth/sign_out')` — not configurable |
+| OAuth error special-case | `mod-arch-core/hooks/useSettings.tsx:47` | Catches `'Error getting Oauth Info for user'` and triggers a refresh cycle |
+| Kubeflow session key | `mod-arch-core/hooks/useTimeBasedRefresh.ts:8` | Uses `kf.dashboard.last.auto.refresh` as a session storage key |
+| Shared → Kubeflow coupling | `mod-arch-shared/package.json:54` | `mod-arch-shared` has a peer dependency on `mod-arch-kubeflow` |
+| Installer defaults to RHOAI | `mod-arch-installer/flavors/default/` | References `@odh-dashboard/internal` and uses `alt="RHOAI"` branding |
+| OpenShift annotations in types | `mod-arch-starter/frontend/src/app/types.ts:3-6` | `DisplayNameAnnotations` type hardcodes `openshift.io/display-name` and `openshift.io/description` |
+
+**Adding xKS / vanilla K8s awareness is the same kind of thing mod-arch already does.**
+
+---
+
+## Two Providers, Two Jobs
+
+### What we have today: `ModularArchContextProvider`
+
+`ModularArchContextProvider` is the React context that every federated package wraps its
+UI with. It handles **app shell concerns**: deployment mode (standalone / federated /
+kubeflow), namespace state, BFF API prefix, and Kubeflow script loading.
+
+```
+ModularArchContextProvider (mod-arch-core)
+├── "Am I standalone, federated, or kubeflow?"
+├── "What namespaces can I see?"
+├── "Is the Kubeflow script loaded?"
+└── "What's my BFF URL prefix?"
+```
+
+### What's missing: platform awareness
+
+When a feature like model-serving needs to list namespaces, find an external URL for a
+service, check who the user is, or query metrics — it reaches past the provider and
+directly calls OpenShift APIs. There's nothing in between.
+
+```
+Feature (e.g., model-serving)
+    │
+    ├── uses ModularArchContextProvider  ✅  for deployment mode, namespace state
+    │
+    └── directly calls OpenShift APIs    ❌  for everything else
+        ├── project.openshift.io          → list namespaces
+        ├── route.openshift.io            → find external URLs
+        ├── user.openshift.io             → resolve user identity
+        ├── openshift-monitoring/thanos   → query metrics
+        └── DSC status                    → detect available components
+```
+
+On vanilla Kubernetes, **none of those APIs exist**.
+
+### What we need: `PlatformProvider`
+
+A second provider — owned by odh-dashboard, not mod-arch — that sits alongside
+`ModularArchContextProvider` and handles **platform concerns**:
+
+```
+ModularArchContextProvider (mod-arch-core)        PlatformProvider (odh-dashboard)
+├── deployment mode                               ├── "How do I list namespaces?"
+├── namespace state                               ├── "How do I find external URLs?"
+├── BFF URL prefix                                ├── "Who is the current user?"
+└── Kubeflow script loading                       ├── "Where is Prometheus?"
+                                                  ├── "What components are available?"
+                                                  └── "What annotation key = display name?"
+```
+
+`ModularArchContextProvider` stays exactly as it is. `PlatformProvider` is new. Features
+call `PlatformProvider` instead of calling OpenShift APIs directly.
+
+### Why this needs new packages (not just a new file)
+
+The platform provider has **two implementations** — one for OpenShift, one for vanilla K8s.
+They can't live in the same package because:
+
+- An OpenShift deployment shouldn't ship vanilla K8s code (and vice versa)
+- The implementations have different dependencies (`project.openshift.io` models vs
+  `v1/Namespace` models)
+- Teams working on vanilla K8s support shouldn't have to touch OpenShift code
+
+So we need three packages:
+
+```
+packages/platform-core/         ← interfaces only (what CAN you do?)
+packages/platform-openshift/    ← OpenShift implementation (HOW on OpenShift)
+packages/platform-kubernetes/   ← vanilla K8s implementation (HOW on K8s)
+```
+
+The app shell picks which implementation to load at startup based on where it's deployed.
+Feature code imports only from `platform-core` and never knows which platform is underneath.
+
+---
+
+## Proposed Plan: Split the Responsibility
+
+### mod-arch gets lightweight platform awareness
+
+A small, scoped change to mod-arch-library — not a rewrite:
+
+| Change | Scope | Details |
+|--------|-------|---------|
+| **New `platform` config field** | `ModularArchConfig` in `mod-arch-core/types/common.ts` | Add `platform: 'openshift' \| 'kubernetes' \| 'kubeflow'` — separate from `deploymentMode` because platform and deployment shape are orthogonal (you can run Federated on OpenShift OR vanilla K8s) |
+| **Configurable logout path** | `mod-arch-core/utilities/appUtils.ts` | Make `logout()` accept a path or read it from config instead of hardcoding `/oauth/sign_out` |
+| **Platform-aware Kubeflow gating** | `mod-arch-core/utilities/utils.ts` | Gate script loading on `platform` field in addition to `DeploymentMode`, as a defensive check |
+
+**What is NOT a mod-arch change**: Theme selection. `ThemeProvider` already accepts a `theme`
+prop independently of `DeploymentMode` (the starter app reads `STYLE_THEME` as a separate env
+var — see `mod-arch-starter/frontend/src/app/utilities/const.ts:4`). Choosing "PF-only on xKS,
+PF+MUI on Kubeflow" is a **consumer responsibility** — the app shell picks which theme to pass
+based on platform. This keeps the mod-arch ask smaller.
+
+### odh-dashboard keeps feature-level platform abstractions
+
+New packages in the monorepo for things mod-arch has no business knowing about:
+
+| Package | Responsibility |
+|---------|---------------|
+| `packages/platform-core/` | Interface definitions: `PlatformProvider` with `NamespaceOperations`, `RoutingOperations`, `IdentityOperations`, `MonitoringOperations`, `PlatformCapabilities` (see [interface draft](app-shell-platform-provider-interface.ts)) |
+| `packages/platform-openshift/` | OpenShift Routes, `project.openshift.io` namespace ops, DSC component gating, Thanos monitoring, Templates, User/Group APIs |
+| `packages/platform-kubernetes/` | `v1/Namespace`, Ingress/Gateway API, CRD-based capability detection, configurable Prometheus endpoint, OIDC identity |
+
+**The boundary**: mod-arch owns _"how does the app shell behave on this platform"_ (config,
+auth path, script loading). odh-dashboard owns _"how do dashboard features adapt to this
+platform"_ (namespace models, routing abstractions, monitoring endpoints, capability detection).
+
+---
+
+## Today's `ModularArchConfig` (for reference)
+
+```typescript
+// mod-arch-core/types/common.ts
+export type ModularArchConfig = {
+  deploymentMode: DeploymentMode;   // 'standalone' | 'federated' | 'kubeflow'
+  URL_PREFIX: string;
+  BFF_API_VERSION: string;
+  mandatoryNamespace?: string;      // overrides namespace listing in ALL modes
+};
+```
+
+After the proposed change:
+
+```typescript
+export type ModularArchConfig = {
+  deploymentMode: DeploymentMode;   // 'standalone' | 'federated' | 'kubeflow'
+  platform: Platform;               // 'openshift' | 'kubernetes' | 'kubeflow'  ← NEW
+  URL_PREFIX: string;
+  BFF_API_VERSION: string;
+  mandatoryNamespace?: string;
+  logoutPath?: string;              // defaults to '/oauth/sign_out' for backwards compat  ← NEW
+};
+```
 
 ---
 
@@ -31,135 +189,111 @@ Every federated package in odh-dashboard wraps its UI with `ModularArchContextPr
 
 ---
 
-## Discussion Point 1: Where should `platform-core` live?
+## Discussion Questions
 
-The proposed `platform-core` package defines a `PlatformProvider` interface for namespace ops,
-routing, identity, monitoring, and capability detection. Two options:
+### 1. Does this boundary feel right?
 
-**Option A**: `platform-core` is a new package in **odh-dashboard**, consumed alongside
-`mod-arch-core`. They coexist -- mod-arch handles deployment mode / namespace state,
-platform-core handles platform-specific implementations.
+mod-arch gets a config field + configurable auth path. odh-dashboard gets the feature-level
+platform packages (`platform-core`, `platform-openshift`, `platform-kubernetes`).
 
-**Option B**: `platform-core` concepts get folded **into `mod-arch-core`** as a new axis of
-`ModularArchConfig`. The `ModularArchContextProvider` gains awareness of which platform it's
-running on and provides platform-specific implementations.
+### 2. `platform` field vs expanding `DeploymentMode`?
 
-**Questions for Monarch**:
-- Does the team see platform abstraction (OpenShift vs vanilla K8s) as within mod-arch scope?
-- Would folding it into mod-arch-core create unwanted coupling to odh-dashboard concerns?
-- Is there value in mod-arch-core being platform-agnostic (usable by projects beyond odh-dashboard)?
+We believe platform and deployment mode are orthogonal:
 
----
+| | OpenShift | Vanilla K8s | Kubeflow |
+|---|:---:|:---:|:---:|
+| **Standalone** | Today | xKS target | Today |
+| **Federated** | Today | xKS target | Today |
+| **Kubeflow** | n/a | n/a | Today |
 
-## Discussion Point 2: ModularArchContextProvider and platform detection
+Should `platform` be a separate config field (our recommendation), or does the team see
+it as an extension of `DeploymentMode`?
 
-`ModularArchContextProvider` takes `config: ModularArchConfig` with deployment mode
-(standalone / federated / kubeflow). Platform detection (OpenShift vs vanilla K8s vs CoreWeave)
-is a new dimension.
+### 3. What's the right scope for the mod-arch change?
 
-**Questions for Monarch**:
-- Should platform detection happen BEFORE `ModularArchContextProvider` (shell responsibility)
-  with the result passed via config?
-- Or should `ModularArchContextProvider` handle it internally based on new config fields?
-- The provider already does Kubeflow script loading and namespace management -- is platform
-  awareness a natural extension of `DeploymentMode`, or a separate concern?
+We're proposing exactly three things:
 
-**Concrete scenario**: On CoreWeave, the provider needs to:
-- Skip Kubeflow script loading
-- Use standard `v1/Namespace` API instead of `project.openshift.io`
-- Not assume OpenShift User/Group APIs exist
+1. One new config field (`platform`)
+2. Configurable logout path (`logoutPath`, defaulting to `/oauth/sign_out`)
+3. Platform-aware Kubeflow script gating (defensive — script loading already checks
+   `DeploymentMode.Kubeflow`, this adds a `platform` guard)
 
----
+Is that too much? Too little? Are there other hardcoded behaviors we should make
+configurable at the same time? (e.g., the `kf.dashboard.*` session key, the OAuth
+error string in useSettings)
 
-## Discussion Point 3: Impact on mod-arch-kubeflow and theming
+### 4. xKS in the monorepo?
 
-`mod-arch-kubeflow` provides MUI-to-PatternFly token mapping and `ThemeProvider`.
+xKS shares feature packages with odh-dashboard (model-serving, model-registry, gen-ai,
+observability), so it needs to stay in the odh-dashboard monorepo as a deployment profile
+rather than a separate app. Does the team agree?
 
-**Questions for Monarch**:
-- Will xKS deployments use PatternFly v6 only (no MUI)? Or is Kubeflow-on-xKS possible?
-- If xKS is PF-only, does `mod-arch-kubeflow` get loaded at all?
-- Should `ThemeProvider` support a "no theme override" mode for pure-PF deployments?
-- Does `pf-tokens-SSOT.json` / MUI theme mapping need changes for non-Kubeflow variants?
+### 5. Anything on the mod-arch roadmap that affects this?
+
+Upcoming changes or plans we should be aware of? (e.g., changes to `ModularArchConfig`,
+`ModularArchContextProvider`, or namespace management)
 
 ---
 
-## Discussion Point 4: mod-arch-shared usage in platform packages
+## What Can Start Immediately (No Monarch Impact)
 
-The proposed `platform-openshift` and `platform-kubernetes` packages are primarily
-logic/API packages. If they ever need UI (platform-specific settings, cloud auth flows),
-should they consume `mod-arch-shared` components?
+**Phase 0 — thinning the odh-dashboard host app** (see [Phase 0 audit](app-shell-phase0-host-audit.md)):
 
-**Questions for Monarch**:
-- Are there constraints on what can depend on `mod-arch-shared`?
-- Should platform packages be strictly logic-only?
-- If a platform package needs a UI component (e.g., Azure AD login page), should that live
-  in the platform package or in a separate feature package that depends on the platform?
+- Move ~812 feature pages out of `frontend/src/pages/` into their own packages
+- Pure code reorganization — no behavior change, no mod-arch impact
+- Unblocks `PLUGIN_PACKAGES` to actually control what ships in each build
+- After Phase 0, host shrinks from ~888 files to ~76 files (shell + admin)
 
 ---
 
-## Discussion Point 5: mod-arch-starter as xKS seed
+## Additional Notes for Discussion
 
-`mod-arch-starter` is a complete app shell template (BFF + React + webpack + Module Federation).
-The xKS dashboard is conceptually the same thing but configured for inference features.
+### `mandatoryNamespace` as an xKS mechanism
 
-**Questions for Monarch**:
-- Could `mod-arch-starter` (or a variant) seed the xKS app shell instead of thinning
-  `frontend/`?
-- The installer supports "flavors" (kubeflow, default) -- could "xks" or "inference" be a
-  new flavor?
-- **Trade-off**: Using mod-arch-starter means xKS is a separate app (multi-repo territory).
-  Thinning `frontend/` keeps it as one app with deployment profiles (monorepo approach).
-  Which does Monarch prefer given mod-arch's design philosophy?
+`mandatoryNamespace` on `ModularArchConfig` already overrides namespace listing in all
+deployment modes — when set, `useNamespaces` returns only that single namespace regardless
+of whether the mode is Standalone, Federated, or Kubeflow. For xKS single-namespace
+deployments (e.g., a dedicated inference namespace), this existing mechanism may be
+sufficient without any namespace-related mod-arch changes.
 
----
+### Theming is already decoupled
 
-## Discussion Point 6: Namespace management on vanilla K8s
+`ThemeProvider` in `mod-arch-kubeflow` accepts a `theme` prop (`Theme.Patternfly` or
+`Theme.MUI`) that is **independent of `DeploymentMode`**. The starter app reads
+`STYLE_THEME` as a separate env var. This means "PF-only on xKS" is achieved by simply
+not passing `Theme.MUI` — no mod-arch library change needed.
 
-`mod-arch-core` provides `useNamespaces`, `useQueryParamNamespaces`, `useNamespaceSelector`.
-These work through `ModularArchContextProvider`.
+### OpenShift coupling audit
 
-**Questions for Monarch**:
-- Does `useNamespacesWithConfig` call K8s APIs directly or go through the BFF?
-- On vanilla K8s, namespace listing uses `v1/Namespace`. Does mod-arch-core need changes?
-- Several BFFs (gen-ai, autorag, automl, eval-hub) have a `project.openshift.io` fallback
-  in `token_k8s_client.go`. This pattern suggests namespace resolution happens at the BFF
-  level -- can mod-arch-core rely on this abstraction?
+We mapped every OpenShift-specific API touchpoint in odh-dashboard
+(see [coupling map](app-shell-openshift-coupling-map.md)):
 
----
+| Category | Files | Tier |
+|----------|:---:|------|
+| Projects API (`project.openshift.io`) | 28 | Tier 1 — blocker for xKS |
+| DSC/DSCI component gating | ~35 | Tier 1 — blocker for xKS |
+| Auth CRD + admin detection | ~10 | Tier 1 — blocker for xKS |
+| Routes API (`route.openshift.io`) | 8 | Tier 2 — per-feature |
+| Templates API (`template.openshift.io`) | 13 | Tier 2 — per-feature |
+| Groups API (`user.openshift.io`) | 21 | Tier 2 — per-feature |
+| Thanos / openshift-monitoring | 18 | Tier 2 — per-feature |
+| `openshift.io/*` annotations | 128 | Tier 3 — convention |
 
-## Discussion Point 7: Versioning and release coordination
+All of this lives in **odh-dashboard**, not mod-arch. The platform packages absorb it.
 
-Different odh-dashboard packages pin different mod-arch versions today (e.g., model-registry
-at ~1.12.0, gen-ai at ^1.2.0). Platform packages would add another consumer.
+### Auth proxy recommendation
 
-**Questions for Monarch**:
-- Should platform packages be part of the mod-arch-library release cycle?
-- Or should they be odh-dashboard-internal packages that consume mod-arch as a dependency?
-- How should version alignment be enforced? (workspace `overrides`? shared version variable?)
-
----
-
-## Discussion Point 8: Extension point changes for platform awareness
-
-`packages/plugin-core/` defines extension points. Platform abstraction may need new types:
-
-- `app.platform/provider` -- platform package registers as the active platform
-- `app.platform/capability` -- declaring platform-specific capabilities
-- Platform-aware `SupportedArea` entries with `platformRequirements` field
-
-**Questions for Monarch**:
-- Does the Monarch team own `plugin-core` extension point design?
-- Would they want to review/approve new extension point types?
-- Is there an extension point pattern that already supports this (e.g., `app.status-provider`
-  for hardware profiles)?
+For xKS, we recommend **oauth2-proxy** as a drop-in replacement for the OpenShift OAuth
+proxy sidecar (see [auth proxy spike](app-shell-auth-proxy-spike.md)). It sets the exact
+headers (`x-forwarded-access-token`, `x-auth-request-user`) the dashboard backend already
+expects. **No backend code changes needed for MVP.**
 
 ---
 
-## Proposed Next Steps (pending Monarch alignment)
+## Proposed Outcome
 
-1. Align on Discussion Points 1-2 (where platform-core lives, how it integrates with
-   ModularArchContextProvider) -- this is the critical architectural decision
-2. Draft `PlatformProvider` interface for joint review
-3. Phase 0: thin the host by migrating feature pages to packages (no Monarch impact)
-4. Phase 1: create platform-core + platform-openshift (Monarch review on interfaces)
-5. Phase 2: create platform-kubernetes for first xKS deployment
+1. **Agreement** on the mod-arch / odh-dashboard boundary for platform abstraction
+2. **Decision** on `platform` config field design (separate field vs expanding `DeploymentMode`)
+3. **Green light** to proceed with Phase 0 (host thinning) and the mod-arch config changes
+
+---
