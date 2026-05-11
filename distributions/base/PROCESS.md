@@ -1,6 +1,6 @@
 # App Shell Integration Process
 
-Roadmap for taking the app shell from blank canvas to production distribution. Each phase describes what changes, what we need from other teams, and what the POC currently ignores.
+Roadmap for taking the app shell from blank canvas to production distribution. Each phase describes what changes, what we need from other teams, and what's still being investigated.
 
 ---
 
@@ -21,7 +21,7 @@ Roadmap for taking the app shell from blank canvas to production distribution. E
 - Categorize: API calls, type dependencies, SDK-managed state
 - Output determines feasibility of direct extraction vs. Platform Provider abstraction scope
 
-**What this phase ignores:**
+**Still in discovery phase:**
 - Real authentication (stub user only)
 - Plugin/feature loading
 - Backend integration (stub only)
@@ -78,10 +78,10 @@ cd distributions/base && npm run start:dev
 - `/api/status` returns real user info from the BFF
 
 **What we need:**
-- Pewter: main BFF available with at least `/api/status` and k8s passthrough
-- Monarch: BFF onboarded to the repo and operator
+- Pewter/Guilherme: main BFF available with at least `/api/status` and k8s passthrough
+- Monarch/Lucas: BFF onboarded to the repo and operator
 
-**What the POC ignores that this phase addresses:**
+**What this phase clarifies:**
 - Real user detection
 - K8s API passthrough
 - Backend proxy routing for model serving endpoints
@@ -108,7 +108,7 @@ cd distributions/base && npm run start:dev
 - Platform team: Kuadrant spike completed, auth API available
 - Agreement on token format and header conventions
 
-**What the POC ignores that this phase addresses:**
+**What this phase clarifies:**
 - The stub user is replaced with a real auth flow
 - Session management
 - RBAC / access review
