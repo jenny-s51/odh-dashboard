@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const RELATIVE_DIRNAME = path.resolve(__dirname, '..');
 const SRC_DIR = path.resolve(RELATIVE_DIRNAME, 'src');
 const DIST_DIR = path.resolve(RELATIVE_DIRNAME, 'public');
-const PRODUCT_NAME = process.env.ODH_PRODUCT_NAME || 'RH AI Inference';
+const PRODUCT_NAME = process.env.ODH_PRODUCT_NAME || 'Red Hat AI Inference UI';
 
 module.exports = () => ({
   entry: {

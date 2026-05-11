@@ -19,7 +19,7 @@ import { MoonIcon, SunIcon } from '@patternfly/react-icons';
 import { Link } from 'react-router-dom';
 import { useThemeContext } from './ThemeContext';
 
-const PRODUCT_NAME = process.env.PRODUCT_NAME || 'RH AI Inference';
+const PRODUCT_NAME = process.env.PRODUCT_NAME || 'Red Hat AI Inference UI';
 
 const BrandLink: React.FC<React.ComponentProps<typeof Link>> = (props) => (
   <Link {...props} to="/" />
@@ -43,9 +43,9 @@ const Header: React.FC<HeaderProps> = ({ username }) => {
             isHamburgerButton
           />
         </MastheadToggle>
-        <MastheadBrand>
-          <MastheadLogo component={BrandLink}>
-            <span style={{ fontSize: '1.25rem', fontWeight: 600 }}>{PRODUCT_NAME}</span>
+        <MastheadBrand data-codemods>
+          <MastheadLogo data-codemods component={BrandLink}>
+            {PRODUCT_NAME}
           </MastheadLogo>
         </MastheadBrand>
       </MastheadMain>
