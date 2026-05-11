@@ -59,6 +59,7 @@ cd distributions/base && npm run start:dev
 
 **Open questions:**
 - Should the nav hierarchy mirror RHOAI exactly (AI hub > Models > Deployments tab)? The POC currently mirrors it, but the inference UI may want a flatter or differently organized nav since it's a smaller surface area with fewer features. Needs team input.
+- If model serving is the only feature shipping in 3.5, what should the Home page render? Does it make sense to have a separate Home, or should the shell land directly on the Models/Deployments view? Needs team input.
 
 **Success criteria:**
 - Model deployment list view renders in the shell
