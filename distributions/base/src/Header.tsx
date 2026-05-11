@@ -43,10 +43,8 @@ const Header: React.FC<HeaderProps> = ({ username }) => {
             isHamburgerButton
           />
         </MastheadToggle>
-        <MastheadBrand data-codemods>
-          <MastheadLogo data-codemods component={BrandLink}>
-            {PRODUCT_NAME}
-          </MastheadLogo>
+        <MastheadBrand>
+          <MastheadLogo component={BrandLink}>{PRODUCT_NAME}</MastheadLogo>
         </MastheadBrand>
       </MastheadMain>
       <MastheadContent>

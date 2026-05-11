@@ -10,9 +10,21 @@ import {
   Spinner,
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './Header';
 import NavSidebar from './NavSidebar';
+import ModelsPage from './pages/ModelsPage';
 import { useUser } from './useUser';
+
+const HomePage: React.FC = () => (
+  <PageSection hasBodyWrapper={false}>
+    <EmptyState headingLevel="h1" titleText="Home" icon={CubesIcon}>
+      <EmptyStateBody>
+        Welcome to the Red Hat AI Inference UI. Select a feature from the sidebar.
+      </EmptyStateBody>
+    </EmptyState>
+  </PageSection>
+);
 
 const Shell: React.FC = () => {
   const { user, loading, error } = useUser();
@@ -34,19 +46,12 @@ const Shell: React.FC = () => {
       sidebar={<NavSidebar />}
       mainContainerId="app-shell-main"
     >
-      <PageSection hasBodyWrapper={false}>
-        <EmptyState headingLevel="h1" titleText="No features loaded" icon={CubesIcon}>
-          <EmptyStateBody>
-            The app shell is running with zero plugins.
-            {error && (
-              <>
-                <br />
-                <small>BFF status: {error}</small>
-              </>
-            )}
-          </EmptyStateBody>
-        </EmptyState>
-      </PageSection>
+      {error && <small>BFF status: {error}</small>}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/ai-hub/models/*" element={<ModelsPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </Page>
   );
 };
