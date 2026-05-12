@@ -1,9 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 const RELATIVE_DIRNAME = path.resolve(__dirname, '..');
 const SRC_DIR = path.resolve(RELATIVE_DIRNAME, 'src');
 const DIST_DIR = path.resolve(RELATIVE_DIRNAME, 'public');
+const PRODUCT_NAME = process.env.ODH_PRODUCT_NAME || 'Red Hat AI Inference UI';
+
 module.exports = () => ({
   entry: {
     app: path.join(SRC_DIR, 'index.tsx'),
@@ -13,7 +16,7 @@ module.exports = () => ({
       {
         test: /\.(tsx|ts|jsx|js)?$/,
         exclude: /node_modules/,
-        include: [SRC_DIR],
+        include: [SRC_DIR, path.resolve(RELATIVE_DIRNAME, '../base/src')],
         use: [{ loader: 'swc-loader' }],
       },
       {
@@ -79,11 +82,17 @@ module.exports = () => ({
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(SRC_DIR, 'index.html'),
-      title: 'App Shell',
+      title: PRODUCT_NAME,
+    }),
+    new webpack.DefinePlugin({
+      'process.env.PRODUCT_NAME': JSON.stringify(PRODUCT_NAME),
     }),
   ],
   resolve: {
     extensions: ['.js', '.ts', '.tsx', '.jsx'],
+    alias: {
+      '@odh-dashboard/base-distribution': path.resolve(RELATIVE_DIRNAME, '../base/src'),
+    },
     symlinks: true,
     cacheWithContext: false,
   },

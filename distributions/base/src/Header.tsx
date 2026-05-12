@@ -1,35 +1,27 @@
 import React from 'react';
 import {
   Masthead,
-  MastheadLogo,
+  MastheadBrand,
   MastheadContent,
   MastheadMain,
   MastheadToggle,
-  MastheadBrand,
   PageToggleButton,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
-  MenuToggle,
   ToggleGroup,
   ToggleGroupItem,
 } from '@patternfly/react-core';
 import { MoonIcon, SunIcon } from '@patternfly/react-icons';
-import { Link } from 'react-router-dom';
 import { useThemeContext } from './ThemeContext';
 
-const PRODUCT_NAME = process.env.PRODUCT_NAME || 'Red Hat AI Inference UI';
-
-const BrandLink: React.FC<React.ComponentProps<typeof Link>> = (props) => (
-  <Link {...props} to="/" />
-);
-
 type HeaderProps = {
-  username: string;
+  brand?: React.ReactNode;
+  toolbar?: React.ReactNode;
 };
 
-const Header: React.FC<HeaderProps> = ({ username }) => {
+const Header: React.FC<HeaderProps> = ({ brand, toolbar }) => {
   const { theme, setTheme } = useThemeContext();
 
   return (
@@ -43,9 +35,7 @@ const Header: React.FC<HeaderProps> = ({ username }) => {
             isHamburgerButton
           />
         </MastheadToggle>
-        <MastheadBrand>
-          <MastheadLogo component={BrandLink}>{PRODUCT_NAME}</MastheadLogo>
-        </MastheadBrand>
+        {brand && <MastheadBrand>{brand}</MastheadBrand>}
       </MastheadMain>
       <MastheadContent>
         <Toolbar isFullHeight>
@@ -68,11 +58,7 @@ const Header: React.FC<HeaderProps> = ({ username }) => {
                 </ToggleGroup>
               </ToolbarItem>
             </ToolbarGroup>
-            <ToolbarItem>
-              <MenuToggle aria-label="User menu" id="user-menu-toggle" isDisabled>
-                {username}
-              </MenuToggle>
-            </ToolbarItem>
+            {toolbar}
           </ToolbarContent>
         </Toolbar>
       </MastheadContent>
