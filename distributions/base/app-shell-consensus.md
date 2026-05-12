@@ -4,16 +4,26 @@ Roadmap for taking the app shell from blank canvas to production distribution. E
 
 ---
 
+## Architecture: Base + Distribution
+
+The shell is split into two layers:
+
+- **`distributions/base/`** — bare framework. PatternFly Page chrome with extension points (masthead, sidebar, children props). No nav items, no user menu, no product name, no routes. Fundamentally unusable by itself — that's the point.
+- **`distributions/rhai/`** — Red Hat AI Inference UI distribution. Composes base with product-specific branding ("Red Hat AI Inference UI"), user menu, nav (Home, AI Hub > Models > Deployments), and routing. This is the layer that ships.
+
+Future distributions (XKS, etc.) would follow the same pattern: compose base with their own product-specific layer.
+
+---
+
 ## Phase 0 — Blank Canvas (current)
 
-**Goal:** Prove the app shell boots with zero features and establish the scope of the OpenShift SDK challenge.
+**Goal:** Prove the app shell boots and establish the distribution split.
 
-**What we're doing:**
-- `distributions/base/` created as a new root-level workspace (not `packages/`)
-- Webpack config set up as a standalone build (cloned from `frontend/config/`, stripped of Module Federation remotes, plugin discovery, Monaco, and SDK externals)
-- Shell.tsx renders PatternFly Page chrome: Masthead with product name, empty sidebar, empty content area
+**What we've done:**
+- `distributions/base/` — configurable shell framework with extension points. Renders an empty PF Page with "No features loaded" message.
+- `distributions/rhai/` — composes base with RHAI-specific Header, NavSidebar (Home, AI Hub > Models > Deployments), user menu, and ModelsPage placeholder.
 - BFF stub server returns hardcoded user via `/api/status`
-- ThemeContext (light/dark toggle) and ErrorBoundary copied and simplified from frontend
+- ThemeContext (light/dark toggle) and ErrorBoundary in base, shared by all distributions
 - No Redux, no OpenShift SDK, no Module Federation remotes, no feature code
 
 **Parallel track — SDK coupling audit:**
@@ -30,26 +40,25 @@ Roadmap for taking the app shell from blank canvas to production distribution. E
 
 **Validation:**
 ```
-cd distributions/base && npm run start:dev
+cd distributions/rhai && npm run dev     # full RHAI product UI on :4020
+cd distributions/base && npm run dev     # bare framework on :4010
 ```
-- Browser opens to a PF shell with empty sidebar and "No features loaded"
-- Header shows product name + theme toggle + "dev-user"
-- No console errors
 
 ---
 
 ## Phase 1 — First Feature Integration (model serving)
 
-**Goal:** Register model serving as the first route in the shell and validate the extension system.
+**Goal:** Bring real model serving UI into the RHAI distribution.
 
 **What changes:**
-- Define the extension point contract (route, nav item, required context)
-- Register model serving as a static build-time import (no dynamic MF at this stage)
-- Wire up the minimal context providers model serving needs (likely: AppContext, AreaContext, or a subset)
+- Extract model serving components from `frontend/` into a consumable package
+- Replace OpenShift SDK calls with BFF-backed REST calls
+- Wire extracted components into `distributions/rhai/` as the first real feature
 - Validate that model deployment flow works end-to-end in the shell
 
 **What we need from other teams:**
 - Serving team guidance on which model serving entry points to integrate first
+- Go BFF team: REST endpoints for model serving operations (list deployments, create inference service, etc.)
 - Agreement on what subset of the model serving package can run without the full dashboard context
 
 **Integration friction to document:**
@@ -58,11 +67,10 @@ cd distributions/base && npm run start:dev
 - What backend endpoints does model serving call, and do they exist in the BFF?
 
 **Open questions:**
-- Should the nav hierarchy mirror RHOAI exactly (AI hub > Models > Deployments tab)? The POC currently mirrors it, but the inference UI may want a flatter or differently organized nav since it's a smaller surface area with fewer features. Needs team input.
-- If model serving is the only feature shipping in 3.5, what should the Home page render? Does it make sense to have a separate Home, or should the shell land directly on the Models/Deployments view? Needs team input.
+- If model serving is the only feature, what should the Home page render? Does it make sense to have a separate Home, or should the shell land directly on the Models/Deployments view? Needs team input.
 
 **Success criteria:**
-- Model deployment list view renders in the shell
+- Model deployment list view renders in the RHAI shell
 - At least one create/edit flow works
 - Integration friction log published
 
@@ -75,7 +83,7 @@ cd distributions/base && npm run start:dev
 **What changes:**
 - Remove `server/stub.js`
 - Point webpack dev proxy at the main BFF
-- BFF acts as pass-through proxy with the same interface as Fastify — serving team endpoint calls don't change
+- BFF acts as pass-through proxy — serving team endpoint calls don't change
 - `/api/status` returns real user info from the BFF
 
 **What we need:**
@@ -88,7 +96,7 @@ cd distributions/base && npm run start:dev
 - Backend proxy routing for model serving endpoints
 
 **Success criteria:**
-- `npm run start:dev` boots the shell against the real BFF (no stub)
+- `npm run dev` boots the RHAI shell against the real BFF (no stub)
 - User info comes from the cluster, not a hardcoded stub
 - Model serving endpoints proxy correctly
 
@@ -126,18 +134,18 @@ cd distributions/base && npm run start:dev
 **Goal:** Support multiple product SKUs from a single codebase.
 
 **What changes:**
-- Build profiles determine which features ship (RHOAI, RH AI, XKS)
+- Additional distributions (XKS, etc.) compose base with their own product-specific layer
 - Feature flags via AreaFlagsProvider (product-level config, not feature toggles)
 - Dedicated distribution config (not the ODH dashboard config CRD)
-- Manifest/operator support for the new distribution
+- Manifest/operator support for new distributions
 
 **What we need from other teams:**
 - Product: which features ship in which SKU
-- Operator team: manifest support for the new distribution deployment
+- Operator team: manifest support for distribution deployments
 
 **Success criteria:**
-- `npm run build -- --profile=rhai` produces a build with only RH AI features
-- Different profiles produce meaningfully different bundles
+- Each distribution produces a self-contained build
+- Different distributions produce meaningfully different bundles
 - Config is minimal and specific to the distribution
 
 ---
