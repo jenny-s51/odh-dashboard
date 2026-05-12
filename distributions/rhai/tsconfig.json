@@ -1,12 +1,11 @@
 {
   "extends": "@odh-dashboard/tsconfig",
   "compilerOptions": {
-    "rootDir": ".",
+    "rootDir": "..",
     "baseUrl": "./src",
     "outDir": "./dist",
     "paths": {
-      "@odh-dashboard/base-distribution": ["../base/src/index.ts"],
-      "@odh-dashboard/base-distribution/*": ["../base/src/*"]
+      "@odh-dashboard/base-distribution/*": ["../../base/src/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
