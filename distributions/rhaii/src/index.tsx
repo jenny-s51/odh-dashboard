@@ -1,8 +1,9 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-
-const container = document.getElementById('root');
-if (container) {
-  const root = createRoot(container);
-  root.render(<div style={{ padding: '2rem' }}>RHAII Distribution</div>);
-}
+import('./bootstrap').catch((error) => {
+  // eslint-disable-next-line no-console
+  console.error('Failed to load application:', error);
+  const root = document.getElementById('root');
+  if (root) {
+    root.textContent = 'Failed to load application. Please refresh the page.';
+    root.style.padding = '2rem';
+  }
+});
