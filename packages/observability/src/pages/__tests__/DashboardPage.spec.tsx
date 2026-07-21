@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 import type { DashboardResource } from '@perses-dev/core';
-import { ProjectsContext } from '@odh-dashboard/internal/concepts/projects/ProjectsContext';
+import { ProjectsContext } from '@odh-dashboard/ui-core/context/ProjectsContext';
 import type { ProjectKind } from '@odh-dashboard/k8s-core';
 import DashboardPage from '../DashboardPage';
 import { usePersesDashboards } from '../../api/usePersesDashboards';
