@@ -55,7 +55,13 @@
     "./hooks/useZodFormValidation": "./src/hooks/useZodFormValidation.ts",
     "./utilities/useGenericObjectState": "./src/utilities/useGenericObjectState.ts",
     "./utilities/useValidation": "./src/utilities/useValidation.ts",
-    "./context/ProjectsContext": "./src/context/ProjectsContext.tsx"
+    "./context/ProjectsContext": "./src/context/ProjectsContext.tsx",
+    "./types": "./src/types.ts",
+    "./components/projectSelector": "./src/components/projectSelector/index.ts",
+    "./components/projectSelector/ProjectSelector": "./src/components/projectSelector/ProjectSelector.tsx",
+    "./components/projectSelector/ProjectSelectorNavigator": "./src/components/projectSelector/ProjectSelectorNavigator.tsx",
+    "./components/projectSelector/ProjectNavigatorLink": "./src/components/projectSelector/ProjectNavigatorLink.tsx",
+    "./components/projectSelector/ProjectIconWithSize": "./src/components/projectSelector/ProjectIconWithSize.tsx"
   },
   "scripts": {
     "lint": "eslint .",
@@ -83,6 +89,7 @@
     "@patternfly/react-styles": "^6",
     "@patternfly/react-table": "^6",
     "react": "^18",
+    "react-router-dom": "^6",
     "zod": "^3"
   }
 }
