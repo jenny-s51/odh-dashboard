@@ -178,6 +178,27 @@ data:
         }
       },
       {
+          "name": "modelServing",
+          "remoteEntry": "/remoteEntry.js",
+          "authorize": true,
+          "tls": true,
+          "proxy": [
+            {
+              "path": "/model-serving/api",
+              "pathRewrite": "/api"
+            }
+          ],
+          "local": {
+            "host": "localhost",
+            "port": 8080
+          },
+          "service": {
+            "name": "odh-dashboard",
+            "namespace": "opendatahub",
+            "port": 9143
+        }
+      },
+      {
         "name": "coreBff",
         "proxyService": [
           {

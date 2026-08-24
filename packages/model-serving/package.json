@@ -20,7 +20,7 @@
     },
     "service": {
       "name": "odh-dashboard",
-      "port": 8043
+      "port": 9143
     }
   },
   "e2eCiTags": [
@@ -102,9 +102,7 @@
   "dependencies": {
     "@odh-dashboard/foundation": "*",
     "@odh-dashboard/hardware-profiles": "*",
-    "@odh-dashboard/internal": "*",
     "@odh-dashboard/k8s-core": "*",
-    "@odh-dashboard/model-registry": "*",
     "@odh-dashboard/plugin-core": "*",
     "@odh-dashboard/trustyai": "*",
     "@odh-dashboard/ui-core": "*",
