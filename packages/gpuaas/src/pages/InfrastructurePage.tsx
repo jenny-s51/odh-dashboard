@@ -445,7 +445,7 @@ const InfrastructurePage: React.FC = () => {
       noHeader
       provideChildrenPadding={false}
     >
-      <PageGroup isFilled={false} stickyOnBreakpoint={{ default: 'top' }}>
+      <PageGroup isFilled={false}>
         <PageSection hasBodyWrapper={false} id="infrastructure-hub-header" className="pf-v6-u-pb-0">
           <Stack hasGutter>
             <StackItem>
